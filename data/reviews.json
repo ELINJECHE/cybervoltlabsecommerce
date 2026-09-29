@@ -1,0 +1,110 @@
+[
+  {
+    "id": "r01",
+    "name": "Brian",
+    "location": "Nairobi",
+    "rating": 5,
+    "date": "2026-08-05",
+    "text": "Ordered a camping tent and it arrived exactly as described. Delivery was quick and I didn't have to travel to pick it up.",
+    "source": "direct"
+  },
+  {
+    "id": "r02",
+    "name": "Mercy",
+    "location": "Nairobi",
+    "rating": 5,
+    "date": "2026-08-07",
+    "text": "Got a pair of riding boots. Very happy with the quality and the delivery was convenient.",
+    "source": "direct"
+  },
+  {
+    "id": "r03",
+    "name": "Kevin",
+    "location": "Thika",
+    "rating": 4,
+    "date": "2026-08-09",
+    "text": "Bought a toy for my child and the delivery was smooth. The toy was just as shown.",
+    "source": "direct"
+  },
+  {
+    "id": "r04",
+    "name": "Sharon",
+    "location": "Nairobi",
+    "rating": 5,
+    "date": "2026-08-12",
+    "text": "I ordered a phone charger and earphones. Everything arrived well packed and delivery was easy.",
+    "source": "direct"
+  },
+  {
+    "id": "r05",
+    "name": "David",
+    "location": "Nairobi",
+    "rating": 5,
+    "date": "2026-07-10",
+    "text": "Bought a mobile phone through WhatsApp and the whole process was straightforward. I liked that it was delivered to me.",
+    "source": "direct"
+  },
+  {
+    "id": "r06",
+    "name": "Anne",
+    "location": "Kiambu",
+    "rating": 5,
+    "date": "2026-07-14",
+    "text": "Ordered a TV and it was delivered without me having to make the trip to the shop. Very convenient.",
+    "source": "direct"
+  },
+  {
+    "id": "r07",
+    "name": "James",
+    "location": "Nairobi",
+    "rating": 4,
+    "date": "2026-07-18",
+    "text": "I got a fridge and the delivery process was convenient. The product arrived in good condition.",
+    "source": "direct"
+  },
+  {
+    "id": "r08",
+    "name": "Faith",
+    "location": "Nairobi",
+    "rating": 5,
+    "date": "2026-08-15",
+    "text": "Bought a microwave and everything went smoothly from ordering to delivery. Happy with the purchase.",
+    "source": "direct"
+  },
+  {
+    "id": "r09",
+    "name": "Collins",
+    "location": "Ruiru",
+    "rating": 5,
+    "date": "2026-08-18",
+    "text": "Ordered motorcycle gloves and a helmet. Good quality and I appreciated having everything delivered.",
+    "source": "direct"
+  },
+  {
+    "id": "r10",
+    "name": "Lucy",
+    "location": "Nairobi",
+    "rating": 5,
+    "date": "2026-08-20",
+    "text": "Got a Bluetooth speaker and phone accessories. Ordering was easy and the delivery was convenient.",
+    "source": "direct"
+  },
+  {
+    "id": "r11",
+    "name": "Samuel",
+    "location": "Machakos",
+    "rating": 4,
+    "date": "2026-07-22",
+    "text": "Bought a set of children's toys as a gift. The items arrived safely and looked like the pictures.",
+    "source": "direct"
+  },
+  {
+    "id": "r12",
+    "name": "Peter",
+    "location": "Nairobi",
+    "rating": 5,
+    "date": "2026-08-22",
+    "text": "I ordered a pair of motorcycle boots. The delivery saved me the hassle of coming to collect them myself.",
+    "source": "direct"
+  }
+]

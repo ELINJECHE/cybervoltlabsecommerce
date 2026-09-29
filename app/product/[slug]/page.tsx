@@ -1,0 +1,108 @@
+import { notFound } from "next/navigation";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { getAllProducts, getProductBySlug, getRelatedProducts } from "@/lib/products";
+import { getAllReviews } from "@/lib/reviews";
+import ImageGallery from "@/components/ImageGallery";
+import PriceTag from "@/components/PriceTag";
+import StarRating from "@/components/StarRating";
+import StockUrgencyBar from "@/components/StockUrgencyBar";
+import ProductActions from "@/components/ProductActions";
+import ProductCard from "@/components/ProductCard";
+import ReviewsCarousel from "@/components/ReviewsCarousel";
+
+export async function generateStaticParams() {
+  const products = await getAllProducts();
+  return products.map((product) => ({ slug: product.slug }));
+}
+
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const product = await getProductBySlug(params.slug);
+  if (!product) return {};
+  return {
+    title: product.name,
+    description: product.description ?? `${product.name} — genuine stock at Cybervolt Labs.`,
+  };
+}
+
+export default async function ProductPage({ params }: { params: { slug: string } }) {
+  const product = await getProductBySlug(params.slug);
+  if (!product) notFound();
+
+  const related = await getRelatedProducts(product);
+  const reviews = getAllReviews();
+  const isLowStock = product.stock > 0 && product.stock <= 10;
+
+  return (
+    <div>
+    <div className="mx-auto max-w-7xl px-4 py-6">
+      <nav className="mb-4 text-xs text-muted">
+        <Link href="/" className="hover:text-primary">Home</Link>
+        {" / "}
+        <Link href={`/category/${product.category}`} className="hover:text-primary capitalize">
+          {product.category.replace("-", " ")}
+        </Link>
+        {" / "}
+        <span className="text-foreground">{product.name}</span>
+      </nav>
+
+      <div className="grid gap-8 lg:grid-cols-2">
+        <ImageGallery images={product.images} name={product.name} />
+
+        <div className="flex flex-col gap-4">
+          <div>
+            <h1 className="text-xl font-bold leading-snug sm:text-2xl">{product.name}</h1>
+            <div className="mt-2 flex items-center gap-3">
+              {product.reviewCount > 0 && (
+                <StarRating rating={product.rating} reviewCount={product.reviewCount} size="md" />
+              )}
+              {product.verified && (
+                <span className="inline-flex items-center gap-1 rounded bg-success/10 px-2 py-0.5 text-xs font-medium text-success">
+                  ✓ Cybervolt Verified
+                </span>
+              )}
+            </div>
+          </div>
+
+          <PriceTag price={product.price} discountPrice={product.discountPrice} size="lg" />
+
+          {isLowStock && (
+            <p className="text-sm font-medium text-deal">Only {product.stock} left in stock — order soon</p>
+          )}
+          {product.isDeal && product.dealClaimedPercent !== undefined && (
+            <StockUrgencyBar claimedPercent={product.dealClaimedPercent} />
+          )}
+
+          {product.description && <p className="text-sm text-muted">{product.description}</p>}
+
+          {product.features.length > 0 && (
+            <ul className="flex flex-col gap-1.5 text-sm">
+              {product.features.map((feature) => (
+                <li key={feature} className="flex gap-2">
+                  <span className="text-success">✓</span>
+                  <span>{feature}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          <ProductActions product={product} />
+        </div>
+      </div>
+
+      {related.length > 0 && (
+        <section className="mt-12">
+          <h2 className="mb-3 text-lg font-bold">You May Also Like</h2>
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+            {related.map((p) => (
+              <ProductCard key={p.id} product={p} />
+            ))}
+          </div>
+        </section>
+      )}
+    </div>
+
+    <ReviewsCarousel reviews={reviews} />
+    </div>
+  );
+}

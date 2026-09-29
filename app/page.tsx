@@ -1,101 +1,122 @@
-import Image from "next/image";
+import Link from "next/link";
+import HeroCarousel from "@/components/HeroCarousel";
+import HotSearchChips from "@/components/HotSearchChips";
+import FlashDealBanner from "@/components/FlashDealBanner";
+import CategoryRail from "@/components/CategoryRail";
+import ProductCard from "@/components/ProductCard";
+import ShowMoreGrid from "@/components/ShowMoreGrid";
+import TrustSection from "@/components/TrustSection";
+import ReviewsCarousel from "@/components/ReviewsCarousel";
+import {
+  getAllCategories,
+  getDealProducts,
+  getNewArrivals,
+  getRecommendedProducts,
+} from "@/lib/products";
+import { getAllReviews } from "@/lib/reviews";
 
-export default function Home() {
+const HERO_SLIDES = [
+  {
+    image: "/assets/images/hero-1.png",
+    alt: "Phones, fashion and home essentials from Cybervolt Labs",
+    title: "Everything You Need, One Shop",
+    subtitle: "Phones, fashion, home essentials and more — delivered across Kenya.",
+    ctaText: "Shop Mobile & Accessories",
+    ctaHref: "/category/mobile-laptop-accessories",
+  },
+  {
+    image: "/assets/images/hero-2.png",
+    alt: "Power banks and electronics from Cybervolt Labs",
+    title: "Power Your Day, Every Day",
+    subtitle: "Power banks, cables and electronics that keep up with you.",
+    ctaText: "Shop Electronics",
+    ctaHref: "/category/electronics",
+  },
+  {
+    image: "/assets/images/hero-3.png",
+    alt: "Furniture and home décor from Cybervolt Labs",
+    title: "Style Your Space",
+    subtitle: "Furniture and décor to make anywhere feel like home.",
+    ctaText: "Shop Furniture",
+    ctaHref: "/category/furniture",
+  },
+];
+
+export default async function HomePage() {
+  const categories = await getAllCategories();
+  const deals = await getDealProducts();
+  const newArrivals = await getNewArrivals();
+  const recommended = await getRecommendedProducts();
+  const reviews = getAllReviews();
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div>
+      <div className="pt-4 sm:pt-6">
+        <HeroCarousel slides={HERO_SLIDES} />
+      </div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      <section className="mx-auto max-w-7xl px-4 pt-5">
+        <HotSearchChips />
+      </section>
+
+      <FlashDealBanner deals={deals} />
+
+      <CategoryRail categories={categories} />
+
+      {newArrivals.length > 0 && (
+        <section className="mx-auto max-w-7xl px-4 py-6">
+          <div className="mb-3 flex items-center justify-between">
+            <h2 className="text-lg font-bold">New Arrivals</h2>
+            <Link href="/search" className="text-sm font-medium text-primary hover:underline">
+              See all
+            </Link>
+          </div>
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+            {newArrivals.slice(0, 8).map((product, index) => (
+              <ProductCard key={product.id} product={product} priority={index < 4} />
+            ))}
+          </div>
+        </section>
+      )}
+
+      <section className="mx-auto max-w-7xl px-4 py-6">
+        <h2 className="mb-3 text-lg font-bold">You May Also Like</h2>
+        <ShowMoreGrid products={recommended} />
+      </section>
+
+      <TrustSection />
+
+      <ReviewsCarousel reviews={reviews} />
+
+      <section className="mx-auto max-w-7xl px-4 py-8 text-sm leading-relaxed text-muted">
+        <h2 className="mb-2 text-base font-bold text-foreground">About Cybervolt Labs</h2>
+        <p className="mb-3">
+          Cybervolt Labs is a Kenyan retail brand based in Ongata Rongai, selling across
+          Instagram, Facebook, TikTok, WhatsApp, Jumia, Jiji, Kilimall and Pigiame. This
+          storefront brings all of that under one roof — from mobile phones and laptops to
+          fashion accessories, furniture, home décor, motorcycle gear and cyber cafe supplies.
+        </p>
+        <p className="mb-3">
+          Browse our{" "}
+          <Link href="/category/mobile-phones" className="font-medium text-primary hover:underline">
+            mobile phones
+          </Link>
+          ,{" "}
+          <Link href="/category/furniture" className="font-medium text-primary hover:underline">
+            furniture
+          </Link>{" "}
+          and{" "}
+          <Link href="/category/fashion-accessories" className="font-medium text-primary hover:underline">
+            fashion accessories
+          </Link>{" "}
+          collections to see what&rsquo;s trending this week. Every order is confirmed over
+          WhatsApp with M-Pesa payment on delivery.
+        </p>
+        <p>
+          Whether you found us through a TikTok video or a WhatsApp forward, welcome — fair
+          prices, and support that actually replies.
+        </p>
+      </section>
     </div>
   );
 }

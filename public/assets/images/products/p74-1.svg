@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800" role="img" aria-label="WhatsApp Business Setup">
+  <defs>
+    <linearGradient id="grad-p74-0" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563eb" />
+      <stop offset="100%" stop-color="#1d4ed8" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="800" fill="url(#grad-p74-0)" />
+  <text text-anchor="middle" font-family="system-ui, sans-serif" font-weight="700" font-size="44" fill="#ffffff"><tspan x="50%" y="386">WhatsApp Business Setup</tspan></text>
+  <text x="50%" y="447" text-anchor="middle" font-family="system-ui, sans-serif" font-size="20" fill="rgba(255,255,255,0.85)">Cybervolt Labs</text>
+</svg>

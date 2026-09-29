@@ -1,0 +1,62 @@
+[
+  {
+    "slug": "interior-design",
+    "name": "Interior Design",
+    "image": "/assets/images/category-interior-design.png",
+    "subcategories": []
+  },
+  {
+    "slug": "mobile-laptop-accessories",
+    "name": "Mobile & Laptop Accessories",
+    "image": "/assets/images/category-mobile-laptop-accessories.png",
+    "subcategories": []
+  },
+  {
+    "slug": "mobile-phones",
+    "name": "Mobile Phones",
+    "image": "/assets/images/category-mobile-phones.jpeg",
+    "subcategories": []
+  },
+  {
+    "slug": "fashion-accessories",
+    "name": "Fashion Accessories",
+    "image": "/assets/images/category-fashion-accessories.png",
+    "subcategories": []
+  },
+  {
+    "slug": "laptops",
+    "name": "Laptops",
+    "image": "/assets/images/category-laptops.png",
+    "subcategories": []
+  },
+  {
+    "slug": "electronics",
+    "name": "Electronics",
+    "image": "/assets/images/category-electronics.png",
+    "subcategories": []
+  },
+  {
+    "slug": "furniture",
+    "name": "Furniture",
+    "image": "/assets/images/category-furniture.png",
+    "subcategories": []
+  },
+  {
+    "slug": "services",
+    "name": "Services",
+    "image": "/assets/images/category-services.jpeg",
+    "subcategories": []
+  },
+  {
+    "slug": "motorcycle-gear",
+    "name": "Motorcycle Parts, Gear & Accessories",
+    "image": "/assets/images/category-motorcycle-gear.jpeg",
+    "subcategories": []
+  },
+  {
+    "slug": "cyber-cafe-supplies",
+    "name": "Cyber Cafe Supplies",
+    "image": "/assets/images/category-cyber-cafe-supplies.png",
+    "subcategories": []
+  }
+]
