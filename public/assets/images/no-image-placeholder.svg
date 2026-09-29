@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800" role="img" aria-label="No image available">
+  <rect width="800" height="800" fill="#eef1fa" />
+  <g fill="none" stroke="#8b708d" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" opacity="0.5">
+    <rect x="180" y="220" width="440" height="360" rx="16" />
+    <circle cx="300" cy="330" r="40" />
+    <path d="M180 500 L320 380 L460 480 L560 400 L620 460 L620 560 L180 560 Z" />
+  </g>
+  <text x="50%" y="660" text-anchor="middle" font-family="system-ui, sans-serif" font-size="28" fill="#6b6b6b">No image yet</text>
+</svg>

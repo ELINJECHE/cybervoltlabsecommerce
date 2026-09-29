@@ -1,0 +1,1702 @@
+[
+  {
+    "id": "p01",
+    "slug": "peel-and-stick-wallpaper-roll",
+    "name": "Peel & Stick Wallpaper (roll)",
+    "category": "interior-design",
+    "price": 900,
+    "images": [
+      "/assets/images/products/p01-1.svg",
+      "/assets/images/products/p01-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p02",
+    "slug": "led-strip-lights-5m",
+    "name": "LED Strip Lights (5m)",
+    "category": "interior-design",
+    "price": 850,
+    "images": [
+      "/assets/images/products/p02-1.svg",
+      "/assets/images/products/p02-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p03",
+    "slug": "decorative-throw-pillows-pair",
+    "name": "Decorative Throw Pillows (pair)",
+    "category": "interior-design",
+    "price": 1200,
+    "images": [
+      "/assets/images/products/p03-1.svg",
+      "/assets/images/products/p03-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p04",
+    "slug": "floating-wall-shelves-set-of-3",
+    "name": "Floating Wall Shelves (set of 3)",
+    "category": "interior-design",
+    "price": 1800,
+    "images": [
+      "/assets/images/products/p04-1.svg",
+      "/assets/images/products/p04-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": true,
+    "verified": true
+  },
+  {
+    "id": "p05",
+    "slug": "macram-wall-hanging",
+    "name": "Macramé Wall Hanging",
+    "category": "interior-design",
+    "price": 1500,
+    "images": [
+      "/assets/images/products/p05-1.svg",
+      "/assets/images/products/p05-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p06",
+    "slug": "scented-candles-set-of-4",
+    "name": "Scented Candles (set of 4)",
+    "category": "interior-design",
+    "price": 1300,
+    "images": [
+      "/assets/images/products/p06-1.svg",
+      "/assets/images/products/p06-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p07",
+    "slug": "table-centerpiece-vase",
+    "name": "Table Centerpiece Vase",
+    "category": "interior-design",
+    "price": 1000,
+    "images": [
+      "/assets/images/products/p07-1.svg",
+      "/assets/images/products/p07-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p08",
+    "slug": "blackout-curtains-pair",
+    "name": "Blackout Curtains (pair)",
+    "category": "interior-design",
+    "price": 2800,
+    "images": [
+      "/assets/images/products/p08-1.svg",
+      "/assets/images/products/p08-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": true,
+    "verified": true
+  },
+  {
+    "id": "p09",
+    "slug": "artificial-plant-arrangement",
+    "name": "Artificial Plant Arrangement",
+    "category": "interior-design",
+    "price": 1400,
+    "images": [
+      "/assets/images/products/p09-1.svg",
+      "/assets/images/products/p09-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p10",
+    "slug": "photo-frame-gallery-set-5-pcs",
+    "name": "Photo Frame Gallery Set (5 pcs)",
+    "category": "interior-design",
+    "price": 1600,
+    "images": [
+      "/assets/images/products/p10-1.svg",
+      "/assets/images/products/p10-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p11",
+    "slug": "type-c-fast-charging-cable-2m",
+    "name": "Type-C Fast Charging Cable (2m)",
+    "category": "mobile-laptop-accessories",
+    "price": 450,
+    "images": [
+      "/assets/images/products/p11-1.svg",
+      "/assets/images/products/p11-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p12",
+    "slug": "wireless-earbuds-tws",
+    "name": "Wireless Earbuds (TWS)",
+    "category": "mobile-laptop-accessories",
+    "price": 2200,
+    "images": [
+      "/assets/images/products/p12-1.svg",
+      "/assets/images/products/p12-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": true,
+    "verified": true
+  },
+  {
+    "id": "p13",
+    "slug": "phone-ring-holder-stand",
+    "name": "Phone Ring Holder + Stand",
+    "category": "mobile-laptop-accessories",
+    "price": 350,
+    "images": [
+      "/assets/images/products/p13-1.svg",
+      "/assets/images/products/p13-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p14",
+    "slug": "laptop-cooling-pad",
+    "name": "Laptop Cooling Pad",
+    "category": "mobile-laptop-accessories",
+    "price": 1600,
+    "images": [
+      "/assets/images/products/p14-1.svg",
+      "/assets/images/products/p14-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p15",
+    "slug": "usb-c-hub-7-in-1",
+    "name": "USB-C Hub (7-in-1)",
+    "category": "mobile-laptop-accessories",
+    "price": 1900,
+    "images": [
+      "/assets/images/products/p15-1.svg",
+      "/assets/images/products/p15-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p16",
+    "slug": "screen-protector-tempered-glass",
+    "name": "Screen Protector (Tempered Glass)",
+    "category": "mobile-laptop-accessories",
+    "price": 350,
+    "images": [
+      "/assets/images/products/p16-1.svg",
+      "/assets/images/products/p16-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p17",
+    "slug": "car-phone-holder-magnetic",
+    "name": "Car Phone Holder (magnetic)",
+    "category": "mobile-laptop-accessories",
+    "price": 700,
+    "images": [
+      "/assets/images/products/p17-1.svg",
+      "/assets/images/products/p17-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p18",
+    "slug": "power-bank-10-000mah",
+    "name": "Power Bank 10,000mAh",
+    "category": "mobile-laptop-accessories",
+    "price": 3000,
+    "images": [
+      "/assets/images/products/p18-1.svg",
+      "/assets/images/products/p18-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": true,
+    "verified": true
+  },
+  {
+    "id": "p19",
+    "slug": "laptop-bag-15-6",
+    "name": "Laptop Bag (15.6\")",
+    "category": "mobile-laptop-accessories",
+    "price": 2200,
+    "images": [
+      "/assets/images/products/p19-1.svg",
+      "/assets/images/products/p19-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p20",
+    "slug": "wireless-mouse",
+    "name": "Wireless Mouse",
+    "category": "mobile-laptop-accessories",
+    "price": 1400,
+    "images": [
+      "/assets/images/products/p20-1.svg",
+      "/assets/images/products/p20-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p21",
+    "slug": "tecno-spark-30c",
+    "name": "Tecno Spark 30C",
+    "category": "mobile-phones",
+    "price": 17500,
+    "images": [
+      "/assets/images/products/p21-1.svg",
+      "/assets/images/products/p21-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p22",
+    "slug": "infinix-hot-50i",
+    "name": "Infinix Hot 50i",
+    "category": "mobile-phones",
+    "price": 17000,
+    "images": [
+      "/assets/images/products/p22-1.svg",
+      "/assets/images/products/p22-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p23",
+    "slug": "samsung-galaxy-a05",
+    "name": "Samsung Galaxy A05",
+    "category": "mobile-phones",
+    "price": 21000,
+    "images": [
+      "/assets/images/products/p23-1.svg",
+      "/assets/images/products/p23-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": true,
+    "verified": true
+  },
+  {
+    "id": "p24",
+    "slug": "tecno-pop-9",
+    "name": "Tecno Pop 9",
+    "category": "mobile-phones",
+    "price": 12000,
+    "images": [
+      "/assets/images/products/p24-1.svg",
+      "/assets/images/products/p24-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p25",
+    "slug": "xiaomi-redmi-14c",
+    "name": "Xiaomi Redmi 14C",
+    "category": "mobile-phones",
+    "price": 20000,
+    "images": [
+      "/assets/images/products/p25-1.svg",
+      "/assets/images/products/p25-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p26",
+    "slug": "itel-a70",
+    "name": "itel A70",
+    "category": "mobile-phones",
+    "price": 10000,
+    "images": [
+      "/assets/images/products/p26-1.svg",
+      "/assets/images/products/p26-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p27",
+    "slug": "nokia-g42",
+    "name": "Nokia G42",
+    "category": "mobile-phones",
+    "price": 18500,
+    "images": [
+      "/assets/images/products/p27-1.svg",
+      "/assets/images/products/p27-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p28",
+    "slug": "motorola-moto-g34",
+    "name": "Motorola Moto G34",
+    "category": "mobile-phones",
+    "price": 20500,
+    "images": [
+      "/assets/images/products/p28-1.svg",
+      "/assets/images/products/p28-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p29",
+    "slug": "oraimo-hava-pro-feature-phone",
+    "name": "Oraimo Hava Pro (feature phone)",
+    "category": "mobile-phones",
+    "price": 4500,
+    "images": [
+      "/assets/images/products/p29-1.svg",
+      "/assets/images/products/p29-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p30",
+    "slug": "iphone-11-refurb",
+    "name": "iPhone 11 (refurb)",
+    "category": "mobile-phones",
+    "price": 44000,
+    "images": [
+      "/assets/images/products/p30-1.svg",
+      "/assets/images/products/p30-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": true,
+    "verified": true
+  },
+  {
+    "id": "p31",
+    "slug": "stainless-steel-watch-men-s",
+    "name": "Stainless Steel Watch (men's)",
+    "category": "fashion-accessories",
+    "price": 2200,
+    "images": [
+      "/assets/images/products/p31-1.svg",
+      "/assets/images/products/p31-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": true,
+    "verified": true
+  },
+  {
+    "id": "p32",
+    "slug": "beaded-bracelets-set-of-5",
+    "name": "Beaded Bracelets (set of 5)",
+    "category": "fashion-accessories",
+    "price": 900,
+    "images": [
+      "/assets/images/products/p32-1.svg",
+      "/assets/images/products/p32-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p33",
+    "slug": "leather-wallet-rfid",
+    "name": "Leather Wallet (RFID)",
+    "category": "fashion-accessories",
+    "price": 1400,
+    "images": [
+      "/assets/images/products/p33-1.svg",
+      "/assets/images/products/p33-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p34",
+    "slug": "silk-scarf-headwrap",
+    "name": "Silk Scarf / Headwrap",
+    "category": "fashion-accessories",
+    "price": 950,
+    "images": [
+      "/assets/images/products/p34-1.svg",
+      "/assets/images/products/p34-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p35",
+    "slug": "sunglasses-uv400",
+    "name": "Sunglasses (UV400)",
+    "category": "fashion-accessories",
+    "price": 1100,
+    "images": [
+      "/assets/images/products/p35-1.svg",
+      "/assets/images/products/p35-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p36",
+    "slug": "minimalist-necklace-set",
+    "name": "Minimalist Necklace Set",
+    "category": "fashion-accessories",
+    "price": 950,
+    "images": [
+      "/assets/images/products/p36-1.svg",
+      "/assets/images/products/p36-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p37",
+    "slug": "canvas-tote-bag-custom-print",
+    "name": "Canvas Tote Bag (custom print)",
+    "category": "fashion-accessories",
+    "price": 1300,
+    "images": [
+      "/assets/images/products/p37-1.svg",
+      "/assets/images/products/p37-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p38",
+    "slug": "bucket-hat",
+    "name": "Bucket Hat",
+    "category": "fashion-accessories",
+    "price": 850,
+    "images": [
+      "/assets/images/products/p38-1.svg",
+      "/assets/images/products/p38-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p39",
+    "slug": "waist-bag-fanny-pack",
+    "name": "Waist Bag / Fanny Pack",
+    "category": "fashion-accessories",
+    "price": 1600,
+    "images": [
+      "/assets/images/products/p39-1.svg",
+      "/assets/images/products/p39-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": true,
+    "verified": true
+  },
+  {
+    "id": "p40",
+    "slug": "earring-set-3-pairs",
+    "name": "Earring Set (3 pairs)",
+    "category": "fashion-accessories",
+    "price": 700,
+    "images": [
+      "/assets/images/products/p40-1.svg",
+      "/assets/images/products/p40-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p41",
+    "slug": "hp-255-g9-ryzen-3",
+    "name": "HP 255 G9 (Ryzen 3)",
+    "category": "laptops",
+    "price": 52000,
+    "images": [
+      "/assets/images/products/p41-1.svg",
+      "/assets/images/products/p41-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p42",
+    "slug": "lenovo-ideapad-1-intel-celeron",
+    "name": "Lenovo IdeaPad 1 (Intel Celeron)",
+    "category": "laptops",
+    "price": 48000,
+    "images": [
+      "/assets/images/products/p42-1.svg",
+      "/assets/images/products/p42-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p43",
+    "slug": "dell-inspiron-15-3000",
+    "name": "Dell Inspiron 15 3000",
+    "category": "laptops",
+    "price": 68000,
+    "images": [
+      "/assets/images/products/p43-1.svg",
+      "/assets/images/products/p43-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p44",
+    "slug": "acer-aspire-3-ryzen-3",
+    "name": "Acer Aspire 3 (Ryzen 3)",
+    "category": "laptops",
+    "price": 56000,
+    "images": [
+      "/assets/images/products/p44-1.svg",
+      "/assets/images/products/p44-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p45",
+    "slug": "hp-chromebook-14",
+    "name": "HP Chromebook 14",
+    "category": "laptops",
+    "price": 41000,
+    "images": [
+      "/assets/images/products/p45-1.svg",
+      "/assets/images/products/p45-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p46",
+    "slug": "asus-vivobook-15",
+    "name": "Asus VivoBook 15",
+    "category": "laptops",
+    "price": 65000,
+    "images": [
+      "/assets/images/products/p46-1.svg",
+      "/assets/images/products/p46-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p47",
+    "slug": "lenovo-thinkpad-e14-refurb",
+    "name": "Lenovo ThinkPad E14 (refurb)",
+    "category": "laptops",
+    "price": 60000,
+    "images": [
+      "/assets/images/products/p47-1.svg",
+      "/assets/images/products/p47-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p48",
+    "slug": "hp-250-g8-i3",
+    "name": "HP 250 G8 (i3)",
+    "category": "laptops",
+    "price": 62000,
+    "images": [
+      "/assets/images/products/p48-1.svg",
+      "/assets/images/products/p48-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p49",
+    "slug": "acer-aspire-5-i5",
+    "name": "Acer Aspire 5 (i5)",
+    "category": "laptops",
+    "price": 80000,
+    "images": [
+      "/assets/images/products/p49-1.svg",
+      "/assets/images/products/p49-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": true,
+    "verified": true
+  },
+  {
+    "id": "p50",
+    "slug": "macbook-air-m1-refurb",
+    "name": "MacBook Air M1 (refurb)",
+    "category": "laptops",
+    "price": 115000,
+    "images": [
+      "/assets/images/products/p50-1.svg",
+      "/assets/images/products/p50-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": true,
+    "verified": true
+  },
+  {
+    "id": "p51",
+    "slug": "bluetooth-speaker-portable",
+    "name": "Bluetooth Speaker (portable)",
+    "category": "electronics",
+    "price": 1900,
+    "images": [
+      "/assets/images/products/p51-1.svg",
+      "/assets/images/products/p51-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p52",
+    "slug": "digital-photo-frame-10",
+    "name": "Digital Photo Frame (10\")",
+    "category": "electronics",
+    "price": 3800,
+    "images": [
+      "/assets/images/products/p52-1.svg",
+      "/assets/images/products/p52-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p53",
+    "slug": "mini-projector-portable",
+    "name": "Mini Projector (portable)",
+    "category": "electronics",
+    "price": 12000,
+    "images": [
+      "/assets/images/products/p53-1.svg",
+      "/assets/images/products/p53-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": true,
+    "verified": true
+  },
+  {
+    "id": "p54",
+    "slug": "smart-plug-wi-fi-2-pack",
+    "name": "Smart Plug (Wi-Fi, 2-pack)",
+    "category": "electronics",
+    "price": 2200,
+    "images": [
+      "/assets/images/products/p54-1.svg",
+      "/assets/images/products/p54-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p55",
+    "slug": "electric-kettle-1-8l",
+    "name": "Electric Kettle (1.8L)",
+    "category": "electronics",
+    "price": 2300,
+    "images": [
+      "/assets/images/products/p55-1.svg",
+      "/assets/images/products/p55-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p56",
+    "slug": "rice-cooker-1l",
+    "name": "Rice Cooker (1L)",
+    "category": "electronics",
+    "price": 2100,
+    "images": [
+      "/assets/images/products/p56-1.svg",
+      "/assets/images/products/p56-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p57",
+    "slug": "desk-lamp-led-usb",
+    "name": "Desk Lamp (LED, USB)",
+    "category": "electronics",
+    "price": 1300,
+    "images": [
+      "/assets/images/products/p57-1.svg",
+      "/assets/images/products/p57-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p58",
+    "slug": "dash-cam-1080p",
+    "name": "Dash Cam (1080p)",
+    "category": "electronics",
+    "price": 5500,
+    "images": [
+      "/assets/images/products/p58-1.svg",
+      "/assets/images/products/p58-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": true,
+    "verified": true
+  },
+  {
+    "id": "p59",
+    "slug": "wireless-charger-15w-pad",
+    "name": "Wireless Charger (15W pad)",
+    "category": "electronics",
+    "price": 1600,
+    "images": [
+      "/assets/images/products/p59-1.svg",
+      "/assets/images/products/p59-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p60",
+    "slug": "headphones-over-ear-wired",
+    "name": "Headphones (over-ear, wired)",
+    "category": "electronics",
+    "price": 1700,
+    "images": [
+      "/assets/images/products/p60-1.svg",
+      "/assets/images/products/p60-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p61",
+    "slug": "foldable-study-desk",
+    "name": "Foldable Study Desk",
+    "category": "furniture",
+    "price": 8500,
+    "images": [
+      "/assets/images/products/p61-1.svg",
+      "/assets/images/products/p61-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p62",
+    "slug": "ergonomic-office-chair",
+    "name": "Ergonomic Office Chair",
+    "category": "furniture",
+    "price": 14000,
+    "images": [
+      "/assets/images/products/p62-1.svg",
+      "/assets/images/products/p62-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p63",
+    "slug": "bedside-table-2-drawer",
+    "name": "Bedside Table (2-drawer)",
+    "category": "furniture",
+    "price": 6500,
+    "images": [
+      "/assets/images/products/p63-1.svg",
+      "/assets/images/products/p63-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p64",
+    "slug": "shoe-rack-6-tier",
+    "name": "Shoe Rack (6-tier)",
+    "category": "furniture",
+    "price": 3800,
+    "images": [
+      "/assets/images/products/p64-1.svg",
+      "/assets/images/products/p64-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p65",
+    "slug": "wall-mounted-bookshelf",
+    "name": "Wall-Mounted Bookshelf",
+    "category": "furniture",
+    "price": 4500,
+    "images": [
+      "/assets/images/products/p65-1.svg",
+      "/assets/images/products/p65-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p66",
+    "slug": "foldable-dining-table-4-seater",
+    "name": "Foldable Dining Table (4-seater)",
+    "category": "furniture",
+    "price": 18000,
+    "images": [
+      "/assets/images/products/p66-1.svg",
+      "/assets/images/products/p66-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": true,
+    "verified": true
+  },
+  {
+    "id": "p67",
+    "slug": "tv-console-media-stand",
+    "name": "TV Console / Media Stand",
+    "category": "furniture",
+    "price": 10500,
+    "images": [
+      "/assets/images/products/p67-1.svg",
+      "/assets/images/products/p67-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p68",
+    "slug": "storage-ottoman-with-lid",
+    "name": "Storage Ottoman (with lid)",
+    "category": "furniture",
+    "price": 6000,
+    "images": [
+      "/assets/images/products/p68-1.svg",
+      "/assets/images/products/p68-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p69",
+    "slug": "wardrobe-2-door-flat-pack",
+    "name": "Wardrobe (2-door flat-pack)",
+    "category": "furniture",
+    "price": 16000,
+    "images": [
+      "/assets/images/products/p69-1.svg",
+      "/assets/images/products/p69-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": true,
+    "verified": true
+  },
+  {
+    "id": "p70",
+    "slug": "bathroom-organiser-shelf",
+    "name": "Bathroom Organiser Shelf",
+    "category": "furniture",
+    "price": 2200,
+    "images": [
+      "/assets/images/products/p70-1.svg",
+      "/assets/images/products/p70-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p71",
+    "slug": "social-media-page-setup",
+    "name": "Social Media Page Setup",
+    "category": "services",
+    "price": 3500,
+    "images": [
+      "/assets/images/products/p71-1.svg",
+      "/assets/images/products/p71-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p72",
+    "slug": "graphic-design-flyer-poster",
+    "name": "Graphic Design (flyer/poster)",
+    "category": "services",
+    "price": 1500,
+    "images": [
+      "/assets/images/products/p72-1.svg",
+      "/assets/images/products/p72-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p73",
+    "slug": "product-photography-10-shots",
+    "name": "Product Photography (10 shots)",
+    "category": "services",
+    "price": 2500,
+    "images": [
+      "/assets/images/products/p73-1.svg",
+      "/assets/images/products/p73-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p74",
+    "slug": "whatsapp-business-setup",
+    "name": "WhatsApp Business Setup",
+    "category": "services",
+    "price": 2000,
+    "images": [
+      "/assets/images/products/p74-1.svg",
+      "/assets/images/products/p74-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p75",
+    "slug": "email-marketing-setup",
+    "name": "Email Marketing Setup",
+    "category": "services",
+    "price": 2500,
+    "images": [
+      "/assets/images/products/p75-1.svg",
+      "/assets/images/products/p75-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p76",
+    "slug": "seo-product-listing-optimisation",
+    "name": "SEO Product Listing Optimisation",
+    "category": "services",
+    "price": 3000,
+    "images": [
+      "/assets/images/products/p76-1.svg",
+      "/assets/images/products/p76-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p77",
+    "slug": "ad-campaign-setup-and-management",
+    "name": "Ad Campaign Setup & Management",
+    "category": "services",
+    "price": 5000,
+    "images": [
+      "/assets/images/products/p77-1.svg",
+      "/assets/images/products/p77-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p78",
+    "slug": "brand-identity-package-logo-etc",
+    "name": "Brand Identity Package (logo etc)",
+    "category": "services",
+    "price": 8000,
+    "images": [
+      "/assets/images/products/p78-1.svg",
+      "/assets/images/products/p78-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": true,
+    "verified": true
+  },
+  {
+    "id": "p79",
+    "slug": "content-creation-5-posts-week",
+    "name": "Content Creation (5 posts/week)",
+    "category": "services",
+    "price": 6000,
+    "images": [
+      "/assets/images/products/p79-1.svg",
+      "/assets/images/products/p79-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": true,
+    "verified": true
+  },
+  {
+    "id": "p80",
+    "slug": "market-research-report",
+    "name": "Market Research Report",
+    "category": "services",
+    "price": 4000,
+    "images": [
+      "/assets/images/products/p80-1.svg",
+      "/assets/images/products/p80-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p81",
+    "slug": "full-face-helmet",
+    "name": "Full-Face Helmet",
+    "category": "motorcycle-gear",
+    "price": 5500,
+    "images": [
+      "/assets/images/products/p81-1.svg",
+      "/assets/images/products/p81-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": true,
+    "verified": true
+  },
+  {
+    "id": "p82",
+    "slug": "riding-gloves",
+    "name": "Riding Gloves",
+    "category": "motorcycle-gear",
+    "price": 1800,
+    "images": [
+      "/assets/images/products/p82-1.svg",
+      "/assets/images/products/p82-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p83",
+    "slug": "riding-jacket-mesh",
+    "name": "Riding Jacket (mesh)",
+    "category": "motorcycle-gear",
+    "price": 7000,
+    "images": [
+      "/assets/images/products/p83-1.svg",
+      "/assets/images/products/p83-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": true,
+    "verified": true
+  },
+  {
+    "id": "p84",
+    "slug": "side-mirror-universal-pair",
+    "name": "Side Mirror (universal pair)",
+    "category": "motorcycle-gear",
+    "price": 1100,
+    "images": [
+      "/assets/images/products/p84-1.svg",
+      "/assets/images/products/p84-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p85",
+    "slug": "motorcycle-phone-holder",
+    "name": "Motorcycle Phone Holder",
+    "category": "motorcycle-gear",
+    "price": 900,
+    "images": [
+      "/assets/images/products/p85-1.svg",
+      "/assets/images/products/p85-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p86",
+    "slug": "brake-pads-universal-set",
+    "name": "Brake Pads (universal set)",
+    "category": "motorcycle-gear",
+    "price": 1100,
+    "images": [
+      "/assets/images/products/p86-1.svg",
+      "/assets/images/products/p86-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p87",
+    "slug": "motorcycle-cover-weatherproof",
+    "name": "Motorcycle Cover (weatherproof)",
+    "category": "motorcycle-gear",
+    "price": 2000,
+    "images": [
+      "/assets/images/products/p87-1.svg",
+      "/assets/images/products/p87-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p88",
+    "slug": "chain-and-sprocket-kit",
+    "name": "Chain & Sprocket Kit",
+    "category": "motorcycle-gear",
+    "price": 3000,
+    "images": [
+      "/assets/images/products/p88-1.svg",
+      "/assets/images/products/p88-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p89",
+    "slug": "luggage-rack-top-carrier",
+    "name": "Luggage Rack (top carrier)",
+    "category": "motorcycle-gear",
+    "price": 3800,
+    "images": [
+      "/assets/images/products/p89-1.svg",
+      "/assets/images/products/p89-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p90",
+    "slug": "led-headlight-bulb-h4",
+    "name": "LED Headlight Bulb (H4)",
+    "category": "motorcycle-gear",
+    "price": 1400,
+    "images": [
+      "/assets/images/products/p90-1.svg",
+      "/assets/images/products/p90-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p91",
+    "slug": "usb-flash-drive-32gb-bulk-x10",
+    "name": "USB Flash Drive 32GB (bulk x10)",
+    "category": "cyber-cafe-supplies",
+    "price": 4500,
+    "images": [
+      "/assets/images/products/p91-1.svg",
+      "/assets/images/products/p91-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": true,
+    "verified": true
+  },
+  {
+    "id": "p92",
+    "slug": "a4-printing-paper-ream-500-sheets",
+    "name": "A4 Printing Paper (ream 500 sheets)",
+    "category": "cyber-cafe-supplies",
+    "price": 1100,
+    "images": [
+      "/assets/images/products/p92-1.svg",
+      "/assets/images/products/p92-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p93",
+    "slug": "ink-cartridge-set-4-color",
+    "name": "Ink Cartridge Set (4-color)",
+    "category": "cyber-cafe-supplies",
+    "price": 2200,
+    "images": [
+      "/assets/images/products/p93-1.svg",
+      "/assets/images/products/p93-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p94",
+    "slug": "mouse-pad-large-rubber",
+    "name": "Mouse Pad (large, rubber)",
+    "category": "cyber-cafe-supplies",
+    "price": 550,
+    "images": [
+      "/assets/images/products/p94-1.svg",
+      "/assets/images/products/p94-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p95",
+    "slug": "keyboard-mouse-combo-wired",
+    "name": "Keyboard + Mouse Combo (wired)",
+    "category": "cyber-cafe-supplies",
+    "price": 2000,
+    "images": [
+      "/assets/images/products/p95-1.svg",
+      "/assets/images/products/p95-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p96",
+    "slug": "webcam-1080p",
+    "name": "Webcam (1080p)",
+    "category": "cyber-cafe-supplies",
+    "price": 3000,
+    "images": [
+      "/assets/images/products/p96-1.svg",
+      "/assets/images/products/p96-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": true,
+    "verified": true
+  },
+  {
+    "id": "p97",
+    "slug": "hdmi-cable-2m",
+    "name": "HDMI Cable (2m)",
+    "category": "cyber-cafe-supplies",
+    "price": 650,
+    "images": [
+      "/assets/images/products/p97-1.svg",
+      "/assets/images/products/p97-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p98",
+    "slug": "usb-hub-4-port",
+    "name": "USB Hub (4-port)",
+    "category": "cyber-cafe-supplies",
+    "price": 800,
+    "images": [
+      "/assets/images/products/p98-1.svg",
+      "/assets/images/products/p98-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p99",
+    "slug": "headset-with-mic",
+    "name": "Headset with Mic",
+    "category": "cyber-cafe-supplies",
+    "price": 1600,
+    "images": [
+      "/assets/images/products/p99-1.svg",
+      "/assets/images/products/p99-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  },
+  {
+    "id": "p100",
+    "slug": "cable-management-kit",
+    "name": "Cable Management Kit",
+    "category": "cyber-cafe-supplies",
+    "price": 1000,
+    "images": [
+      "/assets/images/products/p100-1.svg",
+      "/assets/images/products/p100-2.svg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isNewArrival": false,
+    "verified": true
+  }
+]
