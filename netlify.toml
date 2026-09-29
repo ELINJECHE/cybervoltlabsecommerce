@@ -1,0 +1,9 @@
+[build]
+  command = "npm run build"
+  publish = "out"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Static export (output: "export") — no Next.js server runtime needed.
+# Do not enable Netlify's "Next.js Runtime" plugin; this is a plain static site.
