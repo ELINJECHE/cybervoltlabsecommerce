@@ -12,10 +12,14 @@ import { supabase, supabaseEnabled } from "@/lib/supabase";
 // — the admin panel writes to Supabase, then triggers a rebuild via the
 // deploy hook so the new/edited data gets baked into the next static build.
 //
-// Deliberately NOT cached at module scope: unlike a one-shot `next build`,
-// a long-running process (like `next dev`, or any server) would otherwise
-// freeze on whatever the first fetch happened to return for its entire
-// lifetime, hiding every admin edit until a full restart.
+// Cached at module scope, but ONLY in production (i.e. during the one-shot
+// `next build` that makes this static export) — every page function below
+// calls loadProducts()/loadCategories() independently, and without this the
+// full catalog gets re-fetched from Supabase for nearly every one of the
+// hundreds of pages generated, slow enough to blow past a host's build time
+// limit once the catalog grows. In `next dev` this stays uncached so admin
+// edits keep showing up immediately without a restart — the bug this
+// guarded against previously.
 
 interface ProductRow {
   id: string;
@@ -81,28 +85,47 @@ function rowToCategory(row: CategoryRow): Category {
   };
 }
 
+let cachedProducts: Product[] | null = null;
+let cachedCategories: Category[] | null = null;
+
 async function loadProducts(): Promise<Product[]> {
+  if (cachedProducts) return cachedProducts;
+
+  let result: Product[];
   if (supabaseEnabled) {
     const { data, error } = await supabase.from("products").select("*").order("id");
     if (!error && data) {
-      return (data as ProductRow[]).map(rowToProduct);
+      result = (data as ProductRow[]).map(rowToProduct);
+    } else {
+      console.warn("Supabase product fetch failed, falling back to data/products.json:", error?.message);
+      result = productsData as Product[];
     }
-    console.warn("Supabase product fetch failed, falling back to data/products.json:", error?.message);
+  } else {
+    result = productsData as Product[];
   }
 
-  return productsData as Product[];
+  if (process.env.NODE_ENV === "production") cachedProducts = result;
+  return result;
 }
 
 async function loadCategories(): Promise<Category[]> {
+  if (cachedCategories) return cachedCategories;
+
+  let result: Category[];
   if (supabaseEnabled) {
     const { data, error } = await supabase.from("categories").select("*").order("slug");
     if (!error && data) {
-      return (data as CategoryRow[]).map(rowToCategory);
+      result = (data as CategoryRow[]).map(rowToCategory);
+    } else {
+      console.warn("Supabase category fetch failed, falling back to data/categories.json:", error?.message);
+      result = categoriesData as Category[];
     }
-    console.warn("Supabase category fetch failed, falling back to data/categories.json:", error?.message);
+  } else {
+    result = categoriesData as Category[];
   }
 
-  return categoriesData as Category[];
+  if (process.env.NODE_ENV === "production") cachedCategories = result;
+  return result;
 }
 
 export async function getAllProducts(): Promise<Product[]> {
