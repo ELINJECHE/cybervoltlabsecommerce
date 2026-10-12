@@ -6,15 +6,20 @@ import { useRouter } from "next/navigation";
 import { useCart } from "@/lib/cart-context";
 import { useAuth } from "@/lib/auth-context";
 import { formatKES } from "@/lib/format";
-import { submitOrder, recordAccountOrder } from "@/lib/orders";
+import {
+  submitOrder,
+  generateOrderReference,
+  tagOrderNotes,
+  LAST_ORDER_REF_KEY,
+  type OrderPayload,
+} from "@/lib/orders";
 import { initiatePayHeroPayment, pollPayHeroStatus } from "@/lib/payhero";
 import { supabaseEnabled } from "@/lib/supabase";
 import { getAllReviews } from "@/lib/reviews";
 import ReviewsCarousel from "@/components/ReviewsCarousel";
+import ManualPaymentConfirm from "@/components/ManualPaymentConfirm";
 
-const MPESA_TILL = process.env.NEXT_PUBLIC_MPESA_TILL ?? "000000";
-
-type Phase = "form" | "waiting-for-approval" | "payment-failed";
+type Phase = "form" | "waiting-for-approval" | "manual-payment";
 
 export default function CheckoutPage() {
   const { items, subtotal, clearCart } = useCart();
@@ -29,17 +34,34 @@ export default function CheckoutPage() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [phase, setPhase] = useState<Phase>("form");
+  // Snapshot of what was ordered — the cart is cleared once payment is confirmed,
+  // but the manual-payment step still needs the details.
+  const [order, setOrder] = useState<OrderPayload | null>(null);
+  const [manualReason, setManualReason] = useState<string | null>(null);
+
+  function finishCheckout(reference: string | undefined) {
+    try {
+      if (reference) sessionStorage.setItem(LAST_ORDER_REF_KEY, reference);
+    } catch {
+      // Storage blocked — the success page just won't show the reference.
+    }
+    clearCart();
+    router.push("/checkout/success");
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setSubmitting(true);
     setError(null);
 
-    const payload = {
+    const orderReference = generateOrderReference();
+    const payload: OrderPayload = {
+      type: "order",
+      orderReference,
       customerName: name,
       phone,
       deliveryAddress: address,
-      notes,
+      notes: tagOrderNotes(orderReference, "AWAITING PAYMENT", notes.trim() || undefined),
       items,
       subtotal,
       submittedAt: new Date().toISOString(),
@@ -59,11 +81,13 @@ export default function CheckoutPage() {
       return;
     }
 
+    setOrder(payload);
+
     if (!supabaseEnabled) {
-      // No PayHero configured yet — fall back to manual Till confirmation.
-      if (user) await recordAccountOrder(user.id, payload);
-      clearCart();
-      router.push("/checkout/success");
+      // No M-Pesa prompt available — customer pays the Till and confirms below.
+      setManualReason(null);
+      setPhase("manual-payment");
+      setSubmitting(false);
       return;
     }
 
@@ -82,23 +106,35 @@ export default function CheckoutPage() {
       const status = await pollPayHeroStatus(reference);
 
       if (status === "success") {
-        clearCart();
-        router.push("/checkout/success");
+        finishCheckout(orderReference);
         return;
       }
 
-      setPhase("payment-failed");
-      setError(
+      setManualReason(
         status === "failed"
-          ? "The M-Pesa payment wasn't completed. You can try again, or pay manually below."
-          : "We didn't hear back from M-Pesa in time. If you approved the prompt, your order is still being processed — otherwise, try again below."
+          ? "The M-Pesa payment wasn't completed. You can pay by Till below and confirm it."
+          : "We didn't hear back from M-Pesa in time. If you approved the prompt, tell us below — otherwise pay by Till and confirm it."
       );
+      setPhase("manual-payment");
     } catch (err) {
-      setPhase("payment-failed");
-      setError(err instanceof Error ? err.message : "Failed to start the M-Pesa payment.");
+      console.error("M-Pesa prompt could not be started:", err);
+      setManualReason(
+        "We couldn't send the M-Pesa prompt to your phone automatically, but your order is saved. Pay by Till below, then confirm."
+      );
+      setPhase("manual-payment");
     } finally {
       setSubmitting(false);
     }
+  }
+
+  if (phase === "manual-payment" && order) {
+    return (
+      <ManualPaymentConfirm
+        order={order}
+        reason={manualReason}
+        onConfirmed={() => finishCheckout(order.orderReference)}
+      />
+    );
   }
 
   if (items.length === 0) {
@@ -158,20 +194,8 @@ export default function CheckoutPage() {
         <div className="mb-6 rounded-card border border-success/30 bg-success/5 p-4 text-sm">
           <h2 className="mb-1 font-semibold text-success">Pay with M-Pesa</h2>
           <p className="text-muted">
-            Go to M-Pesa &rarr; Lipa na M-Pesa &rarr; Buy Goods and Services. Till Number:{" "}
-            <strong className="text-foreground">{MPESA_TILL}</strong>. Confirm your order below
-            and we&rsquo;ll follow up to confirm payment.
-          </p>
-        </div>
-      )}
-
-      {phase === "payment-failed" && (
-        <div className="mb-6 rounded-card border border-deal/30 bg-deal/5 p-4 text-sm">
-          <p className="mb-2 text-deal">{error}</p>
-          <p className="text-muted">
-            You can also pay manually: M-Pesa &rarr; Lipa na M-Pesa &rarr; Buy Goods and Services,
-            Till Number <strong className="text-foreground">{MPESA_TILL}</strong>, then message us
-            on WhatsApp with your order details.
+            Place your order and we&rsquo;ll show you the M-Pesa Till details to pay, then you
+            confirm your payment with the M-Pesa code.
           </p>
         </div>
       )}
@@ -249,7 +273,7 @@ export default function CheckoutPage() {
           />
         </div>
 
-        {error && phase !== "payment-failed" && (
+        {error && (
           <p className="rounded-md bg-deal/10 px-3 py-2 text-sm text-deal">{error}</p>
         )}
 

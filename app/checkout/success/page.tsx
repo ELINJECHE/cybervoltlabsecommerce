@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { buildOrderEnquiryLink } from "@/lib/whatsapp";
+import LastOrderReference from "@/components/LastOrderReference";
 
 export default function CheckoutSuccessPage() {
   return (
@@ -10,6 +11,7 @@ export default function CheckoutSuccessPage() {
         Thanks for your order. Our team will reach out shortly to confirm your M-Pesa payment and
         delivery details.
       </p>
+      <LastOrderReference />
       <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
         <Link
           href="/"

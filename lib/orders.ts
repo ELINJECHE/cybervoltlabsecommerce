@@ -9,6 +9,37 @@ export interface OrderPayload {
   items: CartItem[];
   subtotal: number;
   submittedAt: string;
+  // Extra fields are ignored by the original sheet script (the same facts are
+  // also written into Notes), and used by the optional extended script in
+  // docs/GOOGLE_SHEETS_WEBHOOK.md.
+  orderReference?: string;
+  type?: "order" | "payment-confirmation";
+  mpesaCode?: string;
+  paidAmount?: number;
+  paidFromPhone?: string;
+}
+
+// Lets the success page show the reference after checkout navigates away.
+export const LAST_ORDER_REF_KEY = "cv_last_order_ref";
+
+// Short, readable reference the customer quotes to us, e.g. CV-261012-K7QF.
+// Ambiguous characters (0/O, 1/I) are left out so it survives being read aloud.
+export function generateOrderReference(): string {
+  const now = new Date();
+  const date =
+    String(now.getFullYear()).slice(2) +
+    String(now.getMonth() + 1).padStart(2, "0") +
+    String(now.getDate()).padStart(2, "0");
+  const alphabet = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  const bytes = crypto.getRandomValues(new Uint8Array(4));
+  const code = Array.from(bytes, (b) => alphabet[b % alphabet.length]).join("");
+  return `CV-${date}-${code}`;
+}
+
+// The sheet's Notes column carries the reference and status, so staff can
+// search the sheet for a reference and match an order row with its payment row.
+export function tagOrderNotes(reference: string, status: string, notes?: string): string {
+  return `[${reference}] ${status}${notes ? ` · ${notes}` : ""}`;
 }
 
 // Set NEXT_PUBLIC_ORDER_WEBHOOK_URL in .env.local to your own endpoint
@@ -39,6 +70,36 @@ export async function submitOrder(payload: OrderPayload): Promise<void> {
   if (!response.ok) {
     throw new Error(`Order webhook responded with ${response.status}`);
   }
+}
+
+export interface PaymentConfirmationDetails {
+  mpesaCode: string;
+  paidFromPhone: string;
+  paidAmount: number;
+}
+
+// A customer's own claim that they paid — staff must still check the M-Pesa
+// code against the Till's statement before treating the order as paid.
+export async function submitPaymentConfirmation(
+  order: OrderPayload,
+  details: PaymentConfirmationDetails
+): Promise<void> {
+  const claim = [
+    `[${order.orderReference}] PAYMENT CLAIMED`,
+    `M-Pesa code: ${details.mpesaCode}`,
+    `Paid from: ${details.paidFromPhone}`,
+    `Amount: KES ${details.paidAmount}`,
+  ].join(" · ");
+
+  await submitOrder({
+    ...order,
+    type: "payment-confirmation",
+    notes: claim,
+    mpesaCode: details.mpesaCode,
+    paidFromPhone: details.paidFromPhone,
+    paidAmount: details.paidAmount,
+    submittedAt: new Date().toISOString(),
+  });
 }
 
 // Records the order against a logged-in customer's account so it shows in
