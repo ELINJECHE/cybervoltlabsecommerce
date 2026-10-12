@@ -19,8 +19,43 @@ export interface OrderPayload {
   paidFromPhone?: string;
 }
 
-// Lets the success page show the reference after checkout navigates away.
-export const LAST_ORDER_REF_KEY = "cv_last_order_ref";
+// What the success page needs after checkout navigates away (reference, next
+// steps, and a receipt the customer can send to us on WhatsApp).
+export interface LastOrderSummary {
+  reference: string;
+  total: number;
+  phone: string;
+  address: string;
+  items: { name: string; quantity: number; color?: string }[];
+  mpesaCode?: string;
+}
+
+const LAST_ORDER_KEY = "cv_last_order";
+
+export function saveLastOrder(order: OrderPayload, mpesaCode?: string): void {
+  const summary: LastOrderSummary = {
+    reference: order.orderReference ?? "",
+    total: order.subtotal,
+    phone: order.phone,
+    address: order.deliveryAddress,
+    items: order.items.map((i) => ({ name: i.name, quantity: i.quantity, color: i.color })),
+    mpesaCode,
+  };
+  try {
+    sessionStorage.setItem(LAST_ORDER_KEY, JSON.stringify(summary));
+  } catch {
+    // Storage blocked — the success page just shows its general guidance.
+  }
+}
+
+export function readLastOrder(): LastOrderSummary | null {
+  try {
+    const raw = sessionStorage.getItem(LAST_ORDER_KEY);
+    return raw ? (JSON.parse(raw) as LastOrderSummary) : null;
+  } catch {
+    return null;
+  }
+}
 
 // Short, readable reference the customer quotes to us, e.g. CV-261012-K7QF.
 // Ambiguous characters (0/O, 1/I) are left out so it survives being read aloud.

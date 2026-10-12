@@ -5,6 +5,24 @@ but waiting on a setup step that only the site owner can do.
 ==============================================================================
 2026-10-13
 ==============================================================================
+Trust upgrades to the manual payment screens  (committed, not yet pushed)
+- Pay screen: order recap (items, total, delivery address, phone), "Chat with us before
+  you pay" WhatsApp button carrying the order reference, tap-to-copy Till number and
+  amount, and a safety check showing the name M-Pesa should display before the PIN.
+- Confirm step: paste the M-Pesa SMS and the code and amount are filled in automatically
+  (checked against a real Till payment SMS); typing the details is still available.
+- Final page: delivery estimate, the customer's phone and address, and a "Send my receipt
+  to WhatsApp" button that opens a chat with their order summary.
+- Shop details are settings, not code: NEXT_PUBLIC_TILL_NAME ("Elisha Njeche"),
+  NEXT_PUBLIC_ORDER_HOLD_TIME ("30 minutes"), NEXT_PUBLIC_DELIVERY_ESTIMATE ("within 2
+  hours"). Defaults live in .env.production; a Netlify variable of the same name overrides
+  them. Anything left blank is simply omitted from the page.
+- Intended as the stand-in while the Till prompt is fixed, and as a fallback if the Till
+  ever has problems again: turn the automatic prompt on or off with
+  NEXT_PUBLIC_MPESA_PROMPT_ENABLED.
+- Note: the hold time is a promise on the page only; nothing cancels unpaid orders
+  automatically.
+
 Clearer checkout steps  (committed, not yet pushed)
 - Checkout now shows progress: 1 Your details -> 2 Pay with M-Pesa -> 3 Confirm payment.
 - Customers were pressing the order button repeatedly and creating duplicate sheet rows
