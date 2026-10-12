@@ -14,7 +14,14 @@ export default function CategoryRail({ categories }: { categories: Category[] })
             className="tap-target flex w-20 shrink-0 flex-col items-center gap-2 text-center sm:w-24"
           >
             <span className="relative block h-16 w-16 overflow-hidden rounded-full border border-border bg-primary-light sm:h-20 sm:w-20">
-              <Image src={category.image} alt={category.name} fill loading="lazy" sizes="80px" className="object-cover" />
+              <Image
+                src={category.image || "/assets/images/no-image-placeholder.svg"}
+                alt={category.name}
+                fill
+                loading="lazy"
+                sizes="80px"
+                className="object-cover"
+              />
             </span>
             <span className="line-clamp-2 text-xs font-medium leading-tight">{category.name}</span>
           </Link>
