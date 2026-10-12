@@ -4,6 +4,7 @@ import { useState } from "react";
 import { formatKES } from "@/lib/format";
 import { submitPaymentConfirmation, type OrderPayload } from "@/lib/orders";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
+import CheckoutSteps from "@/components/CheckoutSteps";
 
 const MPESA_TILL = process.env.NEXT_PUBLIC_MPESA_TILL ?? "000000";
 
@@ -46,10 +47,15 @@ export default function ManualPaymentConfirm({ order, reason, onConfirmed }: Pro
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-6">
-      <h1 className="text-xl font-bold">Complete your payment</h1>
+      <CheckoutSteps current={2} />
+      <h1 className="text-xl font-bold">Almost done — pay to complete your order</h1>
       <p className="mt-1 text-sm text-muted">
-        {reason ?? "Your order is saved. Pay with M-Pesa, then confirm below so we can verify it."}
+        Your order is saved, but it isn&rsquo;t paid yet. Follow the two steps below and we&rsquo;ll
+        take it from there.
       </p>
+      {reason && (
+        <p className="mt-3 rounded-md bg-deal/10 px-3 py-2 text-sm text-deal">{reason}</p>
+      )}
 
       <div className="mt-4 rounded-card border border-border bg-surface p-4">
         <p className="text-xs font-medium uppercase tracking-wide text-muted">Order reference</p>
@@ -60,7 +66,7 @@ export default function ManualPaymentConfirm({ order, reason, onConfirmed }: Pro
       </div>
 
       <div className="mt-4 rounded-card border border-success/30 bg-success/5 p-4 text-sm">
-        <h2 className="mb-2 font-semibold text-success">Step 1 — Pay with M-Pesa</h2>
+        <h2 className="mb-2 font-semibold text-success">2. Pay with M-Pesa</h2>
         <ol className="list-decimal space-y-1 pl-5 text-muted">
           <li>Open M-Pesa → <strong className="text-foreground">Lipa na M-Pesa</strong> → <strong className="text-foreground">Buy Goods and Services</strong></li>
           <li>Till Number: <strong className="text-foreground">{MPESA_TILL}</strong></li>
@@ -70,7 +76,13 @@ export default function ManualPaymentConfirm({ order, reason, onConfirmed }: Pro
       </div>
 
       <form onSubmit={handleSubmit} className="mt-4 flex flex-col gap-4">
-        <h2 className="text-sm font-semibold">Step 2 — Confirm your payment</h2>
+        <div>
+          <h2 className="text-sm font-semibold">3. Confirm your payment</h2>
+          <p className="mt-1 text-sm text-muted">
+            Once you&rsquo;ve paid, enter the code from your M-Pesa SMS so we can match your
+            payment to this order and arrange delivery.
+          </p>
+        </div>
 
         <div>
           <label htmlFor="mpesaCode" className="mb-1 block text-sm font-medium">

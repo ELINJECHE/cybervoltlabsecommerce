@@ -18,8 +18,15 @@ import { supabaseEnabled } from "@/lib/supabase";
 import { getAllReviews } from "@/lib/reviews";
 import ReviewsCarousel from "@/components/ReviewsCarousel";
 import ManualPaymentConfirm from "@/components/ManualPaymentConfirm";
+import CheckoutSteps from "@/components/CheckoutSteps";
 
 type Phase = "form" | "waiting-for-approval" | "manual-payment";
+
+// The automatic M-Pesa prompt runs through Supabase Edge Functions that have to
+// be deployed first (docs/PAYHERO_SETUP.md). Until NEXT_PUBLIC_MPESA_PROMPT_ENABLED
+// is set to "true", checkout skips the prompt and goes straight to paying the Till
+// and confirming — no failed request, no misleading "instant payment" promise.
+const MPESA_PROMPT_ENABLED = supabaseEnabled && process.env.NEXT_PUBLIC_MPESA_PROMPT_ENABLED === "true";
 
 export default function CheckoutPage() {
   const { items, subtotal, clearCart } = useCart();
@@ -83,8 +90,8 @@ export default function CheckoutPage() {
 
     setOrder(payload);
 
-    if (!supabaseEnabled) {
-      // No M-Pesa prompt available — customer pays the Till and confirms below.
+    if (!MPESA_PROMPT_ENABLED) {
+      // No M-Pesa prompt available — customer pays the Till and confirms next.
       setManualReason(null);
       setPhase("manual-payment");
       setSubmitting(false);
@@ -163,6 +170,7 @@ export default function CheckoutPage() {
     <div>
     <div className="mx-auto max-w-2xl px-4 py-6">
       <h1 className="mb-4 text-xl font-bold">Checkout</h1>
+      <CheckoutSteps current={1} />
 
       <div className="mb-6 rounded-card border border-border bg-surface p-4">
         <h2 className="mb-2 text-sm font-semibold">Order Summary</h2>
@@ -182,7 +190,7 @@ export default function CheckoutPage() {
         </div>
       </div>
 
-      {supabaseEnabled ? (
+      {MPESA_PROMPT_ENABLED ? (
         <div className="mb-6 rounded-card border border-success/30 bg-success/5 p-4 text-sm">
           <h2 className="mb-1 font-semibold text-success">Pay with M-Pesa</h2>
           <p className="text-muted">
@@ -192,10 +200,11 @@ export default function CheckoutPage() {
         </div>
       ) : (
         <div className="mb-6 rounded-card border border-success/30 bg-success/5 p-4 text-sm">
-          <h2 className="mb-1 font-semibold text-success">Pay with M-Pesa</h2>
+          <h2 className="mb-1 font-semibold text-success">How paying works</h2>
           <p className="text-muted">
-            Place your order and we&rsquo;ll show you the M-Pesa Till details to pay, then you
-            confirm your payment with the M-Pesa code.
+            Fill in your details and place your order. Next you&rsquo;ll see our M-Pesa Till number
+            and the exact amount to pay, then you confirm with the code from your M-Pesa SMS.
+            Your order isn&rsquo;t complete until you&rsquo;ve paid and confirmed.
           </p>
         </div>
       )}
@@ -236,7 +245,7 @@ export default function CheckoutPage() {
 
         <div>
           <label htmlFor="phone" className="mb-1 block text-sm font-medium">
-            {supabaseEnabled ? "M-Pesa Phone Number" : "Phone Number"}
+            {MPESA_PROMPT_ENABLED ? "M-Pesa Phone Number" : "Phone Number"}
           </label>
           <input
             id="phone"
@@ -284,9 +293,9 @@ export default function CheckoutPage() {
         >
           {submitting
             ? "Placing Order..."
-            : supabaseEnabled
+            : MPESA_PROMPT_ENABLED
               ? "Place Order & Pay with M-Pesa"
-              : "Place Order"}
+              : "Place Order & Continue to Payment"}
         </button>
       </form>
     </div>
