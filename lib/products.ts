@@ -51,6 +51,17 @@ interface CategoryRow {
   subcategories: { slug: string; name: string }[];
 }
 
+// Only {name, hex} objects are valid swatches — drop anything else (e.g. bare
+// strings) so a malformed row can't break swatches, the colour filter or the
+// cart's colour selection.
+function validColors(colors: ProductRow["colors"]): Product["colors"] {
+  if (!Array.isArray(colors)) return undefined;
+  const valid = colors.filter(
+    (c) => c !== null && typeof c === "object" && typeof c.name === "string" && typeof c.hex === "string"
+  );
+  return valid.length > 0 ? valid : undefined;
+}
+
 function rowToProduct(row: ProductRow): Product {
   return {
     id: row.id,
@@ -61,7 +72,7 @@ function rowToProduct(row: ProductRow): Product {
     price: row.price,
     discountPrice: row.discount_price ?? undefined,
     images: row.images ?? [],
-    colors: row.colors ?? undefined,
+    colors: validColors(row.colors),
     features: row.features ?? [],
     rating: row.rating ?? 0,
     reviewCount: row.review_count ?? 0,

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Newsletter from "@/components/Newsletter";
+import CookieSettingsButton from "@/components/CookieSettingsButton";
 import type { Category } from "@/lib/types";
 
 const PAYMENT_METHODS = ["M-Pesa", "Airtel Money", "Visa", "Mastercard"];
@@ -66,7 +67,10 @@ export default function Footer({ categories }: { categories: Category[] }) {
             </span>
           ))}
         </div>
-        <p className="text-xs text-white/50">© {new Date().getFullYear()} Cybervolt Labs. All rights reserved.</p>
+        <div className="flex items-center gap-4">
+          <p className="text-xs text-white/50">© {new Date().getFullYear()} Cybervolt Labs. All rights reserved.</p>
+          <CookieSettingsButton />
+        </div>
       </div>
     </footer>
   );

@@ -7,6 +7,7 @@ import CategoryNav from "@/components/CategoryNav";
 import Footer from "@/components/Footer";
 import WhatsAppFloatButton from "@/components/WhatsAppFloatButton";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
+import CookieConsent from "@/components/CookieConsent";
 import { getAllCategories } from "@/lib/products";
 
 // Two weights of a single Google Font, per the performance budget.
@@ -47,6 +48,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             <main className="min-h-screen">{children}</main>
             <Footer categories={categories} />
             <WhatsAppFloatButton />
+            <CookieConsent />
           </CartProvider>
         </AuthProvider>
       </body>
