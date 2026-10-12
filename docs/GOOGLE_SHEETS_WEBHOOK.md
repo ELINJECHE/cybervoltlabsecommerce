@@ -87,3 +87,45 @@ for you.
   tradeoff for an order-capture form (same posture as commonly used for this kind of no-backend
   webhook), but don't put anything sensitive (e.g. card numbers) through this path — checkout
   never collects payment details, only order/contact info, which matches this schema.
+
+## Manual M-Pesa payments (Till confirmation)
+
+If the automatic M-Pesa prompt can't be sent (or isn't set up), checkout shows the customer the
+Till details and asks them to confirm their payment. Each order then lands in the sheet as **two
+rows sharing one order reference** (e.g. `CV-261012-K7QF`) — the original script above needs no
+changes for this:
+
+| Row | Notes column starts with | Meaning |
+| --- | --- | --- |
+| 1 | `[CV-261012-K7QF] AWAITING PAYMENT` | Order placed — items, address, total. Not paid yet. |
+| 2 | `[CV-261012-K7QF] PAYMENT CLAIMED · M-Pesa code: … · Paid from: … · Amount: KES …` | Customer says they paid. |
+
+**To confirm an order:** search the sheet (Ctrl/Cmd+F) for the reference, then check the M-Pesa
+code and amount against your Till's statement/app. The code is typed by the customer, so it is a
+*claim* until you've matched it — only treat the order as paid after you have. An order with only
+row 1 means they never confirmed (follow up on WhatsApp using the phone number).
+
+### Optional: separate columns for reference, type and M-Pesa code
+
+If you'd rather have these in their own columns than inside Notes, add these headers in
+columns I–M: `Order Ref | Type | M-Pesa Code | Paid From | Amount Paid`, replace the script's
+`appendRow([...])` call with the one below, and create a **new deployment version**
+(Deploy → Manage deployments → Edit → New version).
+
+```javascript
+  sheet.appendRow([
+    body.submittedAt || new Date().toISOString(),
+    body.customerName || '',
+    body.phone || '',
+    body.deliveryAddress || '',
+    body.notes || '',
+    itemsSummary,
+    body.subtotal || 0,
+    itemCount,
+    body.orderReference || '',
+    body.type || 'order',
+    body.mpesaCode || '',
+    body.paidFromPhone || '',
+    body.paidAmount || '',
+  ]);
+```
