@@ -45,7 +45,7 @@ export default function LastOrderDetails() {
             We contact you{order?.phone ? ` on ${order.phone}` : ""} to confirm your delivery details.
           </li>
           <li>
-            Your order is delivered{order?.address ? ` to ${order.address}` : ""}
+            Your order is processed and dispatched{order?.address ? ` to ${order.address}` : ""}
             {DELIVERY_ESTIMATE ? ` — ${DELIVERY_ESTIMATE}` : ""}.
           </li>
         </ol>
