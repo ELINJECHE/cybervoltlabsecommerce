@@ -7,10 +7,17 @@ row. No backend, no third-party service account needed, just your own Google acc
 
 1. Create a new Google Sheet (e.g. "Cybervolt Orders").
 2. Rename the first tab to `Orders`.
-3. In row 1, add these headers (one per column, A through H):
+3. In row 1, each title must be in **its own cell**, columns A through H:
+
+   | A | B | C | D | E | F | G | H |
+   | --- | --- | --- | --- | --- | --- | --- | --- |
+   | Timestamp | Customer Name | Phone | Delivery Address | Notes | Items | Subtotal (KES) | Item Count |
+
+   Quickest way: copy the line below, click cell **A1** and paste — it spreads across the
+   columns by itself. (Don't type the `|` characters; they are only for this table.)
 
    ```
-   Timestamp | Customer Name | Phone | Delivery Address | Notes | Items | Subtotal (KES) | Item Count
+Timestamp	Customer Name	Phone	Delivery Address	Notes	Items	Subtotal (KES)	Item Count
    ```
 
 ## 2. Add the Apps Script
@@ -108,9 +115,13 @@ row 1 means they never confirmed (follow up on WhatsApp using the phone number).
 ### Optional: separate columns for reference, type and M-Pesa code
 
 If you'd rather have these in their own columns than inside Notes, add these headers in
-columns I–M: `Order Ref | Type | M-Pesa Code | Paid From | Amount Paid`, replace the script's
+columns I–M (paste the full row below into cell A1 to set all 13 titles at once), replace the script's
 `appendRow([...])` call with the one below, and create a **new deployment version**
 (Deploy → Manage deployments → Edit → New version).
+
+```
+Timestamp	Customer Name	Phone	Delivery Address	Notes	Items	Subtotal (KES)	Item Count	Order Ref	Type	M-Pesa Code	Paid From	Amount Paid
+```
 
 ```javascript
   sheet.appendRow([
