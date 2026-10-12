@@ -5,6 +5,10 @@ but waiting on a setup step that only the site owner can do.
 ==============================================================================
 2026-10-13
 ==============================================================================
+Return window changed from 7 days to 48 hours
+- Return Policy page and the home page "Buyer Protection" tile now both say returns are
+  accepted within 48 hours of delivery for unused items in original packaging.
+
 Trust upgrades to the manual payment screens  (committed, not yet pushed)
 - Pay screen: order recap (items, total, delivery address, phone), "Chat with us before
   you pay" WhatsApp button carrying the order reference, tap-to-copy Till number and
