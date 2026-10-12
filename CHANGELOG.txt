@@ -5,6 +5,17 @@ but waiting on a setup step that only the site owner can do.
 ==============================================================================
 2026-10-13
 ==============================================================================
+Clearer checkout steps  (committed, not yet pushed)
+- Checkout now shows progress: 1 Your details -> 2 Pay with M-Pesa -> 3 Confirm payment.
+- Customers were pressing the order button repeatedly and creating duplicate sheet rows
+  because nothing told them what to do next. After placing an order the form is replaced
+  by a "pay to complete your order" screen, so there is no second button to press.
+- Skips the automatic M-Pesa prompt (and its "Failed to send a request to the Edge
+  Function" error) until NEXT_PUBLIC_MPESA_PROMPT_ENABLED=true, which should only be set
+  once the PayHero functions are deployed. Wording no longer promises instant payment.
+- Success page now lists what happens next (we confirm payment, contact you about
+  delivery, deliver) and shows the order reference.
+
 Admin edits now reach the live site
 - Created a Netlify build hook and set NEXT_PUBLIC_DEPLOY_HOOK_URL in Netlify, so
   saving a product or category in /admin triggers a rebuild automatically (about a
@@ -105,8 +116,9 @@ PENDING / KNOWN ISSUES
   prices in /admin. Until then customers can order them at KES 1.
 - New products have no descriptions; their colour/pattern variants are visible in the
   photos but not stored as selectable colours.
-- Deploy the PayHero Edge Functions (docs/PAYHERO_SETUP.md) to turn on the automatic
-  M-Pesa prompt. Until then all customers use the manual Till flow.
+- Deploy the PayHero Edge Functions (docs/PAYHERO_SETUP.md), then set
+  NEXT_PUBLIC_MPESA_PROMPT_ENABLED=true in Netlify to turn on the automatic M-Pesa prompt.
+  Until then all customers use the manual Till flow.
 - WhatsApp reminders need a Meta Business account, a phone number and an approved
   message template (docs/WHATSAPP_REMINDERS_SETUP.md).
 - No privacy policy page yet (the cookie banner does not link to one).
