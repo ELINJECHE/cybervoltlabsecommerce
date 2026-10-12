@@ -1,0 +1,114 @@
+CYBERVOLT LABS — CHANGELOG
+Newest first. "Live" = running on cybervoltlabs.co.ke. "Not deployed" = in the code
+but waiting on a setup step that only the site owner can do.
+
+==============================================================================
+2026-10-13
+==============================================================================
+Admin edits now reach the live site
+- Created a Netlify build hook and set NEXT_PUBLIC_DEPLOY_HOOK_URL in Netlify, so
+  saving a product or category in /admin triggers a rebuild automatically (about a
+  minute until the public pages update). No code change was needed; the hook code
+  (lib/deploy.ts) already existed.
+- Cause of "price edits don't work": the edits WERE saving to the database, but the
+  public site is a static snapshot and nothing was telling Netlify to rebuild.
+- Note: a brand-new product has no Edit page on the live site until the next rebuild.
+
+==============================================================================
+2026-10-12
+==============================================================================
+Manual M-Pesa payment confirmation  (9b8b624, pushed 2026-10-13)
+- Checkout no longer dead-ends on "Failed to send a request to the Edge Function".
+- Every order gets a reference, e.g. CV-261012-K7QF.
+- If the automatic M-Pesa prompt can't be sent, the customer sees the Till steps and
+  a form for their M-Pesa confirmation code, the number they paid from, and the amount.
+- Google Sheet gets two rows per order sharing the reference:
+    "[REF] AWAITING PAYMENT" and "[REF] PAYMENT CLAIMED · M-Pesa code ...".
+  The existing sheet script works unchanged. The code is a customer claim; staff must
+  check it against the Till statement. See docs/GOOGLE_SHEETS_WEBHOOK.md.
+- Success page shows the order reference.
+
+Supabase config moved into the project  (d850052, live)
+- The Netlify dashboard value for NEXT_PUBLIC_SUPABASE_ANON_KEY was being baked into
+  the build as masked bullet characters, which broke login ("String contains non
+  ISO-8859-1 code point") and made the build fall back to the old 101-product catalog.
+- The public Supabase URL + anon key now come from .env.production. The service_role
+  key is never stored in the project.
+
+Cookie consent + analytics  (67442a0, live)
+- Cookie banner with Accept / Decline of equal prominence, using Google Consent Mode
+  v2: analytics starts denied and is only granted after Accept. The choice is
+  remembered, and a "Cookie settings" link in the footer reopens it.
+- Optional second GA4 property via NEXT_PUBLIC_GA4_ID_2 (reports to both; one script).
+  Netlify still uses the original NEXT_PUBLIC_GA4_ID (G-MFWXN0QPWV).
+- Product colours stored as plain text are now ignored instead of breaking swatches,
+  the colour filter and the cart colour picker.
+- Categories with no image (e.g. Sneakers & Shoes) show the placeholder image.
+
+==============================================================================
+2026-09-30
+==============================================================================
+Deployed to Netlify  (2e21431, ef415f7)
+- Added netlify.toml (static export, publish "out", Node 22) and docs/NETLIFY_DEPLOY.md.
+- Fixed build timeouts: every page was re-fetching the whole catalog from Supabase
+  (hundreds of redundant requests). Catalog is now cached for one build only; dev
+  stays uncached so admin edits still show immediately. Full build: ~14 seconds.
+- Custom domain cybervoltlabs.co.ke connected (Netlify DNS, HTTPS certificate issued).
+
+First commit of the full application  (d37b4e1)
+- Everything below had been built before this date but never committed.
+
+==============================================================================
+Built before 2026-09-30 (included in the first commit)
+==============================================================================
+Storefront
+- Mobile-first Next.js 14 static site: home (hero carousel, search + trending chips,
+  flash deals, category rail, new arrivals, product grid, trust section), category,
+  product, search, cart, checkout, about, contact, returns.
+- Brand palette and logo, WhatsApp float button, social links, newsletter signup.
+- Customer reviews carousel (12 genuine reviews) on home, category, search, product,
+  cart and checkout pages.
+- sitemap.xml and robots.txt for https://cybervoltlabs.co.ke; metadataBase set.
+
+Accounts and admin (Supabase)
+- Customer accounts, loyalty points (5 per KES 1,000 spent, 100 for newsletter signup).
+- Password reset: "Forgot password?" on login, reset email, set-new-password page.
+- Admin panel at /admin (admin accounts only): add/edit/delete products and categories,
+  image upload, rebuild-on-save deploy hook.
+- Product and category data now come from Supabase, with data/*.json as a fallback.
+
+Orders and payments
+- Orders post to a Google Sheet via an Apps Script webhook.
+- M-Pesa STK push via PayHero, run server-side in Supabase Edge Functions
+  (initiate-payment, payment-callback).  NOT DEPLOYED — see Pending below.
+- WhatsApp payment reminders for unpaid orders via the Meta Cloud API
+  (send-payment-reminders).  NOT DEPLOYED — see Pending below.
+- GA4 analytics.
+
+Catalog and images  (done in September; the 47 new products and category in Supabase)
+- Created the product-images storage bucket (it did not exist, so image upload in the
+  admin panel could never have worked before).
+- Added the "Sneakers & Shoes" category.
+- Uploaded 144 photos: attached to Full-Face Helmet and Power Bank, and created 47 new
+  products (motorcycle gear, duvets and bedding, smartwatches, a chest freezer, etc.).
+  The new products were created with a placeholder price of KES 1 and no description.
+- Catalog is now 149 products.
+
+Dev tooling
+- Docker setup for local development; docs for Supabase, PayHero, Google Sheets
+  webhook, WhatsApp reminders and Netlify.
+
+==============================================================================
+PENDING / KNOWN ISSUES
+==============================================================================
+- 45 products were still at the placeholder price of KES 1 on 2026-10-12. Set real
+  prices in /admin. Until then customers can order them at KES 1.
+- New products have no descriptions; their colour/pattern variants are visible in the
+  photos but not stored as selectable colours.
+- Deploy the PayHero Edge Functions (docs/PAYHERO_SETUP.md) to turn on the automatic
+  M-Pesa prompt. Until then all customers use the manual Till flow.
+- WhatsApp reminders need a Meta Business account, a phone number and an approved
+  message template (docs/WHATSAPP_REMINDERS_SETUP.md).
+- No privacy policy page yet (the cookie banner does not link to one).
+- Support email is still a placeholder.
+- Revoke any GitHub personal access tokens that were shared for pushing.
