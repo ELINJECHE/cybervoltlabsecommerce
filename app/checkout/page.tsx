@@ -10,7 +10,7 @@ import {
   submitOrder,
   generateOrderReference,
   tagOrderNotes,
-  LAST_ORDER_REF_KEY,
+  saveLastOrder,
   type OrderPayload,
 } from "@/lib/orders";
 import { initiatePayHeroPayment, pollPayHeroStatus } from "@/lib/payhero";
@@ -46,12 +46,8 @@ export default function CheckoutPage() {
   const [order, setOrder] = useState<OrderPayload | null>(null);
   const [manualReason, setManualReason] = useState<string | null>(null);
 
-  function finishCheckout(reference: string | undefined) {
-    try {
-      if (reference) sessionStorage.setItem(LAST_ORDER_REF_KEY, reference);
-    } catch {
-      // Storage blocked — the success page just won't show the reference.
-    }
+  function finishCheckout(completed: OrderPayload, mpesaCode?: string) {
+    saveLastOrder(completed, mpesaCode);
     clearCart();
     router.push("/checkout/success");
   }
@@ -113,7 +109,7 @@ export default function CheckoutPage() {
       const status = await pollPayHeroStatus(reference);
 
       if (status === "success") {
-        finishCheckout(orderReference);
+        finishCheckout(payload);
         return;
       }
 
@@ -139,7 +135,7 @@ export default function CheckoutPage() {
       <ManualPaymentConfirm
         order={order}
         reason={manualReason}
-        onConfirmed={() => finishCheckout(order.orderReference)}
+        onConfirmed={(mpesaCode) => finishCheckout(order, mpesaCode)}
       />
     );
   }
