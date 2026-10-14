@@ -5,6 +5,14 @@ but waiting on a setup step that only the site owner can do.
 ==============================================================================
 2026-10-13
 ==============================================================================
+Catalog data updated  (database only, not published to the live site yet)
+- Sneakers & Shoes replaced: the two old shoes removed (backup kept) and five new ones added
+  from the new creatives, with shoe-only crops and no authenticity wording in names or text.
+- All 33 placeholder prices replaced from pricing.xlsx ("our pricing" only; vendor costs are
+  not published). Alpinestars Short Mesh Riding Gloves 5,500 and SP-8 Leather Racing Gloves
+  6,500 (vendor + 1,000); both Tactical gloves 1,500. No product is left at Ksh 1.
+- Nothing above reaches the website until the next publish/deploy.
+
 Admin "Publish changes" button  (committed, not yet pushed)
 - Saving a product or category no longer triggers a Netlify rebuild (each rebuild costs
   credits, and ten edits meant ten builds). Instead a bar at the top of every admin page
