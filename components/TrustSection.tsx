@@ -1,8 +1,8 @@
 const TRUST_ITEMS = [
   { icon: "🏷️", title: "Fair Prices", description: "Honest pricing, no inflated 'was' prices." },
   { icon: "🚚", title: "Fast Delivery", description: "Nairobi same/next-day, countrywide in 2-4 days." },
-  { icon: "🔒", title: "M-Pesa & Secure Payment", description: "Pay via M-Pesa, card, or on delivery." },
-  { icon: "🛡️", title: "Buyer Protection", description: "Genuine products, returns accepted within 48 hours of delivery." },
+  { icon: "🔒", title: "M-Pesa & Secure Payment", description: "Pay securely with M-Pesa." },
+  { icon: "🛡️", title: "Buyer Protection", description: "Returns accepted within 48 hours of delivery." },
   { icon: "💬", title: "WhatsApp Support", description: "Real humans, real answers, same day." },
   { icon: "📱", title: "Mobile-Friendly", description: "Built to work great on any phone, any network." },
 ];

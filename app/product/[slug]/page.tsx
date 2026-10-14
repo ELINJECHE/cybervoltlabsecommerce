@@ -1,7 +1,9 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getAllProducts, getProductBySlug, getRelatedProducts } from "@/lib/products";
+import { getAllProducts, getCategoryBySlug, getProductBySlug, getRelatedProducts } from "@/lib/products";
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbJsonLd, productJsonLd, productMetadata } from "@/lib/seo";
 import { getAllReviews } from "@/lib/reviews";
 import ImageGallery from "@/components/ImageGallery";
 import PriceTag from "@/components/PriceTag";
@@ -19,10 +21,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const product = await getProductBySlug(params.slug);
   if (!product) return {};
-  return {
-    title: product.name,
-    description: product.description ?? `${product.name} — genuine stock at Cybervolt Labs.`,
-  };
+  return productMetadata(product);
 }
 
 export default async function ProductPage({ params }: { params: { slug: string } }) {
@@ -31,16 +30,29 @@ export default async function ProductPage({ params }: { params: { slug: string }
 
   const related = await getRelatedProducts(product);
   const reviews = getAllReviews();
+  const category = await getCategoryBySlug(product.category);
+  const categoryName = category?.name ?? product.category.replace(/-/g, " ");
   const isLowStock = product.stock > 0 && product.stock <= 10;
 
   return (
     <div>
+    <JsonLd
+      data={[
+        // A Product listing without a photo is invalid structured data, so leave it out.
+        ...(product.images.length > 0 ? [productJsonLd(product, categoryName)] : []),
+        breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: categoryName, path: `/category/${product.category}` },
+          { name: product.name, path: `/product/${product.slug}` },
+        ]),
+      ]}
+    />
     <div className="mx-auto max-w-7xl px-4 py-6">
-      <nav className="mb-4 text-xs text-muted">
+      <nav aria-label="Breadcrumb" className="mb-4 text-xs text-muted">
         <Link href="/" className="hover:text-primary">Home</Link>
         {" / "}
-        <Link href={`/category/${product.category}`} className="hover:text-primary capitalize">
-          {product.category.replace("-", " ")}
+        <Link href={`/category/${product.category}`} className="hover:text-primary">
+          {categoryName}
         </Link>
         {" / "}
         <span className="text-foreground">{product.name}</span>

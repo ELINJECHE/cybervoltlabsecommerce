@@ -9,6 +9,7 @@ import WhatsAppFloatButton from "@/components/WhatsAppFloatButton";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import CookieConsent from "@/components/CookieConsent";
 import { getAllCategories } from "@/lib/products";
+import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, SITE_NAME, SITE_URL } from "@/lib/seo";
 
 // Two weights of a single Google Font, per the performance budget.
 const brandFont = Plus_Jakarta_Sans({
@@ -21,11 +22,19 @@ const brandFont = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL("https://cybervoltlabs.co.ke"),
   title: {
-    default: "Cybervolt Labs — Phones, Fashion, Furniture & More, Delivered in Kenya",
-    template: "%s | Cybervolt Labs",
+    default: DEFAULT_TITLE,
+    template: `%s | ${SITE_NAME}`,
   },
-  description:
-    "Cybervolt Labs sells mobile phones, laptops, fashion accessories, furniture, home décor, electronics and more across Kenya, with M-Pesa payment and fast delivery.",
+  description: DEFAULT_DESCRIPTION,
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    locale: "en_KE",
+    url: SITE_URL,
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+  },
+  twitter: { card: "summary_large_image", title: DEFAULT_TITLE, description: DEFAULT_DESCRIPTION },
 };
 
 export const viewport: Viewport = {

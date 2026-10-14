@@ -7,3 +7,24 @@
 
 # Static export (output: "export") — no Next.js server runtime needed.
 # Do not enable Netlify's "Next.js Runtime" plugin; this is a plain static site.
+
+# Private/utility areas: keep them out of search results.
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+[[headers]]
+  for = "/account/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+[[headers]]
+  for = "/cart"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+[[headers]]
+  for = "/checkout/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"

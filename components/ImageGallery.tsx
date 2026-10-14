@@ -31,7 +31,7 @@ export default function ImageGallery({ images, name }: { images: string[]; name:
                 i === active ? "border-primary" : "border-transparent"
               }`}
             >
-              <Image src={image} alt="" fill loading="lazy" sizes="64px" className="object-cover" />
+              <Image src={image} alt={`${name} — photo ${i + 1}`} fill loading="lazy" sizes="64px" className="object-cover" />
             </button>
           ))}
         </div>

@@ -7,6 +7,7 @@ import ReviewsCarousel from "@/components/ReviewsCarousel";
 
 export const metadata: Metadata = {
   title: "Search",
+  robots: { index: false, follow: true },
 };
 
 export default async function SearchPage() {

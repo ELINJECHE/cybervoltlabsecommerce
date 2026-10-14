@@ -14,6 +14,15 @@ import {
   getRecommendedProducts,
 } from "@/lib/products";
 import { getAllReviews } from "@/lib/reviews";
+import JsonLd from "@/components/JsonLd";
+import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, organizationJsonLd, pageMetadata, websiteJsonLd } from "@/lib/seo";
+
+export const metadata = pageMetadata({
+  title: DEFAULT_TITLE,
+  description: DEFAULT_DESCRIPTION,
+  path: "/",
+  absoluteTitle: true,
+});
 
 const HERO_SLIDES = [
   {
@@ -51,6 +60,8 @@ export default async function HomePage() {
 
   return (
     <div>
+      <JsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
+      <h1 className="sr-only">Cybervolt Labs — phones, fashion, furniture and more in Kenya</h1>
       <div className="pt-4 sm:pt-6">
         <HeroCarousel slides={HERO_SLIDES} />
       </div>
@@ -110,7 +121,7 @@ export default async function HomePage() {
             fashion accessories
           </Link>{" "}
           collections to see what&rsquo;s trending this week. Every order is confirmed over
-          WhatsApp with M-Pesa payment on delivery.
+          WhatsApp, and you pay by M-Pesa.
         </p>
         <p>
           Whether you found us through a TikTok video or a WhatsApp forward, welcome — fair

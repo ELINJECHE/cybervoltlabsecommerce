@@ -5,6 +5,26 @@ but waiting on a setup step that only the site owner can do.
 ==============================================================================
 2026-10-13
 ==============================================================================
+On-page SEO  (committed, not yet pushed)
+- New lib/seo.ts builds titles, descriptions, canonical links, Open Graph / Twitter tags and
+  JSON-LD for every page (see docs/SEO.md). Checked across all 176 built pages: no missing
+  canonicals or descriptions, no duplicate titles or descriptions, every indexable page has a
+  share image, every image has alt text, and the sitemap matches the indexable pages exactly.
+- Home page: 59-character title (was 70), an H1 (it had none), Organization + WebSite data.
+- Product pages: keyword-rich title with price, unique description, Product + Breadcrumb data
+  (offer in KES, 2-day return policy), descriptive thumbnail alt text, correct category name in
+  the breadcrumb (it read "mobile laptop-accessories" before).
+- Category pages: "X in Kenya" titles, descriptions with product count and starting price,
+  CollectionPage + ItemList + Breadcrumb data.
+- Cart, checkout, account and search are noindex (also via headers in netlify.toml for /admin).
+  They previously reused the home page's title and description.
+- About, Contact and Returns got their own descriptions (they all shared the home page's).
+- New default share image (app/opengraph-image.png) for link previews.
+- Wording corrected: removed "genuine stock" from search descriptions and "Genuine products"
+  from the Buyer Protection tile; "M-Pesa payment on delivery" now says M-Pesa payment (the
+  checkout takes payment before dispatch); the payment tile no longer promises card or pay on
+  delivery.
+
 Catalog data updated  (database only, not published to the live site yet)
 - Sneakers & Shoes replaced: the two old shoes removed (backup kept) and five new ones added
   from the new creatives, with shoe-only crops and no authenticity wording in names or text.

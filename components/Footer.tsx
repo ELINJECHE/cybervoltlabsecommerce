@@ -2,15 +2,10 @@ import Link from "next/link";
 import Newsletter from "@/components/Newsletter";
 import CookieSettingsButton from "@/components/CookieSettingsButton";
 import type { Category } from "@/lib/types";
+import { SOCIAL_LINKS } from "@/lib/social";
 
 const PAYMENT_METHODS = ["M-Pesa", "Airtel Money", "Visa", "Mastercard"];
 
-const SOCIAL_LINKS = [
-  { label: "Instagram", href: "https://www.instagram.com/cybervolt_labs_/" },
-  { label: "Facebook", href: "https://www.facebook.com/people/cybervolt-Labs-Kenya/61587610450249/" },
-  { label: "TikTok", href: "https://www.tiktok.com/@cybervolt_labs" },
-  { label: "LinkedIn", href: "https://ke.linkedin.com/company/cybervoltlabskenya" },
-];
 
 export default function Footer({ categories }: { categories: Category[] }) {
   return (

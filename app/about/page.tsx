@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = { title: "Our Story" };
+export const metadata: Metadata = pageMetadata({
+  title: "Our Story",
+  description:
+    "Kenyan online shop in Ongata Rongai selling phones, fashion, furniture and motorcycle gear. Pay with M-Pesa; delivery across Kenya.",
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (
@@ -14,7 +20,7 @@ export default function AboutPage() {
       </p>
       <p className="text-muted">
         Today this storefront brings everything under one roof, with the same fast Nairobi delivery,
-        M-Pesa payment on delivery, and WhatsApp support our customers already know us for.
+        M-Pesa payment, and WhatsApp support our customers already know us for.
       </p>
     </div>
   );

@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { buildOrderEnquiryLink } from "@/lib/whatsapp";
 
-export const metadata: Metadata = { title: "Contact Us" };
+export const metadata: Metadata = pageMetadata({
+  title: "Contact Us",
+  description:
+    "Contact Cybervolt Labs on WhatsApp for orders, delivery and support. Based in Ongata Rongai, Kenya, delivering countrywide.",
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (

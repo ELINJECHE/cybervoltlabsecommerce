@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = { title: "Return Policy" };
+export const metadata: Metadata = pageMetadata({
+  title: "Return Policy",
+  description:
+    "Cybervolt Labs return policy: returns accepted within 48 hours of delivery for unused items in original packaging. Refunds are paid back via M-Pesa.",
+  path: "/returns",
+});
 
 export default function ReturnsPage() {
   return (
