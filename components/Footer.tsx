@@ -4,7 +4,7 @@ import CookieSettingsButton from "@/components/CookieSettingsButton";
 import type { Category } from "@/lib/types";
 import { SOCIAL_LINKS } from "@/lib/social";
 
-const PAYMENT_METHODS = ["M-Pesa", "Airtel Money", "Visa", "Mastercard"];
+const PAYMENT_METHODS = ["M-Pesa"];
 
 
 export default function Footer({ categories }: { categories: Category[] }) {

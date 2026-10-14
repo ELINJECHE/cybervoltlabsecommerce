@@ -1,6 +1,6 @@
 const TRUST_ITEMS = [
-  { icon: "🏷️", title: "Fair Prices", description: "Honest pricing, no inflated 'was' prices." },
-  { icon: "🚚", title: "Fast Delivery", description: "Nairobi same/next-day, countrywide in 2-4 days." },
+  { icon: "🏷️", title: "Clear Prices", description: "Every price is shown in Kenya shillings." },
+  { icon: "🚚", title: "Fast Delivery", description: "Orders dispatched within 2 hours. Nairobi same/next-day, countrywide in 2-4 days." },
   { icon: "🔒", title: "M-Pesa & Secure Payment", description: "Pay securely with M-Pesa." },
   { icon: "🛡️", title: "Buyer Protection", description: "Returns accepted within 48 hours of delivery." },
   { icon: "💬", title: "WhatsApp Support", description: "Real humans, real answers, same day." },
