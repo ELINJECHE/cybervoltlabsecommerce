@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAuth } from "@/lib/auth-context";
 import { supabaseEnabled } from "@/lib/supabase";
+import PublishBar from "@/components/admin/PublishBar";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const { user, loading, isAdmin } = useAuth();
@@ -71,6 +72,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           &larr; Back to site
         </Link>
       </div>
+      <PublishBar />
       {children}
     </div>
   );

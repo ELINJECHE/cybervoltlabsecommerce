@@ -59,21 +59,32 @@ push a commit). Confirm it builds clean and the site loads at the
 3. Wait for DNS to propagate (can take a few minutes to a few hours), then
    Netlify auto-provisions a free HTTPS certificate.
 
-## 6. Wire up the admin "rebuild-on-save" hook
+## 6. Enable the admin "Publish changes" button
 
-1. Site settings → **Build & deploy** → **Build hooks** → **Add build hook**
-   (name it e.g. "admin-save"). Copy the generated URL.
-2. Set `NEXT_PUBLIC_DEPLOY_HOOK_URL` in the environment variables (step 3)
-   to that URL.
-3. Trigger one more deploy so the hook URL is baked into the built site —
-   from then on, every save in `/admin` (product or category) calls this
-   hook automatically and Netlify rebuilds within a minute or two.
+Edits made in `/admin` save to the database straight away, but the public site is a static
+snapshot that only changes after a rebuild. Every Netlify build uses credits, so saving never
+rebuilds by itself. Instead, the admin makes all the edits it wants and then presses
+**Publish changes** (shown at the top of every admin page) once.
+
+1. Netlify → Project configuration → **Developer settings** (or **Build & deploy**) →
+   **Build hooks** → **Add build hook** (name it e.g. "admin-publish", branch `main`).
+   Copy the URL.
+2. Add it as the environment variable `NEXT_PUBLIC_DEPLOY_HOOK_URL` — paste **only the URL**
+   into the Value box.
+3. Deploy once so the button picks it up.
+
+Until the hook is set, the button is disabled and the page explains the manual route:
+Netlify → Deploys → Trigger deploy → Deploy project.
+
+The bar counts edits made **on this device** and blocks repeat clicks for 2 minutes so a
+double-click can't queue a second (paid) build. A brand-new product's Edit page only exists
+after the next publish.
 
 ## Notes
 
 - Every subsequent code change: `git push` → Netlify rebuilds automatically.
-- Every subsequent catalog change via `/admin`: rebuild happens automatically
-  via the build hook — no manual redeploy needed.
+- Every batch of catalog changes via `/admin`: press **Publish changes** once when you're
+  done editing (one build for the whole batch).
 - `sitemap.xml` and `robots.txt` already reference `https://cybervoltlabs.co.ke`
   (set in `app/sitemap.ts` / `app/robots.ts`), so no changes needed there once
   the custom domain is live.

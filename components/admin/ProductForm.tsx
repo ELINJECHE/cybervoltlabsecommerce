@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import type { CategoryRow, ProductInput, ProductRow } from "@/lib/admin-products";
 import { generateId, slugify, uploadProductImage } from "@/lib/admin-products";
-import { triggerRebuild } from "@/lib/deploy";
+import { markUnpublished } from "@/lib/deploy";
 
 interface ProductFormProps {
   categories: CategoryRow[];
@@ -89,7 +89,7 @@ export default function ProductForm({ categories, initial, onSubmit, submitLabel
         jumia_url: jumiaUrl || null,
       };
       await onSubmit(input);
-      await triggerRebuild();
+      markUnpublished();
       router.push("/admin");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong saving this product.");

@@ -8,7 +8,7 @@ import {
   slugify,
   type CategoryRow,
 } from "@/lib/admin-products";
-import { triggerRebuild } from "@/lib/deploy";
+import { markUnpublished } from "@/lib/deploy";
 
 export default function AdminCategoriesPage() {
   const [categories, setCategories] = useState<CategoryRow[]>([]);
@@ -33,7 +33,7 @@ export default function AdminCategoriesPage() {
     setError(null);
     try {
       await createCategory({ slug: slugify(name), name });
-      await triggerRebuild();
+      markUnpublished();
       setName("");
       await load();
     } catch (err) {
@@ -47,7 +47,7 @@ export default function AdminCategoriesPage() {
     if (!confirm(`Delete "${catName}"? Products in this category won't be deleted, but will lose their category.`)) return;
     try {
       await deleteCategory(slug);
-      await triggerRebuild();
+      markUnpublished();
       await load();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to delete category.");

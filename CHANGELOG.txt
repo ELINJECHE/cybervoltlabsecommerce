@@ -5,6 +5,15 @@ but waiting on a setup step that only the site owner can do.
 ==============================================================================
 2026-10-13
 ==============================================================================
+Admin "Publish changes" button  (committed, not yet pushed)
+- Saving a product or category no longer triggers a Netlify rebuild (each rebuild costs
+  credits, and ten edits meant ten builds). Instead a bar at the top of every admin page
+  shows "N changes saved, not live yet" and a single Publish changes button that rebuilds
+  once for the whole batch, after a confirmation.
+- Repeat clicks are blocked for 2 minutes. Without NEXT_PUBLIC_DEPLOY_HOOK_URL the button is
+  disabled and the bar explains the manual route (Netlify -> Deploys -> Deploy project).
+- The unpublished-change count is per browser (edits made on this device).
+
 Return window changed from 7 days to 48 hours
 - Return Policy page and the home page "Buyer Protection" tile now both say returns are
   accepted within 48 hours of delivery for unused items in original packaging.

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { listProductsAdmin, deleteProduct, type ProductRow } from "@/lib/admin-products";
-import { triggerRebuild } from "@/lib/deploy";
+import { markUnpublished } from "@/lib/deploy";
 import { formatKES } from "@/lib/format";
 
 export default function AdminProductsPage() {
@@ -32,7 +32,7 @@ export default function AdminProductsPage() {
     setDeletingId(id);
     try {
       await deleteProduct(id);
-      await triggerRebuild();
+      markUnpublished();
       setProducts((prev) => prev.filter((p) => p.id !== id));
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to delete product.");
