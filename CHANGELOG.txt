@@ -24,6 +24,10 @@ On-page SEO  (committed, not yet pushed)
   from the Buyer Protection tile; "M-Pesa payment on delivery" now says M-Pesa payment (the
   checkout takes payment before dispatch); the payment tile no longer promises card or pay on
   delivery.
+- Also corrected: the footer now lists only M-Pesa (it showed Airtel Money, Visa and Mastercard,
+  none of which are accepted); the "Fair Prices" tile ("no inflated 'was' prices") became "Clear
+  Prices" since the site does show discounts; and the delivery tile now matches the order page:
+  orders are dispatched within 2 hours, Nairobi same/next-day, countrywide 2-4 days.
 
 Catalog data updated  (database only, not published to the live site yet)
 - Sneakers & Shoes replaced: the two old shoes removed (backup kept) and five new ones added
