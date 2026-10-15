@@ -16,6 +16,15 @@ Inventory added from the WhatsApp broadcast group  (committed, not yet pushed)
 - Descriptions are short and generic; specs were added only where the posts gave them. Stock is not
   tracked (set to 0 = unlimited), as for the rest of the shop. Review everything in the admin panel.
 
+140 new products from the WhatsApp offers group  (database updated; site not yet rebuilt/pushed)
+- 140 products added to the shop database with 212 resized photos (about 110 KB each): shoes, home
+  appliances, speakers/audio, electronics, personal care, kitchen, tools, storage and sports items.
+  Prices are the latest ones posted in the group; shoes use "-style" names with no brand claims.
+- 7 new categories (Audio & Speakers, Home Appliances, Kitchen & Dining, Personal Care, Tools & Car
+  Care, Home Storage & Travel, Sports & Leisure). The catalog is now 193 products.
+- Left out: the CTC CT-8011 speaker (no price in the chat) and 6 items already on the site.
+- Needs a rebuild/push before it shows on cybervoltlabs.co.ke.
+
 Delivery fees by area  (committed, not yet pushed)
 - Checkout has a required "Delivery Area" list (50 Nairobi areas from "Nairobi Routes Rates.xlsx"
   plus "Outside Nairobi"). The fee is added to the order total, and the pay screen, the amount to
