@@ -9,8 +9,11 @@ Delivery fees by area  (committed, not yet pushed)
 - Checkout has a required "Delivery Area" list (50 Nairobi areas from "Nairobi Routes Rates.xlsx"
   plus "Outside Nairobi"). The fee is added to the order total, and the pay screen, the amount to
   copy, the WhatsApp messages and the M-Pesa prompt amount all use the new total.
-- Rates live in lib/delivery.ts (edit there; nothing else needs touching). Ranges and repeated areas
-  are charged at the HIGHEST figure in the sheet.
+- Rates live in lib/delivery.ts (edit there; nothing else needs touching). Nairobi CBD is KSh 100.
+  18 areas are "ranged" (e.g. Karen KSh 800-1000). After choosing one, the customer picks a Building /
+  Estate that sets the exact fee; anyone not listed pays the top of the range. A ranged area with no
+  buildings listed yet just charges the top of its range. Building lists go in BUILDINGS in
+  lib/delivery.ts (a fill-in spreadsheet template was made for this).
 - Outside Nairobi: parcel courier fee (about KSh 300-1,000 by weight) is paid to the courier on
   delivery, so it is NOT in the M-Pesa total; the customer is told this at checkout.
 - Order sheet: no new columns. The area is added to the Delivery Address ("Kasarani: ...") and the

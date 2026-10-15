@@ -23,8 +23,11 @@ import { SAME_DAY_HEADLINE } from "@/lib/store-info";
 import {
   NAIROBI_ZONES,
   OUTSIDE_NAIROBI_NOTE,
+  OTHER_BUILDING,
   OUTSIDE_NAIROBI_SLUG,
+  buildingsFor,
   describeDelivery,
+  feeLabel,
   resolveDelivery,
 } from "@/lib/delivery";
 
@@ -46,7 +49,9 @@ export default function CheckoutPage() {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [areaSlug, setAreaSlug] = useState("");
-  const delivery = resolveDelivery(areaSlug);
+  const [building, setBuilding] = useState("");
+  const delivery = resolveDelivery(areaSlug, building);
+  const buildingOptions = buildingsFor(areaSlug);
   // Goods + delivery fee (the fee is 0 outside Nairobi: that one is paid to the courier).
   const total = subtotal + (delivery?.fee ?? 0);
   const [notes, setNotes] = useState("");
@@ -70,6 +75,10 @@ export default function CheckoutPage() {
       setError("Please choose your delivery area so we can add the delivery fee.");
       return;
     }
+    if (delivery.needsBuilding) {
+      setError("Please choose your building or estate so we can work out the exact delivery fee.");
+      return;
+    }
     setSubmitting(true);
     setError(null);
 
@@ -79,7 +88,7 @@ export default function CheckoutPage() {
       orderReference,
       customerName: name,
       phone,
-      deliveryAddress: `${delivery.name}: ${address}`,
+      deliveryAddress: `${delivery.name}${delivery.building ? ` (${delivery.building})` : ""}: ${address}`,
       notes: tagOrderNotes(
         orderReference,
         "AWAITING PAYMENT",
@@ -87,7 +96,7 @@ export default function CheckoutPage() {
       ),
       items,
       subtotal,
-      deliveryArea: delivery.name,
+      deliveryArea: delivery.building ? `${delivery.name} (${delivery.building})` : delivery.name,
       deliveryFee: delivery.fee,
       deliveryPayOnArrival: delivery.payOnDelivery,
       total,
@@ -122,7 +131,7 @@ export default function CheckoutPage() {
       const reference = await initiatePayHeroPayment({
         customerName: name,
         phone,
-        deliveryAddress: `${delivery.name}: ${address}`,
+        deliveryAddress: `${delivery.name}${delivery.building ? ` (${delivery.building})` : ""}: ${address}`,
         notes,
         items,
         amount: total,
@@ -216,11 +225,13 @@ export default function CheckoutPage() {
               ? "Choose your area below"
               : delivery.payOnDelivery
                 ? "Pay courier on arrival"
-                : formatKES(delivery.fee)}
+                : delivery.needsBuilding
+                  ? "Choose your building below"
+                  : formatKES(delivery.fee)}
           </span>
         </div>
         <div className="mt-2 flex justify-between border-t border-border pt-2 text-sm font-bold">
-          <span>{delivery ? "Total to pay now" : "Total"}</span>
+          <span>{delivery && !delivery.needsBuilding ? "Total to pay now" : "Total"}</span>
           <span>{formatKES(total)}</span>
         </div>
       </div>
@@ -299,14 +310,17 @@ export default function CheckoutPage() {
             id="area"
             required
             value={areaSlug}
-            onChange={(e) => setAreaSlug(e.target.value)}
+            onChange={(e) => {
+              setAreaSlug(e.target.value);
+              setBuilding("");
+            }}
             className="h-11 w-full rounded-md border border-border bg-surface px-3 text-sm outline-none focus:border-primary"
           >
             <option value="" disabled>Select where we&rsquo;re delivering…</option>
             <optgroup label="Nairobi — same-day delivery">
               {NAIROBI_ZONES.map((z) => (
                 <option key={z.slug} value={z.slug}>
-                  {z.name} — {formatKES(z.fee)}
+                  {z.name} — {feeLabel(z)}
                 </option>
               ))}
             </optgroup>
@@ -321,6 +335,30 @@ export default function CheckoutPage() {
             </p>
           )}
         </div>
+
+        {buildingOptions.length > 0 && delivery && !delivery.payOnDelivery && (
+          <div>
+            <label htmlFor="building" className="mb-1 block text-sm font-medium">Building / Estate</label>
+            <select
+              id="building"
+              required
+              value={building}
+              onChange={(e) => setBuilding(e.target.value)}
+              className="h-11 w-full rounded-md border border-border bg-surface px-3 text-sm outline-none focus:border-primary"
+            >
+              <option value="" disabled>Select your building or estate…</option>
+              {buildingOptions.map((b) => (
+                <option key={b.name} value={b.name}>
+                  {b.name} — {formatKES(b.fee)}
+                </option>
+              ))}
+              <option value={OTHER_BUILDING}>{OTHER_BUILDING} — {formatKES(delivery.fee)}</option>
+            </select>
+            <p className="mt-1 text-xs text-muted">
+              Your area&rsquo;s fee varies by building. Not listed? Choose &ldquo;Other&rdquo; and we&rsquo;ll charge the top rate.
+            </p>
+          </div>
+        )}
 
         <div>
           <label htmlFor="address" className="mb-1 block text-sm font-medium">Delivery Address</label>
