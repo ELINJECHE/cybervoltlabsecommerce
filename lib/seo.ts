@@ -4,14 +4,14 @@ import { SOCIAL_LINKS } from "@/lib/social";
 
 export const SITE_URL = "https://cybervoltlabs.co.ke";
 export const SITE_NAME = "Cybervolt Labs";
-export const DEFAULT_TITLE = "Cybervolt Labs | Phones, Fashion, Furniture & More in Kenya";
+export const DEFAULT_TITLE = "Cybervolt Labs | Motorcycle Gear, Sneakers & Home in Kenya";
 export const DEFAULT_DESCRIPTION =
-  "Shop mobile phones, laptops, fashion, furniture, home décor, motorcycle gear and more at Cybervolt Labs. Pay with M-Pesa. Delivery across Kenya.";
+  "Shop motorcycle riding gear, sneakers, bedding, home décor and smart gadgets at Cybervolt Labs. Pay with M-Pesa. Delivery across Kenya.";
 
 const TITLE_SUFFIX = ` | ${SITE_NAME}`;
 
 // Used whenever a page has no image of its own (a page-level openGraph replaces the layout's).
-const SHARE_IMAGE_ALT = "Cybervolt Labs — phones, fashion, furniture and motorcycle gear in Kenya. Pay with M-Pesa.";
+const SHARE_IMAGE_ALT = "Cybervolt Labs — motorcycle gear, sneakers and home essentials in Kenya. Pay with M-Pesa.";
 
 export function absoluteUrl(path: string): string {
   if (/^https?:\/\//.test(path)) return path;
@@ -136,7 +136,7 @@ export function organizationJsonLd() {
     "@id": ORG_ID,
     name: SITE_NAME,
     url: SITE_URL,
-    logo: absoluteUrl("/assets/images/logo.svg"),
+    logo: absoluteUrl("/assets/images/logo-512.png"),
     description: DEFAULT_DESCRIPTION,
     areaServed: { "@type": "Country", name: "Kenya" },
     address: { "@type": "PostalAddress", addressLocality: "Ongata Rongai", addressCountry: "KE" },

@@ -71,7 +71,8 @@ function rowToProduct(row: ProductRow): Product {
     subcategory: row.subcategory ?? undefined,
     price: row.price,
     discountPrice: row.discount_price ?? undefined,
-    images: row.images ?? [],
+    // Drop leftover placeholder artwork that predates the real product photos.
+    images: (row.images ?? []).filter((src) => !/^\/assets\/images\/products\/.*\.svg$/.test(src)),
     colors: validColors(row.colors),
     features: row.features ?? [],
     rating: row.rating ?? 0,
@@ -91,7 +92,7 @@ function rowToCategory(row: CategoryRow): Category {
   return {
     slug: row.slug,
     name: row.name,
-    image: row.image,
+    image: row.image || `/assets/images/category-${row.slug}.png`,
     subcategories: row.subcategories ?? [],
   };
 }
@@ -145,6 +146,14 @@ export async function getAllProducts(): Promise<Product[]> {
 
 export async function getAllCategories(): Promise<Category[]> {
   return loadCategories();
+}
+
+// Categories that currently have at least one product. An empty category would be a
+// dead-end page in the menu and in search results, so it stays hidden until it has stock.
+export async function getActiveCategories(): Promise<Category[]> {
+  const [categories, products] = await Promise.all([loadCategories(), loadProducts()]);
+  const stocked = new Set(products.map((p) => p.category));
+  return categories.filter((c) => stocked.has(c.slug));
 }
 
 export async function getCategoryBySlug(slug: string): Promise<Category | undefined> {

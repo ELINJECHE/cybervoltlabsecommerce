@@ -4,7 +4,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata: Metadata = pageMetadata({
   title: "Our Story",
   description:
-    "Kenyan online shop in Ongata Rongai selling phones, fashion, furniture and motorcycle gear. Pay with M-Pesa; delivery across Kenya.",
+    "Kenyan online shop in Ongata Rongai selling motorcycle gear, sneakers, bedding and home décor. Pay with M-Pesa; delivery across Kenya.",
   path: "/about",
 });
 

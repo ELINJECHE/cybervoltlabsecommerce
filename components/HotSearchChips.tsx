@@ -1,13 +1,13 @@
 import Link from "next/link";
 
 const TRENDING_SEARCHES = [
-  "phone",
-  "laptop",
-  "led strip lights",
-  "office chair",
+  "gloves",
   "helmet",
-  "watch",
-  "bluetooth speaker",
+  "riding jacket",
+  "rain suit",
+  "sneakers",
+  "duvet",
+  "smart watch",
 ];
 
 export default function HotSearchChips() {

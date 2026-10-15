@@ -26,7 +26,7 @@ export default function SearchBar({
           type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search for earbuds, power banks, watches..."
+          placeholder="Search gloves, helmets, sneakers, duvets..."
           aria-label="Search products"
           className="h-11 w-full rounded-full border border-border bg-surface pl-4 pr-10 text-sm outline-none focus:border-primary"
         />

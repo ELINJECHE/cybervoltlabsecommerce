@@ -3,6 +3,27 @@ Newest first. "Live" = running on cybervoltlabs.co.ke. "Not deployed" = in the c
 but waiting on a setup step that only the site owner can do.
 
 ==============================================================================
+2026-10-15
+==============================================================================
+Placeholder clean-up and faster images  (committed, not yet pushed)
+- The 99 placeholder products were removed from the shop database (a backup of them was kept
+  outside the project). 53 real products remain.
+- Categories with no products (Cyber Cafe Supplies, Fashion Accessories, Laptops, Mobile Phones,
+  Services) no longer appear in the menu, footer, home page or sitemap. They reappear
+  automatically once a product is added to them.
+- Wording that described products no longer sold (phones, laptops, earbuds, power banks) was
+  updated: home page hero slides, About text, page titles/descriptions, search box hint and the
+  trending-search chips (now gloves, helmet, riding jacket, rain suit, sneakers, duvet, smart watch).
+- Leftover placeholder pictures on two products (Power Bank 10,000mAh, Full-Face Helmet) are
+  no longer shown; the real photos remain.
+- Sneakers & Shoes now has a category picture.
+- data/products.json and data/categories.json (the offline fallback) now mirror the live catalog.
+- Removed the ~200 placeholder product SVGs, two obsolete setup scripts and an unused 586 KB
+  third-party bank banner from the public folder.
+- Images: category pictures went from ~900 KB each to 5-16 KB, hero banners from ~500-650 KB to
+  ~20 KB (WebP), the header logo from 66 KB to 2 KB, and only the first hero slide loads eagerly.
+
+==============================================================================
 2026-10-13
 ==============================================================================
 On-page SEO  (committed, not yet pushed)

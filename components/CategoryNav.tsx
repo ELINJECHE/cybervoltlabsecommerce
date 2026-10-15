@@ -40,10 +40,10 @@ export default function CategoryNav({ categories }: { categories: Category[] }) 
 
         <Link href="/" className="flex shrink-0 items-center">
           <Image
-            src="/assets/images/logo.svg"
+            src="/assets/images/logo-128.png"
             alt="Cybervolt Labs"
-            width={375}
-            height={375}
+            width={128}
+            height={128}
             priority
             className="h-11 w-11 sm:h-12 sm:w-12"
           />

@@ -1,200 +1,437 @@
 [
   {
-    "id": "p01",
-    "slug": "peel-and-stick-wallpaper-roll",
-    "name": "Peel & Stick Wallpaper (roll)",
-    "category": "interior-design",
-    "price": 900,
+    "id": "04334b88-883f-4ced-b0b6-ea19d2b3d612",
+    "slug": "suomy-su-11-mesh-riding-gloves",
+    "name": "Suomy SU-11 Mesh Riding Gloves",
+    "category": "motorcycle-gear",
+    "price": 2500,
     "images": [
-      "/assets/images/products/p01-1.svg",
-      "/assets/images/products/p01-2.svg"
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/04334b88-883f-4ced-b0b6-ea19d2b3d612/suomy-su-11-mesh-riding-gloves-black-grey.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/04334b88-883f-4ced-b0b6-ea19d2b3d612/suomy-su-11-mesh-riding-gloves-black-pink.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/04334b88-883f-4ced-b0b6-ea19d2b3d612/suomy-su-11-mesh-riding-gloves-black-yellow.jpg"
     ],
     "features": [],
     "rating": 0,
     "reviewCount": 0,
     "stock": 0,
-    "isNewArrival": false,
-    "verified": true
+    "colors": [
+      "Black/Grey",
+      "Black/Pink",
+      "Black/Yellow"
+    ]
   },
   {
-    "id": "p02",
-    "slug": "led-strip-lights-5m",
-    "name": "LED Strip Lights (5m)",
-    "category": "interior-design",
-    "price": 850,
+    "id": "0ba52759-1ea1-4ed2-9ff4-901505477629",
+    "slug": "alpinestars-textile-riding-pants",
+    "name": "Alpinestars Textile Riding Pants",
+    "category": "motorcycle-gear",
+    "price": 12000,
     "images": [
-      "/assets/images/products/p02-1.svg",
-      "/assets/images/products/p02-2.svg"
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/0ba52759-1ea1-4ed2-9ff4-901505477629/alpinestars-textile-riding-pants-black-back.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/0ba52759-1ea1-4ed2-9ff4-901505477629/alpinestars-textile-riding-pants-black-front.jpg"
     ],
     "features": [],
     "rating": 0,
     "reviewCount": 0,
     "stock": 0,
-    "isNewArrival": false,
-    "verified": true
+    "colors": [
+      "Black"
+    ]
   },
   {
-    "id": "p03",
-    "slug": "decorative-throw-pillows-pair",
-    "name": "Decorative Throw Pillows (pair)",
+    "id": "16219cdb-0a12-47e1-be50-ab4d4e2c7405",
+    "slug": "boho-tufted-throw-pillow-case",
+    "name": "Boho Tufted Throw Pillow Case",
     "category": "interior-design",
-    "price": 1200,
+    "price": 500,
     "images": [
-      "/assets/images/products/p03-1.svg",
-      "/assets/images/products/p03-2.svg"
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/16219cdb-0a12-47e1-be50-ab4d4e2c7405/boho-tufted-throw-pillow-case-brown-diamond.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/16219cdb-0a12-47e1-be50-ab4d4e2c7405/boho-tufted-throw-pillow-case-grey-chevron.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/16219cdb-0a12-47e1-be50-ab4d4e2c7405/boho-tufted-throw-pillow-case-ivory-wave.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/16219cdb-0a12-47e1-be50-ab4d4e2c7405/boho-tufted-throw-pillow-case-mustard-cream.jpg"
     ],
     "features": [],
     "rating": 0,
     "reviewCount": 0,
     "stock": 0,
-    "isNewArrival": false,
-    "verified": true
+    "colors": [
+      "Brown Diamond",
+      "Grey Chevron",
+      "Ivory Wave",
+      "Mustard Cream"
+    ]
   },
   {
-    "id": "p04",
-    "slug": "floating-wall-shelves-set-of-3",
-    "name": "Floating Wall Shelves (set of 3)",
-    "category": "interior-design",
-    "price": 1800,
+    "id": "1ce2814d-0394-489f-9ec6-467956b6bfdb",
+    "slug": "probiker-knee-guards-pair",
+    "name": "ProBiker Knee Guards (Pair)",
+    "category": "motorcycle-gear",
+    "price": 4500,
     "images": [
-      "/assets/images/products/p04-1.svg",
-      "/assets/images/products/p04-2.svg"
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/1ce2814d-0394-489f-9ec6-467956b6bfdb/probiker-knee-guards-pair-black-angle.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/1ce2814d-0394-489f-9ec6-467956b6bfdb/probiker-knee-guards-pair-black-front.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/1ce2814d-0394-489f-9ec6-467956b6bfdb/probiker-knee-guards-pair-black-side.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/1ce2814d-0394-489f-9ec6-467956b6bfdb/probiker-knee-guards-pair-black-worn-2.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/1ce2814d-0394-489f-9ec6-467956b6bfdb/probiker-knee-guards-pair-black-worn.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0
+  },
+  {
+    "id": "20aec303-2ba5-419c-b36d-7fc1a35aa894",
+    "slug": "suomy-leather-gloves",
+    "name": "Suomy Leather Gloves",
+    "category": "motorcycle-gear",
+    "price": 4000,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/20aec303-2ba5-419c-b36d-7fc1a35aa894/suomy-leather-gloves-black-back.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/20aec303-2ba5-419c-b36d-7fc1a35aa894/suomy-leather-gloves-black-palm.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/20aec303-2ba5-419c-b36d-7fc1a35aa894/suomy-leather-gloves-brown-back.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/20aec303-2ba5-419c-b36d-7fc1a35aa894/suomy-leather-gloves-brown-palm.jpg"
     ],
     "features": [],
     "rating": 0,
     "reviewCount": 0,
     "stock": 0,
-    "isNewArrival": true,
-    "verified": true
+    "colors": [
+      "Black",
+      "Brown"
+    ]
   },
   {
-    "id": "p05",
-    "slug": "macram-wall-hanging",
-    "name": "Macramé Wall Hanging",
+    "id": "2ce96996-fbcc-4a0c-9f38-d68962083564",
+    "slug": "probiker-full-body-armour-jacket",
+    "name": "ProBiker Full Body Armour Jacket",
+    "category": "motorcycle-gear",
+    "price": 6000,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/2ce96996-fbcc-4a0c-9f38-d68962083564/probiker-full-body-armour-jacket-black-back.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/2ce96996-fbcc-4a0c-9f38-d68962083564/probiker-full-body-armour-jacket-black-front-back.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/2ce96996-fbcc-4a0c-9f38-d68962083564/probiker-full-body-armour-jacket-black-front.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "colors": [
+      "Black"
+    ]
+  },
+  {
+    "id": "301e087b-f53b-4cbc-a1bd-795abb46a6c1",
+    "slug": "alpinestars-carbon-knuckle-mesh-gloves",
+    "name": "Alpinestars Carbon Knuckle Mesh Gloves",
+    "category": "motorcycle-gear",
+    "price": 5500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/301e087b-f53b-4cbc-a1bd-795abb46a6c1/alpinestars-carbon-knuckle-mesh-gloves-black-fluo.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "colors": [
+      "Black/Fluo"
+    ]
+  },
+  {
+    "id": "35320f93-a6d4-4dd6-90fb-2db759a4db0f",
+    "slug": "probiker-knee-elbow-guard-set-4pc",
+    "name": "ProBiker Knee & Elbow Guard Set (4pc)",
+    "category": "motorcycle-gear",
+    "price": 3500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/35320f93-a6d4-4dd6-90fb-2db759a4db0f/probiker-knee-elbow-guard-set-4pc-inner-lining.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/35320f93-a6d4-4dd6-90fb-2db759a4db0f/probiker-knee-elbow-guard-set-4pc-worn.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/35320f93-a6d4-4dd6-90fb-2db759a4db0f/probiker-knee-elbow-guard-set-4pc.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0
+  },
+  {
+    "id": "3e699967-8b8f-4e30-ba0f-6893561122de",
+    "slug": "smartpro-chest-freezer-170l",
+    "name": "SmartPro Chest Freezer 170L",
+    "category": "electronics",
+    "price": 17500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/3e699967-8b8f-4e30-ba0f-6893561122de/smartpro-chest-freezer-170l.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/3e699967-8b8f-4e30-ba0f-6893561122de/smartpro-chest-freezer-170l-box.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0
+  },
+  {
+    "id": "41fd1965-d545-4508-989c-98273760e7eb",
+    "slug": "itel-smart-watch-fit-018b",
+    "name": "itel Smart Watch Fit 018B",
+    "category": "electronics",
+    "price": 4500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/41fd1965-d545-4508-989c-98273760e7eb/itel-smart-watch-fit-018b-black.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/41fd1965-d545-4508-989c-98273760e7eb/itel-smart-watch-fit-018b-features.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "colors": [
+      "Black"
+    ]
+  },
+  {
+    "id": "47afb50d-54ea-46b3-9d56-b1a5bdf1ea96",
+    "slug": "alpinestars-sp-8-leather-racing-gloves",
+    "name": "Alpinestars SP-8 Leather Racing Gloves",
+    "category": "motorcycle-gear",
+    "price": 6500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/47afb50d-54ea-46b3-9d56-b1a5bdf1ea96/alpinestars-sp8-leather-racing-gloves-black.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/47afb50d-54ea-46b3-9d56-b1a5bdf1ea96/alpinestars-sp8-leather-racing-gloves-black-white.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "colors": [
+      "Black",
+      "Black/White"
+    ]
+  },
+  {
+    "id": "5258a655-de58-4473-ae67-77525a6bacd3",
+    "slug": "riding-tribe-hi-vis-reflective-mesh-vest",
+    "name": "Riding Tribe Hi-Vis Reflective Mesh Vest",
+    "category": "motorcycle-gear",
+    "price": 2450,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/5258a655-de58-4473-ae67-77525a6bacd3/riding-tribe-hi-vis-reflective-mesh-vest.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/5258a655-de58-4473-ae67-77525a6bacd3/riding-tribe-hi-vis-reflective-mesh-vest-lifestyle.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "colors": [
+      "Hi-Vis"
+    ]
+  },
+  {
+    "id": "55e804ad-3e53-49a8-941f-567f89eb6421",
+    "slug": "aluminium-motorcycle-top-box-45l",
+    "name": "Aluminium Motorcycle Top Box 45L",
+    "category": "motorcycle-gear",
+    "price": 30000,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/55e804ad-3e53-49a8-941f-567f89eb6421/aluminium-motorcycle-top-box-45l-silver-front.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/55e804ad-3e53-49a8-941f-567f89eb6421/aluminium-motorcycle-top-box-45l-silver-interior.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/55e804ad-3e53-49a8-941f-567f89eb6421/aluminium-motorcycle-top-box-45l-silver-top.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "colors": [
+      "Silver"
+    ]
+  },
+  {
+    "id": "56192e5e-59ba-481c-a0f7-9d960b47d2ab",
+    "slug": "prestige-cotton-bath-towels-assorted-colours",
+    "name": "Prestige Cotton Bath Towels (Assorted Colours)",
     "category": "interior-design",
     "price": 1500,
     "images": [
-      "/assets/images/products/p05-1.svg",
-      "/assets/images/products/p05-2.svg"
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/56192e5e-59ba-481c-a0f7-9d960b47d2ab/prestige-cotton-bath-towels-assorted-colours.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0
+  },
+  {
+    "id": "5684c8bc-237c-4f62-9c22-76e8566266f9",
+    "slug": "vemar-rain-suit",
+    "name": "Vemar Rain Suit",
+    "category": "motorcycle-gear",
+    "price": 6500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/5684c8bc-237c-4f62-9c22-76e8566266f9/vemar-rain-suit-camo-back.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/5684c8bc-237c-4f62-9c22-76e8566266f9/vemar-rain-suit-camo-front.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/5684c8bc-237c-4f62-9c22-76e8566266f9/vemar-rain-suit-camo-side.jpg"
     ],
     "features": [],
     "rating": 0,
     "reviewCount": 0,
     "stock": 0,
-    "isNewArrival": false,
-    "verified": true
+    "colors": [
+      "Camo"
+    ]
   },
   {
-    "id": "p06",
-    "slug": "scented-candles-set-of-4",
-    "name": "Scented Candles (set of 4)",
+    "id": "56c89303-8e9e-4212-8b2a-7f9b0fcd4768",
+    "slug": "binded-duvet-set",
+    "name": "Binded Duvet Set",
     "category": "interior-design",
-    "price": 1300,
+    "price": 6000,
     "images": [
-      "/assets/images/products/p06-1.svg",
-      "/assets/images/products/p06-2.svg"
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/56c89303-8e9e-4212-8b2a-7f9b0fcd4768/binded-duvet-black-white-stars.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/56c89303-8e9e-4212-8b2a-7f9b0fcd4768/binded-duvet-charcoal-palm-leaf.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/56c89303-8e9e-4212-8b2a-7f9b0fcd4768/binded-duvet-grey-blue-hexagon.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/56c89303-8e9e-4212-8b2a-7f9b0fcd4768/binded-duvet-grey-mustard-circles.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/56c89303-8e9e-4212-8b2a-7f9b0fcd4768/binded-duvet-grey-peacock-feather.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/56c89303-8e9e-4212-8b2a-7f9b0fcd4768/binded-duvet-grey-white-leaf-print.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/56c89303-8e9e-4212-8b2a-7f9b0fcd4768/binded-duvet-mocha-white-medallion.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/56c89303-8e9e-4212-8b2a-7f9b0fcd4768/binded-duvet-white-brown-wave-leaf.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/56c89303-8e9e-4212-8b2a-7f9b0fcd4768/binded-duvet-white-leaf-navy-polka-dot.jpg"
     ],
     "features": [],
     "rating": 0,
     "reviewCount": 0,
     "stock": 0,
-    "isNewArrival": false,
-    "verified": true
+    "colors": [
+      "Black/White Stars",
+      "Charcoal Palm Leaf",
+      "Grey/Blue Hexagon",
+      "Grey/Mustard Circles",
+      "Grey/Peacock Feather",
+      "Grey/White Leaf Print",
+      "Mocha/White Medallion",
+      "White/Brown Wave Leaf",
+      "White Leaf/Navy Polka Dot"
+    ]
   },
   {
-    "id": "p07",
-    "slug": "table-centerpiece-vase",
-    "name": "Table Centerpiece Vase",
-    "category": "interior-design",
-    "price": 1000,
+    "id": "5e14a494-986f-4963-b8fe-ec3a84d465d8",
+    "slug": "bag-lock-padlocks-12pc",
+    "name": "Bag Lock Padlocks (12pc)",
+    "category": "furniture",
+    "price": 1500,
     "images": [
-      "/assets/images/products/p07-1.svg",
-      "/assets/images/products/p07-2.svg"
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/5e14a494-986f-4963-b8fe-ec3a84d465d8/bag-lock-padlocks-12pc.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0
+  },
+  {
+    "id": "5e208ffb-e928-45ce-afd6-88ed118cf675",
+    "slug": "alpinestars-riding-pants-with-thermal-liner",
+    "name": "Alpinestars Riding Pants with Thermal Liner",
+    "category": "motorcycle-gear",
+    "price": 12000,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/5e208ffb-e928-45ce-afd6-88ed118cf675/alpinestars-riding-pants-thermal-liner-back.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/5e208ffb-e928-45ce-afd6-88ed118cf675/alpinestars-riding-pants-thermal-liner-front.jpg"
     ],
     "features": [],
     "rating": 0,
     "reviewCount": 0,
     "stock": 0,
-    "isNewArrival": false,
-    "verified": true
+    "colors": [
+      "Black"
+    ]
   },
   {
-    "id": "p08",
-    "slug": "blackout-curtains-pair",
-    "name": "Blackout Curtains (pair)",
-    "category": "interior-design",
-    "price": 2800,
+    "id": "612d0a23-884c-49d6-9bc6-621b077634f6",
+    "slug": "alpinestars-textile-riding-set-jacket-pants",
+    "name": "Alpinestars Textile Riding Set (Jacket + Pants)",
+    "category": "motorcycle-gear",
+    "price": 25000,
     "images": [
-      "/assets/images/products/p08-1.svg",
-      "/assets/images/products/p08-2.svg"
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/612d0a23-884c-49d6-9bc6-621b077634f6/alpinestars-textile-riding-set-black-jacket.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/612d0a23-884c-49d6-9bc6-621b077634f6/alpinestars-textile-riding-set-black-pants.jpg"
     ],
     "features": [],
     "rating": 0,
     "reviewCount": 0,
     "stock": 0,
-    "isNewArrival": true,
-    "verified": true
+    "colors": [
+      "Black"
+    ]
   },
   {
-    "id": "p09",
-    "slug": "artificial-plant-arrangement",
-    "name": "Artificial Plant Arrangement",
-    "category": "interior-design",
-    "price": 1400,
+    "id": "64719058-38ea-4cab-b57d-3e0395bc8613",
+    "slug": "alpinestars-textile-riding-jacket",
+    "name": "Alpinestars Textile Riding Jacket",
+    "category": "motorcycle-gear",
+    "price": 13000,
     "images": [
-      "/assets/images/products/p09-1.svg",
-      "/assets/images/products/p09-2.svg"
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/64719058-38ea-4cab-b57d-3e0395bc8613/alpinestars-textile-riding-jacket-black-back.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/64719058-38ea-4cab-b57d-3e0395bc8613/alpinestars-textile-riding-jacket-black-folded.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/64719058-38ea-4cab-b57d-3e0395bc8613/alpinestars-textile-riding-jacket-black-front.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/64719058-38ea-4cab-b57d-3e0395bc8613/alpinestars-textile-riding-jacket-quilted-liner.jpg"
     ],
     "features": [],
     "rating": 0,
     "reviewCount": 0,
     "stock": 0,
-    "isNewArrival": false,
-    "verified": true
+    "colors": [
+      "Black"
+    ]
   },
   {
-    "id": "p10",
-    "slug": "photo-frame-gallery-set-5-pcs",
-    "name": "Photo Frame Gallery Set (5 pcs)",
-    "category": "interior-design",
-    "price": 1600,
+    "id": "69ee3af3-752f-43f4-afa7-23c5c73cfeae",
+    "slug": "lyschy-adventure-riding-jacket",
+    "name": "Lyschy Adventure Riding Jacket",
+    "category": "motorcycle-gear",
+    "price": 15000,
     "images": [
-      "/assets/images/products/p10-1.svg",
-      "/assets/images/products/p10-2.svg"
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/69ee3af3-752f-43f4-afa7-23c5c73cfeae/lyschy-adventure-riding-jacket-black-back.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/69ee3af3-752f-43f4-afa7-23c5c73cfeae/lyschy-adventure-riding-jacket-black-front-vents-open.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/69ee3af3-752f-43f4-afa7-23c5c73cfeae/lyschy-adventure-riding-jacket-black-front.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/69ee3af3-752f-43f4-afa7-23c5c73cfeae/lyschy-adventure-riding-jacket-black-side-1.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/69ee3af3-752f-43f4-afa7-23c5c73cfeae/lyschy-adventure-riding-jacket-black-side-2.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/69ee3af3-752f-43f4-afa7-23c5c73cfeae/lyschy-adventure-riding-jacket-grey-back.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/69ee3af3-752f-43f4-afa7-23c5c73cfeae/lyschy-adventure-riding-jacket-grey-front-vents-open.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/69ee3af3-752f-43f4-afa7-23c5c73cfeae/lyschy-adventure-riding-jacket-grey-front.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/69ee3af3-752f-43f4-afa7-23c5c73cfeae/lyschy-adventure-riding-jacket-grey-side.jpg"
     ],
     "features": [],
     "rating": 0,
     "reviewCount": 0,
     "stock": 0,
-    "isNewArrival": false,
-    "verified": true
+    "colors": [
+      "Black",
+      "Grey"
+    ]
   },
   {
-    "id": "p11",
-    "slug": "type-c-fast-charging-cable-2m",
-    "name": "Type-C Fast Charging Cable (2m)",
-    "category": "mobile-laptop-accessories",
-    "price": 450,
-    "images": [
-      "/assets/images/products/p11-1.svg",
-      "/assets/images/products/p11-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p12",
-    "slug": "wireless-earbuds-tws",
-    "name": "Wireless Earbuds (TWS)",
-    "category": "mobile-laptop-accessories",
+    "id": "7148fccf-a6d9-4cb3-af46-e11059255b34",
+    "slug": "pro-biker-half-finger-gloves",
+    "name": "Pro Biker Half-Finger Gloves",
+    "category": "motorcycle-gear",
     "price": 2200,
     "images": [
-      "/assets/images/products/p12-1.svg",
-      "/assets/images/products/p12-2.svg"
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/7148fccf-a6d9-4cb3-af46-e11059255b34/pro-biker-half-finger-gloves-blue-front.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/7148fccf-a6d9-4cb3-af46-e11059255b34/pro-biker-half-finger-gloves-blue-palm.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/7148fccf-a6d9-4cb3-af46-e11059255b34/pro-biker-half-finger-gloves-red-front.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/7148fccf-a6d9-4cb3-af46-e11059255b34/pro-biker-half-finger-gloves-red-palm.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "colors": [
+      "Blue",
+      "Red"
+    ]
+  },
+  {
+    "id": "76e70458-dfdc-430c-8065-2a41f0970361",
+    "slug": "utarudi-gs80-smartwatch",
+    "name": "Utarudi GS80 Smartwatch",
+    "category": "electronics",
+    "price": 6500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/76e70458-dfdc-430c-8065-2a41f0970361/utarudi-gs80-smartwatch.jpg"
     ],
     "features": [],
     "rating": 0,
@@ -204,89 +441,539 @@
     "verified": true
   },
   {
-    "id": "p13",
-    "slug": "phone-ring-holder-stand",
-    "name": "Phone Ring Holder + Stand",
-    "category": "mobile-laptop-accessories",
-    "price": 350,
+    "id": "837b754f-be92-47ad-8a7b-a517df93e027",
+    "slug": "two-piece-motorcycle-rain-suit",
+    "name": "Two-Piece Motorcycle Rain Suit",
+    "category": "motorcycle-gear",
+    "price": 6500,
     "images": [
-      "/assets/images/products/p13-1.svg",
-      "/assets/images/products/p13-2.svg"
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/837b754f-be92-47ad-8a7b-a517df93e027/two-piece-motorcycle-rain-suit-hi-vis-yellow-black-back.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/837b754f-be92-47ad-8a7b-a517df93e027/two-piece-motorcycle-rain-suit-hi-vis-yellow-black-front.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/837b754f-be92-47ad-8a7b-a517df93e027/two-piece-motorcycle-rain-suit-peach-black-front.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/837b754f-be92-47ad-8a7b-a517df93e027/two-piece-motorcycle-rain-suit-peach-black-side.jpg"
     ],
     "features": [],
     "rating": 0,
     "reviewCount": 0,
     "stock": 0,
-    "isNewArrival": false,
+    "colors": [
+      "Hi-Vis Yellow/Black",
+      "Peach/Black"
+    ]
+  },
+  {
+    "id": "89b9c731-946e-4f53-b419-ea5c7bb1be2b",
+    "slug": "suomy-full-finger-riding-gloves",
+    "name": "Suomy Full-Finger Riding Gloves",
+    "category": "motorcycle-gear",
+    "price": 2500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/89b9c731-946e-4f53-b419-ea5c7bb1be2b/suomy-full-finger-riding-gloves-black-back.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/89b9c731-946e-4f53-b419-ea5c7bb1be2b/suomy-full-finger-riding-gloves-black-palm.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/89b9c731-946e-4f53-b419-ea5c7bb1be2b/suomy-full-finger-riding-gloves-lime-palm.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "colors": [
+      "Black",
+      "Lime"
+    ]
+  },
+  {
+    "id": "8caab1f4-a6bd-4079-b402-4ffe2c4d2410",
+    "slug": "silk-duvet-set",
+    "name": "Silk Duvet Set",
+    "category": "interior-design",
+    "price": 1700,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/8caab1f4-a6bd-4079-b402-4ffe2c4d2410/silk-duvet-set.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
     "verified": true
   },
   {
-    "id": "p14",
-    "slug": "laptop-cooling-pad",
-    "name": "Laptop Cooling Pad",
-    "category": "mobile-laptop-accessories",
-    "price": 1600,
+    "id": "90a7fee8-7b6a-4eab-9448-0ba40b1510c1",
+    "slug": "tactical-fingerless-gloves",
+    "name": "Tactical Fingerless Gloves",
+    "category": "motorcycle-gear",
+    "price": 1500,
     "images": [
-      "/assets/images/products/p14-1.svg",
-      "/assets/images/products/p14-2.svg"
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/90a7fee8-7b6a-4eab-9448-0ba40b1510c1/tactical-fingerless-gloves-tan-back.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/90a7fee8-7b6a-4eab-9448-0ba40b1510c1/tactical-fingerless-gloves-tan-palm.jpg"
     ],
     "features": [],
     "rating": 0,
     "reviewCount": 0,
     "stock": 0,
-    "isNewArrival": false,
-    "verified": true
+    "colors": [
+      "Tan"
+    ]
   },
   {
-    "id": "p15",
-    "slug": "usb-c-hub-7-in-1",
-    "name": "USB-C Hub (7-in-1)",
-    "category": "mobile-laptop-accessories",
-    "price": 1900,
+    "id": "9ae04245-47f9-4853-a456-2a20d444185d",
+    "slug": "alpinestars-racing-gloves",
+    "name": "Alpinestars Racing Gloves",
+    "category": "motorcycle-gear",
+    "price": 5500,
     "images": [
-      "/assets/images/products/p15-1.svg",
-      "/assets/images/products/p15-2.svg"
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/9ae04245-47f9-4853-a456-2a20d444185d/alpinestars-gloves-black-red-93-back.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/9ae04245-47f9-4853-a456-2a20d444185d/alpinestars-gloves-black-red-93-palm.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/9ae04245-47f9-4853-a456-2a20d444185d/alpinestars-gloves-black-white-back.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/9ae04245-47f9-4853-a456-2a20d444185d/alpinestars-gloves-black-white-palm.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/9ae04245-47f9-4853-a456-2a20d444185d/alpinestars-gloves-black-yellow-back.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/9ae04245-47f9-4853-a456-2a20d444185d/alpinestars-gloves-black-yellow-palm.jpg"
     ],
     "features": [],
     "rating": 0,
     "reviewCount": 0,
     "stock": 0,
-    "isNewArrival": false,
-    "verified": true
+    "colors": [
+      "Black/Red",
+      "Black/White",
+      "Black/Yellow"
+    ]
   },
   {
-    "id": "p16",
-    "slug": "screen-protector-tempered-glass",
-    "name": "Screen Protector (Tempered Glass)",
-    "category": "mobile-laptop-accessories",
-    "price": 350,
+    "id": "9c05b4b2-ce57-4d50-8fd4-f89963b82476",
+    "slug": "vemar-two-piece-rain-suit",
+    "name": "Vemar Two-Piece Rain Suit",
+    "category": "motorcycle-gear",
+    "price": 6500,
     "images": [
-      "/assets/images/products/p16-1.svg",
-      "/assets/images/products/p16-2.svg"
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/9c05b4b2-ce57-4d50-8fd4-f89963b82476/vemar-two-piece-rain-suit-grey-camo-back.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/9c05b4b2-ce57-4d50-8fd4-f89963b82476/vemar-two-piece-rain-suit-grey-camo-front.jpg"
     ],
     "features": [],
     "rating": 0,
     "reviewCount": 0,
     "stock": 0,
-    "isNewArrival": false,
-    "verified": true
+    "colors": [
+      "Grey Camo"
+    ]
   },
   {
-    "id": "p17",
-    "slug": "car-phone-holder-magnetic",
-    "name": "Car Phone Holder (magnetic)",
-    "category": "mobile-laptop-accessories",
-    "price": 700,
+    "id": "9ec86fe5-803d-453c-bdbd-fe8592daf206",
+    "slug": "leather-casual-lace-up-shoes-black-timberland-style",
+    "name": "Leather Casual Lace-up Shoes - Black (Timberland style)",
+    "category": "sneakers-shoes",
+    "price": 3000,
     "images": [
-      "/assets/images/products/p17-1.svg",
-      "/assets/images/products/p17-2.svg"
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/9ec86fe5-803d-453c-bdbd-fe8592daf206/timberland-1-side.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/9ec86fe5-803d-453c-bdbd-fe8592daf206/timberland-2-rear.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/9ec86fe5-803d-453c-bdbd-fe8592daf206/timberland-3-top.jpg"
     ],
     "features": [],
     "rating": 0,
     "reviewCount": 0,
     "stock": 0,
-    "isNewArrival": false,
-    "verified": true
+    "description": "Leather casual lace-up shoes in black with a white sole. Sizes 40-43. Please add your size in the Order Notes at checkout."
+  },
+  {
+    "id": "a563e2ef-8877-4ec3-8c2b-4bb7d5a1137a",
+    "slug": "air-cushion-sneakers-all-black-tn-style",
+    "name": "Air Cushion Sneakers - All Black (Tn style)",
+    "category": "sneakers-shoes",
+    "price": 3200,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/a563e2ef-8877-4ec3-8c2b-4bb7d5a1137a/tn-black-1-toe.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/a563e2ef-8877-4ec3-8c2b-4bb7d5a1137a/tn-black-2-layers.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Air-cushioned casual sneakers, all black. Sizes 36-45. Please add your size in the Order Notes at checkout."
+  },
+  {
+    "id": "a57558f3-9bb2-4afb-b871-9956073821e4",
+    "slug": "riding-tribe-reflective-fluorescent-mesh-vest",
+    "name": "Riding Tribe Reflective Fluorescent Mesh Vest",
+    "category": "motorcycle-gear",
+    "price": 2500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/a57558f3-9bb2-4afb-b871-9956073821e4/riding-tribe-reflective-fluorescent-mesh-vest-lifestyle.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isDeal": true,
+    "colors": [
+      "Fluorescent"
+    ]
+  },
+  {
+    "id": "acca080e-0901-46da-8a23-71ba0ee3adbb",
+    "slug": "air-cushion-sneakers-pink-blue-tn-style",
+    "name": "Air Cushion Sneakers - Pink & Blue (Tn style)",
+    "category": "sneakers-shoes",
+    "price": 3200,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/acca080e-0901-46da-8a23-71ba0ee3adbb/tn-pink-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Air-cushioned casual sneakers in a pink and blue colourway. Sizes 39-45. Please add your size in the Order Notes at checkout."
+  },
+  {
+    "id": "adf66917-4bae-4756-9de2-aa8ab810ae38",
+    "slug": "alpinestars-short-mesh-riding-gloves",
+    "name": "Alpinestars Short Mesh Riding Gloves",
+    "category": "motorcycle-gear",
+    "price": 5500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/adf66917-4bae-4756-9de2-aa8ab810ae38/alpinestars-short-mesh-riding-gloves-black.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/adf66917-4bae-4756-9de2-aa8ab810ae38/alpinestars-short-mesh-riding-gloves-black-red.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "colors": [
+      "Black",
+      "Black/Red"
+    ]
+  },
+  {
+    "id": "af15335a-04ed-4a8f-9ec1-c4ffa271b13c",
+    "slug": "fox-motocross-helmet-with-goggles",
+    "name": "Fox Motocross Helmet with Goggles",
+    "category": "motorcycle-gear",
+    "price": 8000,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/af15335a-04ed-4a8f-9ec1-c4ffa271b13c/fox-motocross-helmet-red-black-inside.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/af15335a-04ed-4a8f-9ec1-c4ffa271b13c/fox-motocross-helmet-with-goggles-red-black-back.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/af15335a-04ed-4a8f-9ec1-c4ffa271b13c/fox-motocross-helmet-with-goggles-red-black-front.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/af15335a-04ed-4a8f-9ec1-c4ffa271b13c/fox-motocross-helmet-with-goggles-red-black-side-1.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/af15335a-04ed-4a8f-9ec1-c4ffa271b13c/fox-motocross-helmet-with-goggles-red-black-side-2.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "dealEndsAt": "2026-10-12T21:20:00+00:00",
+    "isDeal": true,
+    "verified": true,
+    "colors": [
+      "Red/Black"
+    ]
+  },
+  {
+    "id": "b8162366-df90-4625-a136-162ea7cf2898",
+    "slug": "cotton-duvet-set",
+    "name": "Cotton Duvet Set",
+    "category": "interior-design",
+    "price": 3000,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/b8162366-df90-4625-a136-162ea7cf2898/cotton-duvet-set-blue-check-hearts.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/b8162366-df90-4625-a136-162ea7cf2898/cotton-duvet-set-charcoal-gold-geometric.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/b8162366-df90-4625-a136-162ea7cf2898/cotton-duvet-set-grey-orange-abstract.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/b8162366-df90-4625-a136-162ea7cf2898/cotton-duvet-set-pastel-lilac-hearts.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/b8162366-df90-4625-a136-162ea7cf2898/cotton-duvet-set-pink-love-hearts.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "colors": [
+      "Blue Check Hearts",
+      "Charcoal Gold Geometric",
+      "Grey Orange Abstract",
+      "Pastel Lilac Hearts",
+      "Pink Love Hearts"
+    ]
+  },
+  {
+    "id": "c289aabe-2278-47f3-bd6c-f0bb36c3df38",
+    "slug": "red-dragon-chest-back-protector-vest",
+    "name": "Red Dragon Chest/Back Protector Vest",
+    "category": "motorcycle-gear",
+    "price": 6800,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/c289aabe-2278-47f3-bd6c-f0bb36c3df38/red-dragon-chest-back-protector-vest-black-back.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/c289aabe-2278-47f3-bd6c-f0bb36c3df38/red-dragon-chest-back-protector-vest-black-front.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "colors": [
+      "Black"
+    ]
+  },
+  {
+    "id": "c417e9ae-0639-4c99-9a95-6c5cbf376287",
+    "slug": "scoyco-knee-and-elbow-guards-set",
+    "name": "Scoyco Knee and Elbow Guards Set",
+    "category": "motorcycle-gear",
+    "price": 6500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/c417e9ae-0639-4c99-9a95-6c5cbf376287/scoyco-knee-and-elbow-guards-set.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0
+  },
+  {
+    "id": "c571fe2b-e698-41de-93f7-94791ed29371",
+    "slug": "black-silver-mesh-runner-new-balance-740-style",
+    "name": "Black & Silver Mesh Runner (New Balance 740 style)",
+    "category": "sneakers-shoes",
+    "price": 2500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/c571fe2b-e698-41de-93f7-94791ed29371/nb740-1-side.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/c571fe2b-e698-41de-93f7-94791ed29371/nb740-2-rear.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/c571fe2b-e698-41de-93f7-94791ed29371/nb740-3-top.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Casual mesh sneakers in black and silver. Sizes 40-45. Please add your size in the Order Notes at checkout.",
+    "isNewArrival": true
+  },
+  {
+    "id": "c72cf1da-8583-4293-be06-eab22f8a4676",
+    "slug": "vemar-chest-back-protector-vest",
+    "name": "Vemar Chest/Back Protector Vest",
+    "category": "motorcycle-gear",
+    "price": 6800,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/c72cf1da-8583-4293-be06-eab22f8a4676/vemar-chest-back-protector-vest-white-back.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/c72cf1da-8583-4293-be06-eab22f8a4676/vemar-chest-back-protector-vest-white-front.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "colors": [
+      "White"
+    ]
+  },
+  {
+    "id": "c894855d-7513-4541-8376-dbf53fffa45d",
+    "slug": "prox-steel-knee-elbow-guard-set-4pc",
+    "name": "Prox Steel Knee & Elbow Guard Set (4pc)",
+    "category": "motorcycle-gear",
+    "price": 4500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/c894855d-7513-4541-8376-dbf53fffa45d/prox-steel-knee-elbow-guard-set-4pc-front-side.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/c894855d-7513-4541-8376-dbf53fffa45d/prox-steel-knee-elbow-guard-set-4pc-inner-lining.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/c894855d-7513-4541-8376-dbf53fffa45d/prox-steel-knee-elbow-guard-set-4pc-worn.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/c894855d-7513-4541-8376-dbf53fffa45d/prox-steel-knee-elbow-guard-set-4pc.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0
+  },
+  {
+    "id": "cb0593f9-4aaf-43d1-9a3b-682b741bc297",
+    "slug": "jcan-rain-suit",
+    "name": "JCAN Rain Suit",
+    "category": "motorcycle-gear",
+    "price": 6500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/cb0593f9-4aaf-43d1-9a3b-682b741bc297/jcan-rain-suit-yellow-black-back.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/cb0593f9-4aaf-43d1-9a3b-682b741bc297/jcan-rain-suit-yellow-black-front.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/cb0593f9-4aaf-43d1-9a3b-682b741bc297/jcan-rain-suit-yellow-black-side.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "colors": [
+      "Yellow/Black"
+    ]
+  },
+  {
+    "id": "ccdf48e5-4bf5-43e0-b1e5-5d1334951bfe",
+    "slug": "air-max-95-style-cushion-sneakers-black-green",
+    "name": "Air Max 95-style Cushion Sneakers (Black & Green)",
+    "category": "sneakers-shoes",
+    "price": 3700,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/ccdf48e5-4bf5-43e0-b1e5-5d1334951bfe/airmax95-1-black-side.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/ccdf48e5-4bf5-43e0-b1e5-5d1334951bfe/airmax95-2-black-rear.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/ccdf48e5-4bf5-43e0-b1e5-5d1334951bfe/airmax95-3-black-top.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/ccdf48e5-4bf5-43e0-b1e5-5d1334951bfe/airmax95-4-green-side.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Air-cushioned casual sneakers in black or green. Sizes 40-45. Please add your size and colour in the Order Notes at checkout.",
+    "colors": [
+      {
+        "hex": "#1a1a1a",
+        "name": "Black"
+      },
+      {
+        "hex": "#5f7f4f",
+        "name": "Green"
+      }
+    ]
+  },
+  {
+    "id": "ce5c0428-bd81-4003-9c56-280ae66e8821",
+    "slug": "perforated-leather-motorcycle-gloves",
+    "name": "Perforated Leather Motorcycle Gloves",
+    "category": "motorcycle-gear",
+    "price": 4000,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/ce5c0428-bd81-4003-9c56-280ae66e8821/perforated-leather-motorcycle-gloves-black.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "colors": [
+      "Black"
+    ]
+  },
+  {
+    "id": "d57f1e74-92d9-4026-ac8a-ffbce4cddfce",
+    "slug": "jcan-women-s-rain-suit",
+    "name": "JCAN Women's Rain Suit",
+    "category": "motorcycle-gear",
+    "price": 6500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/d57f1e74-92d9-4026-ac8a-ffbce4cddfce/jcan-womens-rain-suit-pink-black-front.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/d57f1e74-92d9-4026-ac8a-ffbce4cddfce/jcan-womens-rain-suit-pink-black-side.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "colors": [
+      "Pink/Black"
+    ]
+  },
+  {
+    "id": "ded1d27f-9039-4e2f-9ce3-b6a23ce38f8c",
+    "slug": "mobaidao-balaclava-face-mask",
+    "name": "Mobaidao Balaclava Face Mask",
+    "category": "motorcycle-gear",
+    "price": 1800,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/ded1d27f-9039-4e2f-9ce3-b6a23ce38f8c/mobaidao-balaclava-face-mask-black.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "colors": [
+      "Black"
+    ]
+  },
+  {
+    "id": "e5e65f28-3930-4cc1-a333-7e0a39cfe116",
+    "slug": "lyschy-textile-riding-pants",
+    "name": "Lyschy Textile Riding Pants",
+    "category": "motorcycle-gear",
+    "price": 15000,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/e5e65f28-3930-4cc1-a333-7e0a39cfe116/lyschy-textile-riding-pants-black-back.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/e5e65f28-3930-4cc1-a333-7e0a39cfe116/lyschy-textile-riding-pants-black-front.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/e5e65f28-3930-4cc1-a333-7e0a39cfe116/lyschy-textile-riding-pants-black-side.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/e5e65f28-3930-4cc1-a333-7e0a39cfe116/lyschy-textile-riding-pants-grey-black-back.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/e5e65f28-3930-4cc1-a333-7e0a39cfe116/lyschy-textile-riding-pants-grey-black-front.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "colors": [
+      "Black",
+      "Grey/Black"
+    ]
+  },
+  {
+    "id": "ea995322-033d-4c11-b17b-fcc9e10a18b3",
+    "slug": "luxury-jacquard-silk-duvet-set",
+    "name": "Luxury Jacquard Silk Duvet Set",
+    "category": "interior-design",
+    "price": 2500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/ea995322-033d-4c11-b17b-fcc9e10a18b3/luxury-jacquard-silk-duvet-set-champagne-gold.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/ea995322-033d-4c11-b17b-fcc9e10a18b3/luxury-jacquard-silk-duvet-set-cream-ivory.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/ea995322-033d-4c11-b17b-fcc9e10a18b3/luxury-jacquard-silk-duvet-set-navy-blue.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "colors": [
+      "Champagne Gold",
+      "Cream Ivory",
+      "Navy Blue"
+    ]
+  },
+  {
+    "id": "f5e5abcc-d0b2-40c9-a489-059112105ae4",
+    "slug": "toothpaste-dispenser-jx200",
+    "name": "Toothpaste Dispenser JX200",
+    "category": "electronics",
+    "price": 450,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/f5e5abcc-d0b2-40c9-a489-059112105ae4/toothpaste-dispenser-jx200.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/f5e5abcc-d0b2-40c9-a489-059112105ae4/toothpaste-dispenser-jx200-box.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "isDeal": true
+  },
+  {
+    "id": "fa4cc7be-eb04-4ddc-9e9c-5af2de573c08",
+    "slug": "tactical-half-finger-knuckle-gloves",
+    "name": "Tactical Half-Finger Knuckle Gloves",
+    "category": "motorcycle-gear",
+    "price": 1500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/fa4cc7be-eb04-4ddc-9e9c-5af2de573c08/tactical-half-finger-knuckle-gloves-olive.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/fa4cc7be-eb04-4ddc-9e9c-5af2de573c08/tactical-half-finger-knuckle-gloves-olive-worn-front.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/fa4cc7be-eb04-4ddc-9e9c-5af2de573c08/tactical-half-finger-knuckle-gloves-olive-worn-palm.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/fa4cc7be-eb04-4ddc-9e9c-5af2de573c08/tactical-half-finger-knuckle-gloves-tan.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "colors": [
+      "Olive",
+      "Tan"
+    ]
+  },
+  {
+    "id": "fa63e906-d945-47ce-8da0-7b67fcf91077",
+    "slug": "riding-tribe-hi-vis-mesh-riding-jacket",
+    "name": "Riding Tribe Hi-Vis Mesh Riding Jacket",
+    "category": "motorcycle-gear",
+    "price": 8000,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/fa63e906-d945-47ce-8da0-7b67fcf91077/riding-tribe-hi-vis-mesh-riding-jacket-armor-features.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/fa63e906-d945-47ce-8da0-7b67fcf91077/riding-tribe-hi-vis-mesh-riding-jacket-back.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/fa63e906-d945-47ce-8da0-7b67fcf91077/riding-tribe-hi-vis-mesh-riding-jacket-front-angle.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/fa63e906-d945-47ce-8da0-7b67fcf91077/riding-tribe-hi-vis-mesh-riding-jacket-front.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/fa63e906-d945-47ce-8da0-7b67fcf91077/riding-tribe-hi-vis-mesh-riding-jacket-side.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "colors": [
+      "Hi-Vis"
+    ]
   },
   {
     "id": "p18",
@@ -295,1068 +982,15 @@
     "category": "mobile-laptop-accessories",
     "price": 3000,
     "images": [
-      "/assets/images/products/p18-1.svg",
-      "/assets/images/products/p18-2.svg"
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/p18/utarudi-22-5w-power-bank-promo-1.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/p18/utarudi-22-5w-power-bank-promo-2.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/p18/utarudi-pf01-22-5w-power-bank-black.jpg"
     ],
     "features": [],
     "rating": 0,
     "reviewCount": 0,
     "stock": 0,
     "isNewArrival": true,
-    "verified": true
-  },
-  {
-    "id": "p19",
-    "slug": "laptop-bag-15-6",
-    "name": "Laptop Bag (15.6\")",
-    "category": "mobile-laptop-accessories",
-    "price": 2200,
-    "images": [
-      "/assets/images/products/p19-1.svg",
-      "/assets/images/products/p19-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p20",
-    "slug": "wireless-mouse",
-    "name": "Wireless Mouse",
-    "category": "mobile-laptop-accessories",
-    "price": 1400,
-    "images": [
-      "/assets/images/products/p20-1.svg",
-      "/assets/images/products/p20-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p21",
-    "slug": "tecno-spark-30c",
-    "name": "Tecno Spark 30C",
-    "category": "mobile-phones",
-    "price": 17500,
-    "images": [
-      "/assets/images/products/p21-1.svg",
-      "/assets/images/products/p21-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p22",
-    "slug": "infinix-hot-50i",
-    "name": "Infinix Hot 50i",
-    "category": "mobile-phones",
-    "price": 17000,
-    "images": [
-      "/assets/images/products/p22-1.svg",
-      "/assets/images/products/p22-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p23",
-    "slug": "samsung-galaxy-a05",
-    "name": "Samsung Galaxy A05",
-    "category": "mobile-phones",
-    "price": 21000,
-    "images": [
-      "/assets/images/products/p23-1.svg",
-      "/assets/images/products/p23-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": true,
-    "verified": true
-  },
-  {
-    "id": "p24",
-    "slug": "tecno-pop-9",
-    "name": "Tecno Pop 9",
-    "category": "mobile-phones",
-    "price": 12000,
-    "images": [
-      "/assets/images/products/p24-1.svg",
-      "/assets/images/products/p24-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p25",
-    "slug": "xiaomi-redmi-14c",
-    "name": "Xiaomi Redmi 14C",
-    "category": "mobile-phones",
-    "price": 20000,
-    "images": [
-      "/assets/images/products/p25-1.svg",
-      "/assets/images/products/p25-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p26",
-    "slug": "itel-a70",
-    "name": "itel A70",
-    "category": "mobile-phones",
-    "price": 10000,
-    "images": [
-      "/assets/images/products/p26-1.svg",
-      "/assets/images/products/p26-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p27",
-    "slug": "nokia-g42",
-    "name": "Nokia G42",
-    "category": "mobile-phones",
-    "price": 18500,
-    "images": [
-      "/assets/images/products/p27-1.svg",
-      "/assets/images/products/p27-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p28",
-    "slug": "motorola-moto-g34",
-    "name": "Motorola Moto G34",
-    "category": "mobile-phones",
-    "price": 20500,
-    "images": [
-      "/assets/images/products/p28-1.svg",
-      "/assets/images/products/p28-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p29",
-    "slug": "oraimo-hava-pro-feature-phone",
-    "name": "Oraimo Hava Pro (feature phone)",
-    "category": "mobile-phones",
-    "price": 4500,
-    "images": [
-      "/assets/images/products/p29-1.svg",
-      "/assets/images/products/p29-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p30",
-    "slug": "iphone-11-refurb",
-    "name": "iPhone 11 (refurb)",
-    "category": "mobile-phones",
-    "price": 44000,
-    "images": [
-      "/assets/images/products/p30-1.svg",
-      "/assets/images/products/p30-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": true,
-    "verified": true
-  },
-  {
-    "id": "p31",
-    "slug": "stainless-steel-watch-men-s",
-    "name": "Stainless Steel Watch (men's)",
-    "category": "fashion-accessories",
-    "price": 2200,
-    "images": [
-      "/assets/images/products/p31-1.svg",
-      "/assets/images/products/p31-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": true,
-    "verified": true
-  },
-  {
-    "id": "p32",
-    "slug": "beaded-bracelets-set-of-5",
-    "name": "Beaded Bracelets (set of 5)",
-    "category": "fashion-accessories",
-    "price": 900,
-    "images": [
-      "/assets/images/products/p32-1.svg",
-      "/assets/images/products/p32-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p33",
-    "slug": "leather-wallet-rfid",
-    "name": "Leather Wallet (RFID)",
-    "category": "fashion-accessories",
-    "price": 1400,
-    "images": [
-      "/assets/images/products/p33-1.svg",
-      "/assets/images/products/p33-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p34",
-    "slug": "silk-scarf-headwrap",
-    "name": "Silk Scarf / Headwrap",
-    "category": "fashion-accessories",
-    "price": 950,
-    "images": [
-      "/assets/images/products/p34-1.svg",
-      "/assets/images/products/p34-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p35",
-    "slug": "sunglasses-uv400",
-    "name": "Sunglasses (UV400)",
-    "category": "fashion-accessories",
-    "price": 1100,
-    "images": [
-      "/assets/images/products/p35-1.svg",
-      "/assets/images/products/p35-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p36",
-    "slug": "minimalist-necklace-set",
-    "name": "Minimalist Necklace Set",
-    "category": "fashion-accessories",
-    "price": 950,
-    "images": [
-      "/assets/images/products/p36-1.svg",
-      "/assets/images/products/p36-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p37",
-    "slug": "canvas-tote-bag-custom-print",
-    "name": "Canvas Tote Bag (custom print)",
-    "category": "fashion-accessories",
-    "price": 1300,
-    "images": [
-      "/assets/images/products/p37-1.svg",
-      "/assets/images/products/p37-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p38",
-    "slug": "bucket-hat",
-    "name": "Bucket Hat",
-    "category": "fashion-accessories",
-    "price": 850,
-    "images": [
-      "/assets/images/products/p38-1.svg",
-      "/assets/images/products/p38-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p39",
-    "slug": "waist-bag-fanny-pack",
-    "name": "Waist Bag / Fanny Pack",
-    "category": "fashion-accessories",
-    "price": 1600,
-    "images": [
-      "/assets/images/products/p39-1.svg",
-      "/assets/images/products/p39-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": true,
-    "verified": true
-  },
-  {
-    "id": "p40",
-    "slug": "earring-set-3-pairs",
-    "name": "Earring Set (3 pairs)",
-    "category": "fashion-accessories",
-    "price": 700,
-    "images": [
-      "/assets/images/products/p40-1.svg",
-      "/assets/images/products/p40-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p41",
-    "slug": "hp-255-g9-ryzen-3",
-    "name": "HP 255 G9 (Ryzen 3)",
-    "category": "laptops",
-    "price": 52000,
-    "images": [
-      "/assets/images/products/p41-1.svg",
-      "/assets/images/products/p41-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p42",
-    "slug": "lenovo-ideapad-1-intel-celeron",
-    "name": "Lenovo IdeaPad 1 (Intel Celeron)",
-    "category": "laptops",
-    "price": 48000,
-    "images": [
-      "/assets/images/products/p42-1.svg",
-      "/assets/images/products/p42-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p43",
-    "slug": "dell-inspiron-15-3000",
-    "name": "Dell Inspiron 15 3000",
-    "category": "laptops",
-    "price": 68000,
-    "images": [
-      "/assets/images/products/p43-1.svg",
-      "/assets/images/products/p43-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p44",
-    "slug": "acer-aspire-3-ryzen-3",
-    "name": "Acer Aspire 3 (Ryzen 3)",
-    "category": "laptops",
-    "price": 56000,
-    "images": [
-      "/assets/images/products/p44-1.svg",
-      "/assets/images/products/p44-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p45",
-    "slug": "hp-chromebook-14",
-    "name": "HP Chromebook 14",
-    "category": "laptops",
-    "price": 41000,
-    "images": [
-      "/assets/images/products/p45-1.svg",
-      "/assets/images/products/p45-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p46",
-    "slug": "asus-vivobook-15",
-    "name": "Asus VivoBook 15",
-    "category": "laptops",
-    "price": 65000,
-    "images": [
-      "/assets/images/products/p46-1.svg",
-      "/assets/images/products/p46-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p47",
-    "slug": "lenovo-thinkpad-e14-refurb",
-    "name": "Lenovo ThinkPad E14 (refurb)",
-    "category": "laptops",
-    "price": 60000,
-    "images": [
-      "/assets/images/products/p47-1.svg",
-      "/assets/images/products/p47-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p48",
-    "slug": "hp-250-g8-i3",
-    "name": "HP 250 G8 (i3)",
-    "category": "laptops",
-    "price": 62000,
-    "images": [
-      "/assets/images/products/p48-1.svg",
-      "/assets/images/products/p48-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p49",
-    "slug": "acer-aspire-5-i5",
-    "name": "Acer Aspire 5 (i5)",
-    "category": "laptops",
-    "price": 80000,
-    "images": [
-      "/assets/images/products/p49-1.svg",
-      "/assets/images/products/p49-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": true,
-    "verified": true
-  },
-  {
-    "id": "p50",
-    "slug": "macbook-air-m1-refurb",
-    "name": "MacBook Air M1 (refurb)",
-    "category": "laptops",
-    "price": 115000,
-    "images": [
-      "/assets/images/products/p50-1.svg",
-      "/assets/images/products/p50-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": true,
-    "verified": true
-  },
-  {
-    "id": "p51",
-    "slug": "bluetooth-speaker-portable",
-    "name": "Bluetooth Speaker (portable)",
-    "category": "electronics",
-    "price": 1900,
-    "images": [
-      "/assets/images/products/p51-1.svg",
-      "/assets/images/products/p51-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p52",
-    "slug": "digital-photo-frame-10",
-    "name": "Digital Photo Frame (10\")",
-    "category": "electronics",
-    "price": 3800,
-    "images": [
-      "/assets/images/products/p52-1.svg",
-      "/assets/images/products/p52-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p53",
-    "slug": "mini-projector-portable",
-    "name": "Mini Projector (portable)",
-    "category": "electronics",
-    "price": 12000,
-    "images": [
-      "/assets/images/products/p53-1.svg",
-      "/assets/images/products/p53-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": true,
-    "verified": true
-  },
-  {
-    "id": "p54",
-    "slug": "smart-plug-wi-fi-2-pack",
-    "name": "Smart Plug (Wi-Fi, 2-pack)",
-    "category": "electronics",
-    "price": 2200,
-    "images": [
-      "/assets/images/products/p54-1.svg",
-      "/assets/images/products/p54-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p55",
-    "slug": "electric-kettle-1-8l",
-    "name": "Electric Kettle (1.8L)",
-    "category": "electronics",
-    "price": 2300,
-    "images": [
-      "/assets/images/products/p55-1.svg",
-      "/assets/images/products/p55-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p56",
-    "slug": "rice-cooker-1l",
-    "name": "Rice Cooker (1L)",
-    "category": "electronics",
-    "price": 2100,
-    "images": [
-      "/assets/images/products/p56-1.svg",
-      "/assets/images/products/p56-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p57",
-    "slug": "desk-lamp-led-usb",
-    "name": "Desk Lamp (LED, USB)",
-    "category": "electronics",
-    "price": 1300,
-    "images": [
-      "/assets/images/products/p57-1.svg",
-      "/assets/images/products/p57-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p58",
-    "slug": "dash-cam-1080p",
-    "name": "Dash Cam (1080p)",
-    "category": "electronics",
-    "price": 5500,
-    "images": [
-      "/assets/images/products/p58-1.svg",
-      "/assets/images/products/p58-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": true,
-    "verified": true
-  },
-  {
-    "id": "p59",
-    "slug": "wireless-charger-15w-pad",
-    "name": "Wireless Charger (15W pad)",
-    "category": "electronics",
-    "price": 1600,
-    "images": [
-      "/assets/images/products/p59-1.svg",
-      "/assets/images/products/p59-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p60",
-    "slug": "headphones-over-ear-wired",
-    "name": "Headphones (over-ear, wired)",
-    "category": "electronics",
-    "price": 1700,
-    "images": [
-      "/assets/images/products/p60-1.svg",
-      "/assets/images/products/p60-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p61",
-    "slug": "foldable-study-desk",
-    "name": "Foldable Study Desk",
-    "category": "furniture",
-    "price": 8500,
-    "images": [
-      "/assets/images/products/p61-1.svg",
-      "/assets/images/products/p61-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p62",
-    "slug": "ergonomic-office-chair",
-    "name": "Ergonomic Office Chair",
-    "category": "furniture",
-    "price": 14000,
-    "images": [
-      "/assets/images/products/p62-1.svg",
-      "/assets/images/products/p62-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p63",
-    "slug": "bedside-table-2-drawer",
-    "name": "Bedside Table (2-drawer)",
-    "category": "furniture",
-    "price": 6500,
-    "images": [
-      "/assets/images/products/p63-1.svg",
-      "/assets/images/products/p63-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p64",
-    "slug": "shoe-rack-6-tier",
-    "name": "Shoe Rack (6-tier)",
-    "category": "furniture",
-    "price": 3800,
-    "images": [
-      "/assets/images/products/p64-1.svg",
-      "/assets/images/products/p64-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p65",
-    "slug": "wall-mounted-bookshelf",
-    "name": "Wall-Mounted Bookshelf",
-    "category": "furniture",
-    "price": 4500,
-    "images": [
-      "/assets/images/products/p65-1.svg",
-      "/assets/images/products/p65-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p66",
-    "slug": "foldable-dining-table-4-seater",
-    "name": "Foldable Dining Table (4-seater)",
-    "category": "furniture",
-    "price": 18000,
-    "images": [
-      "/assets/images/products/p66-1.svg",
-      "/assets/images/products/p66-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": true,
-    "verified": true
-  },
-  {
-    "id": "p67",
-    "slug": "tv-console-media-stand",
-    "name": "TV Console / Media Stand",
-    "category": "furniture",
-    "price": 10500,
-    "images": [
-      "/assets/images/products/p67-1.svg",
-      "/assets/images/products/p67-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p68",
-    "slug": "storage-ottoman-with-lid",
-    "name": "Storage Ottoman (with lid)",
-    "category": "furniture",
-    "price": 6000,
-    "images": [
-      "/assets/images/products/p68-1.svg",
-      "/assets/images/products/p68-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p69",
-    "slug": "wardrobe-2-door-flat-pack",
-    "name": "Wardrobe (2-door flat-pack)",
-    "category": "furniture",
-    "price": 16000,
-    "images": [
-      "/assets/images/products/p69-1.svg",
-      "/assets/images/products/p69-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": true,
-    "verified": true
-  },
-  {
-    "id": "p70",
-    "slug": "bathroom-organiser-shelf",
-    "name": "Bathroom Organiser Shelf",
-    "category": "furniture",
-    "price": 2200,
-    "images": [
-      "/assets/images/products/p70-1.svg",
-      "/assets/images/products/p70-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p71",
-    "slug": "social-media-page-setup",
-    "name": "Social Media Page Setup",
-    "category": "services",
-    "price": 3500,
-    "images": [
-      "/assets/images/products/p71-1.svg",
-      "/assets/images/products/p71-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p72",
-    "slug": "graphic-design-flyer-poster",
-    "name": "Graphic Design (flyer/poster)",
-    "category": "services",
-    "price": 1500,
-    "images": [
-      "/assets/images/products/p72-1.svg",
-      "/assets/images/products/p72-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p73",
-    "slug": "product-photography-10-shots",
-    "name": "Product Photography (10 shots)",
-    "category": "services",
-    "price": 2500,
-    "images": [
-      "/assets/images/products/p73-1.svg",
-      "/assets/images/products/p73-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p74",
-    "slug": "whatsapp-business-setup",
-    "name": "WhatsApp Business Setup",
-    "category": "services",
-    "price": 2000,
-    "images": [
-      "/assets/images/products/p74-1.svg",
-      "/assets/images/products/p74-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p75",
-    "slug": "email-marketing-setup",
-    "name": "Email Marketing Setup",
-    "category": "services",
-    "price": 2500,
-    "images": [
-      "/assets/images/products/p75-1.svg",
-      "/assets/images/products/p75-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p76",
-    "slug": "seo-product-listing-optimisation",
-    "name": "SEO Product Listing Optimisation",
-    "category": "services",
-    "price": 3000,
-    "images": [
-      "/assets/images/products/p76-1.svg",
-      "/assets/images/products/p76-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p77",
-    "slug": "ad-campaign-setup-and-management",
-    "name": "Ad Campaign Setup & Management",
-    "category": "services",
-    "price": 5000,
-    "images": [
-      "/assets/images/products/p77-1.svg",
-      "/assets/images/products/p77-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p78",
-    "slug": "brand-identity-package-logo-etc",
-    "name": "Brand Identity Package (logo etc)",
-    "category": "services",
-    "price": 8000,
-    "images": [
-      "/assets/images/products/p78-1.svg",
-      "/assets/images/products/p78-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": true,
-    "verified": true
-  },
-  {
-    "id": "p79",
-    "slug": "content-creation-5-posts-week",
-    "name": "Content Creation (5 posts/week)",
-    "category": "services",
-    "price": 6000,
-    "images": [
-      "/assets/images/products/p79-1.svg",
-      "/assets/images/products/p79-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": true,
-    "verified": true
-  },
-  {
-    "id": "p80",
-    "slug": "market-research-report",
-    "name": "Market Research Report",
-    "category": "services",
-    "price": 4000,
-    "images": [
-      "/assets/images/products/p80-1.svg",
-      "/assets/images/products/p80-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
     "verified": true
   },
   {
@@ -1366,337 +1000,14 @@
     "category": "motorcycle-gear",
     "price": 5500,
     "images": [
-      "/assets/images/products/p81-1.svg",
-      "/assets/images/products/p81-2.svg"
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/p81/v1-motocross-helmet-goggles-red.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/p81/v1-motocross-helmet-goggles-colour-options.jpg"
     ],
     "features": [],
     "rating": 0,
     "reviewCount": 0,
     "stock": 0,
     "isNewArrival": true,
-    "verified": true
-  },
-  {
-    "id": "p82",
-    "slug": "riding-gloves",
-    "name": "Riding Gloves",
-    "category": "motorcycle-gear",
-    "price": 1800,
-    "images": [
-      "/assets/images/products/p82-1.svg",
-      "/assets/images/products/p82-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p83",
-    "slug": "riding-jacket-mesh",
-    "name": "Riding Jacket (mesh)",
-    "category": "motorcycle-gear",
-    "price": 7000,
-    "images": [
-      "/assets/images/products/p83-1.svg",
-      "/assets/images/products/p83-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": true,
-    "verified": true
-  },
-  {
-    "id": "p84",
-    "slug": "side-mirror-universal-pair",
-    "name": "Side Mirror (universal pair)",
-    "category": "motorcycle-gear",
-    "price": 1100,
-    "images": [
-      "/assets/images/products/p84-1.svg",
-      "/assets/images/products/p84-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p85",
-    "slug": "motorcycle-phone-holder",
-    "name": "Motorcycle Phone Holder",
-    "category": "motorcycle-gear",
-    "price": 900,
-    "images": [
-      "/assets/images/products/p85-1.svg",
-      "/assets/images/products/p85-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p86",
-    "slug": "brake-pads-universal-set",
-    "name": "Brake Pads (universal set)",
-    "category": "motorcycle-gear",
-    "price": 1100,
-    "images": [
-      "/assets/images/products/p86-1.svg",
-      "/assets/images/products/p86-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p87",
-    "slug": "motorcycle-cover-weatherproof",
-    "name": "Motorcycle Cover (weatherproof)",
-    "category": "motorcycle-gear",
-    "price": 2000,
-    "images": [
-      "/assets/images/products/p87-1.svg",
-      "/assets/images/products/p87-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p88",
-    "slug": "chain-and-sprocket-kit",
-    "name": "Chain & Sprocket Kit",
-    "category": "motorcycle-gear",
-    "price": 3000,
-    "images": [
-      "/assets/images/products/p88-1.svg",
-      "/assets/images/products/p88-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p89",
-    "slug": "luggage-rack-top-carrier",
-    "name": "Luggage Rack (top carrier)",
-    "category": "motorcycle-gear",
-    "price": 3800,
-    "images": [
-      "/assets/images/products/p89-1.svg",
-      "/assets/images/products/p89-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p90",
-    "slug": "led-headlight-bulb-h4",
-    "name": "LED Headlight Bulb (H4)",
-    "category": "motorcycle-gear",
-    "price": 1400,
-    "images": [
-      "/assets/images/products/p90-1.svg",
-      "/assets/images/products/p90-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p91",
-    "slug": "usb-flash-drive-32gb-bulk-x10",
-    "name": "USB Flash Drive 32GB (bulk x10)",
-    "category": "cyber-cafe-supplies",
-    "price": 4500,
-    "images": [
-      "/assets/images/products/p91-1.svg",
-      "/assets/images/products/p91-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": true,
-    "verified": true
-  },
-  {
-    "id": "p92",
-    "slug": "a4-printing-paper-ream-500-sheets",
-    "name": "A4 Printing Paper (ream 500 sheets)",
-    "category": "cyber-cafe-supplies",
-    "price": 1100,
-    "images": [
-      "/assets/images/products/p92-1.svg",
-      "/assets/images/products/p92-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p93",
-    "slug": "ink-cartridge-set-4-color",
-    "name": "Ink Cartridge Set (4-color)",
-    "category": "cyber-cafe-supplies",
-    "price": 2200,
-    "images": [
-      "/assets/images/products/p93-1.svg",
-      "/assets/images/products/p93-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p94",
-    "slug": "mouse-pad-large-rubber",
-    "name": "Mouse Pad (large, rubber)",
-    "category": "cyber-cafe-supplies",
-    "price": 550,
-    "images": [
-      "/assets/images/products/p94-1.svg",
-      "/assets/images/products/p94-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p95",
-    "slug": "keyboard-mouse-combo-wired",
-    "name": "Keyboard + Mouse Combo (wired)",
-    "category": "cyber-cafe-supplies",
-    "price": 2000,
-    "images": [
-      "/assets/images/products/p95-1.svg",
-      "/assets/images/products/p95-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p96",
-    "slug": "webcam-1080p",
-    "name": "Webcam (1080p)",
-    "category": "cyber-cafe-supplies",
-    "price": 3000,
-    "images": [
-      "/assets/images/products/p96-1.svg",
-      "/assets/images/products/p96-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": true,
-    "verified": true
-  },
-  {
-    "id": "p97",
-    "slug": "hdmi-cable-2m",
-    "name": "HDMI Cable (2m)",
-    "category": "cyber-cafe-supplies",
-    "price": 650,
-    "images": [
-      "/assets/images/products/p97-1.svg",
-      "/assets/images/products/p97-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p98",
-    "slug": "usb-hub-4-port",
-    "name": "USB Hub (4-port)",
-    "category": "cyber-cafe-supplies",
-    "price": 800,
-    "images": [
-      "/assets/images/products/p98-1.svg",
-      "/assets/images/products/p98-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p99",
-    "slug": "headset-with-mic",
-    "name": "Headset with Mic",
-    "category": "cyber-cafe-supplies",
-    "price": 1600,
-    "images": [
-      "/assets/images/products/p99-1.svg",
-      "/assets/images/products/p99-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
-    "verified": true
-  },
-  {
-    "id": "p100",
-    "slug": "cable-management-kit",
-    "name": "Cable Management Kit",
-    "category": "cyber-cafe-supplies",
-    "price": 1000,
-    "images": [
-      "/assets/images/products/p100-1.svg",
-      "/assets/images/products/p100-2.svg"
-    ],
-    "features": [],
-    "rating": 0,
-    "reviewCount": 0,
-    "stock": 0,
-    "isNewArrival": false,
     "verified": true
   }
 ]

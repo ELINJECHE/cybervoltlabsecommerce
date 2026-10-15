@@ -37,7 +37,8 @@ export default function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
             src={slide.image}
             alt={slide.alt}
             fill
-            priority
+            // Only the first slide is on screen at load; the others fetch when needed.
+            priority={i === 0}
             sizes="100vw"
             className="object-cover object-left sm:object-center"
           />

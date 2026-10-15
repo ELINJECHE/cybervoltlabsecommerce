@@ -8,7 +8,7 @@ import Footer from "@/components/Footer";
 import WhatsAppFloatButton from "@/components/WhatsAppFloatButton";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import CookieConsent from "@/components/CookieConsent";
-import { getAllCategories } from "@/lib/products";
+import { getActiveCategories } from "@/lib/products";
 import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, SITE_NAME, SITE_URL } from "@/lib/seo";
 
 // Two weights of a single Google Font, per the performance budget.
@@ -43,7 +43,7 @@ export const viewport: Viewport = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const categories = await getAllCategories();
+  const categories = await getActiveCategories();
 
   return (
     <html lang="en">

@@ -1,13 +1,13 @@
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getAllCategories, getCategoryBySlug, getProductsByCategory } from "@/lib/products";
+import { getActiveCategories, getCategoryBySlug, getProductsByCategory } from "@/lib/products";
 import CategoryPageClient from "@/components/CategoryPageClient";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbJsonLd, categoryJsonLd, categoryMetadata } from "@/lib/seo";
 
 export async function generateStaticParams() {
-  const categories = await getAllCategories();
+  const categories = await getActiveCategories();
   return categories.map((category) => ({ slug: category.slug }));
 }
 

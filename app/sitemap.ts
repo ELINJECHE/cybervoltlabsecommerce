@@ -1,12 +1,12 @@
 import type { MetadataRoute } from "next";
-import { getAllProducts, getAllCategories } from "@/lib/products";
+import { getAllProducts, getActiveCategories } from "@/lib/products";
 
 const SITE_URL = "https://cybervoltlabs.co.ke";
 
 // Static export bakes this in at build time, same as every other page —
 // it reflects the catalog as of the last rebuild, not live data.
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [products, categories] = await Promise.all([getAllProducts(), getAllCategories()]);
+  const [products, categories] = await Promise.all([getAllProducts(), getActiveCategories()]);
 
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: SITE_URL, changeFrequency: "daily", priority: 1 },
