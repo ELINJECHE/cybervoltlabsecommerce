@@ -5,6 +5,17 @@ but waiting on a setup step that only the site owner can do.
 ==============================================================================
 2026-10-15
 ==============================================================================
+Inventory added from the WhatsApp broadcast group  (committed, not yet pushed)
+- 140 new products (now 193) with 212 photos, built from the "Cybervolt Labs | Exclusive Offers & Drops"
+  chat export: shoes, home appliances, speakers, electronics, kitchen, personal care, tools, storage,
+  sports and more. The full working list is in "Cybervolt Inventory from WhatsApp.xlsx".
+- 7 new categories: Audio & Speakers, Home Appliances, Kitchen & Dining, Personal Care, Tools & Car Care,
+  Home Storage & Travel, Sports & Leisure (each with an icon).
+- Prices are the latest price in the chat. Branded shoes use "-style" wording and no product claims.
+- Left out on purpose: one speaker with no price, and six items already on the site.
+- Descriptions are short and generic; specs were added only where the posts gave them. Stock is not
+  tracked (set to 0 = unlimited), as for the rest of the shop. Review everything in the admin panel.
+
 Delivery fees by area  (committed, not yet pushed)
 - Checkout has a required "Delivery Area" list (50 Nairobi areas from "Nairobi Routes Rates.xlsx"
   plus "Outside Nairobi"). The fee is added to the order total, and the pay screen, the amount to

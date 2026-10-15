@@ -1,5 +1,11 @@
 [
   {
+    "slug": "audio-speakers",
+    "name": "Audio & Speakers",
+    "image": "",
+    "subcategories": []
+  },
+  {
     "slug": "cyber-cafe-supplies",
     "name": "Cyber Cafe Supplies",
     "image": "/assets/images/category-cyber-cafe-supplies.png",
@@ -24,9 +30,27 @@
     "subcategories": []
   },
   {
+    "slug": "home-appliances",
+    "name": "Home Appliances",
+    "image": "",
+    "subcategories": []
+  },
+  {
+    "slug": "home-storage",
+    "name": "Home Storage & Travel",
+    "image": "",
+    "subcategories": []
+  },
+  {
     "slug": "interior-design",
     "name": "Interior Design",
     "image": "/assets/images/category-interior-design.png",
+    "subcategories": []
+  },
+  {
+    "slug": "kitchen-dining",
+    "name": "Kitchen & Dining",
+    "image": "",
     "subcategories": []
   },
   {
@@ -54,6 +78,12 @@
     "subcategories": []
   },
   {
+    "slug": "personal-care",
+    "name": "Personal Care",
+    "image": "",
+    "subcategories": []
+  },
+  {
     "slug": "services",
     "name": "Services",
     "image": "/assets/images/category-services.jpeg",
@@ -62,6 +92,18 @@
   {
     "slug": "sneakers-shoes",
     "name": "Sneakers & Shoes",
+    "image": "",
+    "subcategories": []
+  },
+  {
+    "slug": "sports-leisure",
+    "name": "Sports & Leisure",
+    "image": "",
+    "subcategories": []
+  },
+  {
+    "slug": "tools-car-care",
+    "name": "Tools & Car Care",
     "image": "",
     "subcategories": []
   }

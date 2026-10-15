@@ -1,5 +1,20 @@
 [
   {
+    "id": "03329b9b-b33c-4f54-b1d3-43ea505fc2c6",
+    "slug": "rashnik-glass-2burner-gas-stove-code-rn-1500-front-panel",
+    "name": "Rashnik Glass 2burner Gas Stove Code: RN-1500 Front panel",
+    "category": "home-appliances",
+    "price": 3000,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/03329b9b-b33c-4f54-b1d3-43ea505fc2c6/rashnik-glass-2burner-gas-stove-code-rn-1500-front-panel-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A dependable appliance for your home."
+  },
+  {
     "id": "04334b88-883f-4ced-b0b6-ea19d2b3d612",
     "slug": "suomy-su-11-mesh-riding-gloves",
     "name": "Suomy SU-11 Mesh Riding Gloves",
@@ -21,6 +36,78 @@
     ]
   },
   {
+    "id": "055f6580-5c39-40de-8a92-d5ad20d91b67",
+    "slug": "room-fan-heater",
+    "name": "Room Fan Heater",
+    "category": "home-appliances",
+    "price": 2000,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/055f6580-5c39-40de-8a92-d5ad20d91b67/room-fan-heater-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A dependable appliance for your home."
+  },
+  {
+    "id": "0713f1f0-71e8-481a-8c07-2a4525718d20",
+    "slug": "c15-portable-bluetooth-speaker",
+    "name": "C15 Portable Bluetooth Speaker",
+    "category": "audio-speakers",
+    "price": 1899,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/0713f1f0-71e8-481a-8c07-2a4525718d20/c15-portable-bluetooth-speaker-1.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/0713f1f0-71e8-481a-8c07-2a4525718d20/c15-portable-bluetooth-speaker-2.jpg"
+    ],
+    "features": [
+      "1200mAh battery",
+      "Bluetooth 3.0 pairing, up to 10 m range",
+      "USB, TF card, AUX and FM radio playback",
+      "Compact, travel-friendly design"
+    ],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Sound that fills the room."
+  },
+  {
+    "id": "074eef1b-52ba-4515-aeeb-e9178c23ca3b",
+    "slug": "m1-mini-portable-bluetooth-speaker",
+    "name": "M1 Mini Portable Bluetooth Speaker",
+    "category": "audio-speakers",
+    "price": 1999,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/074eef1b-52ba-4515-aeeb-e9178c23ca3b/m1-mini-portable-bluetooth-speaker-1.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/074eef1b-52ba-4515-aeeb-e9178c23ca3b/m1-mini-portable-bluetooth-speaker-2.jpg"
+    ],
+    "features": [
+      "No batteries needed - charges via USB cable",
+      "Good sound, bass and volume",
+      "Connects via Bluetooth"
+    ],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Sound that fills the room."
+  },
+  {
+    "id": "07ced2b8-1eca-46ad-a1e5-cddcdf2b9814",
+    "slug": "wireless-car-wash-spray-gun-lithium-battery",
+    "name": "Wireless Car Wash Spray Gun (lithium battery)",
+    "category": "tools-car-care",
+    "price": 4500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/07ced2b8-1eca-46ad-a1e5-cddcdf2b9814/wireless-car-wash-spray-gun-lithium-battery-1.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/07ced2b8-1eca-46ad-a1e5-cddcdf2b9814/wireless-car-wash-spray-gun-lithium-battery-2.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A handy tool for the job."
+  },
+  {
     "id": "0ba52759-1ea1-4ed2-9ff4-901505477629",
     "slug": "alpinestars-textile-riding-pants",
     "name": "Alpinestars Textile Riding Pants",
@@ -37,6 +124,137 @@
     "colors": [
       "Black"
     ]
+  },
+  {
+    "id": "108c3543-6823-49c0-b90b-e0f61b7a7622",
+    "slug": "chunky-sneakers-leopard-print-new-balance-9060-style",
+    "name": "Chunky Sneakers - Leopard Print (New Balance 9060 style)",
+    "category": "sneakers-shoes",
+    "price": 3999,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/108c3543-6823-49c0-b90b-e0f61b7a7622/chunky-sneakers-leopard-print-new-balance-9060-style-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Comfortable everyday footwear. Sizes 36-42. Please add your size in the Order Notes at checkout."
+  },
+  {
+    "id": "10f566f4-765c-4a91-80fc-d3af64554902",
+    "slug": "ipcone-3-1-standing-cooker-with-electric-oven",
+    "name": "Ipcone 3+1 Standing Cooker with Electric Oven",
+    "category": "home-appliances",
+    "price": 18999,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/10f566f4-765c-4a91-80fc-d3af64554902/ipcone-3-1-standing-cooker-with-electric-oven-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A dependable appliance for your home."
+  },
+  {
+    "id": "10fe5974-540d-4fb3-b573-3494e98c0606",
+    "slug": "12pc-hair-dryer-styling-set",
+    "name": "12pc Hair Dryer Styling Set",
+    "category": "personal-care",
+    "price": 3300,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/10fe5974-540d-4fb3-b573-3494e98c0606/12pc-hair-dryer-styling-set-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Personal grooming made easy."
+  },
+  {
+    "id": "116337ae-5589-47ae-883d-f7b547958e9c",
+    "slug": "nobel-nb-928l-hi-bass-audio-system",
+    "name": "Nobel NB-928L Hi-Bass Audio System",
+    "category": "audio-speakers",
+    "price": 15000,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/116337ae-5589-47ae-883d-f7b547958e9c/nobel-nb-928l-hi-bass-audio-system-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Sound that fills the room.",
+    "isNewArrival": true
+  },
+  {
+    "id": "11e5866f-18c2-47d5-993a-bc49a897aa43",
+    "slug": "von-2-in-1-blender-350w",
+    "name": "Von 2-in-1 Blender 350W",
+    "category": "home-appliances",
+    "price": 4400,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/11e5866f-18c2-47d5-993a-bc49a897aa43/von-2-in-1-blender-350w-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A dependable appliance for your home."
+  },
+  {
+    "id": "14f6c4ba-e345-4662-983b-cbdb5752bb15",
+    "slug": "hanmac-20l-microwave-oven",
+    "name": "Hanmac 20L Microwave Oven",
+    "category": "home-appliances",
+    "price": 7800,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/14f6c4ba-e345-4662-983b-cbdb5752bb15/hanmac-20l-microwave-oven-1.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/14f6c4ba-e345-4662-983b-cbdb5752bb15/hanmac-20l-microwave-oven-2.jpg"
+    ],
+    "features": [
+      "20L capacity",
+      "Digital controls"
+    ],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A dependable appliance for your home.",
+    "isNewArrival": true
+  },
+  {
+    "id": "1563245d-0393-4398-b97b-146334098f84",
+    "slug": "ladies-low-profile-sneakers-samba-style",
+    "name": "Ladies Low-Profile Sneakers (Samba style)",
+    "category": "sneakers-shoes",
+    "price": 3500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/1563245d-0393-4398-b97b-146334098f84/ladies-low-profile-sneakers-samba-style-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Comfortable everyday footwear. Sizes 37-42. Please add your size in the Order Notes at checkout."
+  },
+  {
+    "id": "15c38638-c5c7-4322-8a11-7c095df9128b",
+    "slug": "oil-dispenser-bottle-630ml-glass-auto-flip",
+    "name": "Oil Dispenser Bottle 630ml (glass, auto-flip)",
+    "category": "kitchen-dining",
+    "price": 899,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/15c38638-c5c7-4322-8a11-7c095df9128b/oil-dispenser-bottle-630ml-glass-auto-flip-1.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/15c38638-c5c7-4322-8a11-7c095df9128b/oil-dispenser-bottle-630ml-glass-auto-flip-2.jpg"
+    ],
+    "features": [
+      "Auto-flip condiment container",
+      "Automatic cap, leak-proof",
+      "Glass, 630 ml capacity"
+    ],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "For your kitchen and table."
   },
   {
     "id": "16219cdb-0a12-47e1-be50-ab4d4e2c7405",
@@ -62,6 +280,53 @@
     ]
   },
   {
+    "id": "163a0a31-9755-4113-904f-976d80e7048a",
+    "slug": "oraimo-zon-666c",
+    "name": "Oraimo Zon 666C",
+    "category": "electronics",
+    "price": 1999,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/163a0a31-9755-4113-904f-976d80e7048a/oraimo-zon-666c-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A practical gadget for home, office or on the go."
+  },
+  {
+    "id": "174604e5-765c-4a34-8325-327e2bafa862",
+    "slug": "chunky-sneakers-naked-wolfe-style",
+    "name": "Chunky Sneakers (Naked Wolfe style)",
+    "category": "sneakers-shoes",
+    "price": 3000,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/174604e5-765c-4a34-8325-327e2bafa862/chunky-sneakers-naked-wolfe-style-1.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/174604e5-765c-4a34-8325-327e2bafa862/chunky-sneakers-naked-wolfe-style-2.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Comfortable everyday footwear. Sizes 41-45. Please add your size in the Order Notes at checkout."
+  },
+  {
+    "id": "1cc53e76-ee8c-4283-9d4d-e979a4109a74",
+    "slug": "cloud-style-running-trainers",
+    "name": "Cloud-style Running Trainers",
+    "category": "sneakers-shoes",
+    "price": 3500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/1cc53e76-ee8c-4283-9d4d-e979a4109a74/cloud-style-running-trainers-1.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/1cc53e76-ee8c-4283-9d4d-e979a4109a74/cloud-style-running-trainers-2.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Comfortable everyday footwear. Sizes 41-44. Please add your size in the Order Notes at checkout."
+  },
+  {
     "id": "1ce2814d-0394-489f-9ec6-467956b6bfdb",
     "slug": "probiker-knee-guards-pair",
     "name": "ProBiker Knee Guards (Pair)",
@@ -78,6 +343,21 @@
     "rating": 0,
     "reviewCount": 0,
     "stock": 0
+  },
+  {
+    "id": "1e02a6d6-717b-42c9-9c85-3b12da091b9a",
+    "slug": "franco-banetti-official-shoes",
+    "name": "Franco Banetti Official Shoes",
+    "category": "sneakers-shoes",
+    "price": 3000,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/1e02a6d6-717b-42c9-9c85-3b12da091b9a/franco-banetti-official-shoes-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Comfortable everyday footwear. Sizes 40-45. Please add your size in the Order Notes at checkout."
   },
   {
     "id": "20aec303-2ba5-419c-b36d-7fc1a35aa894",
@@ -101,6 +381,90 @@
     ]
   },
   {
+    "id": "225a0d47-47b1-4caf-be1c-75ea88fc28d3",
+    "slug": "gld-gl-004-2-1-multimedia-speaker-system",
+    "name": "GLD GL-004 2.1 Multimedia Speaker System",
+    "category": "audio-speakers",
+    "price": 8500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/225a0d47-47b1-4caf-be1c-75ea88fc28d3/gld-gl-004-2-1-multimedia-speaker-system-1.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/225a0d47-47b1-4caf-be1c-75ea88fc28d3/gld-gl-004-2-1-multimedia-speaker-system-2.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Sound that fills the room.",
+    "isNewArrival": true
+  },
+  {
+    "id": "23a4c3e2-2d84-4676-9bb3-9443bf337894",
+    "slug": "clothes-shoe-rack-with-hooks",
+    "name": "Clothes & Shoe Rack with Hooks",
+    "category": "home-storage",
+    "price": 1999,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/23a4c3e2-2d84-4676-9bb3-9443bf337894/clothes-shoe-rack-with-hooks-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Keeps your space tidy and organised."
+  },
+  {
+    "id": "2677aa0d-7b81-4765-be98-433b0d94e409",
+    "slug": "amtec-am-006-2-1-home-theatre-system",
+    "name": "Amtec AM-006 2.1 Home Theatre System",
+    "category": "audio-speakers",
+    "price": 10200,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/2677aa0d-7b81-4765-be98-433b0d94e409/amtec-am-006-2-1-home-theatre-system-1.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/2677aa0d-7b81-4765-be98-433b0d94e409/amtec-am-006-2-1-home-theatre-system-2.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Sound that fills the room.",
+    "isNewArrival": true
+  },
+  {
+    "id": "28ea6b46-5a18-4c9a-add1-e4e1186e1c17",
+    "slug": "casual-boots-lugz-style",
+    "name": "Casual Boots (Lugz style)",
+    "category": "sneakers-shoes",
+    "price": 4500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/28ea6b46-5a18-4c9a-add1-e4e1186e1c17/casual-boots-lugz-style-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Comfortable everyday footwear. Sizes 40-45. Please add your size in the Order Notes at checkout."
+  },
+  {
+    "id": "2b90fc91-c048-4bad-9c71-3a2d9f870716",
+    "slug": "shox-style-cushion-sneakers",
+    "name": "Shox-style Cushion Sneakers",
+    "category": "sneakers-shoes",
+    "price": 2800,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/2b90fc91-c048-4bad-9c71-3a2d9f870716/shox-style-cushion-sneakers-1.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/2b90fc91-c048-4bad-9c71-3a2d9f870716/shox-style-cushion-sneakers-2.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/2b90fc91-c048-4bad-9c71-3a2d9f870716/shox-style-cushion-sneakers-3.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/2b90fc91-c048-4bad-9c71-3a2d9f870716/shox-style-cushion-sneakers-4.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/2b90fc91-c048-4bad-9c71-3a2d9f870716/shox-style-cushion-sneakers-5.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Comfortable everyday footwear. Sizes 40-45, 40-46. Please add your size in the Order Notes at checkout.",
+    "isNewArrival": true
+  },
+  {
     "id": "2ce96996-fbcc-4a0c-9f38-d68962083564",
     "slug": "probiker-full-body-armour-jacket",
     "name": "ProBiker Full Body Armour Jacket",
@@ -120,6 +484,66 @@
     ]
   },
   {
+    "id": "2d051a28-5466-4a17-be81-2288b7c6c91b",
+    "slug": "garden-umbrella",
+    "name": "Garden Umbrella",
+    "category": "sports-leisure",
+    "price": 2800,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/2d051a28-5466-4a17-be81-2288b7c6c91b/garden-umbrella-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "For play and the outdoors."
+  },
+  {
+    "id": "2d896671-4a06-4002-a151-e4199999929b",
+    "slug": "lx-60-3-piece-multimedia-speaker-system",
+    "name": "LX-60 3-Piece Multimedia Speaker System",
+    "category": "audio-speakers",
+    "price": 4000,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/2d896671-4a06-4002-a151-e4199999929b/lx-60-3-piece-multimedia-speaker-system-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Sound that fills the room."
+  },
+  {
+    "id": "2dfd4865-6bb0-4824-9f37-3f819e390cfc",
+    "slug": "low-top-skate-sneakers-sb-dunk-style",
+    "name": "Low-Top Skate Sneakers (SB Dunk style)",
+    "category": "sneakers-shoes",
+    "price": 2600,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/2dfd4865-6bb0-4824-9f37-3f819e390cfc/low-top-skate-sneakers-sb-dunk-style-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Comfortable everyday footwear. Sizes 38-45. Please add your size in the Order Notes at checkout."
+  },
+  {
+    "id": "2e4e252a-583f-4d6d-96e3-2716d5b01d68",
+    "slug": "tronic-3-way-extension-with-usb-type-c-ports",
+    "name": "Tronic 3-Way Extension with USB & Type-C Ports",
+    "category": "electronics",
+    "price": 2500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/2e4e252a-583f-4d6d-96e3-2716d5b01d68/tronic-3-way-extension-with-usb-type-c-ports-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A practical gadget for home, office or on the go."
+  },
+  {
     "id": "301e087b-f53b-4cbc-a1bd-795abb46a6c1",
     "slug": "alpinestars-carbon-knuckle-mesh-gloves",
     "name": "Alpinestars Carbon Knuckle Mesh Gloves",
@@ -135,6 +559,26 @@
     "colors": [
       "Black/Fluo"
     ]
+  },
+  {
+    "id": "3280d154-1127-47d3-8039-f5fb0502517f",
+    "slug": "egg-shaped-cutlery-set-gold-24-pcs-egg-case",
+    "name": "Egg-Shaped Cutlery Set, Gold (24 pcs + egg case)",
+    "category": "kitchen-dining",
+    "price": 3200,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/3280d154-1127-47d3-8039-f5fb0502517f/egg-shaped-cutlery-set-gold-24-pcs-egg-case-1.jpg"
+    ],
+    "features": [
+      "6 dinner knives, 6 dinner forks",
+      "6 table spoons, 6 tea spoons",
+      "Egg-shaped carry case",
+      "Gold colour"
+    ],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "For your kitchen and table."
   },
   {
     "id": "35320f93-a6d4-4dd6-90fb-2db759a4db0f",
@@ -153,6 +597,76 @@
     "stock": 0
   },
   {
+    "id": "3812b387-5207-4918-83ed-87dd04ed06bb",
+    "slug": "hisense-12kg-front-load-washing-machine-wash-spin",
+    "name": "Hisense 12kg Front Load Washing Machine (Wash & Spin)",
+    "category": "home-appliances",
+    "price": 66000,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/3812b387-5207-4918-83ed-87dd04ed06bb/hisense-12kg-front-load-washing-machine-wash-spin-1.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/3812b387-5207-4918-83ed-87dd04ed06bb/hisense-12kg-front-load-washing-machine-wash-spin-2.jpg"
+    ],
+    "features": [
+      "12 kg front load",
+      "Wash and spin",
+      "Steam function"
+    ],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A dependable appliance for your home."
+  },
+  {
+    "id": "3915c42e-61f0-4777-94d3-6e10e0fea702",
+    "slug": "air-max-97-style-cushion-sneakers",
+    "name": "Air Max 97-style Cushion Sneakers",
+    "category": "sneakers-shoes",
+    "price": 3700,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/3915c42e-61f0-4777-94d3-6e10e0fea702/air-max-97-style-cushion-sneakers-1.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/3915c42e-61f0-4777-94d3-6e10e0fea702/air-max-97-style-cushion-sneakers-2.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/3915c42e-61f0-4777-94d3-6e10e0fea702/air-max-97-style-cushion-sneakers-3.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/3915c42e-61f0-4777-94d3-6e10e0fea702/air-max-97-style-cushion-sneakers-4.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/3915c42e-61f0-4777-94d3-6e10e0fea702/air-max-97-style-cushion-sneakers-5.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Comfortable everyday footwear. Sizes 38-45, 40-45. Please add your size in the Order Notes at checkout.",
+    "isNewArrival": true
+  },
+  {
+    "id": "39a4d74b-1a73-4ef7-811f-96f7a61d5445",
+    "slug": "3-in-1-executive-table-glass-effect",
+    "name": "3-in-1 Executive Table (glass effect)",
+    "category": "furniture",
+    "price": 6700,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/39a4d74b-1a73-4ef7-811f-96f7a61d5445/3-in-1-executive-table-glass-effect-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Furniture for your home or office."
+  },
+  {
+    "id": "3b277845-c5be-437e-ac11-4ca63d9b3e49",
+    "slug": "ladies-turkey-sandals",
+    "name": "Ladies Turkey Sandals",
+    "category": "sneakers-shoes",
+    "price": 2800,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/3b277845-c5be-437e-ac11-4ca63d9b3e49/ladies-turkey-sandals-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Comfortable everyday footwear. Sizes 37-412800. Please add your size in the Order Notes at checkout."
+  },
+  {
     "id": "3e699967-8b8f-4e30-ba0f-6893561122de",
     "slug": "smartpro-chest-freezer-170l",
     "name": "SmartPro Chest Freezer 170L",
@@ -166,6 +680,23 @@
     "rating": 0,
     "reviewCount": 0,
     "stock": 0
+  },
+  {
+    "id": "3f79b298-302b-4ddf-9a3b-623016c18821",
+    "slug": "suede-low-top-sneakers-puma-suede-style",
+    "name": "Suede Low-top Sneakers (Puma Suede style)",
+    "category": "sneakers-shoes",
+    "price": 3000,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/3f79b298-302b-4ddf-9a3b-623016c18821/suede-low-top-sneakers-puma-suede-style-1.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/3f79b298-302b-4ddf-9a3b-623016c18821/suede-low-top-sneakers-puma-suede-style-2.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/3f79b298-302b-4ddf-9a3b-623016c18821/suede-low-top-sneakers-puma-suede-style-3.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Comfortable everyday footwear. Sizes 37-40, 40,44, 40-45. Please add your size in the Order Notes at checkout."
   },
   {
     "id": "41fd1965-d545-4508-989c-98273760e7eb",
@@ -184,6 +715,21 @@
     "colors": [
       "Black"
     ]
+  },
+  {
+    "id": "420f9ca4-37e4-4ef4-99f4-9f9299aa46fc",
+    "slug": "portable-bluetooth-party-speaker",
+    "name": "Portable Bluetooth Party Speaker",
+    "category": "audio-speakers",
+    "price": 36000,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/420f9ca4-37e4-4ef4-99f4-9f9299aa46fc/portable-bluetooth-party-speaker-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Sound that fills the room."
   },
   {
     "id": "47afb50d-54ea-46b3-9d56-b1a5bdf1ea96",
@@ -205,6 +751,152 @@
     ]
   },
   {
+    "id": "4814a581-1015-4777-a147-1c04455d8591",
+    "slug": "ladies-leather-boots",
+    "name": "Ladies Leather Boots",
+    "category": "sneakers-shoes",
+    "price": 4500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/4814a581-1015-4777-a147-1c04455d8591/ladies-leather-boots-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Comfortable everyday footwear. Sizes 37-41. Please add your size in the Order Notes at checkout."
+  },
+  {
+    "id": "48572487-8a71-429d-8cc4-3ed394de5c53",
+    "slug": "von-1-7l-cordless-kettle",
+    "name": "Von 1.7L Cordless Kettle",
+    "category": "home-appliances",
+    "price": 2300,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/48572487-8a71-429d-8cc4-3ed394de5c53/von-1-7l-cordless-kettle-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A dependable appliance for your home."
+  },
+  {
+    "id": "4a431564-1cca-42ba-afa8-129c8f730294",
+    "slug": "hair-trimmer-machine",
+    "name": "Hair Trimmer Machine",
+    "category": "personal-care",
+    "price": 3200,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/4a431564-1cca-42ba-afa8-129c8f730294/hair-trimmer-machine-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Personal grooming made easy."
+  },
+  {
+    "id": "4ae17344-bdbc-4f4b-bfcb-ef9dbd3c68e5",
+    "slug": "8pc-luggage-travel-organizer-set-with-toiletry-case",
+    "name": "8pc Luggage Travel Organizer Set with Toiletry Case",
+    "category": "home-storage",
+    "price": 2500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/4ae17344-bdbc-4f4b-bfcb-ef9dbd3c68e5/8pc-luggage-travel-organizer-set-with-toiletry-case-1.jpg"
+    ],
+    "features": [
+      "8-piece set for suitcases",
+      "Includes a toiletry case"
+    ],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Keeps your space tidy and organised."
+  },
+  {
+    "id": "4d4379a3-a08d-40b4-9fc3-b2ccd9e66bda",
+    "slug": "hisense-94l-single-door-refrigerator-ref094dr",
+    "name": "Hisense 94L Single Door Refrigerator (REF094DR)",
+    "category": "home-appliances",
+    "price": 16850,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/4d4379a3-a08d-40b4-9fc3-b2ccd9e66bda/hisense-94l-single-door-refrigerator-ref094dr-1.jpg"
+    ],
+    "features": [
+      "94L capacity, single door",
+      "Silver finish",
+      "Direct cool, with freezer compartment",
+      "Mechanical temperature control"
+    ],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A dependable appliance for your home."
+  },
+  {
+    "id": "4f01bd20-b895-44b9-b5b9-f7cc3728314a",
+    "slug": "suede-retro-sneakers-campus-style",
+    "name": "Suede Retro Sneakers (Campus style)",
+    "category": "sneakers-shoes",
+    "price": 2800,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/4f01bd20-b895-44b9-b5b9-f7cc3728314a/suede-retro-sneakers-campus-style-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Comfortable everyday footwear. Sizes 38-41. Please add your size in the Order Notes at checkout.",
+    "isNewArrival": true
+  },
+  {
+    "id": "4f3eb6d2-ee84-42cf-b8c7-835263dd67b8",
+    "slug": "euroken-pro-ek-611-3-1-multimedia-speaker-system",
+    "name": "Euroken Pro EK-611 3.1 Multimedia Speaker System",
+    "category": "audio-speakers",
+    "price": 4500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/4f3eb6d2-ee84-42cf-b8c7-835263dd67b8/euroken-pro-ek-611-3-1-multimedia-speaker-system-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Sound that fills the room."
+  },
+  {
+    "id": "5102ad71-0279-440f-9b2c-1b4cb2945f2f",
+    "slug": "ladies-turkey-casual-shoes",
+    "name": "Ladies Turkey Casual Shoes",
+    "category": "sneakers-shoes",
+    "price": 2600,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/5102ad71-0279-440f-9b2c-1b4cb2945f2f/ladies-turkey-casual-shoes-1.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/5102ad71-0279-440f-9b2c-1b4cb2945f2f/ladies-turkey-casual-shoes-2.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Comfortable everyday footwear. Sizes 37-41, 38-40. Please add your size in the Order Notes at checkout."
+  },
+  {
+    "id": "51ce84df-2d4e-4c01-869b-b3882ef9e2a2",
+    "slug": "ailipu-kl-6301-3-1-multimedia-speaker-system",
+    "name": "Ailipu KL-6301 3.1 Multimedia Speaker System",
+    "category": "audio-speakers",
+    "price": 4800,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/51ce84df-2d4e-4c01-869b-b3882ef9e2a2/ailipu-kl-6301-3-1-multimedia-speaker-system-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Sound that fills the room.",
+    "isNewArrival": true
+  },
+  {
     "id": "5258a655-de58-4473-ae67-77525a6bacd3",
     "slug": "riding-tribe-hi-vis-reflective-mesh-vest",
     "name": "Riding Tribe Hi-Vis Reflective Mesh Vest",
@@ -221,6 +913,53 @@
     "colors": [
       "Hi-Vis"
     ]
+  },
+  {
+    "id": "535faa95-1c37-4dc8-9f5f-a89127232f16",
+    "slug": "nunix-fs-40-16-standing-fan",
+    "name": "Nunix FS-40 16\" Standing Fan",
+    "category": "home-appliances",
+    "price": 3100,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/535faa95-1c37-4dc8-9f5f-a89127232f16/nunix-fs-40-16-standing-fan-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A dependable appliance for your home.",
+    "isNewArrival": true
+  },
+  {
+    "id": "5388a915-5e14-42ac-9d89-87f3bc3b8d61",
+    "slug": "kiramona-ladies-boots",
+    "name": "Kiramona Ladies Boots",
+    "category": "sneakers-shoes",
+    "price": 3800,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/5388a915-5e14-42ac-9d89-87f3bc3b8d61/kiramona-ladies-boots-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Comfortable everyday footwear. Sizes 37,41. Please add your size in the Order Notes at checkout."
+  },
+  {
+    "id": "55d832a1-dbf0-4a67-a366-82d32f02d105",
+    "slug": "kids-zoom-style-running-sneakers",
+    "name": "Kids Zoom-style Running Sneakers",
+    "category": "sneakers-shoes",
+    "price": 2500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/55d832a1-dbf0-4a67-a366-82d32f02d105/kids-zoom-style-running-sneakers-1.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/55d832a1-dbf0-4a67-a366-82d32f02d105/kids-zoom-style-running-sneakers-2.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Comfortable everyday footwear. Sizes 25-36. Please add your size in the Order Notes at checkout."
   },
   {
     "id": "55e804ad-3e53-49a8-941f-567f89eb6421",
@@ -275,6 +1014,24 @@
     ]
   },
   {
+    "id": "56aec958-a654-4252-b208-e454ca8dc94a",
+    "slug": "electromate-mw-005-700w-microwave-oven",
+    "name": "ElectroMate MW-005 700W Microwave Oven",
+    "category": "home-appliances",
+    "price": 8445,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/56aec958-a654-4252-b208-e454ca8dc94a/electromate-mw-005-700w-microwave-oven-1.jpg"
+    ],
+    "features": [
+      "700W"
+    ],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A dependable appliance for your home.",
+    "isNewArrival": true
+  },
+  {
     "id": "56c89303-8e9e-4212-8b2a-7f9b0fcd4768",
     "slug": "binded-duvet-set",
     "name": "Binded Duvet Set",
@@ -308,6 +1065,76 @@
     ]
   },
   {
+    "id": "58990f18-1172-4cee-b779-9385028d5557",
+    "slug": "gift-set-body-mist-perfume-watch-with-gift-box",
+    "name": "Gift Set: Body Mist, Perfume & Watch (with gift box)",
+    "category": "personal-care",
+    "price": 3000,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/58990f18-1172-4cee-b779-9385028d5557/gift-set-body-mist-perfume-watch-with-gift-box-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Personal grooming made easy."
+  },
+  {
+    "id": "58f92718-8575-4e3e-8eee-1fb08d92ea20",
+    "slug": "solarmax-sb-605-soundbar-speaker",
+    "name": "Solarmax SB-605 Soundbar Speaker",
+    "category": "audio-speakers",
+    "price": 5100,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/58f92718-8575-4e3e-8eee-1fb08d92ea20/solarmax-sb-605-soundbar-speaker-1.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/58f92718-8575-4e3e-8eee-1fb08d92ea20/solarmax-sb-605-soundbar-speaker-2.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Sound that fills the room.",
+    "isNewArrival": true
+  },
+  {
+    "id": "59b91af7-99f6-4ff2-83fc-40db3f0b81ff",
+    "slug": "half-face-helmet-double-visor-removable-padding",
+    "name": "Half Face Helmet (double visor, removable padding)",
+    "category": "motorcycle-gear",
+    "price": 7000,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/59b91af7-99f6-4ff2-83fc-40db3f0b81ff/half-face-helmet-double-visor-removable-padding-1.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/59b91af7-99f6-4ff2-83fc-40db3f0b81ff/half-face-helmet-double-visor-removable-padding-2.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/59b91af7-99f6-4ff2-83fc-40db3f0b81ff/half-face-helmet-double-visor-removable-padding-3.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/59b91af7-99f6-4ff2-83fc-40db3f0b81ff/half-face-helmet-double-visor-removable-padding-4.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/59b91af7-99f6-4ff2-83fc-40db3f0b81ff/half-face-helmet-double-visor-removable-padding-5.jpg"
+    ],
+    "features": [
+      "Double visor",
+      "Removable padding"
+    ],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Riding gear built for the road.",
+    "isNewArrival": true
+  },
+  {
+    "id": "5b27b64a-2f69-4094-85d6-520c3265b672",
+    "slug": "handboss-universal-foam-cleaner",
+    "name": "HandBoss Universal Foam Cleaner",
+    "category": "tools-car-care",
+    "price": 800,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/5b27b64a-2f69-4094-85d6-520c3265b672/handboss-universal-foam-cleaner-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A handy tool for the job."
+  },
+  {
     "id": "5e14a494-986f-4963-b8fe-ec3a84d465d8",
     "slug": "bag-lock-padlocks-12pc",
     "name": "Bag Lock Padlocks (12pc)",
@@ -338,6 +1165,37 @@
     "colors": [
       "Black"
     ]
+  },
+  {
+    "id": "5f33a24b-b43b-4211-8ced-b743a9855dd2",
+    "slug": "retro-runner-sneakers-new-balance-509-style",
+    "name": "Retro Runner Sneakers (New Balance 509 style)",
+    "category": "sneakers-shoes",
+    "price": 3500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/5f33a24b-b43b-4211-8ced-b743a9855dd2/retro-runner-sneakers-new-balance-509-style-1.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/5f33a24b-b43b-4211-8ced-b743a9855dd2/retro-runner-sneakers-new-balance-509-style-2.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Comfortable everyday footwear. Sizes 41,44. Please add your size in the Order Notes at checkout."
+  },
+  {
+    "id": "5f9498aa-f4e4-4c29-a56b-8d76a9ba4b66",
+    "slug": "tronic-4-way-extension-lead",
+    "name": "Tronic 4-Way Extension Lead",
+    "category": "electronics",
+    "price": 2300,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/5f9498aa-f4e4-4c29-a56b-8d76a9ba4b66/tronic-4-way-extension-lead-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A practical gadget for home, office or on the go."
   },
   {
     "id": "612d0a23-884c-49d6-9bc6-621b077634f6",
@@ -378,6 +1236,98 @@
     ]
   },
   {
+    "id": "658989c9-6afc-47a8-8569-c83494b63820",
+    "slug": "smart-casual-leather-shoes-cat-style",
+    "name": "Smart Casual Leather Shoes (CAT style)",
+    "category": "sneakers-shoes",
+    "price": 3200,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/658989c9-6afc-47a8-8569-c83494b63820/smart-casual-leather-shoes-cat-style-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Comfortable everyday footwear. Sizes 42,44. Please add your size in the Order Notes at checkout."
+  },
+  {
+    "id": "65d74409-cb4d-4e54-a0f5-e5fa42648fff",
+    "slug": "oraimo-bass-go-boom-30w-bluetooth-speaker",
+    "name": "Oraimo Bass Go Boom 30W Bluetooth Speaker",
+    "category": "audio-speakers",
+    "price": 8000,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/65d74409-cb4d-4e54-a0f5-e5fa42648fff/oraimo-bass-go-boom-30w-bluetooth-speaker-1.jpg"
+    ],
+    "features": [
+      "30W super bass",
+      "RGB lights with 4 colour modes",
+      "7 hours playtime",
+      "IPX5 water resistant",
+      "Bluetooth 5.0, FM and USB"
+    ],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Sound that fills the room."
+  },
+  {
+    "id": "6678446a-64c6-4288-8025-c8aa2e256073",
+    "slug": "roch-white-digital-microwave",
+    "name": "Roch White Digital Microwave",
+    "category": "home-appliances",
+    "price": 7500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/6678446a-64c6-4288-8025-c8aa2e256073/roch-white-digital-microwave-1.jpg"
+    ],
+    "features": [
+      "Digital controls",
+      "White"
+    ],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A dependable appliance for your home."
+  },
+  {
+    "id": "670fec96-1556-4fa0-aef6-4c75b80b0e36",
+    "slug": "motocross-off-road-helmet-dot-certified-intercom-compatible",
+    "name": "Motocross Off-road Helmet (DOT certified, intercom compatible)",
+    "category": "motorcycle-gear",
+    "price": 9000,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/670fec96-1556-4fa0-aef6-4c75b80b0e36/motocross-off-road-helmet-dot-certified-intercom-compatible-1.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/670fec96-1556-4fa0-aef6-4c75b80b0e36/motocross-off-road-helmet-dot-certified-intercom-compatible-2.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/670fec96-1556-4fa0-aef6-4c75b80b0e36/motocross-off-road-helmet-dot-certified-intercom-compatible-3.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/670fec96-1556-4fa0-aef6-4c75b80b0e36/motocross-off-road-helmet-dot-certified-intercom-compatible-4.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/670fec96-1556-4fa0-aef6-4c75b80b0e36/motocross-off-road-helmet-dot-certified-intercom-compatible-5.jpg"
+    ],
+    "features": [
+      "Removable inner padding",
+      "Intercom compatible"
+    ],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Riding gear built for the road.",
+    "isNewArrival": true
+  },
+  {
+    "id": "67b17e9d-2225-44c7-88f9-e8990185f636",
+    "slug": "3-layer-foldable-clothes-hanger-rack",
+    "name": "3-Layer Foldable Clothes Hanger Rack",
+    "category": "home-storage",
+    "price": 2499,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/67b17e9d-2225-44c7-88f9-e8990185f636/3-layer-foldable-clothes-hanger-rack-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Keeps your space tidy and organised."
+  },
+  {
     "id": "69ee3af3-752f-43f4-afa7-23c5c73cfeae",
     "slug": "lyschy-adventure-riding-jacket",
     "name": "Lyschy Adventure Riding Jacket",
@@ -404,6 +1354,110 @@
     ]
   },
   {
+    "id": "6a772a1f-ad72-4881-9d4c-b3e763e81c80",
+    "slug": "tenda-f3-wireless-wifi-router",
+    "name": "Tenda F3 Wireless WiFi Router",
+    "category": "electronics",
+    "price": 2500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/6a772a1f-ad72-4881-9d4c-b3e763e81c80/tenda-f3-wireless-wifi-router-1.jpg"
+    ],
+    "features": [
+      "Three external antennas",
+      "Easy setup"
+    ],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A practical gadget for home, office or on the go."
+  },
+  {
+    "id": "6b497216-456c-47c5-8892-e3ed29182c46",
+    "slug": "roch-top-load-twin-tub-washing-machine-7kg-8kg",
+    "name": "Roch Top-Load Twin Tub Washing Machine (7kg / 8kg)",
+    "category": "home-appliances",
+    "price": 18500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/6b497216-456c-47c5-8892-e3ed29182c46/roch-top-load-twin-tub-washing-machine-7kg-8kg-1.jpg"
+    ],
+    "features": [
+      "Top-load twin tub",
+      "7 kg: KSh 18,500 / 8 kg: KSh 22,000"
+    ],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A dependable appliance for your home."
+  },
+  {
+    "id": "6d752872-68b1-4bd1-81d5-44aab4c5f75e",
+    "slug": "air-ultra-style-sneakers",
+    "name": "Air Ultra-style Sneakers",
+    "category": "sneakers-shoes",
+    "price": 3800,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/6d752872-68b1-4bd1-81d5-44aab4c5f75e/air-ultra-style-sneakers-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Comfortable everyday footwear. Sizes 40-45. Please add your size in the Order Notes at checkout."
+  },
+  {
+    "id": "6da845a3-c29d-4793-83ff-39c67be7ca0a",
+    "slug": "kids-inline-roller-skates-set-with-helmet-pads",
+    "name": "Kids Inline Roller Skates Set with Helmet & Pads",
+    "category": "sports-leisure",
+    "price": 5900,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/6da845a3-c29d-4793-83ff-39c67be7ca0a/kids-inline-roller-skates-set-with-helmet-pads-1.jpg"
+    ],
+    "features": [
+      "Set includes skates, helmet and pads"
+    ],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "For play and the outdoors."
+  },
+  {
+    "id": "6e27e0f6-3321-440e-80ef-6df806b54f6f",
+    "slug": "ailyons-elp2408k-bluetooth-multimedia-speaker-system",
+    "name": "Ailyons ELP2408K Bluetooth Multimedia Speaker System",
+    "category": "audio-speakers",
+    "price": 3300,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/6e27e0f6-3321-440e-80ef-6df806b54f6f/ailyons-elp2408k-bluetooth-multimedia-speaker-system-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Sound that fills the room."
+  },
+  {
+    "id": "709caef0-d6d6-49cc-8ab5-65f55e71b60e",
+    "slug": "havit-sk875bt-aurasync-dual-bluetooth-speaker",
+    "name": "Havit SK875BT AuraSync Dual Bluetooth Speaker",
+    "category": "audio-speakers",
+    "price": 6200,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/709caef0-d6d6-49cc-8ab5-65f55e71b60e/havit-sk875bt-aurasync-dual-bluetooth-speaker-1.jpg"
+    ],
+    "features": [
+      "16W output (2 x 8W)",
+      "Bluetooth 5.3, AUX and TWS",
+      "12 hours playtime",
+      "Type-C charging",
+      "Voice assistant and handsfree calls"
+    ],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Sound that fills the room."
+  },
+  {
     "id": "7148fccf-a6d9-4cb3-af46-e11059255b34",
     "slug": "pro-biker-half-finger-gloves",
     "name": "Pro Biker Half-Finger Gloves",
@@ -425,6 +1479,77 @@
     ]
   },
   {
+    "id": "72958ddd-431a-4c97-b9db-d7b75ce602a8",
+    "slug": "solarmax-sp-154-2-1-multimedia-speaker-system",
+    "name": "Solarmax SP-154 2.1 Multimedia Speaker System",
+    "category": "audio-speakers",
+    "price": 3400,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/72958ddd-431a-4c97-b9db-d7b75ce602a8/solarmax-sp-154-2-1-multimedia-speaker-system-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Sound that fills the room."
+  },
+  {
+    "id": "73a3c1f6-dfa8-429a-bdf1-62f6e0610d19",
+    "slug": "expon-wifi-router",
+    "name": "Expon WiFi Router",
+    "category": "electronics",
+    "price": 2800,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/73a3c1f6-dfa8-429a-bdf1-62f6e0610d19/expon-wifi-router-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A practical gadget for home, office or on the go."
+  },
+  {
+    "id": "74a06486-a1ac-4750-82b7-15bec286f868",
+    "slug": "hisense-20l-digital-microwave-oven-black",
+    "name": "Hisense 20L Digital Microwave Oven (Black)",
+    "category": "home-appliances",
+    "price": 8800,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/74a06486-a1ac-4750-82b7-15bec286f868/hisense-20l-digital-microwave-oven-black-1.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/74a06486-a1ac-4750-82b7-15bec286f868/hisense-20l-digital-microwave-oven-black-2.jpg"
+    ],
+    "features": [
+      "20L capacity",
+      "Digital controls",
+      "Black"
+    ],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A dependable appliance for your home.",
+    "isNewArrival": true
+  },
+  {
+    "id": "759ab9d8-de30-4bfa-8886-eadaadc7de5b",
+    "slug": "bontel-landline-wireless-phone-dual-sim",
+    "name": "Bontel Landline / Wireless Phone (dual SIM)",
+    "category": "electronics",
+    "price": 4500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/759ab9d8-de30-4bfa-8886-eadaadc7de5b/bontel-landline-wireless-phone-dual-sim-1.jpg"
+    ],
+    "features": [
+      "Dual SIM - works with any network",
+      "Calls and SMS, radio, torch and alarm clock",
+      "Load credit the normal way",
+      "Black"
+    ],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A practical gadget for home, office or on the go."
+  },
+  {
     "id": "76e70458-dfdc-430c-8065-2a41f0970361",
     "slug": "utarudi-gs80-smartwatch",
     "name": "Utarudi GS80 Smartwatch",
@@ -439,6 +1564,116 @@
     "stock": 0,
     "isNewArrival": true,
     "verified": true
+  },
+  {
+    "id": "78c99821-0bd2-43e0-8aaf-56cad648e065",
+    "slug": "air-max-97-style-cushion-sneakers-holy-water",
+    "name": "Air Max 97-style Cushion Sneakers - Holy Water",
+    "category": "sneakers-shoes",
+    "price": 3800,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/78c99821-0bd2-43e0-8aaf-56cad648e065/air-max-97-style-cushion-sneakers-holy-water-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Comfortable everyday footwear. Sizes 38-45. Please add your size in the Order Notes at checkout."
+  },
+  {
+    "id": "7997c252-a7ce-4336-b700-60ca2cd02c0a",
+    "slug": "q17-smart-face-tracking-tripod-1-8m",
+    "name": "Q17 Smart Face-Tracking Tripod (1.8m)",
+    "category": "electronics",
+    "price": 3999,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/7997c252-a7ce-4336-b700-60ca2cd02c0a/q17-smart-face-tracking-tripod-1-8m-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A practical gadget for home, office or on the go."
+  },
+  {
+    "id": "7ae0a121-90f6-4a5e-a1ff-62b174c7029a",
+    "slug": "skate-low-top-sneakers-vans-old-skool-style",
+    "name": "Skate Low-top Sneakers (Vans Old Skool style)",
+    "category": "sneakers-shoes",
+    "price": 2300,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/7ae0a121-90f6-4a5e-a1ff-62b174c7029a/skate-low-top-sneakers-vans-old-skool-style-1.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/7ae0a121-90f6-4a5e-a1ff-62b174c7029a/skate-low-top-sneakers-vans-old-skool-style-2.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/7ae0a121-90f6-4a5e-a1ff-62b174c7029a/skate-low-top-sneakers-vans-old-skool-style-3.jpg"
+    ],
+    "features": [
+      "Colours: black, black/grey, black/brown"
+    ],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Comfortable everyday footwear. Sizes 38-45. Please add your size and colour in the Order Notes at checkout."
+  },
+  {
+    "id": "7c710446-8b64-4235-acc7-c4df5f3c4640",
+    "slug": "volsmart-50x55-standing-cooker",
+    "name": "Volsmart 50x55 Standing Cooker",
+    "category": "home-appliances",
+    "price": 20500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/7c710446-8b64-4235-acc7-c4df5f3c4640/volsmart-50x55-standing-cooker-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A dependable appliance for your home."
+  },
+  {
+    "id": "8074fa34-64d1-40c5-88de-2908db9410f5",
+    "slug": "heavy-warm-blanket-6x6ft-6kg",
+    "name": "Heavy Warm Blanket 6x6ft (6kg)",
+    "category": "interior-design",
+    "price": 3500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/8074fa34-64d1-40c5-88de-2908db9410f5/heavy-warm-blanket-6x6ft-6kg-1.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/8074fa34-64d1-40c5-88de-2908db9410f5/heavy-warm-blanket-6x6ft-6kg-2.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/8074fa34-64d1-40c5-88de-2908db9410f5/heavy-warm-blanket-6x6ft-6kg-3.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/8074fa34-64d1-40c5-88de-2908db9410f5/heavy-warm-blanket-6x6ft-6kg-4.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/8074fa34-64d1-40c5-88de-2908db9410f5/heavy-warm-blanket-6x6ft-6kg-5.jpg"
+    ],
+    "features": [
+      "Size 6 x 6 ft",
+      "Weight 6 kg",
+      "Heavy, warm and cosy"
+    ],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Finishing touches for your home."
+  },
+  {
+    "id": "818eb7f7-32b0-4542-aac0-3e3b175f87aa",
+    "slug": "plain-blackout-curtains-1-5-x-2m-height-2-5m",
+    "name": "Plain Blackout Curtains (1.5 x 2m, height 2.5m)",
+    "category": "interior-design",
+    "price": 2900,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/818eb7f7-32b0-4542-aac0-3e3b175f87aa/plain-blackout-curtains-1-5-x-2m-height-2-5m-1.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/818eb7f7-32b0-4542-aac0-3e3b175f87aa/plain-blackout-curtains-1-5-x-2m-height-2-5m-2.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/818eb7f7-32b0-4542-aac0-3e3b175f87aa/plain-blackout-curtains-1-5-x-2m-height-2-5m-3.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/818eb7f7-32b0-4542-aac0-3e3b175f87aa/plain-blackout-curtains-1-5-x-2m-height-2-5m-4.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/818eb7f7-32b0-4542-aac0-3e3b175f87aa/plain-blackout-curtains-1-5-x-2m-height-2-5m-5.jpg"
+    ],
+    "features": [
+      "Blackout",
+      "Curtain 1.5 x 2 m, height 2.5 m"
+    ],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Finishing touches for your home.",
+    "isNewArrival": true
   },
   {
     "id": "837b754f-be92-47ad-8a7b-a517df93e027",
@@ -460,6 +1695,36 @@
       "Hi-Vis Yellow/Black",
       "Peach/Black"
     ]
+  },
+  {
+    "id": "840feb56-688b-4a0c-b678-f18130ef5e2b",
+    "slug": "sokany-sk-3372-vacuum-cleaner",
+    "name": "Sokany SK-3372 Vacuum Cleaner",
+    "category": "home-appliances",
+    "price": 7999,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/840feb56-688b-4a0c-b678-f18130ef5e2b/sokany-sk-3372-vacuum-cleaner-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A dependable appliance for your home."
+  },
+  {
+    "id": "84c6c7d0-1221-49f2-bfec-3a5408d0c165",
+    "slug": "powermax-extension-lead-with-usb-type-c-4-way-3-way",
+    "name": "Powermax Extension Lead with USB & Type-C (4-way / 3-way)",
+    "category": "electronics",
+    "price": 2200,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/84c6c7d0-1221-49f2-bfec-3a5408d0c165/powermax-extension-lead-with-usb-type-c-4-way-3-way-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A practical gadget for home, office or on the go."
   },
   {
     "id": "89b9c731-946e-4f53-b419-ea5c7bb1be2b",
@@ -515,6 +1780,42 @@
     ]
   },
   {
+    "id": "961fcb06-bc78-447d-a13f-d9a7db8d10c8",
+    "slug": "leather-long-riding-gloves-touchscreen-sensor",
+    "name": "Leather Long Riding Gloves (touchscreen sensor)",
+    "category": "motorcycle-gear",
+    "price": 6500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/961fcb06-bc78-447d-a13f-d9a7db8d10c8/leather-long-riding-gloves-touchscreen-sensor-1.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/961fcb06-bc78-447d-a13f-d9a7db8d10c8/leather-long-riding-gloves-touchscreen-sensor-2.jpg"
+    ],
+    "features": [
+      "Leather long-cuff gloves",
+      "Touchscreen sensor"
+    ],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Riding gear built for the road.",
+    "isNewArrival": true
+  },
+  {
+    "id": "9a2d04c1-2c41-4798-be23-6d53ac9bb219",
+    "slug": "classic-white-leather-sneakers-air-force-1-style",
+    "name": "Classic White Leather Sneakers (Air Force 1 style)",
+    "category": "sneakers-shoes",
+    "price": 2200,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/9a2d04c1-2c41-4798-be23-6d53ac9bb219/classic-white-leather-sneakers-air-force-1-style-1.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/9a2d04c1-2c41-4798-be23-6d53ac9bb219/classic-white-leather-sneakers-air-force-1-style-2.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Comfortable everyday footwear. Sizes 36-44, 38-44. Please add your size in the Order Notes at checkout."
+  },
+  {
     "id": "9ae04245-47f9-4853-a456-2a20d444185d",
     "slug": "alpinestars-racing-gloves",
     "name": "Alpinestars Racing Gloves",
@@ -539,6 +1840,21 @@
     ]
   },
   {
+    "id": "9b666509-4ada-4ad6-857d-c3a6456bf685",
+    "slug": "msl-fluffy-headphones",
+    "name": "MSL Fluffy Headphones",
+    "category": "audio-speakers",
+    "price": 2400,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/9b666509-4ada-4ad6-857d-c3a6456bf685/msl-fluffy-headphones-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Sound that fills the room."
+  },
+  {
     "id": "9c05b4b2-ce57-4d50-8fd4-f89963b82476",
     "slug": "vemar-two-piece-rain-suit",
     "name": "Vemar Two-Piece Rain Suit",
@@ -557,6 +1873,68 @@
     ]
   },
   {
+    "id": "9c76a5e3-7438-4533-865b-2ff90559bfc0",
+    "slug": "tronic-6-way-extension-lead",
+    "name": "Tronic 6-Way Extension Lead",
+    "category": "electronics",
+    "price": 2600,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/9c76a5e3-7438-4533-865b-2ff90559bfc0/tronic-6-way-extension-lead-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A practical gadget for home, office or on the go."
+  },
+  {
+    "id": "9c95147d-5c0d-4df2-a0af-43b27ed43221",
+    "slug": "kezu-kh-105t-professional-hair-clipper",
+    "name": "Kezu KH-105T Professional Hair Clipper",
+    "category": "personal-care",
+    "price": 2400,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/9c95147d-5c0d-4df2-a0af-43b27ed43221/kezu-kh-105t-professional-hair-clipper-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Personal grooming made easy."
+  },
+  {
+    "id": "9cfec883-214b-4eb9-8bf3-2c92a4a8ccc3",
+    "slug": "euroken-mtungi-woofer-ek-607-home-theatre-system",
+    "name": "Euroken Mtungi Woofer EK-607 Home Theatre System",
+    "category": "audio-speakers",
+    "price": 9500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/9cfec883-214b-4eb9-8bf3-2c92a4a8ccc3/euroken-mtungi-woofer-ek-607-home-theatre-system-1.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/9cfec883-214b-4eb9-8bf3-2c92a4a8ccc3/euroken-mtungi-woofer-ek-607-home-theatre-system-2.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Sound that fills the room."
+  },
+  {
+    "id": "9eac199f-99f9-477b-9386-40415f378c89",
+    "slug": "retro-runner-sneakers-new-balance-530-style",
+    "name": "Retro Runner Sneakers (New Balance 530 style)",
+    "category": "sneakers-shoes",
+    "price": 3000,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/9eac199f-99f9-477b-9386-40415f378c89/retro-runner-sneakers-new-balance-530-style-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Comfortable everyday footwear. Sizes 41,43. Please add your size in the Order Notes at checkout.",
+    "isNewArrival": true
+  },
+  {
     "id": "9ec86fe5-803d-453c-bdbd-fe8592daf206",
     "slug": "leather-casual-lace-up-shoes-black-timberland-style",
     "name": "Leather Casual Lace-up Shoes - Black (Timberland style)",
@@ -572,6 +1950,73 @@
     "reviewCount": 0,
     "stock": 0,
     "description": "Leather casual lace-up shoes in black with a white sole. Sizes 40-43. Please add your size in the Order Notes at checkout."
+  },
+  {
+    "id": "a08b536f-3bcb-47ab-944e-f9997812dab0",
+    "slug": "dji-mic-mini-2-wireless-microphone",
+    "name": "DJI Mic Mini 2 Wireless Microphone",
+    "category": "audio-speakers",
+    "price": 15500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/a08b536f-3bcb-47ab-944e-f9997812dab0/dji-mic-mini-2-wireless-microphone-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Sound that fills the room."
+  },
+  {
+    "id": "a0d615fe-6299-4cb4-85cc-f03b22ba3b55",
+    "slug": "ipcone-2-in-1-blender",
+    "name": "Ipcone 2-in-1 Blender",
+    "category": "home-appliances",
+    "price": 2400,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/a0d615fe-6299-4cb4-85cc-f03b22ba3b55/ipcone-2-in-1-blender-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A dependable appliance for your home.",
+    "isNewArrival": true
+  },
+  {
+    "id": "a16b7f9a-2f39-410d-a369-362b1fe1594b",
+    "slug": "syinix-microwave-oven",
+    "name": "Syinix Microwave Oven",
+    "category": "home-appliances",
+    "price": 7800,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/a16b7f9a-2f39-410d-a369-362b1fe1594b/syinix-microwave-oven-1.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/a16b7f9a-2f39-410d-a369-362b1fe1594b/syinix-microwave-oven-2.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/a16b7f9a-2f39-410d-a369-362b1fe1594b/syinix-microwave-oven-3.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/a16b7f9a-2f39-410d-a369-362b1fe1594b/syinix-microwave-oven-4.jpg"
+    ],
+    "features": [
+      "Microwave oven"
+    ],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A dependable appliance for your home.",
+    "isNewArrival": true
+  },
+  {
+    "id": "a2586ca0-0dc1-427d-a5dd-4af4eca15d84",
+    "slug": "luxgen-quartz-room-heater",
+    "name": "Luxgen Quartz Room Heater",
+    "category": "home-appliances",
+    "price": 2600,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/a2586ca0-0dc1-427d-a5dd-4af4eca15d84/luxgen-quartz-room-heater-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A dependable appliance for your home."
   },
   {
     "id": "a563e2ef-8877-4ec3-8c2b-4bb7d5a1137a",
@@ -608,6 +2053,73 @@
     ]
   },
   {
+    "id": "a8c8070c-3bd4-41c8-abd9-9d7753ac6a7b",
+    "slug": "sokany-double-electric-stove",
+    "name": "Sokany Double Electric Stove",
+    "category": "home-appliances",
+    "price": 4500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/a8c8070c-3bd4-41c8-abd9-9d7753ac6a7b/sokany-double-electric-stove-1.jpg"
+    ],
+    "features": [
+      "Uses any cooking pot"
+    ],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A dependable appliance for your home.",
+    "isNewArrival": true
+  },
+  {
+    "id": "a9de7f1c-5327-4cb3-8a27-7c96dd5b69a6",
+    "slug": "insulated-lunch-box-bag-6-litres",
+    "name": "Insulated Lunch Box Bag (6 litres)",
+    "category": "home-storage",
+    "price": 850,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/a9de7f1c-5327-4cb3-8a27-7c96dd5b69a6/insulated-lunch-box-bag-6-litres-1.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/a9de7f1c-5327-4cb3-8a27-7c96dd5b69a6/insulated-lunch-box-bag-6-litres-2.jpg"
+    ],
+    "features": [
+      "Capacity 6 litres",
+      "Measures 23 x 14 x 20 cm"
+    ],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Keeps your space tidy and organised."
+  },
+  {
+    "id": "aa9b7d6f-ffa4-4471-b19e-5f6957f94439",
+    "slug": "ramtons-rm250-single-hot-plate",
+    "name": "Ramtons RM250 Single Hot Plate",
+    "category": "home-appliances",
+    "price": 6000,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/aa9b7d6f-ffa4-4471-b19e-5f6957f94439/ramtons-rm250-single-hot-plate-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A dependable appliance for your home."
+  },
+  {
+    "id": "ab22526f-bbe2-4582-82c1-ca4b5898db11",
+    "slug": "sayona-hair-dryer",
+    "name": "Sayona Hair Dryer",
+    "category": "personal-care",
+    "price": 4999,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/ab22526f-bbe2-4582-82c1-ca4b5898db11/sayona-hair-dryer-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Personal grooming made easy."
+  },
+  {
     "id": "acca080e-0901-46da-8a23-71ba0ee3adbb",
     "slug": "air-cushion-sneakers-pink-blue-tn-style",
     "name": "Air Cushion Sneakers - Pink & Blue (Tn style)",
@@ -621,6 +2133,54 @@
     "reviewCount": 0,
     "stock": 0,
     "description": "Air-cushioned casual sneakers in a pink and blue colourway. Sizes 39-45. Please add your size in the Order Notes at checkout."
+  },
+  {
+    "id": "acf4e275-fec2-4b45-b67d-e4c07fde92ea",
+    "slug": "james-pot-11pc-non-stick-cookware-set",
+    "name": "James Pot 11pc Non-stick Cookware Set",
+    "category": "kitchen-dining",
+    "price": 5600,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/acf4e275-fec2-4b45-b67d-e4c07fde92ea/james-pot-11pc-non-stick-cookware-set-1.jpg"
+    ],
+    "features": [
+      "11-piece set",
+      "Non-stick material"
+    ],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "For your kitchen and table."
+  },
+  {
+    "id": "ad1c4ea8-ac56-41e1-a485-2d6b179895dd",
+    "slug": "ailipu-kl-6304-3-1-multimedia-speaker-system",
+    "name": "Ailipu KL-6304 3.1 Multimedia Speaker System",
+    "category": "audio-speakers",
+    "price": 4600,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/ad1c4ea8-ac56-41e1-a485-2d6b179895dd/ailipu-kl-6304-3-1-multimedia-speaker-system-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Sound that fills the room."
+  },
+  {
+    "id": "ada779e4-d830-4ffa-b2f0-59b638bc8e55",
+    "slug": "double-shoe-slot-space-saver",
+    "name": "Double Shoe Slot Space Saver",
+    "category": "home-storage",
+    "price": 650,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/ada779e4-d830-4ffa-b2f0-59b638bc8e55/double-shoe-slot-space-saver-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Keeps your space tidy and organised."
   },
   {
     "id": "adf66917-4bae-4756-9de2-aa8ab810ae38",
@@ -640,6 +2200,21 @@
       "Black",
       "Black/Red"
     ]
+  },
+  {
+    "id": "ae908355-78df-4dba-b3e8-fad61e51863f",
+    "slug": "geemy-cordless-rechargeable-shaver",
+    "name": "Geemy Cordless Rechargeable Shaver",
+    "category": "personal-care",
+    "price": 2200,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/ae908355-78df-4dba-b3e8-fad61e51863f/geemy-cordless-rechargeable-shaver-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Personal grooming made easy."
   },
   {
     "id": "af15335a-04ed-4a8f-9ec1-c4ffa271b13c",
@@ -664,6 +2239,72 @@
     "colors": [
       "Red/Black"
     ]
+  },
+  {
+    "id": "b0b72edb-62ac-4293-864a-9eb9682c4322",
+    "slug": "casio-calculator-geometry-set-combo",
+    "name": "Casio Calculator & Geometry Set Combo",
+    "category": "electronics",
+    "price": 1500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/b0b72edb-62ac-4293-864a-9eb9682c4322/casio-calculator-geometry-set-combo-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A practical gadget for home, office or on the go."
+  },
+  {
+    "id": "b1957118-de7e-43d9-b807-4359666e9600",
+    "slug": "amtec-am-1218-double-speaker",
+    "name": "Amtec AM-1218 Double Speaker",
+    "category": "audio-speakers",
+    "price": 18000,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/b1957118-de7e-43d9-b807-4359666e9600/amtec-am-1218-double-speaker-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Sound that fills the room."
+  },
+  {
+    "id": "b4bba856-168c-4d9b-b487-a80ca7cf02db",
+    "slug": "household-stepping-ladder-4-5-6-steps",
+    "name": "Household Stepping Ladder (4, 5 & 6 steps)",
+    "category": "tools-car-care",
+    "price": 5200,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/b4bba856-168c-4d9b-b487-a80ca7cf02db/household-stepping-ladder-4-5-6-steps-1.jpg"
+    ],
+    "features": [
+      "Heavy-duty household steps ladder",
+      "4 steps KSh 5,200 / 5 steps KSh 5,800 / 6 steps KSh 6,500"
+    ],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A handy tool for the job."
+  },
+  {
+    "id": "b559be0b-b1e4-4d0d-ae53-8a499e9e3e45",
+    "slug": "9-in-1-electric-steam-cleaner-yellow",
+    "name": "9-in-1 Electric Steam Cleaner (Yellow)",
+    "category": "home-appliances",
+    "price": 3700,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/b559be0b-b1e4-4d0d-ae53-8a499e9e3e45/9-in-1-electric-steam-cleaner-yellow-1.jpg"
+    ],
+    "features": [
+      "All-purpose 9-in-1 electric steam cleaner",
+      "Yellow"
+    ],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A dependable appliance for your home."
   },
   {
     "id": "b8162366-df90-4625-a136-162ea7cf2898",
@@ -691,6 +2332,128 @@
     ]
   },
   {
+    "id": "b89ab0c8-e97c-4fe7-8802-1219f85dcfb3",
+    "slug": "speedcat-style-ballet-sneakers",
+    "name": "Speedcat-style Ballet Sneakers",
+    "category": "sneakers-shoes",
+    "price": 3500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/b89ab0c8-e97c-4fe7-8802-1219f85dcfb3/speedcat-style-ballet-sneakers-1.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/b89ab0c8-e97c-4fe7-8802-1219f85dcfb3/speedcat-style-ballet-sneakers-2.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/b89ab0c8-e97c-4fe7-8802-1219f85dcfb3/speedcat-style-ballet-sneakers-3.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Comfortable everyday footwear. Sizes 36-42. Please add your size in the Order Notes at checkout."
+  },
+  {
+    "id": "b8ff5576-7940-4087-bfc0-dc78685fbb66",
+    "slug": "marble-velvet-blackout-curtains-1-5-x-2m-sheer",
+    "name": "Marble / Velvet Blackout Curtains (1.5 x 2m + sheer)",
+    "category": "interior-design",
+    "price": 3000,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/b8ff5576-7940-4087-bfc0-dc78685fbb66/marble-velvet-blackout-curtains-1-5-x-2m-sheer-1.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/b8ff5576-7940-4087-bfc0-dc78685fbb66/marble-velvet-blackout-curtains-1-5-x-2m-sheer-2.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/b8ff5576-7940-4087-bfc0-dc78685fbb66/marble-velvet-blackout-curtains-1-5-x-2m-sheer-3.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/b8ff5576-7940-4087-bfc0-dc78685fbb66/marble-velvet-blackout-curtains-1-5-x-2m-sheer-4.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/b8ff5576-7940-4087-bfc0-dc78685fbb66/marble-velvet-blackout-curtains-1-5-x-2m-sheer-5.jpg"
+    ],
+    "features": [
+      "Heavy blackout panel",
+      "Curtain 1.5 x 2 m, height 2.5 m",
+      "Sheer 3 m"
+    ],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Finishing touches for your home.",
+    "isNewArrival": true
+  },
+  {
+    "id": "b9d5ed52-6e45-4103-bda6-6ea7f2244c09",
+    "slug": "2pc-ceramic-sugar-dishes-with-stand",
+    "name": "2pc Ceramic Sugar Dishes with Stand",
+    "category": "kitchen-dining",
+    "price": 2200,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/b9d5ed52-6e45-4103-bda6-6ea7f2244c09/2pc-ceramic-sugar-dishes-with-stand-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "For your kitchen and table."
+  },
+  {
+    "id": "ba3fd844-a0ce-4892-868c-9642c5242888",
+    "slug": "atlantic-official-shoes",
+    "name": "Atlantic Official Shoes",
+    "category": "sneakers-shoes",
+    "price": 3000,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/ba3fd844-a0ce-4892-868c-9642c5242888/atlantic-official-shoes-1.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/ba3fd844-a0ce-4892-868c-9642c5242888/atlantic-official-shoes-2.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Comfortable everyday footwear. Sizes 40-45. Please add your size in the Order Notes at checkout.",
+    "isNewArrival": true
+  },
+  {
+    "id": "bb2f37e6-7854-4fa5-9602-6a49372be606",
+    "slug": "marwa-30pc-induction-ready-cookware-set",
+    "name": "Marwa 30pc Induction-Ready Cookware Set",
+    "category": "kitchen-dining",
+    "price": 10500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/bb2f37e6-7854-4fa5-9602-6a49372be606/marwa-30pc-induction-ready-cookware-set-1.jpg"
+    ],
+    "features": [
+      "30-piece set",
+      "Induction enabled"
+    ],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "For your kitchen and table.",
+    "isNewArrival": true
+  },
+  {
+    "id": "bb4f28ac-9361-4884-b304-0139df8feff6",
+    "slug": "nuix-3-burner-gas-stove-gt",
+    "name": "Nuix 3-Burner Gas Stove (GT)",
+    "category": "home-appliances",
+    "price": 4000,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/bb4f28ac-9361-4884-b304-0139df8feff6/nuix-3-burner-gas-stove-gt-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A dependable appliance for your home."
+  },
+  {
+    "id": "bec2ac00-6335-4906-9baf-f48733abf375",
+    "slug": "high-top-sneakers-jordan-1-style",
+    "name": "High-Top Sneakers (Jordan 1 style)",
+    "category": "sneakers-shoes",
+    "price": 3500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/bec2ac00-6335-4906-9baf-f48733abf375/high-top-sneakers-jordan-1-style-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Comfortable everyday footwear. Sizes 40-44. Please add your size in the Order Notes at checkout."
+  },
+  {
     "id": "c289aabe-2278-47f3-bd6c-f0bb36c3df38",
     "slug": "red-dragon-chest-back-protector-vest",
     "name": "Red Dragon Chest/Back Protector Vest",
@@ -707,6 +2470,37 @@
     "colors": [
       "Black"
     ]
+  },
+  {
+    "id": "c32e35b0-3533-4035-bf9b-47798059c344",
+    "slug": "wegastar-16-wall-fan-wsf-16",
+    "name": "Wegastar 16\" Wall Fan (WSF-16)",
+    "category": "home-appliances",
+    "price": 3500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/c32e35b0-3533-4035-bf9b-47798059c344/wegastar-16-wall-fan-wsf-16-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A dependable appliance for your home."
+  },
+  {
+    "id": "c3883e2f-805a-4b86-b715-97374550ce66",
+    "slug": "atlantic-official-mules",
+    "name": "Atlantic Official Mules",
+    "category": "sneakers-shoes",
+    "price": 3000,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/c3883e2f-805a-4b86-b715-97374550ce66/atlantic-official-mules-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Comfortable everyday footwear. Sizes 40-45. Please add your size in the Order Notes at checkout.",
+    "isNewArrival": true
   },
   {
     "id": "c417e9ae-0639-4c99-9a95-6c5cbf376287",
@@ -776,6 +2570,36 @@
     "stock": 0
   },
   {
+    "id": "c8c0a86a-7fa8-42ea-9065-556f0d5d408f",
+    "slug": "cushion-sneakers-nike-lego-style",
+    "name": "Cushion Sneakers (Nike Lego style)",
+    "category": "sneakers-shoes",
+    "price": 3800,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/c8c0a86a-7fa8-42ea-9065-556f0d5d408f/cushion-sneakers-nike-lego-style-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Comfortable everyday footwear. Sizes 40-45. Please add your size in the Order Notes at checkout."
+  },
+  {
+    "id": "c8d87ac2-70af-4a02-b94a-6106eefe461d",
+    "slug": "c12-ai-face-tracking-selfie-stand",
+    "name": "C12 AI Face-Tracking Selfie Stand",
+    "category": "electronics",
+    "price": 3999,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/c8d87ac2-70af-4a02-b94a-6106eefe461d/c12-ai-face-tracking-selfie-stand-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A practical gadget for home, office or on the go."
+  },
+  {
     "id": "cb0593f9-4aaf-43d1-9a3b-682b741bc297",
     "slug": "jcan-rain-suit",
     "name": "JCAN Rain Suit",
@@ -793,6 +2617,21 @@
     "colors": [
       "Yellow/Black"
     ]
+  },
+  {
+    "id": "cb4cddfe-67e6-4898-ade5-63cee4980ae8",
+    "slug": "dunk-style-sneakers-blue",
+    "name": "Dunk-style Sneakers - Blue",
+    "category": "sneakers-shoes",
+    "price": 3500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/cb4cddfe-67e6-4898-ade5-63cee4980ae8/dunk-style-sneakers-blue-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Comfortable everyday footwear. Sizes 40-45. Please add your size in the Order Notes at checkout."
   },
   {
     "id": "ccdf48e5-4bf5-43e0-b1e5-5d1334951bfe",
@@ -840,6 +2679,69 @@
     ]
   },
   {
+    "id": "d157abe6-ff5b-4d92-8e44-7fddb5d64c90",
+    "slug": "47pc-rechargeable-drill-screwdriver-tool-box-set",
+    "name": "47pc Rechargeable Drill & Screwdriver Tool Box Set",
+    "category": "tools-car-care",
+    "price": 2500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/d157abe6-ff5b-4d92-8e44-7fddb5d64c90/47pc-rechargeable-drill-screwdriver-tool-box-set-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A handy tool for the job."
+  },
+  {
+    "id": "d2ea5d01-d39b-46a7-b39a-ce5f1dd0a0cf",
+    "slug": "casual-brogues",
+    "name": "Casual Brogues",
+    "category": "sneakers-shoes",
+    "price": 2600,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/d2ea5d01-d39b-46a7-b39a-ce5f1dd0a0cf/casual-brogues-1.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/d2ea5d01-d39b-46a7-b39a-ce5f1dd0a0cf/casual-brogues-2.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Comfortable everyday footwear. Sizes 37-41. Please add your size in the Order Notes at checkout."
+  },
+  {
+    "id": "d4034d61-51b3-4bbb-bed8-2e85a092c0c5",
+    "slug": "skateboards-assorted-designs",
+    "name": "Skateboards (assorted designs)",
+    "category": "sports-leisure",
+    "price": 2400,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/d4034d61-51b3-4bbb-bed8-2e85a092c0c5/skateboards-assorted-designs-1.jpg"
+    ],
+    "features": [
+      "Assorted designs"
+    ],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "For play and the outdoors."
+  },
+  {
+    "id": "d45f9e0a-a0d2-4109-b93c-45c79433997e",
+    "slug": "syinix-10kg-twin-tub-washing-machine",
+    "name": "Syinix 10kg Twin Tub Washing Machine",
+    "category": "home-appliances",
+    "price": 25000,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/d45f9e0a-a0d2-4109-b93c-45c79433997e/syinix-10kg-twin-tub-washing-machine-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A dependable appliance for your home."
+  },
+  {
     "id": "d57f1e74-92d9-4026-ac8a-ffbce4cddfce",
     "slug": "jcan-women-s-rain-suit",
     "name": "JCAN Women's Rain Suit",
@@ -858,6 +2760,66 @@
     ]
   },
   {
+    "id": "d6ca1c41-5934-4827-bd4f-b7827b954f5c",
+    "slug": "leather-lace-up-boots-dr-martens-style",
+    "name": "Leather Lace-up Boots (Dr Martens style)",
+    "category": "sneakers-shoes",
+    "price": 4200,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/d6ca1c41-5934-4827-bd4f-b7827b954f5c/leather-lace-up-boots-dr-martens-style-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Comfortable everyday footwear. Sizes 41-43. Please add your size in the Order Notes at checkout."
+  },
+  {
+    "id": "d6cde721-1e49-4da9-b365-86dba7c5ffbb",
+    "slug": "skate-shoes",
+    "name": "Skate Shoes",
+    "category": "sneakers-shoes",
+    "price": 4999,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/d6cde721-1e49-4da9-b365-86dba7c5ffbb/skate-shoes-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Comfortable everyday footwear."
+  },
+  {
+    "id": "d7e36e29-71d8-4370-838e-514517ee02d2",
+    "slug": "ceiling-tv-mount-32-75",
+    "name": "Ceiling TV Mount 32\"-75\"",
+    "category": "electronics",
+    "price": 4500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/d7e36e29-71d8-4370-838e-514517ee02d2/ceiling-tv-mount-32-75-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A practical gadget for home, office or on the go."
+  },
+  {
+    "id": "d84641a0-9068-464f-abe3-0758c6fd1346",
+    "slug": "full-motion-tv-wall-bracket",
+    "name": "Full Motion TV Wall Bracket",
+    "category": "electronics",
+    "price": 1450,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/d84641a0-9068-464f-abe3-0758c6fd1346/full-motion-tv-wall-bracket-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A practical gadget for home, office or on the go."
+  },
+  {
     "id": "ded1d27f-9039-4e2f-9ce3-b6a23ce38f8c",
     "slug": "mobaidao-balaclava-face-mask",
     "name": "Mobaidao Balaclava Face Mask",
@@ -873,6 +2835,145 @@
     "colors": [
       "Black"
     ]
+  },
+  {
+    "id": "def0d898-fa98-44e9-90c7-c05ec4b2b0e3",
+    "slug": "tronic-4-way-extension-with-switches",
+    "name": "Tronic 4-Way Extension with Switches",
+    "category": "electronics",
+    "price": 2500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/def0d898-fa98-44e9-90c7-c05ec4b2b0e3/tronic-4-way-extension-with-switches-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A practical gadget for home, office or on the go."
+  },
+  {
+    "id": "e0ebcf1d-7c08-459a-9e5d-b48b4a79bfa8",
+    "slug": "casio-fx-82ms-scientific-calculator",
+    "name": "Casio fx-82MS Scientific Calculator",
+    "category": "electronics",
+    "price": 1550,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/e0ebcf1d-7c08-459a-9e5d-b48b4a79bfa8/casio-fx-82ms-scientific-calculator-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A practical gadget for home, office or on the go."
+  },
+  {
+    "id": "e12bc4a2-fcbd-49ba-aabe-084b1728ebbe",
+    "slug": "havit-sq146bt-partymaster-pro-60w-bluetooth-speaker",
+    "name": "Havit SQ146BT PartyMaster Pro 60W Bluetooth Speaker",
+    "category": "audio-speakers",
+    "price": 9999,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/e12bc4a2-fcbd-49ba-aabe-084b1728ebbe/havit-sq146bt-partymaster-pro-60w-bluetooth-speaker-1.jpg"
+    ],
+    "features": [
+      "60W output, 6.5\" driver",
+      "Bluetooth 5.1, USB, TF card, FM, AUX and TWS",
+      "RGB lighting",
+      "3600mAh battery",
+      "1 wireless microphone included"
+    ],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Sound that fills the room."
+  },
+  {
+    "id": "e48f4484-4396-4dd6-a846-5c001e9354b6",
+    "slug": "a58-plus-smart-watch-bracelet-combo-set",
+    "name": "A58 Plus Smart Watch & Bracelet Combo Set",
+    "category": "electronics",
+    "price": 2800,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/e48f4484-4396-4dd6-a846-5c001e9354b6/a58-plus-smart-watch-bracelet-combo-set-1.jpg"
+    ],
+    "features": [
+      "Smart watch with 2 straps",
+      "Golden wrist watch and golden bracelet",
+      "Necklace, ring and 2 earrings",
+      "Charger included"
+    ],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A practical gadget for home, office or on the go."
+  },
+  {
+    "id": "e49630f8-8b57-4bc4-99bc-953cf0b0f424",
+    "slug": "ramtons-rm253-double-hot-plate",
+    "name": "Ramtons RM253 Double Hot Plate",
+    "category": "home-appliances",
+    "price": 9999,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/e49630f8-8b57-4bc4-99bc-953cf0b0f424/ramtons-rm253-double-hot-plate-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A dependable appliance for your home."
+  },
+  {
+    "id": "e541d1f5-6c62-4dab-a7f3-0a0da61cb226",
+    "slug": "full-riding-boots",
+    "name": "Full Riding Boots",
+    "category": "motorcycle-gear",
+    "price": 15000,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/e541d1f5-6c62-4dab-a7f3-0a0da61cb226/full-riding-boots-1.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/e541d1f5-6c62-4dab-a7f3-0a0da61cb226/full-riding-boots-2.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/e541d1f5-6c62-4dab-a7f3-0a0da61cb226/full-riding-boots-3.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/e541d1f5-6c62-4dab-a7f3-0a0da61cb226/full-riding-boots-4.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/e541d1f5-6c62-4dab-a7f3-0a0da61cb226/full-riding-boots-5.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Riding gear built for the road.",
+    "isNewArrival": true
+  },
+  {
+    "id": "e549674f-1f21-464a-8fbf-c4496343af43",
+    "slug": "safe-keys-lock-box-black-grey",
+    "name": "Safe Keys Lock Box (black / grey)",
+    "category": "tools-car-care",
+    "price": 2500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/e549674f-1f21-464a-8fbf-c4496343af43/safe-keys-lock-box-black-grey-1.jpg"
+    ],
+    "features": [
+      "Hard, unbreakable, scratch-proof ABS",
+      "Colours: black and grey"
+    ],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A handy tool for the job."
+  },
+  {
+    "id": "e5693a7c-91b6-4921-abb4-dc9848072d75",
+    "slug": "sokany-roti-maker",
+    "name": "Sokany Roti Maker",
+    "category": "home-appliances",
+    "price": 3600,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/e5693a7c-91b6-4921-abb4-dc9848072d75/sokany-roti-maker-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A dependable appliance for your home."
   },
   {
     "id": "e5e65f28-3930-4cc1-a333-7e0a39cfe116",
@@ -897,6 +2998,36 @@
     ]
   },
   {
+    "id": "e8afcca0-ee75-4bb9-a547-df00d8defcfa",
+    "slug": "vitron-v42sb-soundbar",
+    "name": "Vitron V42SB Soundbar",
+    "category": "audio-speakers",
+    "price": 4500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/e8afcca0-ee75-4bb9-a547-df00d8defcfa/vitron-v42sb-soundbar-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Sound that fills the room."
+  },
+  {
+    "id": "e9e53789-6dd2-4dab-97a5-bd43395e0629",
+    "slug": "rashnik-rn-1500-glass-2-burner-gas-stove",
+    "name": "Rashnik RN-1500 Glass 2-Burner Gas Stove",
+    "category": "home-appliances",
+    "price": 3000,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/e9e53789-6dd2-4dab-97a5-bd43395e0629/rashnik-rn-1500-glass-2-burner-gas-stove-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A dependable appliance for your home."
+  },
+  {
     "id": "ea995322-033d-4c11-b17b-fcc9e10a18b3",
     "slug": "luxury-jacquard-silk-duvet-set",
     "name": "Luxury Jacquard Silk Duvet Set",
@@ -918,6 +3049,143 @@
     ]
   },
   {
+    "id": "ec76ba25-ea64-40e1-8a9c-933073442c4a",
+    "slug": "jtc-j-801-pro-2-1-speaker-system",
+    "name": "JTC J-801 Pro 2.1 Speaker System",
+    "category": "audio-speakers",
+    "price": 9000,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/ec76ba25-ea64-40e1-8a9c-933073442c4a/jtc-j-801-pro-2-1-speaker-system-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Sound that fills the room.",
+    "isNewArrival": true
+  },
+  {
+    "id": "ec9bb73d-4943-4b51-8125-99ca0020f367",
+    "slug": "jsb-5-way-extension-lead-5m",
+    "name": "JSB 5-Way Extension Lead (5m)",
+    "category": "electronics",
+    "price": 1950,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/ec9bb73d-4943-4b51-8125-99ca0020f367/jsb-5-way-extension-lead-5m-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A practical gadget for home, office or on the go."
+  },
+  {
+    "id": "ecf90dd2-576e-4856-a623-16216c0e720c",
+    "slug": "artificial-calla-lily-flower-1-4m",
+    "name": "Artificial Calla Lily Flower (1.4m)",
+    "category": "interior-design",
+    "price": 4500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/ecf90dd2-576e-4856-a623-16216c0e720c/artificial-calla-lily-flower-1-4m-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Finishing touches for your home.",
+    "isNewArrival": true
+  },
+  {
+    "id": "ed318924-b025-4279-b5ad-a3fc451f3e59",
+    "slug": "electronic-money-bank-atm-style",
+    "name": "Electronic Money Bank (ATM style)",
+    "category": "electronics",
+    "price": 3000,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/ed318924-b025-4279-b5ad-a3fc451f3e59/electronic-money-bank-atm-style-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A practical gadget for home, office or on the go.",
+    "isNewArrival": true
+  },
+  {
+    "id": "edfc6ee4-9393-46fe-a879-5d3086ee6cc1",
+    "slug": "suomy-metallic-knuckle-gloves-touchscreen-sensor",
+    "name": "Suomy Metallic Knuckle Gloves (touchscreen sensor)",
+    "category": "motorcycle-gear",
+    "price": 3000,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/edfc6ee4-9393-46fe-a879-5d3086ee6cc1/suomy-metallic-knuckle-gloves-touchscreen-sensor-1.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/edfc6ee4-9393-46fe-a879-5d3086ee6cc1/suomy-metallic-knuckle-gloves-touchscreen-sensor-2.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/edfc6ee4-9393-46fe-a879-5d3086ee6cc1/suomy-metallic-knuckle-gloves-touchscreen-sensor-3.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/edfc6ee4-9393-46fe-a879-5d3086ee6cc1/suomy-metallic-knuckle-gloves-touchscreen-sensor-4.jpg"
+    ],
+    "features": [
+      "Metallic knuckle protection",
+      "Touchscreen sensor"
+    ],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Riding gear built for the road."
+  },
+  {
+    "id": "ee0a1e72-3c09-4a83-96ad-d8249accb1cd",
+    "slug": "honf-super-adhesive-waterproof-tape-10cm-x-150cm",
+    "name": "Honf Super Adhesive Waterproof Tape (10cm x 150cm)",
+    "category": "tools-car-care",
+    "price": 650,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/ee0a1e72-3c09-4a83-96ad-d8249accb1cd/honf-super-adhesive-waterproof-tape-10cm-x-150cm-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A handy tool for the job."
+  },
+  {
+    "id": "eeabfc21-240e-472b-9539-91114a3a1b68",
+    "slug": "jsb-4-way-extension-lead-3m",
+    "name": "JSB 4-Way Extension Lead (3m)",
+    "category": "electronics",
+    "price": 1700,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/eeabfc21-240e-472b-9539-91114a3a1b68/jsb-4-way-extension-lead-3m-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A practical gadget for home, office or on the go."
+  },
+  {
+    "id": "effdd358-8f7a-4622-b775-24cbffbaddc5",
+    "slug": "reflective-riding-jacket-fully-padded",
+    "name": "Reflective Riding Jacket (fully padded)",
+    "category": "motorcycle-gear",
+    "price": 8500,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/effdd358-8f7a-4622-b775-24cbffbaddc5/reflective-riding-jacket-fully-padded-1.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/effdd358-8f7a-4622-b775-24cbffbaddc5/reflective-riding-jacket-fully-padded-2.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/effdd358-8f7a-4622-b775-24cbffbaddc5/reflective-riding-jacket-fully-padded-3.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/effdd358-8f7a-4622-b775-24cbffbaddc5/reflective-riding-jacket-fully-padded-4.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/effdd358-8f7a-4622-b775-24cbffbaddc5/reflective-riding-jacket-fully-padded-5.jpg"
+    ],
+    "features": [
+      "Reflective",
+      "Fully padded"
+    ],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Riding gear built for the road.",
+    "isNewArrival": true
+  },
+  {
     "id": "f5e5abcc-d0b2-40c9-a489-059112105ae4",
     "slug": "toothpaste-dispenser-jx200",
     "name": "Toothpaste Dispenser JX200",
@@ -932,6 +3200,38 @@
     "reviewCount": 0,
     "stock": 0,
     "isDeal": true
+  },
+  {
+    "id": "f7ae1696-e965-45b2-a1c3-dbe4324dd93e",
+    "slug": "tp-100w-solar-floodlight",
+    "name": "TP 100W Solar Floodlight",
+    "category": "tools-car-care",
+    "price": 3800,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/f7ae1696-e965-45b2-a1c3-dbe4324dd93e/tp-100w-solar-floodlight-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "A handy tool for the job."
+  },
+  {
+    "id": "f92db6c6-b85e-4cad-ac79-91c2af7df2a6",
+    "slug": "wallabee-style-suede-shoes",
+    "name": "Wallabee-style Suede Shoes",
+    "category": "sneakers-shoes",
+    "price": 2800,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/f92db6c6-b85e-4cad-ac79-91c2af7df2a6/wallabee-style-suede-shoes-1.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/f92db6c6-b85e-4cad-ac79-91c2af7df2a6/wallabee-style-suede-shoes-2.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Comfortable everyday footwear. Sizes 39-45. Please add your size in the Order Notes at checkout.",
+    "isNewArrival": true
   },
   {
     "id": "fa4cc7be-eb04-4ddc-9e9c-5af2de573c08",
@@ -976,6 +3276,43 @@
     ]
   },
   {
+    "id": "fce519bd-e058-4190-9557-869c74c1386b",
+    "slug": "vomero-5-style-running-sneakers",
+    "name": "Vomero 5-style Running Sneakers",
+    "category": "sneakers-shoes",
+    "price": 4000,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/fce519bd-e058-4190-9557-869c74c1386b/vomero-5-style-running-sneakers-1.jpg"
+    ],
+    "features": [],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "Comfortable everyday footwear. Sizes 36-41. Please add your size in the Order Notes at checkout.",
+    "isNewArrival": true
+  },
+  {
+    "id": "fdfc5dab-be97-455b-9c0c-41bac1c967dc",
+    "slug": "portable-folding-camping-chair",
+    "name": "Portable Folding Camping Chair",
+    "category": "sports-leisure",
+    "price": 2200,
+    "images": [
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/fdfc5dab-be97-455b-9c0c-41bac1c967dc/portable-folding-camping-chair-1.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/fdfc5dab-be97-455b-9c0c-41bac1c967dc/portable-folding-camping-chair-2.jpg",
+      "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/fdfc5dab-be97-455b-9c0c-41bac1c967dc/portable-folding-camping-chair-3.jpg"
+    ],
+    "features": [
+      "Durable cross-braced metal frame",
+      "Water-resistant canvas fabric",
+      "Side pocket"
+    ],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 0,
+    "description": "For play and the outdoors."
+  },
+  {
     "id": "p18",
     "slug": "power-bank-10-000mah",
     "name": "Power Bank 10,000mAh",
@@ -998,7 +3335,7 @@
     "slug": "full-face-helmet",
     "name": "Full-Face Helmet",
     "category": "motorcycle-gear",
-    "price": 5500,
+    "price": 8500,
     "images": [
       "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/p81/v1-motocross-helmet-goggles-red.jpg",
       "https://ptyxbmydwhqkrewmgzed.supabase.co/storage/v1/object/public/product-images/p81/v1-motocross-helmet-goggles-colour-options.jpg"
