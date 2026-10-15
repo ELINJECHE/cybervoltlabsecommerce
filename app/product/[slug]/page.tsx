@@ -10,6 +10,7 @@ import PriceTag from "@/components/PriceTag";
 import StarRating from "@/components/StarRating";
 import StockUrgencyBar from "@/components/StockUrgencyBar";
 import ProductActions from "@/components/ProductActions";
+import { SAME_DAY_HEADLINE } from "@/lib/store-info";
 import ProductCard from "@/components/ProductCard";
 import ReviewsCarousel from "@/components/ReviewsCarousel";
 
@@ -77,6 +78,10 @@ export default async function ProductPage({ params }: { params: { slug: string }
           </div>
 
           <PriceTag price={product.price} discountPrice={product.discountPrice} size="lg" />
+
+          <p className="flex items-center gap-2 rounded-card border border-primary/30 bg-primary/5 px-3 py-2 text-sm font-semibold text-primary">
+            <span aria-hidden="true">🚚</span> {SAME_DAY_HEADLINE} — order today, get it today
+          </p>
 
           {isLowStock && (
             <p className="text-sm font-medium text-deal">Only {product.stock} left in stock — order soon</p>

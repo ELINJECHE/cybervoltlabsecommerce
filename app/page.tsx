@@ -28,8 +28,8 @@ const HERO_SLIDES = [
   {
     image: "/assets/images/hero-1.webp",
     alt: "Cybervolt Labs featured products",
-    title: "Gear Up. Step Out.",
-    subtitle: "Motorcycle gear, sneakers and home essentials — delivered across Kenya.",
+    title: "Order Today. Get It Today.",
+    subtitle: "Same-day delivery in Nairobi on motorcycle gear, sneakers and home essentials. Countrywide in 2–4 days.",
     ctaText: "Shop Motorcycle Gear",
     ctaHref: "/category/motorcycle-gear",
   },

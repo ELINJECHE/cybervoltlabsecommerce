@@ -5,6 +5,15 @@ but waiting on a setup step that only the site owner can do.
 ==============================================================================
 2026-10-15
 ==============================================================================
+Same-day delivery promoted  (committed, not yet pushed)
+- Blue banner above the header on every page: "Same-day delivery in Nairobi - order today, get it today".
+- First home-page hero slide is now "Order Today. Get It Today."; the Fast Delivery tile became
+  "Same-Day Delivery" and moved first. Callouts added on every product page and on checkout.
+- Home page title/description, product/category descriptions, About and Contact now lead with
+  same-day Nairobi delivery. The link-preview (share) image was redrawn with the same headline.
+- Wording is scoped to Nairobi on purpose; countrywide stays "2-4 days". No order cut-off time is
+  stated. Edit the one line SAME_DAY_HEADLINE in lib/store-info.ts to change it everywhere.
+
 Placeholder clean-up and faster images  (committed, not yet pushed)
 - The 99 placeholder products were removed from the shop database (a backup of them was kept
   outside the project). 53 real products remain.

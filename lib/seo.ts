@@ -4,14 +4,14 @@ import { SOCIAL_LINKS } from "@/lib/social";
 
 export const SITE_URL = "https://cybervoltlabs.co.ke";
 export const SITE_NAME = "Cybervolt Labs";
-export const DEFAULT_TITLE = "Cybervolt Labs | Motorcycle Gear, Sneakers & Home in Kenya";
+export const DEFAULT_TITLE = "Cybervolt Labs | Same-Day Delivery in Nairobi, Kenya";
 export const DEFAULT_DESCRIPTION =
-  "Shop motorcycle riding gear, sneakers, bedding, home décor and smart gadgets at Cybervolt Labs. Pay with M-Pesa. Delivery across Kenya.";
+  "Same-day delivery in Nairobi. Shop motorcycle riding gear, sneakers, bedding, home décor and smart gadgets at Cybervolt Labs. Pay with M-Pesa.";
 
 const TITLE_SUFFIX = ` | ${SITE_NAME}`;
 
 // Used whenever a page has no image of its own (a page-level openGraph replaces the layout's).
-const SHARE_IMAGE_ALT = "Cybervolt Labs — motorcycle gear, sneakers and home essentials in Kenya. Pay with M-Pesa.";
+const SHARE_IMAGE_ALT = "Cybervolt Labs — same-day delivery in Nairobi. Motorcycle gear, sneakers and home essentials. Pay with M-Pesa.";
 
 export function absoluteUrl(path: string): string {
   if (/^https?:\/\//.test(path)) return path;
@@ -92,7 +92,7 @@ export function productMetadata(product: Product): Metadata {
   const lead = product.description ? firstSentence(product.description) : "";
   const description = composeDescription(
     lead ? `${product.name}: ${lead} ${kes(price)}.` : `Buy ${product.name} online in Kenya for ${kes(price)}.`,
-    ["Order from Cybervolt Labs, pay with M-Pesa, delivery across Kenya.", "Pay with M-Pesa; delivery across Kenya.", "Pay with M-Pesa."]
+    ["Order from Cybervolt Labs: same-day delivery in Nairobi, pay with M-Pesa.", "Same-day Nairobi delivery; pay with M-Pesa.", "Pay with M-Pesa."]
   );
   return pageMetadata({
     // Long names lose their bracketed qualifier rather than being cut off mid-word.
@@ -115,8 +115,8 @@ export function categoryMetadata(category: Category, products: Product[]): Metad
     count > 0
       ? `Shop ${category.name} in Kenya: ${count} product${count === 1 ? "" : "s"} from ${kes(prices[0])}${
           names.length ? `, including ${names.join(" and ")}` : ""
-        }. Pay with M-Pesa; delivery across Kenya.`
-      : `Shop ${category.name} in Kenya at Cybervolt Labs. Pay with M-Pesa; delivery across Kenya.`;
+        }. Same-day delivery in Nairobi; pay with M-Pesa.`
+      : `Shop ${category.name} in Kenya at Cybervolt Labs. Same-day delivery in Nairobi; pay with M-Pesa.`;
   return pageMetadata({
     title: fitTitle([`${category.name} in Kenya`, category.name]),
     description: truncate(body, 158),

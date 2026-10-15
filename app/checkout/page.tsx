@@ -19,6 +19,7 @@ import { getAllReviews } from "@/lib/reviews";
 import ReviewsCarousel from "@/components/ReviewsCarousel";
 import ManualPaymentConfirm from "@/components/ManualPaymentConfirm";
 import CheckoutSteps from "@/components/CheckoutSteps";
+import { SAME_DAY_HEADLINE } from "@/lib/store-info";
 
 type Phase = "form" | "waiting-for-approval" | "manual-payment";
 
@@ -165,7 +166,8 @@ export default function CheckoutPage() {
   return (
     <div>
     <div className="mx-auto max-w-2xl px-4 py-6">
-      <h1 className="mb-4 text-xl font-bold">Checkout</h1>
+      <h1 className="mb-1 text-xl font-bold">Checkout</h1>
+      <p className="mb-4 text-sm font-medium text-primary">🚚 {SAME_DAY_HEADLINE} — order today, get it today</p>
       <CheckoutSteps current={1} />
 
       <div className="mb-6 rounded-card border border-border bg-surface p-4">

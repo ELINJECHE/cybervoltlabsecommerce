@@ -28,7 +28,7 @@ export default function ContactPage() {
         <p>Email: hello@cybervoltlabs.co.ke</p>
         <p>Instagram: @cybervolt_labs_ &middot; TikTok: @cybervolt_labs</p>
         <p>Facebook &amp; LinkedIn: Cybervolt Labs Kenya</p>
-        <p>Based in Nairobi, Kenya — delivering countrywide.</p>
+        <p>Based in Nairobi, Kenya — same-day delivery in Nairobi, countrywide in 2-4 days.</p>
       </div>
     </div>
   );

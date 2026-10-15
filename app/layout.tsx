@@ -4,6 +4,7 @@ import "./globals.css";
 import { CartProvider } from "@/lib/cart-context";
 import { AuthProvider } from "@/lib/auth-context";
 import CategoryNav from "@/components/CategoryNav";
+import DeliveryBanner from "@/components/DeliveryBanner";
 import Footer from "@/components/Footer";
 import WhatsAppFloatButton from "@/components/WhatsAppFloatButton";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
@@ -53,6 +54,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body className={`${brandFont.variable} font-sans antialiased`}>
         <AuthProvider>
           <CartProvider>
+            <DeliveryBanner />
             <CategoryNav categories={categories} />
             <main className="min-h-screen">{children}</main>
             <Footer categories={categories} />
