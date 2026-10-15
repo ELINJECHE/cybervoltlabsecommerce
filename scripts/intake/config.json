@@ -3,13 +3,48 @@
     "~/Library/CloudStorage/GoogleDrive-elinjeche@gmail.com/My Drive/Cybervolt Supplier Chats"
   ],
   "work_dir": "intake",
-  "markup_percent": 25,
-  "round_up_to": 50,
+  "markup_percent": 20,
+  "round_up_to": 10,
   "min_sell_price": 100,
   "photos_per_product": 5,
   "photo_max_px": 1000,
   "skip_senders": [],
   "retail_price_sources": [
     "Cybervolt Labs"
-  ]
+  ],
+  "suppliers": [
+    {
+      "name": "Brown Collection",
+      "match": [
+        "brown collection"
+      ]
+    },
+    {
+      "name": "Jamnet Wholesalers",
+      "match": [
+        "jamnet"
+      ]
+    },
+    {
+      "name": "Phyllis Households",
+      "match": [
+        "phyllis",
+        "phylis"
+      ]
+    },
+    {
+      "name": "Open Air",
+      "match": [
+        "open air",
+        "openair"
+      ]
+    },
+    {
+      "name": "Splendid Homes",
+      "match": [
+        "splendid homes"
+      ]
+    }
+  ],
+  "own_group_label": "Cybervolt WhatsApp offers group"
 }

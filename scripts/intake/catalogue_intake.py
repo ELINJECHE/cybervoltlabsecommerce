@@ -3,9 +3,10 @@
 
   scan      find new "WhatsApp Chat - <supplier>.zip" exports, parse the posts and write a review
             spreadsheet (intake/review/*.xlsx). Needs no secrets and never touches the live shop.
+  backfill  one-off: add sourcing records for products that predate this tool.
   contact   make labelled contact sheets of photo-only posts so they can be named by eye.
   setnames  fill product names into a review sheet (used for photo-only posts).
-  apply     push rows you marked ADD / UPDATE PRICE to the shop. Needs SUPABASE_SERVICE_KEY in the
+  apply     push rows you marked ADD to the shop (price updates are NOT done here: admin sets them). Needs SUPABASE_SERVICE_KEY in the
             environment for that one run; the key is never stored anywhere.
 
 Third-party chats and photos stay in intake/ (git-ignored) and are never published.
@@ -195,11 +196,20 @@ def build_items(msgs, photos_dir, supplier):
     return out
 
 
-def sell_price(cost, supplier=""):
+def canonical_supplier(group):
+    """(display name, kind): kind is 'supplier' (cost + margin), 'retail' (your own group) or 'unlisted'."""
+    low = group.lower()
+    for k in CFG["retail_price_sources"]:
+        if k.lower() in low: return CFG["own_group_label"], "retail"
+    for s in CFG["suppliers"]:
+        if any(m in low for m in s["match"]): return s["name"], "supplier"
+    return group, "unlisted"
+
+
+def sell_price(cost, kind="supplier"):
     if not cost: return None
-    # Your own broadcast groups already post retail prices, so no markup on those.
-    retail = any(k.lower() in supplier.lower() for k in CFG["retail_price_sources"])
-    p = cost * (1 + (0 if retail else CFG["markup_percent"]) / 100.0)
+    # Your own broadcast groups already post retail prices, so no margin on those.
+    p = cost * (1 + (0 if kind == "retail" else CFG["markup_percent"]) / 100.0)
     step = CFG["round_up_to"]
     return max(CFG["min_sell_price"], int(-(-p // step) * step))
 
@@ -238,8 +248,8 @@ def slug(t):
 
 # ---------------------------------------------------------------- scan
 HEAD = ["Decision", "Photo", "Item ID", "Supplier", "Posted", "Product name", "Category", "Supplier price (cost)",
-        "Proposed sell price", "Final sell price", "Sizes", "Suggested", "Already on site", "Site price", "Matched product ID",
-        "Photo files", "Original message", "Applied"]
+        "Proposed sell price", "Final sell price", "Sizes", "Suggested", "Already on site", "Site price",
+        "Source group", "Photo files", "Original message", "Applied"]
 COL = {h: i + 1 for i, h in enumerate(HEAD)}
 
 
@@ -250,7 +260,7 @@ def write_sheet(path, rows):
         c.font = Font(bold=True, color="FFFFFF"); c.fill = PatternFill("solid", fgColor="4D66B0"); c.alignment = Alignment(wrap_text=True, vertical="center")
     for r in rows:
         ws.append([r["decision"], None, r["id"], r["supplier"], r["posted"], r["name"], r["category"], r["cost"], r["proposed"], r["final"],
-                   r["sizes"], r["suggested"], r["site_name"], r["site_price"], r["site_id"], ", ".join(r["files"]), r["text"][:400], ""])
+                   r["sizes"], r["suggested"], r["site_name"], r["site_price"], r["group"], ", ".join(r["files"]), r["text"][:400], ""])
         row = ws.max_row
         ws.row_dimensions[row].height = 70
         try:
@@ -264,19 +274,19 @@ def write_sheet(path, rows):
             ws.cell(row=row, column=COL["Product name"]).fill = PatternFill("solid", fgColor="FFF3CD")
     widths = {"Decision": 14, "Photo": 14, "Item ID": 14, "Supplier": 18, "Posted": 11, "Product name": 44, "Category": 18, "Supplier price (cost)": 12,
               "Proposed sell price": 12, "Final sell price": 12, "Sizes": 10, "Suggested": 16, "Already on site": 34, "Site price": 10,
-              "Matched product ID": 10, "Photo files": 30, "Original message": 70, "Applied": 12}
+              "Source group": 26, "Photo files": 30, "Original message": 70, "Applied": 12}
     for h, w in widths.items(): ws.column_dimensions[get_column_letter(COL[h])].width = w
-    dv = DataValidation(type="list", formula1='"ADD,UPDATE PRICE,SKIP"', allow_blank=True)
+    dv = DataValidation(type="list", formula1='"ADD,SKIP"', allow_blank=True)
     ws.add_data_validation(dv); dv.add(f"A2:A{ws.max_row + 500}")
     cats = DataValidation(type="list", formula1='"' + ",".join(CATEGORIES) + '"', allow_blank=True)
     ws.add_data_validation(cats); cats.add(f"G2:G{ws.max_row + 500}")
     ws.freeze_panes = "D2"
     n = wb.create_sheet("How to review")
-    for line in ["1. In column A choose ADD, UPDATE PRICE or SKIP for each row (blank rows are ignored).",
+    for line in ["1. In column A choose ADD or SKIP for each row (blank rows are ignored). Prices of products already on the site are changed in the admin panel, never from here.",
                  "2. Check the product name and category (yellow = needs a name). Branded shoes: keep the '-style' wording, no brand claims.",
-                 "3. 'Final sell price' is what customers pay. It starts as supplier cost + markup; change it freely.",
+                 "3. 'Final sell price' is what customers pay. It starts as supplier price + margin; change it freely. The supplier price and group are saved for the admin Inventory & pricing page.",
                  "4. Save the file, then tell Claude 'apply the approved catalogue rows'.",
-                 f"Markup rule: cost +{CFG['markup_percent']}% rounded up to the next KSh {CFG['round_up_to']}; none for your own groups (scripts/intake/config.json)."]:
+                 f"Margin rule: supplier price +{CFG['markup_percent']}% rounded up to the next KSh {CFG['round_up_to']}; none for your own groups (scripts/intake/config.json)."]:
         n.append([line])
     n.column_dimensions["A"].width = 120
     wb.save(path)
@@ -299,7 +309,8 @@ def cmd_scan(args):
         h = hashlib.sha1(open(z, "rb").read()).hexdigest()
         if h in manifest["zips"]:
             continue
-        supplier = re.sub(r"\s*\(\d+\)$", "", re.sub(r"^WhatsApp Chat\s*-\s*", "", os.path.basename(z)[:-4])).strip()
+        group = re.sub(r"\s*\(\d+\)$", "", re.sub(r"^WhatsApp Chat\s*-\s*", "", os.path.basename(z)[:-4])).strip()
+        supplier, kind = canonical_supplier(group)
         dest = os.path.join(root, "work", f"{slug(supplier)}-{h[:8]}")
         shutil.rmtree(dest, ignore_errors=True); safe_extract(z, dest)
         txts = glob.glob(os.path.join(dest, "*.txt"))
@@ -307,6 +318,7 @@ def cmd_scan(args):
             print("  no chat text in", os.path.basename(z)); manifest["zips"][h] = {"zip": os.path.basename(z), "note": "no text"}; continue
         msgs = parse_chat(open(txts[0], encoding="utf-8", errors="ignore").read())
         items = build_items(msgs, dest, supplier)
+        if kind == "unlisted": print(f"  note: '{group}' is not one of your listed suppliers; using the default {CFG['markup_percent']}% margin.")
         rows, skipped_seen = [], 0
         for n, it in enumerate(items):
             key = f"{slug(supplier)}|{it['ts'].date()}|{slug(it['name'] or it['photos'][0])}|{it['price']}"
@@ -325,12 +337,12 @@ def cmd_scan(args):
             thumb = os.path.join(pdir, "thumb.png"); t = Image.open(os.path.join(pdir, files[0])).convert("RGB"); t.thumbnail((120, 120)); t.save(thumb)
             name = it["name"] or "(name from photo)"
             m = match_live(name, live) if it["name"] else None
-            cost = it["price"]; prop = sell_price(cost, supplier)
-            if m is None: suggested = "ADD" if cost else "ADD (no price)"
-            elif cost and prop and abs(prop - m["price"]) / max(m["price"], 1) > 0.05: suggested = "UPDATE PRICE?"
-            else: suggested = "SKIP (on site)"
+            cost = it["price"]; prop = sell_price(cost, kind)
+            # Prices of products already on the site are never changed from here: admin sets those.
+            if m is not None: suggested = "SKIP (on site)"
+            else: suggested = "ADD" if cost else "ADD (no price)"
             rows.append({"decision": "", "id": iid, "supplier": supplier, "posted": it["ts"].strftime("%Y-%m-%d"), "name": name,
-                         "category": it["category"], "cost": cost, "proposed": prop, "final": prop, "sizes": it["sizes"], "suggested": suggested,
+                         "category": it["category"], "cost": cost, "proposed": prop, "final": prop, "sizes": it["sizes"], "suggested": suggested, "group": group, "kind": kind,
                          "site_name": m["name"] if m else "", "site_price": m["price"] if m else None, "site_id": m["id"] if m else "",
                          "files": files, "text": it["text"], "thumb": thumb})
         stamp = datetime.date.today().isoformat()
@@ -381,6 +393,14 @@ def cmd_contact(args):
 
 
 # ---------------------------------------------------------------- apply
+def sourcing_ready(base, H):
+    st, body = http("GET", f"{base}/rest/v1/product_sourcing?select=product_id&limit=1", H)
+    return st == 200
+
+
+SQL_HINT = "The admin-only table product_sourcing doesn't exist yet. Run docs/sql/product_sourcing.sql in Supabase (SQL Editor) once, then retry."
+
+
 def cmd_apply(args):
     root = work_root(args)
     key = os.environ.get("SUPABASE_SERVICE_KEY")
@@ -388,67 +408,84 @@ def cmd_apply(args):
         sys.exit("SUPABASE_SERVICE_KEY is not set (pass it inline for this run only).")
     env = load_env(); base = env["NEXT_PUBLIC_SUPABASE_URL"]
     H = {"apikey": key or "", "Authorization": f"Bearer {key}", "Content-Type": "application/json"}
+    HR = H if key else {"apikey": env["NEXT_PUBLIC_SUPABASE_ANON_KEY"]}
     sheets = [args.sheet] if args.sheet else sorted(glob.glob(os.path.join(root, "review", "*.xlsx")))
-    st, body = http("GET", f"{base}/rest/v1/products?select=slug", H if key else {"apikey": env["NEXT_PUBLIC_SUPABASE_ANON_KEY"]})
+    if key and not sourcing_ready(base, H): sys.exit(SQL_HINT)
+    st, body = http("GET", f"{base}/rest/v1/products?select=slug", HR)
     taken = {r["slug"] for r in json.loads(body)}
-    st, body = http("GET", f"{base}/rest/v1/categories?select=slug", H if key else {"apikey": env["NEXT_PUBLIC_SUPABASE_ANON_KEY"]})
+    st, body = http("GET", f"{base}/rest/v1/categories?select=slug", HR)
     cats = {r["slug"] for r in json.loads(body)}
-    added = updated = bad = 0
+    added = bad = 0
     for sp in sheets:
         wb = openpyxl.load_workbook(sp); ws = wb["Review"]; dirty = False
         for row in ws.iter_rows(min_row=2):
             v = lambda h: row[COL[h] - 1].value
-            dec = (v("Decision") or "").strip().upper()
-            if dec not in ("ADD", "UPDATE PRICE") or v("Applied"): continue
+            if (v("Decision") or "").strip().upper() != "ADD" or v("Applied"): continue
             name, cat, price = (v("Product name") or "").strip(), (v("Category") or "").strip(), v("Final sell price")
             if not name or name.startswith("("): print(f"  ! {v('Item ID')}: needs a product name"); bad += 1; continue
-            if dec == "ADD" and cat == "sneakers-shoes" and BIG_BRANDS.search(name) and "style" not in name.lower():
+            if cat == "sneakers-shoes" and BIG_BRANDS.search(name) and "style" not in name.lower():
                 print(f"  ! {name}: rename with neutral '-style' wording (e.g. 'Cushion Sneakers (Air Max style)'), no brand claims"); bad += 1; continue
             if not isinstance(price, (int, float)) or price < CFG["min_sell_price"]: print(f"  ! {name}: needs a final sell price"); bad += 1; continue
-            ok = False
-            if dec == "UPDATE PRICE":
-                pid = v("Matched product ID")
-                if not pid: print(f"  ! {name}: UPDATE PRICE but no matched product"); bad += 1; continue
-                print(f"  {'(dry) ' if args.dry_run else ''}price {name} -> KSh {int(price)}")
-                if not args.dry_run:
-                    s, r = http("PATCH", f"{base}/rest/v1/products?id=eq.{pid}", H, json.dumps({"price": int(price), "updated_at": time.strftime("%Y-%m-%dT%H:%M:%S+00:00", time.gmtime())}).encode())
-                    ok = s in (200, 204)
-                    if not ok: print("    failed:", s, r[:150])
-                else: ok = True
-                updated += ok
-            else:
-                if cat not in cats: print(f"  ! {name}: category '{cat}' doesn't exist yet (create it first)"); bad += 1; continue
-                base_slug = s_ = slug(name); n = 2
-                while s_ in taken: s_ = f"{base_slug}-{n}"; n += 1
-                taken.add(s_)
-                files = [f for f in (v("Photo files") or "").split(", ") if f]
-                pdir = os.path.join(root, "photos", v("Item ID"))
-                sizes = v("Sizes")
-                desc = DESC.get(cat, "") + (f" Sizes {sizes}. Please add your size in the Order Notes at checkout." if sizes and cat == "sneakers-shoes" else "")
-                print(f"  {'(dry) ' if args.dry_run else ''}add   {name} | {cat} | KSh {int(price)} | {len(files)} photo(s)")
-                if args.dry_run: ok = True; added += 1
-                else:
-                    pid = str(uuid.uuid4()); urls = []
-                    try:
-                        for fn in files:
-                            hd = {"apikey": key, "Authorization": f"Bearer {key}", "Content-Type": "image/jpeg", "x-upsert": "true"}
-                            s, r = http("POST", f"{base}/storage/v1/object/product-images/{pid}/{fn}", hd, open(os.path.join(pdir, fn), "rb").read())
-                            if s not in (200, 201): raise RuntimeError(f"photo {fn}: {s}")
-                            urls.append(f"{base}/storage/v1/object/public/product-images/{pid}/{fn}")
-                        rowj = {"id": pid, "slug": s_, "name": name, "category": cat, "subcategory": None, "price": int(price), "discount_price": None,
-                                "images": urls, "colors": None, "features": [], "rating": 0, "review_count": 0, "stock": 0, "is_deal": False,
-                                "deal_ends_at": None, "deal_claimed_percent": None, "is_new_arrival": True, "verified": False, "description": desc, "jumia_url": None}
-                        s, r = http("POST", f"{base}/rest/v1/products", H, json.dumps(rowj).encode())
-                        if s not in (200, 201): raise RuntimeError(f"insert: {s} {r[:150]}")
-                        ok = True; added += 1
-                    except Exception as e:
-                        print("    failed:", e)
-            if ok and not args.dry_run:
+            if cat not in cats: print(f"  ! {name}: category '{cat}' doesn't exist yet (create it first)"); bad += 1; continue
+            kind = canonical_supplier(v("Source group") or "")[1]
+            cost = v("Supplier price (cost)") if kind != "retail" and isinstance(v("Supplier price (cost)"), (int, float)) else None
+            supplier = canonical_supplier(v("Source group") or "")[0] if v("Source group") else (v("Supplier") or "Unknown")
+            base_slug = s_ = slug(name); n = 2
+            while s_ in taken: s_ = f"{base_slug}-{n}"; n += 1
+            taken.add(s_)
+            files = [f for f in (v("Photo files") or "").split(", ") if f]
+            pdir = os.path.join(root, "photos", v("Item ID"))
+            sizes = v("Sizes")
+            desc = DESC.get(cat, "") + (f" Sizes {sizes}. Please add your size in the Order Notes at checkout." if sizes and cat == "sneakers-shoes" else "")
+            print(f"  {'(dry) ' if args.dry_run else ''}add   {name} | {cat} | KSh {int(price)} (cost {cost or 'n/a'} from {supplier}) | {len(files)} photo(s)")
+            if args.dry_run: added += 1; continue
+            pid = str(uuid.uuid4()); urls = []
+            try:
+                for fn in files:
+                    hd = {"apikey": key, "Authorization": f"Bearer {key}", "Content-Type": "image/jpeg", "x-upsert": "true"}
+                    st_, r = http("POST", f"{base}/storage/v1/object/product-images/{pid}/{fn}", hd, open(os.path.join(pdir, fn), "rb").read())
+                    if st_ not in (200, 201): raise RuntimeError(f"photo {fn}: {st_}")
+                    urls.append(f"{base}/storage/v1/object/public/product-images/{pid}/{fn}")
+                rowj = {"id": pid, "slug": s_, "name": name, "category": cat, "subcategory": None, "price": int(price), "discount_price": None,
+                        "images": urls, "colors": None, "features": [], "rating": 0, "review_count": 0, "stock": 0, "is_deal": False,
+                        "deal_ends_at": None, "deal_claimed_percent": None, "is_new_arrival": True, "verified": False, "description": desc, "jumia_url": None}
+                st_, r = http("POST", f"{base}/rest/v1/products", H, json.dumps(rowj).encode())
+                if st_ not in (200, 201): raise RuntimeError(f"insert: {st_} {r[:150]}")
+                src = {"product_id": pid, "supplier": supplier, "supplier_cost": int(cost) if cost else None, "listed_price": int(price),
+                       "source_ref": f"{v('Source group')} export, post of {v('Posted')}"}
+                st_, r = http("POST", f"{base}/rest/v1/product_sourcing", H, json.dumps(src).encode())
+                if st_ not in (200, 201): print(f"    warning: product added but its sourcing record failed ({st_} {r[:120]})")
+                added += 1
                 ws.cell(row=row[0].row, column=COL["Applied"]).value = datetime.date.today().isoformat(); dirty = True
+            except Exception as e:
+                print("    failed:", e)
         if dirty: wb.save(sp)
-    print(f"{'(dry run) ' if args.dry_run else ''}added {added}, price updates {updated}, rows needing attention {bad}")
-    if (added or updated) and not args.dry_run:
+    print(f"{'(dry run) ' if args.dry_run else ''}added {added}, rows needing attention {bad}")
+    if added and not args.dry_run:
         print("Catalogue changed in the database. It shows on the site after the next rebuild (Publish changes in admin).")
+
+
+def cmd_backfill(args):
+    """One-off: give products that have no sourcing record one (supplier unknown / own group), so the
+    admin Inventory & pricing page covers the whole catalogue. Costs stay blank where unknown."""
+    key = os.environ.get("SUPABASE_SERVICE_KEY") or sys.exit("SUPABASE_SERVICE_KEY is not set (pass it inline for this run only).")
+    env = load_env(); base = env["NEXT_PUBLIC_SUPABASE_URL"]
+    H = {"apikey": key, "Authorization": f"Bearer {key}", "Content-Type": "application/json"}
+    if not sourcing_ready(base, H): sys.exit(SQL_HINT)
+    own = set(json.load(open(args.own_slugs))) if args.own_slugs else set()
+    st, body = http("GET", f"{base}/rest/v1/products?select=id,slug,price,created_at", H); prods = json.loads(body)
+    st, body = http("GET", f"{base}/rest/v1/product_sourcing?select=product_id", H); have = {r["product_id"] for r in json.loads(body)}
+    rows = []
+    for p in prods:
+        if p["id"] in have: continue
+        is_own = p["slug"] in own
+        rows.append({"product_id": p["id"], "supplier": CFG["own_group_label"] if is_own else "Earlier import (supplier not recorded)",
+                     "supplier_cost": None, "listed_price": p["price"], "source_ref": "backfilled " + datetime.date.today().isoformat(),
+                     "listed_at": p.get("created_at") or datetime.datetime.utcnow().isoformat()})
+    for i in range(0, len(rows), 100):
+        st, r = http("POST", f"{base}/rest/v1/product_sourcing", H, json.dumps(rows[i:i + 100]).encode())
+        if st not in (200, 201): sys.exit(f"backfill failed ({st}): {r[:200]}")
+    print(f"backfilled {len(rows)} products ({sum(1 for r in rows if r['supplier'] == CFG['own_group_label'])} from the offers group)")
 
 
 def main():
@@ -457,9 +494,10 @@ def main():
     s = sub.add_parser("scan"); s.add_argument("--watch", action="append"); s.add_argument("--work")
     n = sub.add_parser("setnames"); n.add_argument("sheet"); n.add_argument("names")
     c = sub.add_parser("contact"); c.add_argument("todo")
+    b = sub.add_parser("backfill"); b.add_argument("--own-slugs")
     a = sub.add_parser("apply"); a.add_argument("--sheet"); a.add_argument("--work"); a.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
-    {"scan": cmd_scan, "setnames": cmd_setnames, "contact": cmd_contact, "apply": cmd_apply}[args.cmd](args)
+    {"scan": cmd_scan, "setnames": cmd_setnames, "contact": cmd_contact, "apply": cmd_apply, "backfill": cmd_backfill}[args.cmd](args)
 
 
 if __name__ == "__main__":

@@ -16,11 +16,16 @@ Inventory added from the WhatsApp broadcast group  (committed, not yet pushed)
 - Descriptions are short and generic; specs were added only where the posts gave them. Stock is not
   tracked (set to 0 = unlimited), as for the rest of the shop. Review everything in the admin panel.
 
-Supplier chat intake (semi-automatic)  (committed, not pushed; no site change)
+Supplier chat intake + admin inventory analytics  (committed, not pushed)
 - New scripts/intake/catalogue_intake.py: reads WhatsApp group exports dropped in the Google Drive
-  folder "Cybervolt Supplier Chats", writes a picture-based review sheet (ADD / UPDATE PRICE / SKIP,
-  proposed prices), and pushes only the rows you approve. A daily 08:00 Claude scheduled task runs
-  the scan. See docs/CATALOGUE_INTAKE.md.
+  folder "Cybervolt Supplier Chats", writes a picture-based review sheet (ADD / SKIP), and pushes only
+  the rows you approve. A daily 08:00 Claude scheduled task runs the scan. See docs/CATALOGUE_INTAKE.md.
+- Main suppliers (Brown Collection, Jamnet Wholesalers, Phyllis Households, Open Air, Splendid Homes):
+  listed price = supplier price + 20% (rounded up to KSh 10). Prices of existing products are never
+  updated by intake; admin sets them.
+- New admin page "Inventory & pricing": per-supplier counts, supplier cost, listed value, average
+  margin, price changes since listing, below-cost / thin-margin flags, product table, CSV download.
+  Needs one-time SQL: docs/sql/product_sourcing.sql (admin-only table, no public access).
 
 140 new products from the WhatsApp offers group  (database updated; site not yet rebuilt/pushed)
 - 140 products added to the shop database with 212 resized photos (about 110 KB each): shoes, home

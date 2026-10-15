@@ -50,6 +50,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const navLinks = [
     { href: "/admin", label: "Products" },
     { href: "/admin/categories", label: "Categories" },
+    { href: "/admin/inventory", label: "Inventory & pricing" },
   ];
 
   return (
