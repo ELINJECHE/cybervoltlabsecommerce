@@ -23,9 +23,7 @@ import { SAME_DAY_HEADLINE } from "@/lib/store-info";
 import {
   NAIROBI_ZONES,
   OUTSIDE_NAIROBI_NOTE,
-  OTHER_BUILDING,
   OUTSIDE_NAIROBI_SLUG,
-  buildingsFor,
   describeDelivery,
   feeLabel,
   resolveDelivery,
@@ -51,7 +49,6 @@ export default function CheckoutPage() {
   const [areaSlug, setAreaSlug] = useState("");
   const [building, setBuilding] = useState("");
   const delivery = resolveDelivery(areaSlug, building);
-  const buildingOptions = buildingsFor(areaSlug);
   // Goods + delivery fee (the fee is 0 outside Nairobi: that one is paid to the courier).
   const total = subtotal + (delivery?.fee ?? 0);
   const [notes, setNotes] = useState("");
@@ -76,7 +73,7 @@ export default function CheckoutPage() {
       return;
     }
     if (delivery.needsBuilding) {
-      setError("Please choose your building or estate so we can work out the exact delivery fee.");
+      setError("Please type your building or estate so we can confirm the exact delivery fee.");
       return;
     }
     setSubmitting(true);
@@ -225,13 +222,11 @@ export default function CheckoutPage() {
               ? "Choose your area below"
               : delivery.payOnDelivery
                 ? "Pay courier on arrival"
-                : delivery.needsBuilding
-                  ? "Choose your building below"
-                  : formatKES(delivery.fee)}
+                : formatKES(delivery.fee)}
           </span>
         </div>
         <div className="mt-2 flex justify-between border-t border-border pt-2 text-sm font-bold">
-          <span>{delivery && !delivery.needsBuilding ? "Total to pay now" : "Total"}</span>
+          <span>{delivery ? "Total to pay now" : "Total"}</span>
           <span>{formatKES(total)}</span>
         </div>
       </div>
@@ -310,10 +305,7 @@ export default function CheckoutPage() {
             id="area"
             required
             value={areaSlug}
-            onChange={(e) => {
-              setAreaSlug(e.target.value);
-              setBuilding("");
-            }}
+            onChange={(e) => setAreaSlug(e.target.value)}
             className="h-11 w-full rounded-md border border-border bg-surface px-3 text-sm outline-none focus:border-primary"
           >
             <option value="" disabled>Select where we&rsquo;re delivering…</option>
@@ -336,26 +328,20 @@ export default function CheckoutPage() {
           )}
         </div>
 
-        {buildingOptions.length > 0 && delivery && !delivery.payOnDelivery && (
+        {delivery?.range && (
           <div>
             <label htmlFor="building" className="mb-1 block text-sm font-medium">Building / Estate</label>
-            <select
+            <input
               id="building"
               required
               value={building}
               onChange={(e) => setBuilding(e.target.value)}
+              placeholder="e.g. name of your estate or apartment block"
               className="h-11 w-full rounded-md border border-border bg-surface px-3 text-sm outline-none focus:border-primary"
-            >
-              <option value="" disabled>Select your building or estate…</option>
-              {buildingOptions.map((b) => (
-                <option key={b.name} value={b.name}>
-                  {b.name} — {formatKES(b.fee)}
-                </option>
-              ))}
-              <option value={OTHER_BUILDING}>{OTHER_BUILDING} — {formatKES(delivery.fee)}</option>
-            </select>
+            />
             <p className="mt-1 text-xs text-muted">
-              Your area&rsquo;s fee varies by building. Not listed? Choose &ldquo;Other&rdquo; and we&rsquo;ll charge the top rate.
+              Delivery to {delivery.name} is {delivery.range} depending on the building. You pay the top rate
+              (KSh {delivery.fee}) now, and we confirm the exact fee for your building on WhatsApp.
             </p>
           </div>
         )}

@@ -1,8 +1,9 @@
 // Delivery fees by area, from "Nairobi Routes Rates.xlsx".
 //
 // Where the sheet gave a range (e.g. Karen 800-1000) or listed an area several times at different
-// prices, it is a ranged area: the customer then picks a building (see BUILDINGS) to narrow the
-// fee, and anyone not listed pays the top of the range so the rider is always covered.
+// prices, it is a ranged area: the customer types their building / estate, the top of the range
+// is charged so the rider is always covered, and the shop narrows the exact fee with the
+// customer on WhatsApp using that building.
 // "Nairobi CBD" is KSh 100 (set by the owner; the sheet's two bare "Nairobi" rows were dropped).
 // The sheet shortened some names to their first word; the likely full names are used here.
 // To change a fee or split an area, edit this table only; checkout and totals follow.
@@ -10,16 +11,10 @@
 export interface DeliveryZone {
   slug: string;
   name: string;
-  // What is charged. For a ranged area this is the TOP of the range, used until the customer
-  // picks a building that narrows it down.
+  // What is charged now. For a ranged area this is the TOP of the range.
   fee: number;
   // Set only for ranged areas: the bottom of the range.
   minFee?: number;
-}
-
-export interface Building {
-  name: string;
-  fee: number;
 }
 
 const slugify = (name: string) => name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
@@ -31,14 +26,6 @@ const ranged = (name: string, minFee: number, maxFee: number): DeliveryZone => (
   fee: maxFee,
   minFee,
 });
-
-// Buildings / estates that narrow a ranged area's fee, keyed by zone slug. Customers pick one
-// after choosing the area; anyone not listed pays the top of the range. A ranged area with no
-// buildings listed here simply charges the top of its range and shows no building list.
-//   e.g. kasarani: [{ name: "Mwiki Estate", fee: 600 }, { name: "Kasarani Mall area", fee: 500 }]
-export const BUILDINGS: Record<string, Building[]> = {};
-
-export const OTHER_BUILDING = "Other / not listed";
 
 export const NAIROBI_ZONES: DeliveryZone[] = [
   ranged("Buruburu", 400, 500),
@@ -103,22 +90,24 @@ export const OUTSIDE_NAIROBI_NOTE =
 export interface DeliverySelection {
   slug: string;
   name: string;
-  // Building chosen inside a ranged area, if any.
+  // Building / estate typed by the customer (ranged areas).
   building?: string;
   // Charged now, added to the M-Pesa total.
   fee: number;
   // True when the fee is settled with the courier on delivery instead.
   payOnDelivery: boolean;
-  // The customer still has to pick a building before the fee is final.
+  // Ranged area: the customer must type their building / estate.
   needsBuilding: boolean;
-}
-
-export function buildingsFor(zoneSlug: string): Building[] {
-  return BUILDINGS[zoneSlug] ?? [];
+  // e.g. "KSh 500–700" for a ranged area; the top of it is what's charged now.
+  range?: string;
 }
 
 export function feeLabel(z: DeliveryZone): string {
   return z.minFee !== undefined && z.minFee !== z.fee ? `KSh ${z.minFee}–${z.fee}` : `KSh ${z.fee}`;
+}
+
+export function isRanged(z: DeliveryZone): boolean {
+  return z.minFee !== undefined && z.minFee !== z.fee;
 }
 
 export function resolveDelivery(slug: string, building = ""): DeliverySelection | null {
@@ -128,16 +117,15 @@ export function resolveDelivery(slug: string, building = ""): DeliverySelection 
   const found = NAIROBI_ZONES.find((z) => z.slug === slug);
   if (!found) return null;
 
-  const options = buildingsFor(found.slug);
-  const chosen = options.find((b) => b.name === building);
-  const hasList = found.minFee !== undefined && options.length > 0;
+  const typed = building.trim();
   return {
     slug: found.slug,
     name: found.name,
-    building: chosen?.name ?? (hasList && building === OTHER_BUILDING ? OTHER_BUILDING : undefined),
-    fee: chosen ? chosen.fee : found.fee,
+    building: typed || undefined,
+    fee: found.fee,
     payOnDelivery: false,
-    needsBuilding: hasList && !chosen && building !== OTHER_BUILDING,
+    needsBuilding: isRanged(found) && !typed,
+    ...(isRanged(found) ? { range: feeLabel(found) } : {}),
   };
 }
 
@@ -145,5 +133,7 @@ export function resolveDelivery(slug: string, building = ""): DeliverySelection 
 export function describeDelivery(sel: DeliverySelection): string {
   return sel.payOnDelivery
     ? "Delivery: outside Nairobi, parcel fee (KSh 300-1000) payable to courier on delivery"
-    : `Delivery: ${sel.name}${sel.building ? ` (${sel.building})` : ""}, KSh ${sel.fee}`;
+    : sel.range
+      ? `Delivery: ${sel.name}, building: ${sel.building ?? "?"}, range ${sel.range}, charged top rate KSh ${sel.fee} - confirm exact fee for the building`
+      : `Delivery: ${sel.name}, KSh ${sel.fee}`;
 }
