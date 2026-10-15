@@ -5,6 +5,18 @@ but waiting on a setup step that only the site owner can do.
 ==============================================================================
 2026-10-15
 ==============================================================================
+Delivery fees by area  (committed, not yet pushed)
+- Checkout has a required "Delivery Area" list (50 Nairobi areas from "Nairobi Routes Rates.xlsx"
+  plus "Outside Nairobi"). The fee is added to the order total, and the pay screen, the amount to
+  copy, the WhatsApp messages and the M-Pesa prompt amount all use the new total.
+- Rates live in lib/delivery.ts (edit there; nothing else needs touching). Ranges and repeated areas
+  are charged at the HIGHEST figure in the sheet.
+- Outside Nairobi: parcel courier fee (about KSh 300-1,000 by weight) is paid to the courier on
+  delivery, so it is NOT in the M-Pesa total; the customer is told this at checkout.
+- Order sheet: no new columns. The area is added to the Delivery Address ("Kasarani: ...") and the
+  fee and the amount to pay are written into Notes. The "Subtotal (KES)" column stays goods-only.
+- Cart page notes that delivery is added at checkout.
+
 Same-day delivery promoted  (committed, not yet pushed)
 - Blue banner above the header on every page: "Same-day delivery in Nairobi - order today, get it today".
 - First home-page hero slide is now "Order Today. Get It Today."; the Fast Delivery tile became

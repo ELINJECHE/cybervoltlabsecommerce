@@ -7,7 +7,13 @@ export interface OrderPayload {
   deliveryAddress: string;
   notes?: string;
   items: CartItem[];
+  // Goods only. What the customer pays by M-Pesa is `total` (goods + delivery fee).
   subtotal: number;
+  deliveryArea?: string;
+  deliveryFee?: number;
+  // True when the delivery fee is paid to the courier on arrival (outside Nairobi).
+  deliveryPayOnArrival?: boolean;
+  total?: number;
   submittedAt: string;
   // Extra fields are ignored by the original sheet script (the same facts are
   // also written into Notes), and used by the optional extended script in
@@ -35,7 +41,7 @@ const LAST_ORDER_KEY = "cv_last_order";
 export function saveLastOrder(order: OrderPayload, mpesaCode?: string): void {
   const summary: LastOrderSummary = {
     reference: order.orderReference ?? "",
-    total: order.subtotal,
+    total: order.total ?? order.subtotal,
     phone: order.phone,
     address: order.deliveryAddress,
     items: order.items.map((i) => ({ name: i.name, quantity: i.quantity, color: i.color })),

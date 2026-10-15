@@ -20,6 +20,13 @@ import ReviewsCarousel from "@/components/ReviewsCarousel";
 import ManualPaymentConfirm from "@/components/ManualPaymentConfirm";
 import CheckoutSteps from "@/components/CheckoutSteps";
 import { SAME_DAY_HEADLINE } from "@/lib/store-info";
+import {
+  NAIROBI_ZONES,
+  OUTSIDE_NAIROBI_NOTE,
+  OUTSIDE_NAIROBI_SLUG,
+  describeDelivery,
+  resolveDelivery,
+} from "@/lib/delivery";
 
 type Phase = "form" | "waiting-for-approval" | "manual-payment";
 
@@ -38,6 +45,10 @@ export default function CheckoutPage() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+  const [areaSlug, setAreaSlug] = useState("");
+  const delivery = resolveDelivery(areaSlug);
+  // Goods + delivery fee (the fee is 0 outside Nairobi: that one is paid to the courier).
+  const total = subtotal + (delivery?.fee ?? 0);
   const [notes, setNotes] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -55,6 +66,10 @@ export default function CheckoutPage() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (!delivery) {
+      setError("Please choose your delivery area so we can add the delivery fee.");
+      return;
+    }
     setSubmitting(true);
     setError(null);
 
@@ -64,10 +79,18 @@ export default function CheckoutPage() {
       orderReference,
       customerName: name,
       phone,
-      deliveryAddress: address,
-      notes: tagOrderNotes(orderReference, "AWAITING PAYMENT", notes.trim() || undefined),
+      deliveryAddress: `${delivery.name}: ${address}`,
+      notes: tagOrderNotes(
+        orderReference,
+        "AWAITING PAYMENT",
+        [describeDelivery(delivery), `Total to pay now KSh ${total}`, notes.trim()].filter(Boolean).join(" · ")
+      ),
       items,
       subtotal,
+      deliveryArea: delivery.name,
+      deliveryFee: delivery.fee,
+      deliveryPayOnArrival: delivery.payOnDelivery,
+      total,
       submittedAt: new Date().toISOString(),
     };
 
@@ -99,10 +122,10 @@ export default function CheckoutPage() {
       const reference = await initiatePayHeroPayment({
         customerName: name,
         phone,
-        deliveryAddress: address,
+        deliveryAddress: `${delivery.name}: ${address}`,
         notes,
         items,
-        amount: subtotal,
+        amount: total,
         customerId: user?.id,
       });
 
@@ -182,9 +205,23 @@ export default function CheckoutPage() {
             </li>
           ))}
         </ul>
-        <div className="mt-3 flex justify-between border-t border-border pt-3 text-sm font-bold">
-          <span>Total</span>
+        <div className="mt-3 flex justify-between border-t border-border pt-3 text-sm">
+          <span>Items</span>
           <span>{formatKES(subtotal)}</span>
+        </div>
+        <div className="mt-1 flex justify-between text-sm">
+          <span>Delivery{delivery && !delivery.payOnDelivery ? ` (${delivery.name})` : ""}</span>
+          <span className={delivery ? "" : "text-muted"}>
+            {!delivery
+              ? "Choose your area below"
+              : delivery.payOnDelivery
+                ? "Pay courier on arrival"
+                : formatKES(delivery.fee)}
+          </span>
+        </div>
+        <div className="mt-2 flex justify-between border-t border-border pt-2 text-sm font-bold">
+          <span>{delivery ? "Total to pay now" : "Total"}</span>
+          <span>{formatKES(total)}</span>
         </div>
       </div>
 
@@ -257,12 +294,41 @@ export default function CheckoutPage() {
         </div>
 
         <div>
+          <label htmlFor="area" className="mb-1 block text-sm font-medium">Delivery Area</label>
+          <select
+            id="area"
+            required
+            value={areaSlug}
+            onChange={(e) => setAreaSlug(e.target.value)}
+            className="h-11 w-full rounded-md border border-border bg-surface px-3 text-sm outline-none focus:border-primary"
+          >
+            <option value="" disabled>Select where we&rsquo;re delivering…</option>
+            <optgroup label="Nairobi — same-day delivery">
+              {NAIROBI_ZONES.map((z) => (
+                <option key={z.slug} value={z.slug}>
+                  {z.name} — {formatKES(z.fee)}
+                </option>
+              ))}
+            </optgroup>
+            <optgroup label="Rest of Kenya">
+              <option value={OUTSIDE_NAIROBI_SLUG}>Outside Nairobi (countrywide parcel)</option>
+            </optgroup>
+          </select>
+          {delivery?.payOnDelivery && <p className="mt-1 text-xs text-muted">{OUTSIDE_NAIROBI_NOTE}</p>}
+          {!delivery && (
+            <p className="mt-1 text-xs text-muted">
+              Can&rsquo;t find your area? Pick the nearest one and tell us on WhatsApp.
+            </p>
+          )}
+        </div>
+
+        <div>
           <label htmlFor="address" className="mb-1 block text-sm font-medium">Delivery Address</label>
           <textarea
             id="address"
             required
             rows={3}
-            placeholder="Estate/building, area, town"
+            placeholder="Estate / building, street, landmark"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             className="w-full rounded-md border border-border bg-surface px-3 py-2 text-sm outline-none focus:border-primary"

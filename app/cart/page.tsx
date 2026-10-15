@@ -91,6 +91,7 @@ export default function CartPage() {
           <span className="text-sm font-semibold">Subtotal</span>
           <span className="text-lg font-bold">{formatKES(subtotal)}</span>
         </div>
+        <p className="mt-2 text-xs text-muted">Delivery fee is added at checkout, based on your area.</p>
 
         <Link
           href="/checkout"

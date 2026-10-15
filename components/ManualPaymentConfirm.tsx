@@ -19,10 +19,11 @@ interface Props {
 const CODE_PATTERN = /^[A-Z0-9]{8,12}$/;
 
 export default function ManualPaymentConfirm({ order, reason, onConfirmed }: Props) {
+  const amountDue = order.total ?? order.subtotal;
   const [pasted, setPasted] = useState("");
   const [mpesaCode, setMpesaCode] = useState("");
   const [paidFromPhone, setPaidFromPhone] = useState(order.phone);
-  const [paidAmount, setPaidAmount] = useState(String(order.subtotal));
+  const [paidAmount, setPaidAmount] = useState(String(amountDue));
   const [manual, setManual] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -39,11 +40,11 @@ export default function ManualPaymentConfirm({ order, reason, onConfirmed }: Pro
   }
 
   const chatLink = buildWhatsAppLink(
-    `Hi Cybervolt Labs, I'm about to pay for order ${order.orderReference} (${formatKES(order.subtotal)}) ` +
+    `Hi Cybervolt Labs, I'm about to pay for order ${order.orderReference} (${formatKES(amountDue)}) ` +
       `and have a question: `
   );
   const payLink = buildWhatsAppLink(
-    `Hi Cybervolt Labs, I placed order ${order.orderReference} for ${formatKES(order.subtotal)} ` +
+    `Hi Cybervolt Labs, I placed order ${order.orderReference} for ${formatKES(amountDue)} ` +
       `and paid via M-Pesa Till ${MPESA_TILL}. My M-Pesa confirmation code is: `
   );
 
@@ -106,9 +107,15 @@ export default function ManualPaymentConfirm({ order, reason, onConfirmed }: Pro
             </li>
           ))}
         </ul>
+        {order.deliveryArea && (
+          <div className="mt-2 flex justify-between border-t border-border pt-2">
+            <span>Delivery{order.deliveryPayOnArrival ? "" : ` (${order.deliveryArea})`}</span>
+            <span>{order.deliveryPayOnArrival ? "Pay courier on arrival" : formatKES(order.deliveryFee ?? 0)}</span>
+          </div>
+        )}
         <div className="mt-2 flex justify-between border-t border-border pt-2 font-bold">
-          <span>Total to pay</span>
-          <span>{formatKES(order.subtotal)}</span>
+          <span>Total to pay now</span>
+          <span>{formatKES(amountDue)}</span>
         </div>
         <dl className="mt-3 grid grid-cols-[5.5rem_1fr] gap-x-2 gap-y-1">
           <dt className="text-muted">Deliver to</dt>
@@ -154,9 +161,9 @@ export default function ManualPaymentConfirm({ order, reason, onConfirmed }: Pro
         <div className="mt-2 flex items-center justify-between rounded-md border border-success/30 bg-surface px-3 py-2">
           <div>
             <p className="text-[11px] font-medium uppercase tracking-wide text-muted">Amount</p>
-            <p className="text-xl font-bold tracking-wide">{formatKES(order.subtotal)}</p>
+            <p className="text-xl font-bold tracking-wide">{formatKES(amountDue)}</p>
           </div>
-          <CopyButton value={String(order.subtotal)} label="amount" />
+          <CopyButton value={String(amountDue)} label="amount" />
         </div>
 
         {TILL_NAME && (
