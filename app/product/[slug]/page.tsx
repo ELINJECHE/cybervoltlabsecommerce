@@ -10,7 +10,10 @@ import PriceTag from "@/components/PriceTag";
 import StarRating from "@/components/StarRating";
 import StockUrgencyBar from "@/components/StockUrgencyBar";
 import ProductActions from "@/components/ProductActions";
-import { SAME_DAY_HEADLINE } from "@/lib/store-info";
+import ProductDelivery from "@/components/ProductDelivery";
+import StickyBuyBar from "@/components/StickyBuyBar";
+import TrackView from "@/components/TrackView";
+import { getProductImage } from "@/lib/images";
 import ProductCard from "@/components/ProductCard";
 import ReviewsCarousel from "@/components/ReviewsCarousel";
 
@@ -79,9 +82,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
 
           <PriceTag price={product.price} discountPrice={product.discountPrice} size="lg" />
 
-          <p className="flex items-center gap-2 rounded-card border border-primary/30 bg-primary/5 px-3 py-2 text-sm font-semibold text-primary">
-            <span aria-hidden="true">🚚</span> {SAME_DAY_HEADLINE} — order today, get it today
-          </p>
+          <ProductDelivery price={product.discountPrice ?? product.price} />
 
           {isLowStock && (
             <p className="text-sm font-medium text-deal">Only {product.stock} left in stock — order soon</p>
@@ -103,7 +104,18 @@ export default async function ProductPage({ params }: { params: { slug: string }
             </ul>
           )}
 
-          <ProductActions product={product} />
+          <div id="buy-actions">
+            <ProductActions product={product} />
+          </div>
+          <TrackView item={{ slug: product.slug, name: product.name, price: product.discountPrice ?? product.price, image: getProductImage(product.images) }} />
+          <StickyBuyBar
+            productId={product.id}
+            slug={product.slug}
+            name={product.name}
+            image={getProductImage(product.images)}
+            price={product.discountPrice ?? product.price}
+            needsChoice={(product.colors?.length ?? 0) > 0 || product.category === "sneakers-shoes"}
+          />
         </div>
       </div>
 

@@ -5,6 +5,7 @@ import { supabase } from "@/lib/supabase";
 export interface SourcingRow {
   product_id: string;
   supplier: string;
+  supplier_phone: string | null;
   supplier_cost: number | null;
   listed_price: number;
   source_ref: string | null;
@@ -106,4 +107,33 @@ export function toCsv(lines: InventoryLine[]): string {
     [l.name, l.supplier, l.listed_at.slice(0, 10), l.supplier_cost, l.listed_price, l.currentPrice, l.marginAtListing, l.currentMargin, l.source_ref].map(esc).join(",")
   );
   return [head.map(esc).join(","), ...rows].join("\n");
+}
+
+// Supplier name + phone for one product, edited from the admin product form.
+export async function getProductSupplier(productId: string): Promise<{ supplier: string; phone: string } | null> {
+  const { data, error } = await supabase
+    .from("product_sourcing")
+    .select("supplier, supplier_phone")
+    .eq("product_id", productId)
+    .maybeSingle();
+  if (error || !data) return null; // table not set up yet, or no record: the form starts empty
+  return { supplier: data.supplier as string, phone: (data.supplier_phone as string | null) ?? "" };
+}
+
+// Updates only the supplier fields of an existing record, so cost, listed price and
+// listing date (the margin history) stay as they were. A product with no record yet
+// gets one, listed at its current price.
+export async function saveProductSupplier(productId: string, supplier: string, phone: string | null, price: number): Promise<void> {
+  const existing = await supabase.from("product_sourcing").select("product_id").eq("product_id", productId).maybeSingle();
+  if (existing.error) throw new Error(existing.error.message);
+  const { error } = existing.data
+    ? await supabase.from("product_sourcing").update({ supplier, supplier_phone: phone }).eq("product_id", productId)
+    : await supabase.from("product_sourcing").insert({
+        product_id: productId,
+        supplier,
+        supplier_phone: phone,
+        listed_price: price,
+        source_ref: "Admin product form",
+      });
+  if (error) throw new Error(error.message);
 }

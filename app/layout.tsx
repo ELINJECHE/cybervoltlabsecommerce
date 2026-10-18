@@ -9,6 +9,9 @@ import Footer from "@/components/Footer";
 import WhatsAppFloatButton from "@/components/WhatsAppFloatButton";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import CookieConsent from "@/components/CookieConsent";
+import BottomNav from "@/components/BottomNav";
+import ToastHost from "@/components/ToastHost";
+import { BOTTOM_NAV_ENABLED } from "@/lib/community";
 import { getActiveCategories } from "@/lib/products";
 import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, SITE_NAME, SITE_URL } from "@/lib/seo";
 
@@ -56,10 +59,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <CartProvider>
             <DeliveryBanner />
             <CategoryNav categories={categories} />
-            <main className="min-h-screen">{children}</main>
+            <main className={`min-h-screen ${BOTTOM_NAV_ENABLED ? "pb-16 lg:pb-0" : ""}`}>{children}</main>
             <Footer categories={categories} />
             <WhatsAppFloatButton />
             <CookieConsent />
+            <BottomNav />
+            <ToastHost />
           </CartProvider>
         </AuthProvider>
       </body>

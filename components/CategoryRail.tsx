@@ -6,7 +6,7 @@ export default function CategoryRail({ categories }: { categories: Category[] })
   return (
     <section className="mx-auto max-w-7xl px-4 py-6">
       <h2 className="mb-3 text-lg font-bold">Shop by Category</h2>
-      <div className="flex gap-4 overflow-x-auto scrollbar-hide pb-1">
+      <div className="relative flex gap-4 overflow-x-auto scrollbar-hide pb-1">
         {categories.map((category) => (
           <Link
             key={category.slug}

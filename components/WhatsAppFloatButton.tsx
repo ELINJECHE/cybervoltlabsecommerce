@@ -2,12 +2,13 @@
 
 import { useState } from "react";
 import { buildOrderEnquiryLink, buildTrackOrderLink } from "@/lib/whatsapp";
+import { BOTTOM_NAV_ENABLED } from "@/lib/community";
 
 export default function WhatsAppFloatButton() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="fixed bottom-4 right-4 z-50 flex flex-col items-end gap-2">
+    <div className={`fixed right-4 z-50 flex flex-col items-end gap-2 ${BOTTOM_NAV_ENABLED ? "bottom-20" : "bottom-4"} lg:bottom-4`}>
       {open && (
         <div className="mb-1 flex animate-slide-up flex-col gap-2 rounded-card border border-border bg-surface p-2 shadow-card">
           <a

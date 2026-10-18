@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { buildOrderEnquiryLink } from "@/lib/whatsapp";
 import LastOrderDetails from "@/components/LastOrderDetails";
+import WhatsAppChatLink from "@/components/WhatsAppChatLink";
 
 export default function CheckoutSuccessPage() {
   return (
@@ -17,14 +18,14 @@ export default function CheckoutSuccessPage() {
         >
           Continue Shopping
         </Link>
-        <a
+        <WhatsAppChatLink
           href={buildOrderEnquiryLink()}
-          target="_blank"
-          rel="noopener noreferrer"
+          button="chat_nasi"
+          placement="order_success"
           className="tap-target rounded-full bg-whatsapp px-6 py-3 text-sm font-semibold text-white hover:brightness-95"
         >
-          Message Us on WhatsApp
-        </a>
+          💬 Chat Nasi
+        </WhatsAppChatLink>
       </div>
     </div>
   );

@@ -113,6 +113,27 @@ export async function submitOrder(payload: OrderPayload): Promise<void> {
   }
 }
 
+// Copies every checkout (guest or logged in) into Supabase's shop_orders table for the
+// admin Orders page (docs/sql/shop_orders.sql). Best-effort, like recordAccountOrder:
+// the webhook above stays the order of record, so a failure here never blocks checkout.
+export async function recordShopOrder(payload: OrderPayload): Promise<void> {
+  if (!supabaseEnabled || !payload.orderReference) return;
+  const { error } = await supabase.from("shop_orders").insert({
+    reference: payload.orderReference,
+    customer_name: payload.customerName,
+    phone: payload.phone,
+    delivery_address: payload.deliveryAddress,
+    delivery_area: payload.deliveryArea ?? null,
+    delivery_fee: payload.deliveryFee ?? 0,
+    pay_on_delivery: payload.deliveryPayOnArrival ?? false,
+    subtotal: payload.subtotal,
+    total: payload.total ?? payload.subtotal,
+    items: payload.items,
+    notes: payload.notes || null,
+  });
+  if (error) console.error("Failed to save order for the admin Orders page:", error.message);
+}
+
 export interface PaymentConfirmationDetails {
   mpesaCode: string;
   paidFromPhone: string;
@@ -131,6 +152,16 @@ export async function submitPaymentConfirmation(
     `Paid from: ${details.paidFromPhone}`,
     `Amount: KES ${details.paidAmount}`,
   ].join(" · ");
+
+  if (supabaseEnabled && order.orderReference) {
+    const { error } = await supabase.rpc("claim_order_payment", {
+      p_reference: order.orderReference,
+      p_mpesa_code: details.mpesaCode,
+      p_amount: details.paidAmount,
+      p_from_phone: details.paidFromPhone,
+    });
+    if (error) console.error("Failed to attach the M-Pesa code to the order:", error.message);
+  }
 
   await submitOrder({
     ...order,

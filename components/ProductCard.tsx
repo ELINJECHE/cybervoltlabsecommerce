@@ -4,6 +4,7 @@ import type { Product } from "@/lib/types";
 import { getProductImage } from "@/lib/images";
 import PriceTag from "@/components/PriceTag";
 import StarRating from "@/components/StarRating";
+import QuickAdd from "@/components/QuickAdd";
 
 export default function ProductCard({
   product,
@@ -14,11 +15,23 @@ export default function ProductCard({
   priority?: boolean;
 }) {
   const isLowStock = product.stock > 0 && product.stock <= 10;
+  // Shoes need a size and some products need a colour, so those open the product page instead.
+  const canQuickAdd = !(product.colors && product.colors.length > 0) && product.category !== "sneakers-shoes";
 
   return (
+    <div className="relative h-full">
+    {canQuickAdd && (
+      <QuickAdd
+        productId={product.id}
+        slug={product.slug}
+        name={product.name}
+        image={getProductImage(product.images)}
+        price={product.discountPrice ?? product.price}
+      />
+    )}
     <Link
       href={`/product/${product.slug}`}
-      className="group flex flex-col rounded-card border border-border bg-surface shadow-card transition hover:shadow-md"
+      className="group flex h-full flex-col rounded-card border border-border bg-surface shadow-card transition hover:shadow-md"
     >
       <div className="relative aspect-square w-full overflow-hidden rounded-t-card bg-primary-light">
         <Image
@@ -76,5 +89,6 @@ export default function ProductCard({
         )}
       </div>
     </Link>
+    </div>
   );
 }

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { usePathname } from "next/navigation";
 import type { Category } from "@/lib/types";
@@ -23,6 +23,56 @@ export default function CategoryNav({ categories }: { categories: Category[] }) 
   // portal, the drawer's `fixed inset-0` would size itself to the header
   // instead of the viewport.
   useEffect(() => setMounted(true), []);
+
+  // Desktop row: show the categories that fit on one line, the rest go under "More".
+  // A hidden copy of the row measures every label so the split can be recomputed on resize.
+  const rowRef = useRef<HTMLUListElement>(null);
+  const measureRef = useRef<HTMLUListElement>(null);
+  const [visibleCount, setVisibleCount] = useState(categories.length);
+  const [moreOpen, setMoreOpen] = useState(false);
+
+  useLayoutEffect(() => {
+    const row = rowRef.current;
+    const measure = measureRef.current;
+    if (!row || !measure) return;
+    const fit = () => {
+      const style = getComputedStyle(row);
+      const available = row.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
+      const gap = parseFloat(style.columnGap) || 0;
+      const items = Array.from(measure.children) as HTMLElement[];
+      const moreWidth = items[items.length - 1].offsetWidth;
+      const widths = items.slice(0, -1).map((el) => el.offsetWidth);
+      const total = widths.reduce((sum, w) => sum + w, 0) + gap * (widths.length - 1);
+      if (total <= available) return setVisibleCount(widths.length);
+      let used = moreWidth;
+      let count = 0;
+      while (count < widths.length && used + gap + widths[count] <= available) used += gap + widths[count++];
+      setVisibleCount(count);
+    };
+    fit();
+    const observer = new ResizeObserver(fit);
+    observer.observe(row);
+    return () => observer.disconnect();
+  }, [categories]);
+
+  const moreRef = useRef<HTMLLIElement>(null);
+  useEffect(() => setMoreOpen(false), [pathname]);
+  useEffect(() => {
+    if (!moreOpen) return;
+    const close = (e: Event) => {
+      if (e instanceof KeyboardEvent ? e.key === "Escape" : !moreRef.current?.contains(e.target as Node)) setMoreOpen(false);
+    };
+    document.addEventListener("pointerdown", close);
+    document.addEventListener("keydown", close);
+    return () => {
+      document.removeEventListener("pointerdown", close);
+      document.removeEventListener("keydown", close);
+    };
+  }, [moreOpen]);
+
+  const visible = categories.slice(0, visibleCount);
+  const overflow = categories.slice(visibleCount);
+  const overflowActive = overflow.some((c) => pathname === `/category/${c.slug}`);
 
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-surface/95 backdrop-blur">
@@ -80,9 +130,17 @@ export default function CategoryNav({ categories }: { categories: Category[] }) 
       </div>
 
       {/* Desktop category row with 2-level hover dropdown */}
-      <nav className="hidden border-t border-border lg:block">
-        <ul className="mx-auto flex max-w-7xl gap-6 px-4">
-          {categories.map((category) => (
+      <nav className="relative hidden border-t border-border lg:block">
+        <div aria-hidden="true" className="pointer-events-none invisible absolute left-0 top-0 h-0 w-0 overflow-hidden">
+          <ul ref={measureRef} className="flex w-max gap-6 whitespace-nowrap px-4">
+            {categories.map((category) => (
+              <li key={category.slug} className="py-2.5 text-sm font-medium">{category.name}</li>
+            ))}
+            <li className="py-2.5 text-sm font-medium">More ▾</li>
+          </ul>
+        </div>
+        <ul ref={rowRef} className="mx-auto flex max-w-7xl gap-6 whitespace-nowrap px-4">
+          {visible.map((category) => (
             <li key={category.slug} className="group relative">
               <Link
                 href={`/category/${category.slug}`}
@@ -107,6 +165,41 @@ export default function CategoryNav({ categories }: { categories: Category[] }) 
               )}
             </li>
           ))}
+          {overflow.length > 0 && (
+            <li
+              ref={moreRef}
+              className="relative"
+              onMouseEnter={() => setMoreOpen(true)}
+              onMouseLeave={() => setMoreOpen(false)}
+            >
+              <button
+                type="button"
+                aria-expanded={moreOpen}
+                aria-haspopup="true"
+                onClick={() => setMoreOpen(true)}
+                className={`inline-block py-2.5 text-sm font-medium transition hover:text-primary ${
+                  overflowActive ? "text-primary" : ""
+                }`}
+              >
+                More ▾
+              </button>
+              {moreOpen && (
+                <div className="absolute right-0 top-full z-50 min-w-[220px] rounded-b-card border border-border bg-surface py-1 shadow-card">
+                  {overflow.map((category) => (
+                    <Link
+                      key={category.slug}
+                      href={`/category/${category.slug}`}
+                      className={`block px-4 py-2 text-sm hover:bg-primary-light hover:text-primary ${
+                        pathname === `/category/${category.slug}` ? "text-primary" : ""
+                      }`}
+                    >
+                      {category.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </li>
+          )}
         </ul>
       </nav>
 

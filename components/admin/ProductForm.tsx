@@ -1,11 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import type { CategoryRow, ProductInput, ProductRow } from "@/lib/admin-products";
 import { generateId, slugify, uploadProductImage } from "@/lib/admin-products";
 import { markUnpublished } from "@/lib/deploy";
+import { getProductSupplier, saveProductSupplier } from "@/lib/admin-sourcing";
+import { buildPhoneChatLink, normalizeKenyanPhone } from "@/lib/whatsapp";
 
 interface ProductFormProps {
   categories: CategoryRow[];
@@ -31,11 +33,24 @@ export default function ProductForm({ categories, initial, onSubmit, submitLabel
   const [dealEndsAt, setDealEndsAt] = useState(initial?.deal_ends_at?.slice(0, 16) ?? "");
   const [dealClaimedPercent, setDealClaimedPercent] = useState(initial?.deal_claimed_percent?.toString() ?? "");
   const [verified, setVerified] = useState(initial?.verified ?? true);
-  const [jumiaUrl, setJumiaUrl] = useState(initial?.jumia_url ?? "");
+  const [supplier, setSupplier] = useState("");
+  const [supplierPhone, setSupplierPhone] = useState("");
   const [images, setImages] = useState<string[]>(initial?.images ?? []);
   const [uploading, setUploading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // Supplier details live in the admin-only product_sourcing table, never on the public product.
+  useEffect(() => {
+    if (!initial) return;
+    getProductSupplier(initial.id).then((s) => {
+      if (!s) return;
+      setSupplier(s.supplier);
+      setSupplierPhone(s.phone);
+    });
+  }, [initial]);
+
+  const normalizedPhone = supplierPhone.trim() ? normalizeKenyanPhone(supplierPhone) : null;
 
   async function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -65,6 +80,15 @@ export default function ProductForm({ categories, initial, onSubmit, submitLabel
       return;
     }
 
+    if (supplierPhone.trim() && !normalizedPhone) {
+      setError("Supplier phone doesn't look like a Kenyan mobile number (e.g. 0712 345 678).");
+      return;
+    }
+    if (supplierPhone.trim() && !supplier.trim()) {
+      setError("Add the supplier's name as well as their phone.");
+      return;
+    }
+
     setSubmitting(true);
     setError(null);
 
@@ -86,10 +110,22 @@ export default function ProductForm({ categories, initial, onSubmit, submitLabel
         is_new_arrival: isNewArrival,
         verified,
         description: description || null,
-        jumia_url: jumiaUrl || null,
       };
       await onSubmit(input);
       markUnpublished();
+      if (supplier.trim()) {
+        try {
+          await saveProductSupplier(draftId, supplier.trim(), normalizedPhone, Number(price));
+        } catch (err) {
+          const msg = err instanceof Error ? err.message : "";
+          setError(
+            `Product saved, but the supplier details weren't${msg ? ` (${msg})` : ""}. ` +
+              "If this mentions supplier_phone or product_sourcing, run docs/sql/product_sourcing.sql in Supabase first."
+          );
+          setSubmitting(false);
+          return;
+        }
+      }
       router.push("/admin");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong saving this product.");
@@ -136,13 +172,35 @@ export default function ProductForm({ categories, initial, onSubmit, submitLabel
           />
         </div>
         <div>
-          <label htmlFor="jumiaUrl" className="mb-1 block text-sm font-medium">Jumia URL (optional)</label>
+          <label htmlFor="supplier" className="mb-1 block text-sm font-medium">Supplier (admin only)</label>
           <input
-            id="jumiaUrl"
-            value={jumiaUrl}
-            onChange={(e) => setJumiaUrl(e.target.value)}
+            id="supplier"
+            value={supplier}
+            onChange={(e) => setSupplier(e.target.value)}
+            placeholder="e.g. Jamnet Wholesalers"
             className="h-11 w-full rounded-md border border-border bg-surface px-3 text-sm outline-none focus:border-primary"
           />
+        </div>
+        <div>
+          <label htmlFor="supplierPhone" className="mb-1 block text-sm font-medium">Supplier phone (admin only)</label>
+          <input
+            id="supplierPhone"
+            type="tel"
+            value={supplierPhone}
+            onChange={(e) => setSupplierPhone(e.target.value)}
+            placeholder="0712 345 678"
+            className="h-11 w-full rounded-md border border-border bg-surface px-3 text-sm outline-none focus:border-primary"
+          />
+          {normalizedPhone && (
+            <a
+              href={buildPhoneChatLink(normalizedPhone)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-1 inline-block text-xs font-semibold text-primary hover:underline"
+            >
+              💬 Chat with supplier on WhatsApp
+            </a>
+          )}
         </div>
         <div>
           <label htmlFor="price" className="mb-1 block text-sm font-medium">Price (KES)</label>

@@ -26,7 +26,6 @@ export interface Product {
   isNewArrival?: boolean;
   verified?: boolean; // "Cybervolt Verified" trust badge
   description?: string;
-  jumiaUrl?: string; // direct link to this listing on Jumia, if listed there
 }
 
 export interface Subcategory {

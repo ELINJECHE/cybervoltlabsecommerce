@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { formatKES } from "@/lib/format";
 import { readLastOrder, type LastOrderSummary } from "@/lib/orders";
 import { DELIVERY_ESTIMATE } from "@/lib/store-info";
+import { EXCLUSIVE_GROUP_URL, MVP_CODE, MVP_DELIVERY_DISCOUNT, MVP_GROUP_URL } from "@/lib/community";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
 
 function buildReceiptLink(order: LastOrderSummary): string {
@@ -51,6 +52,29 @@ export default function LastOrderDetails() {
         </ol>
         <p className="mt-3 text-muted">
           Questions? Message us on WhatsApp and quote your order reference.
+        </p>
+      </div>
+
+      <div className="mt-4 rounded-card border border-primary/30 bg-primary/5 p-4 text-left text-sm">
+        <h2 className="mb-1 font-semibold text-primary">🎉 You&rsquo;ve unlocked MVP Access</h2>
+        <p className="text-muted">
+          Customers who have ordered join our MVP group for first pick of new stock. Use code{" "}
+          <strong className="text-foreground">{MVP_CODE}</strong> on your next order for KSh {MVP_DELIVERY_DISCOUNT} off delivery.
+        </p>
+        <a
+          href={MVP_GROUP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="tap-target mt-3 flex items-center justify-center rounded-full bg-whatsapp py-2.5 text-sm font-semibold text-white hover:brightness-95"
+        >
+          Join MVP Access on WhatsApp
+        </a>
+        <p className="mt-2 text-xs text-muted">
+          Prefer to just follow new drops?{" "}
+          <a href={EXCLUSIVE_GROUP_URL} target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline">
+            Join the free group
+          </a>
+          .
         </p>
       </div>
 

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/seo";
 import { buildOrderEnquiryLink } from "@/lib/whatsapp";
+import WhatsAppChatLink from "@/components/WhatsAppChatLink";
 
 export const metadata: Metadata = pageMetadata({
   title: "Contact Us",
@@ -16,14 +17,14 @@ export default function ContactPage() {
       <p className="mb-4 text-muted">
         The fastest way to reach us is WhatsApp — we typically reply the same day.
       </p>
-      <a
+      <WhatsAppChatLink
         href={buildOrderEnquiryLink()}
-        target="_blank"
-        rel="noopener noreferrer"
+        button="chat_nasi"
+        placement="contact_page"
         className="tap-target inline-flex items-center gap-2 rounded-full bg-whatsapp px-6 py-3 text-sm font-semibold text-white hover:brightness-95"
       >
-        💬 Chat on WhatsApp
-      </a>
+        💬 Chat Nasi
+      </WhatsAppChatLink>
       <div className="mt-6 flex flex-col gap-1 text-muted">
         <p>Email: hello@cybervoltlabs.co.ke</p>
         <p>Instagram: @cybervolt_labs_ &middot; TikTok: @cybervolt_labs</p>

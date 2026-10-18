@@ -3,6 +3,7 @@ import Newsletter from "@/components/Newsletter";
 import CookieSettingsButton from "@/components/CookieSettingsButton";
 import type { Category } from "@/lib/types";
 import { SOCIAL_LINKS } from "@/lib/social";
+import { EXCLUSIVE_GROUP_URL } from "@/lib/community";
 
 const PAYMENT_METHODS = ["M-Pesa"];
 
@@ -43,6 +44,11 @@ export default function Footer({ categories }: { categories: Category[] }) {
                 </a>
               </li>
             ))}
+            <li>
+              <a href={EXCLUSIVE_GROUP_URL} target="_blank" rel="noopener noreferrer" className="hover:text-white">
+                WhatsApp drops (free)
+              </a>
+            </li>
           </ul>
         </div>
 

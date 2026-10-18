@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/lib/cart-context";
@@ -8,6 +8,7 @@ import { useAuth } from "@/lib/auth-context";
 import { formatKES } from "@/lib/format";
 import {
   submitOrder,
+  recordShopOrder,
   generateOrderReference,
   tagOrderNotes,
   saveLastOrder,
@@ -20,6 +21,8 @@ import ReviewsCarousel from "@/components/ReviewsCarousel";
 import ManualPaymentConfirm from "@/components/ManualPaymentConfirm";
 import CheckoutSteps from "@/components/CheckoutSteps";
 import { SAME_DAY_HEADLINE } from "@/lib/store-info";
+import { MVP_CODE, MVP_DELIVERY_DISCOUNT } from "@/lib/community";
+import { useDeliveryArea } from "@/lib/use-delivery-area";
 import {
   NAIROBI_ZONES,
   OUTSIDE_NAIROBI_NOTE,
@@ -48,9 +51,18 @@ export default function CheckoutPage() {
   const [address, setAddress] = useState("");
   const [areaSlug, setAreaSlug] = useState("");
   const [building, setBuilding] = useState("");
+  const { slug: storedArea, setArea: rememberArea } = useDeliveryArea();
+  // Start from the area chosen in the top bar.
+  useEffect(() => {
+    if (storedArea && !areaSlug) setAreaSlug(storedArea);
+  }, [storedArea, areaSlug]);
+  const [mvpCode, setMvpCode] = useState("");
   const delivery = resolveDelivery(areaSlug, building);
   // Goods + delivery fee (the fee is 0 outside Nairobi: that one is paid to the courier).
-  const total = subtotal + (delivery?.fee ?? 0);
+  // The MVP code takes KSh 100 off the delivery fee (never below zero; not for courier parcels).
+  const mvpApplied = mvpCode.trim().toUpperCase() === MVP_CODE;
+  const mvpDiscount = mvpApplied && delivery && !delivery.payOnDelivery ? Math.min(MVP_DELIVERY_DISCOUNT, delivery.fee) : 0;
+  const total = subtotal + (delivery?.fee ?? 0) - mvpDiscount;
   const [notes, setNotes] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -89,12 +101,12 @@ export default function CheckoutPage() {
       notes: tagOrderNotes(
         orderReference,
         "AWAITING PAYMENT",
-        [describeDelivery(delivery), `Total to pay now KSh ${total}`, notes.trim()].filter(Boolean).join(" · ")
+        [describeDelivery(delivery), mvpDiscount > 0 ? `MVP code ${MVP_CODE} (-KSh ${mvpDiscount} delivery)` : "", `Total to pay now KSh ${total}`, notes.trim()].filter(Boolean).join(" · ")
       ),
       items,
       subtotal,
       deliveryArea: delivery.building ? `${delivery.name} (${delivery.building})` : delivery.name,
-      deliveryFee: delivery.fee,
+      deliveryFee: delivery.fee - mvpDiscount,
       deliveryPayOnArrival: delivery.payOnDelivery,
       total,
       submittedAt: new Date().toISOString(),
@@ -114,6 +126,7 @@ export default function CheckoutPage() {
       return;
     }
 
+    await recordShopOrder(payload);
     setOrder(payload);
 
     if (!MPESA_PROMPT_ENABLED) {
@@ -225,6 +238,12 @@ export default function CheckoutPage() {
                 : formatKES(delivery.fee)}
           </span>
         </div>
+        {mvpDiscount > 0 && (
+          <div className="mt-1 flex justify-between text-sm text-success">
+            <span>MVP code</span>
+            <span>−{formatKES(mvpDiscount)}</span>
+          </div>
+        )}
         <div className="mt-2 flex justify-between border-t border-border pt-2 text-sm font-bold">
           <span>{delivery ? "Total to pay now" : "Total"}</span>
           <span>{formatKES(total)}</span>
@@ -305,7 +324,7 @@ export default function CheckoutPage() {
             id="area"
             required
             value={areaSlug}
-            onChange={(e) => setAreaSlug(e.target.value)}
+            onChange={(e) => { setAreaSlug(e.target.value); rememberArea(e.target.value); }}
             className="h-11 w-full rounded-md border border-border bg-surface px-3 text-sm outline-none focus:border-primary"
           >
             <option value="" disabled>Select where we&rsquo;re delivering…</option>
@@ -345,6 +364,24 @@ export default function CheckoutPage() {
             </p>
           </div>
         )}
+
+        <div>
+          <label htmlFor="mvp" className="mb-1 block text-sm font-medium">MVP code (optional)</label>
+          <input
+            id="mvp"
+            value={mvpCode}
+            onChange={(e) => setMvpCode(e.target.value)}
+            autoCapitalize="characters"
+            autoComplete="off"
+            placeholder="Have an MVP code?"
+            className="h-11 w-full rounded-md border border-border bg-surface px-3 text-sm uppercase outline-none focus:border-primary"
+          />
+          {mvpApplied && (
+            <p className="mt-1 text-xs text-success">
+              {mvpDiscount > 0 ? `MVP code applied: KSh ${mvpDiscount} off your delivery.` : "MVP code accepted. Pick a Nairobi area to see your delivery discount."}
+            </p>
+          )}
+        </div>
 
         <div>
           <label htmlFor="address" className="mb-1 block text-sm font-medium">Delivery Address</label>

@@ -41,7 +41,6 @@ interface ProductRow {
   is_new_arrival: boolean;
   verified: boolean;
   description: string | null;
-  jumia_url: string | null;
 }
 
 interface CategoryRow {
@@ -84,7 +83,6 @@ function rowToProduct(row: ProductRow): Product {
     isNewArrival: row.is_new_arrival ?? undefined,
     verified: row.verified ?? undefined,
     description: row.description ?? undefined,
-    jumiaUrl: row.jumia_url ?? undefined,
   };
 }
 
@@ -150,10 +148,26 @@ export async function getAllCategories(): Promise<Category[]> {
 
 // Categories that currently have at least one product. An empty category would be a
 // dead-end page in the menu and in search results, so it stays hidden until it has stock.
+const CATEGORY_PRIORITY = [
+  "motorcycle-gear",
+  "sneakers-shoes",
+  "home-appliances",
+  "audio-speakers",
+  "sports-leisure",
+  "furniture",
+  "interior-design",
+  "kitchen-dining",
+];
+
 export async function getActiveCategories(): Promise<Category[]> {
   const [categories, products] = await Promise.all([loadCategories(), loadProducts()]);
   const stocked = new Set(products.map((p) => p.category));
-  return categories.filter((c) => stocked.has(c.slug));
+  // Lead with the best-margin and fastest-selling categories; the rest follow in slug order.
+  const rank = (slug: string) => {
+    const i = CATEGORY_PRIORITY.indexOf(slug);
+    return i === -1 ? CATEGORY_PRIORITY.length : i;
+  };
+  return categories.filter((c) => stocked.has(c.slug)).sort((a, b) => rank(a.slug) - rank(b.slug));
 }
 
 export async function getCategoryBySlug(slug: string): Promise<Category | undefined> {

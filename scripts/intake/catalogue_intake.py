@@ -668,6 +668,25 @@ def update_cost_row(row, base, H, dry_run):
     return True
 
 
+def clean_listing_name(name, cost):
+    """Tidy a name lifted from a post: drop 'In stock', trailing '…', a price stuck on the end
+    (when it equals the supplier cost) and promo words."""
+    n = re.sub(r"\s+", " ", name or "").strip()
+    n = re.sub(r"(?i)\b(in stock|now|save|promotion|promo|prices? (?:crushed|reduced) down|reduced)\b\.?$", "", n).strip(" …-.,")
+    n = re.sub(r"\s*▫\s*\d+\s*$", "", n).strip()
+    if isinstance(cost, (int, float)) and re.search(rf"[\s=/-]{int(cost)}(?:/=|/-)?$", n):
+        n = re.sub(rf"[\s=/-]{int(cost)}(?:/=|/-)?$", "", n).strip(" …-.,")
+    return n
+
+
+def fix_category(name, cat):
+    """config.json 'category_fixes': {regex: slug}. Keyword guesses at scan time are sometimes off
+    (a shoe rack is not footwear), so the first matching fix wins."""
+    for pat, slug_ in CFG.get("category_fixes", {}).items():
+        if re.search(pat, name, re.I): return slug_
+    return cat
+
+
 def cmd_apply(args):
     root = work_root(args)
     key = os.environ.get("SUPABASE_SERVICE_KEY")
@@ -682,7 +701,11 @@ def cmd_apply(args):
     taken = {r["slug"] for r in json.loads(body)}
     st, body = http("GET", f"{base}/rest/v1/categories?select=slug", HR)
     cats = {r["slug"] for r in json.loads(body)}
-    added = bad = costs = 0
+    # Names already on the shop, so an ADD row that repeats a live product (or an earlier row in this
+    # same run) is skipped instead of creating a second copy.
+    st, body = http("GET", f"{base}/rest/v1/products?select=name,category", HR)
+    live_now = json.loads(body) if st == 200 else []
+    added = bad = costs = dups = 0
     for sp in sheets:
         wb = openpyxl.load_workbook(sp)
         if "Review" not in wb.sheetnames: continue  # e.g. the stock-check sheet
@@ -701,11 +724,26 @@ def cmd_apply(args):
                 continue
             if decision != "ADD": continue
             name, cat, price = (v("Product name") or "").strip(), (v("Category") or "").strip(), v("Final sell price")
-            if not name or name.startswith("("): print(f"  ! {v('Item ID')}: needs a product name"); bad += 1; continue
+            name = clean_listing_name(name, v("Supplier price (cost)"))
+            if not cat:  # blank category: keyword guess, then the config fallback rules
+                cat = guess_category(name + " " + str(v("Original message") or ""))
+                if not cat:
+                    cat = next((sl for pt, sl in CFG.get("category_fallback", {}).items() if re.search(pt, name, re.I)), "")
+            if cat: cat = fix_category(name, cat)
+            if any(re.search(pt, name, re.I) for pt in CFG.get("skip_name_patterns", [])):
+                print(f"  - {name}: skipped (brand/logo wording or name too unclear to list)"); bad += 1; continue
+            if not name or name.startswith("(") or not re.search(r"[A-Za-z]{3}", name): print(f"  ! {v('Item ID')} ('{name}'): needs a product name"); bad += 1; continue
             if cat == "sneakers-shoes" and BIG_BRANDS.search(name) and "style" not in name.lower():
                 print(f"  ! {name}: rename with neutral '-style' wording (e.g. 'Cushion Sneakers (Air Max style)'), no brand claims"); bad += 1; continue
             if not isinstance(price, (int, float)) or price < CFG["min_sell_price"]: print(f"  ! {name}: needs a final sell price"); bad += 1; continue
             if cat not in cats: print(f"  ! {name}: category '{cat}' doesn't exist yet (create it first)"); bad += 1; continue
+            nk = re.sub(r"[^a-z0-9]", "", name.lower())
+            dup = next((p_ for p_ in live_now if re.sub(r"[^a-z0-9]", "", p_["name"].lower()) == nk), None) or match_live(name, live_now)
+            if dup is not None and (dup.get("category") == cat or re.sub(r"[^a-z0-9]", "", dup["name"].lower()) == nk):
+                print(f"  = {name}: skipped, already on the shop as '{dup['name']}'"); dups += 1
+                if not args.dry_run:
+                    ws.cell(row=row[0].row, column=COL["Decision"]).value = "SKIP (duplicate)"; dirty = True
+                continue
             kind = canonical_supplier(v("Source group") or "")[1]
             cost = v("Supplier price (cost)") if kind != "retail" and isinstance(v("Supplier price (cost)"), (int, float)) else None
             supplier = canonical_supplier(v("Source group") or "")[0] if v("Source group") else (v("Supplier") or "Unknown")
@@ -717,6 +755,7 @@ def cmd_apply(args):
             sizes = v("Sizes")
             desc = DESC.get(cat, "") + (f" Sizes {sizes}. Please add your size in the Order Notes at checkout." if sizes and cat == "sneakers-shoes" else "")
             print(f"  {'(dry) ' if args.dry_run else ''}add   {name} | {cat} | KSh {int(price)} (cost {cost or 'n/a'} from {supplier}) | {len(files)} photo(s)")
+            live_now.append({"name": name, "category": cat})
             if args.dry_run: added += 1; continue
             pid = str(uuid.uuid4()); urls = []
             try:
@@ -739,8 +778,8 @@ def cmd_apply(args):
             except Exception as e:
                 print("    failed:", e)
         if dirty: wb.save(sp)
-    print(f"{'(dry run) ' if args.dry_run else ''}added {added}, supplier costs updated {costs}, rows needing attention {bad}")
-    log_run(root, "apply", f"{'(dry run) ' if args.dry_run else ''}added {added} product(s), updated {costs} supplier cost(s), {bad} row(s) need attention, from {len(sheets)} sheet(s)")
+    print(f"{'(dry run) ' if args.dry_run else ''}added {added}, duplicates skipped {dups}, supplier costs updated {costs}, rows needing attention {bad}")
+    log_run(root, "apply", f"{'(dry run) ' if args.dry_run else ''}added {added} product(s), skipped {dups} duplicate(s), updated {costs} supplier cost(s), {bad} row(s) need attention, from {len(sheets)} sheet(s)")
     if added and not args.dry_run:
         print("Catalogue changed in the database. It shows on the site after the next rebuild (Publish changes in admin).")
 

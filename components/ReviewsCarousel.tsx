@@ -33,7 +33,7 @@ export default function ReviewsCarousel({ reviews }: { reviews: Review[] }) {
       <div className="relative">
         <div
           ref={railRef}
-          className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth scrollbar-hide pb-1"
+          className="relative flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth scrollbar-hide pb-1"
         >
           {reviews.map((review) => (
             <article

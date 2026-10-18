@@ -3,16 +3,21 @@ import HeroCarousel from "@/components/HeroCarousel";
 import HotSearchChips from "@/components/HotSearchChips";
 import FlashDealBanner from "@/components/FlashDealBanner";
 import CategoryRail from "@/components/CategoryRail";
-import ProductCard from "@/components/ProductCard";
 import ShowMoreGrid from "@/components/ShowMoreGrid";
+import Shelf from "@/components/Shelf";
+import UspStrip from "@/components/UspStrip";
+import PriceChips from "@/components/PriceChips";
+import CommunityStrip from "@/components/CommunityStrip";
+import RecentlyViewed from "@/components/RecentlyViewed";
 import TrustSection from "@/components/TrustSection";
 import ReviewsCarousel from "@/components/ReviewsCarousel";
 import {
   getActiveCategories,
+  getAllProducts,
   getDealProducts,
-  getNewArrivals,
   getRecommendedProducts,
 } from "@/lib/products";
+import type { Product } from "@/lib/types";
 import { getAllReviews } from "@/lib/reviews";
 import JsonLd from "@/components/JsonLd";
 import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, organizationJsonLd, pageMetadata, websiteJsonLd } from "@/lib/seo";
@@ -51,11 +56,32 @@ const HERO_SLIDES = [
   },
 ];
 
+// Homepage shelves, in order: the best-margin and best-selling categories lead.
+const SHELVES: { slugs: string[]; title: string; subtitle: string; href: string; tint?: boolean }[] = [
+  { slugs: ["motorcycle-gear"], title: "Motorcycle Gear", subtitle: "Helmets, jackets, gloves and more for the road", href: "/category/motorcycle-gear", tint: true },
+  { slugs: ["sneakers-shoes"], title: "Sneakers & Shoes", subtitle: "Fresh pairs, restocked often", href: "/category/sneakers-shoes" },
+  { slugs: ["home-appliances"], title: "Home Appliances", subtitle: "Microwaves, cookers, washers and kitchen helpers", href: "/category/home-appliances", tint: true },
+  { slugs: ["audio-speakers"], title: "Audio & Speakers", subtitle: "Home theatre, soundbars and portable speakers", href: "/category/audio-speakers" },
+  { slugs: ["sports-leisure", "furniture"], title: "Fitness, Outdoors & Seating", subtitle: "Dumbbells, camping gear, chairs and more", href: "/category/sports-leisure", tint: true },
+  { slugs: ["interior-design"], title: "Home & Bedding", subtitle: "Duvets, curtains, mats and cosy touches", href: "/category/interior-design" },
+  { slugs: ["kitchen-dining"], title: "Kitchen & Dining", subtitle: "Cookware, flasks, lunch boxes and more", href: "/category/kitchen-dining", tint: true },
+  { slugs: ["toy-shop"], title: "Toys & Gifts", subtitle: "Something for the kids", href: "/category/toy-shop" },
+];
+
+// Richest listings first (most photos), then the pricier items.
+function pickForShelf(all: Product[], slugs: string[], limit = 10): Product[] {
+  return all
+    .filter((p) => slugs.includes(p.category))
+    .sort((a, b) => b.images.length - a.images.length || (b.discountPrice ?? b.price) - (a.discountPrice ?? a.price))
+    .slice(0, limit);
+}
+
 export default async function HomePage() {
   const categories = await getActiveCategories();
   const deals = await getDealProducts();
-  const newArrivals = await getNewArrivals();
-  const recommended = await getRecommendedProducts();
+  const all = await getAllProducts();
+  // Only a starter set goes to the "more to explore" grid; the rest is a click away.
+  const recommended = (await getRecommendedProducts()).slice(0, 40);
   const reviews = getAllReviews();
 
   return (
@@ -66,6 +92,8 @@ export default async function HomePage() {
         <HeroCarousel slides={HERO_SLIDES} />
       </div>
 
+      <UspStrip />
+
       <section className="mx-auto max-w-7xl px-4 pt-5">
         <HotSearchChips />
       </section>
@@ -74,24 +102,25 @@ export default async function HomePage() {
 
       <CategoryRail categories={categories} />
 
-      {newArrivals.length > 0 && (
-        <section className="mx-auto max-w-7xl px-4 py-6">
-          <div className="mb-3 flex items-center justify-between">
-            <h2 className="text-lg font-bold">New Arrivals</h2>
-            <Link href="/search" className="text-sm font-medium text-primary hover:underline">
-              See all
-            </Link>
-          </div>
-          <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-            {newArrivals.slice(0, 8).map((product, index) => (
-              <ProductCard key={product.id} product={product} priority={index < 4} />
-            ))}
-          </div>
-        </section>
-      )}
+      <RecentlyViewed />
+
+      <PriceChips />
+
+      {SHELVES.map((shelf, i) => (
+        <div key={shelf.title}>
+          <Shelf
+            title={shelf.title}
+            subtitle={shelf.subtitle}
+            href={shelf.href}
+            products={pickForShelf(all, shelf.slugs)}
+            tint={shelf.tint}
+          />
+          {i === 2 && <CommunityStrip />}
+        </div>
+      ))}
 
       <section className="mx-auto max-w-7xl px-4 py-6">
-        <h2 className="mb-3 text-lg font-bold">You May Also Like</h2>
+        <h2 className="mb-3 text-lg font-bold">More to explore</h2>
         <ShowMoreGrid products={recommended} />
       </section>
 

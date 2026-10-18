@@ -6,6 +6,9 @@ import { useCart } from "@/lib/cart-context";
 import { formatKES } from "@/lib/format";
 import { getAllReviews } from "@/lib/reviews";
 import ReviewsCarousel from "@/components/ReviewsCarousel";
+import CartDelivery from "@/components/CartDelivery";
+import CommunityStrip from "@/components/CommunityStrip";
+import { MAX_PER_ORDER } from "@/lib/community";
 
 export default function CartPage() {
   const { items, updateQuantity, removeItem, subtotal } = useCart();
@@ -63,7 +66,7 @@ export default function CartPage() {
                     <span className="w-6 text-center text-sm font-medium">{item.quantity}</span>
                     <button
                       type="button"
-                      onClick={() => updateQuantity(item.productId, item.color, item.quantity + 1)}
+                      onClick={() => updateQuantity(item.productId, item.color, Math.min(MAX_PER_ORDER, item.quantity + 1))}
                       aria-label="Increase quantity"
                       className="tap-target flex items-center justify-center px-2.5 text-base"
                     >
@@ -91,7 +94,7 @@ export default function CartPage() {
           <span className="text-sm font-semibold">Subtotal</span>
           <span className="text-lg font-bold">{formatKES(subtotal)}</span>
         </div>
-        <p className="mt-2 text-xs text-muted">Delivery fee is added at checkout, based on your area.</p>
+        <CartDelivery subtotal={subtotal} />
 
         <Link
           href="/checkout"
@@ -99,7 +102,10 @@ export default function CartPage() {
         >
           Proceed to Checkout
         </Link>
+        <p className="mt-2 text-center text-xs text-muted">Up to {MAX_PER_ORDER} of each item per order.</p>
       </div>
+
+      <CommunityStrip />
 
       <ReviewsCarousel reviews={reviews} />
     </div>

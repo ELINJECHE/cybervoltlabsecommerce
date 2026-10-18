@@ -1,50 +1,77 @@
 {
-  "watch_dirs": [
-    "~/Library/CloudStorage/GoogleDrive-elinjeche@gmail.com/My Drive/Cybervolt Supplier Chats"
-  ],
-  "work_dir": "intake",
-  "markup_percent": 20,
-  "round_up_to": 10,
-  "min_sell_price": 100,
-  "photos_per_product": 5,
-  "photo_max_px": 1000,
-  "skip_senders": [],
-  "retail_price_sources": [
-    "Cybervolt Labs"
-  ],
-  "suppliers": [
-    {
-      "name": "Brown Collection",
-      "match": [
-        "brown collection"
-      ]
-    },
-    {
-      "name": "Jamnet Wholesalers",
-      "match": [
-        "jamnet"
-      ]
-    },
-    {
-      "name": "Phyllis Households",
-      "match": [
-        "phyllis",
-        "phylis"
-      ]
-    },
-    {
-      "name": "Open Air",
-      "match": [
-        "open air",
-        "openair"
-      ]
-    },
-    {
-      "name": "Splendid Homes",
-      "match": [
-        "splendid homes"
-      ]
-    }
-  ],
-  "own_group_label": "Cybervolt WhatsApp offers group"
+ "watch_dirs": [
+  "~/Library/CloudStorage/GoogleDrive-elinjeche@gmail.com/My Drive/Cybervolt Supplier Chats"
+ ],
+ "work_dir": "intake",
+ "markup_percent": 20,
+ "round_up_to": 10,
+ "min_sell_price": 100,
+ "photos_per_product": 5,
+ "photo_max_px": 1000,
+ "new_item_days": 7,
+ "stock_check_days": 21,
+ "skip_senders": [],
+ "retail_price_sources": [
+  "Cybervolt Labs"
+ ],
+ "suppliers": [
+  {
+   "name": "Brown Collection",
+   "match": [
+    "brown collection"
+   ]
+  },
+  {
+   "name": "Jamnet Wholesalers",
+   "match": [
+    "jamnet"
+   ]
+  },
+  {
+   "name": "Phyllis Households",
+   "match": [
+    "phyllis",
+    "phylis"
+   ]
+  },
+  {
+   "name": "Open Air",
+   "match": [
+    "open air",
+    "openair"
+   ]
+  },
+  {
+   "name": "Splendid Homes",
+   "match": [
+    "splendid homes"
+   ]
+  }
+ ],
+ "own_group_label": "Cybervolt WhatsApp offers group",
+ "group_categories": {
+  "jatin toy shop": "toy-shop"
+ },
+ "category_fixes": {
+  "dumbbell|kettle ?bell|barbell": "sports-leisure",
+  "massage gun": "personal-care",
+  "skating|roller skate": "sports-leisure",
+  "oil dispenser|lunch box|water bottle|flask|\\bmug\\b|frying pan|cookware": "kitchen-dining",
+  "toothpaste|\\brack\\b|organi[sz]er|hanger|shel(?:f|ves)": "home-storage",
+  "beach set|tote bag": "fashion-accessories",
+  "mosquito net|baby net|zip closer": "interior-design"
+ },
+ "skip_name_patterns": [
+  "\\blogo\\b|\\bbranded\\b",
+  "^(nunix (lts|gc|sc)|macro stainless|solix \\(small\\)|lujos|golden lionfox|stone circle|display mesh|his luxiou|single velvet|baglock)\\b"
+ ],
+ "category_fallback": {
+  "mackin ?tosh|mattress protector|floor mat|bedside mat|bath mat|kitchen mats?|fleece|velvet|loose covers|towel|kikoi|candles?|\\bm\\.? ?net\\b|mosquito|tent net|baby coat|school round|sheet|duvet": "interior-design",
+  "rain ?coat|raincoats": "motorcycle-gear",
+  "sleeping bag|privacy tent|stepper|resistance bands": "sports-leisure",
+  "padlock|\\block\\b|locks|anti theft|\\bsaw\\b|tarpaulin|water pump": "tools-car-care",
+  "wahl|gel dryer": "personal-care",
+  "burner|infrared|breakfast maker|juicer|coffee maker|donut|cake machine|meat mincer|sandwich maker|jiko|jika": "home-appliances",
+  "egg poacher|fruit press|knife sharpener|lunch bag|marwa": "kitchen-dining"
+ }
 }

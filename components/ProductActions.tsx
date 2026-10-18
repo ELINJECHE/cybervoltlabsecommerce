@@ -5,7 +5,9 @@ import { useRouter } from "next/navigation";
 import type { Product } from "@/lib/types";
 import { getProductImage } from "@/lib/images";
 import { useCart } from "@/lib/cart-context";
-import { buildProductEnquiryLink, buildJumiaLink } from "@/lib/whatsapp";
+import { MAX_PER_ORDER } from "@/lib/community";
+import { buildProductEnquiryLink } from "@/lib/whatsapp";
+import WhatsAppChatLink from "@/components/WhatsAppChatLink";
 
 export default function ProductActions({ product }: { product: Product }) {
   const [selectedColor, setSelectedColor] = useState(product.colors?.[0]?.name);
@@ -77,7 +79,7 @@ export default function ProductActions({ product }: { product: Product }) {
           <span className="w-8 text-center text-sm font-medium">{quantity}</span>
           <button
             type="button"
-            onClick={() => setQuantity((q) => Math.min(product.stock > 0 ? product.stock : 99, q + 1))}
+            onClick={() => setQuantity((q) => Math.min(MAX_PER_ORDER, q + 1))}
             aria-label="Increase quantity"
             className="tap-target flex items-center justify-center px-3 text-lg"
           >
@@ -103,24 +105,29 @@ export default function ProductActions({ product }: { product: Product }) {
         </button>
       </div>
 
-      <div className="flex flex-col gap-2 sm:flex-row">
-        <a
-          href={buildProductEnquiryLink(product.name, pageUrl)}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="tap-target flex flex-1 items-center justify-center gap-2 rounded-full bg-whatsapp px-6 py-3 text-sm font-semibold text-white transition hover:brightness-95"
+      {/* The "face" behind Chat Nami: swap the initials for a real photo once chosen. */}
+      <div className="flex items-end gap-2">
+        <span
+          aria-hidden="true"
+          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-whatsapp text-xs font-bold text-white"
         >
-          💬 Buy on WhatsApp
-        </a>
-        <a
-          href={buildJumiaLink(product.name, product.jumiaUrl)}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="tap-target flex flex-1 items-center justify-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-semibold transition hover:bg-primary-light"
-        >
-          🛒 Buy on Jumia
-        </a>
+          CV
+        </span>
+        <p className="rounded-2xl rounded-bl-sm border border-border bg-surface px-3 py-2 text-sm">
+          Hey, niko hapa! Would you like my assistance with anything kuhusu{" "}
+          <span className="font-semibold">{product.name}</span>?
+        </p>
       </div>
+
+      <WhatsAppChatLink
+        href={buildProductEnquiryLink(product.name, pageUrl)}
+        button="chat_nami"
+        placement="product_page"
+        product={product.slug}
+        className="tap-target flex items-center justify-center gap-2 rounded-full bg-whatsapp px-6 py-3 text-sm font-semibold text-white transition hover:brightness-95"
+      >
+        💬 Chat Nami
+      </WhatsAppChatLink>
     </div>
   );
 }

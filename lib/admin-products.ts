@@ -25,7 +25,6 @@ export interface ProductRow {
   is_new_arrival: boolean;
   verified: boolean;
   description: string | null;
-  jumia_url: string | null;
 }
 
 export type ProductInput = Omit<ProductRow, "rating" | "review_count">;

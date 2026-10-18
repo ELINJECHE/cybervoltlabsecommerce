@@ -106,5 +106,11 @@
     "name": "Tools & Car Care",
     "image": "",
     "subcategories": []
+  },
+  {
+    "slug": "toy-shop",
+    "name": "Toy Shop",
+    "image": "",
+    "subcategories": []
   }
 ]
