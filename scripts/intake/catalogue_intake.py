@@ -6,7 +6,10 @@
   backfill  one-off: add sourcing records for products that predate this tool.
   contact   make labelled contact sheets of photo-only posts so they can be named by eye.
   setnames  fill product names into a review sheet (used for photo-only posts).
-  apply     push rows you marked ADD to the shop (price updates are NOT done here: admin sets them). Needs SUPABASE_SERVICE_KEY in the
+  stock     stock check only, over every export (already-scanned ones too): writes the stock-check sheet.
+  log       show the run log (intake/RUN_LOG.md): when each scan/apply ran and what it did.
+  apply     push rows you marked ADD to the shop, and record new supplier costs for rows marked
+            UPDATE COST (selling prices are NOT changed here: admin sets them). Needs SUPABASE_SERVICE_KEY in the
             environment for that one run; the key is never stored anywhere.
 
 Third-party chats and photos stay in intake/ (git-ignored) and are never published.
@@ -36,6 +39,7 @@ CATEGORIES = {  # slug -> keywords that suggest it (first match wins, order matt
     "interior-design": r"curtain|blanket|duvet|bed ?sheet|pillow|flower|vase|carpet|rug|wall (?:art|decor)|mirror",
     "home-storage": r"\brack\b|organi[sz]er|hanger|shoe slot|storage|basket|luggage|suitcase",
     "tools-car-care": r"drill|tool box|ladder|\btape\b|lock box|floodlight|solar|car wash|foam cleaner|screwdriver",
+    "toy-shop": r"\btoys?\b|\bdolls?\b|teddy|puzzle|magic cube|twist cube|lego|building blocks|bubble gun|toy car|remote control car|stroller|play ?set|play mat|kids kitchen|money safe|fairy wings|birthday (?:crown|banner)|balloons?",
     "sports-leisure": r"skateboard|skates|camping|umbrella|football|gym|dumbbell|yoga",
     "furniture": r"\btable\b|\bchair\b|sofa|\bbed\b|wardrobe|shelf|desk",
     "electronics": r"watch|router|wifi|calculator|extension|tripod|tv (?:bracket|mount)|bracket|phone|power ?bank|charger|cable|camera|smart|bluetooth|tablet|laptop",
@@ -46,15 +50,47 @@ DESC = {
     "tools-car-care": "A handy tool for the job.", "personal-care": "Personal grooming made easy.",
     "motorcycle-gear": "Riding gear built for the road.", "kitchen-dining": "For your kitchen and table.",
     "home-storage": "Keeps your space tidy and organised.", "interior-design": "Finishing touches for your home.",
-    "sports-leisure": "For play and the outdoors.", "furniture": "Furniture for your home or office.",
+    "sports-leisure": "For play and the outdoors.", "toy-shop": "Toys and party fun for kids.", "furniture": "Furniture for your home or office.",
 }
 BIG_BRANDS = re.compile(r"(?i)\b(nike|adidas|puma|new balance|vans|jordan|timberland|clarks|dr\.? ?martens|lugz|cat|converse|skechers|reebok|under armour|on cloud|air ?max|air ?force)\b")
 GREETING = re.compile(r"(?i)\b(good morning|happy (?:monday|tuesday|wednesday|thursday|friday|saturday|sunday)|blessings?|prayer|amen|father|lord|heavenly|almighty|god|happy new)\b")
+SOLD_OUT = re.compile(r"(?i)\b(sold ?out|out of stock|out-of-stock|no stock|imeisha|zimeisha|stock (?:is )?(?:over|finished)|not available)\b")
+NEW_ITEM_DAYS = CFG.get("new_item_days", 7)        # only posts this recent are offered as new products
+STOCK_CHECK_DAYS = CFG.get("stock_check_days", 21)  # on-site products not reposted this long get a stock warning
+STALE_EXPORT_DAYS = 14                              # warn when a supplier's chat hasn't been exported for this long
 EMO = re.compile(r"[\U00010000-\U0010ffff☀-➿⬀-⯿️‍]")
 
 
 def cfg_path(p):
     return os.path.expanduser(p)
+
+
+LOG_HEAD = "# Catalogue intake run log\n\nNewest at the bottom. Written by scripts/intake/catalogue_intake.py.\n\n| When | Command | Result |\n|---|---|---|\n"
+
+
+def log_run(root, cmd, result):
+    """One line per run in intake/RUN_LOG.md, so there's always a record of the last update."""
+    path = os.path.join(root, "RUN_LOG.md")
+    new = not os.path.exists(path)
+    with open(path, "a", encoding="utf-8") as f:
+        if new: f.write(LOG_HEAD)
+        when = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+        f.write(f"| {when} | {cmd} | {result.replace('|', '/')} |\n")
+
+
+def cmd_log(args):
+    path = os.path.join(work_root(args), "RUN_LOG.md")
+    if not os.path.exists(path): print("No runs logged yet."); return
+    lines = [l for l in open(path, encoding="utf-8").read().splitlines() if l.startswith("| 2")]
+    print("\n".join(lines[-args.last:]) if lines else "No runs logged yet.")
+    changed = lambda l: "| apply |" in l and "dry run" not in l and bool(re.search(r"added [1-9]|updated [1-9]", l))
+    applied = [l for l in lines if changed(l)]
+    print("\nLast catalogue change:", applied[-1].split("|")[1].strip() if applied else "none logged yet")
+    spath = os.path.join(work_root(args), "stock_seen.json")
+    if os.path.exists(spath):
+        sups = json.load(open(spath)).get("suppliers", {})
+        if sups:
+            print("Newest message per supplier chat:", "; ".join(f"{k} {v.get('latest_chat', '?')}" for k, v in sorted(sups.items())))
 
 
 def work_root(args):
@@ -214,6 +250,22 @@ def sell_price(cost, kind="supplier"):
     return max(CFG["min_sell_price"], int(-(-p // step) * step))
 
 
+def cost_check(cost, site_price, kind):
+    """A supplier reposted something you already sell. The scan has no access to the recorded
+    (admin-only) cost, so it compares the newly posted cost with your current selling price."""
+    if kind == "retail" or not cost or not site_price:
+        return "SKIP (on site)"
+    margin = (site_price - cost) / cost * 100
+    target = sell_price(cost, kind)
+    if site_price < cost:
+        return f"⚠ BELOW COST: cost {cost:,} · your price {site_price:,} · suggested {target:,}"
+    if margin < CFG["markup_percent"] / 2:
+        return f"⚠ THIN MARGIN: cost {cost:,} · your price {site_price:,} · margin {margin:.0f}% · suggested {target:,}"
+    if site_price > target * 1.15:
+        return f"↓ ROOM TO CUT: cost {cost:,} · your price {site_price:,} · margin {margin:.0f}% · suggested {target:,}"
+    return "SKIP (on site)"
+
+
 def tokens(s):
     stop = {"the", "and", "with", "for", "size", "pcs", "pc", "set", "kg", "black", "white", "new"}
     return {t for t in re.findall(r"[a-z0-9]+", s.lower()) if len(t) > 1 and t not in stop}
@@ -231,6 +283,27 @@ def match_live(name, live):
     return best[1] if best[0] >= 0.66 else None
 
 
+# Only the chat text and photos are ever used, so videos, voice notes and documents (the bulk of a
+# big export) are left in the zip instead of filling the disk.
+EXTRACT_EXT = (".txt", ".jpg", ".jpeg", ".png", ".webp")
+
+
+def file_sha1(path):
+    """Hash in chunks: a 13 GB export must never be read into memory in one go."""
+    h = hashlib.sha1()
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(1 << 20), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def fully_local(path):
+    """Google Drive can leave a big export as a partly downloaded placeholder; reading one blocks
+    forever. A file whose on-disk size is well below its real size is not ready yet."""
+    st = os.stat(path)
+    return st.st_blocks * 512 >= st.st_size * 0.98
+
+
 def safe_extract(zpath, dest):
     os.makedirs(dest, exist_ok=True)
     root = os.path.realpath(dest)
@@ -239,7 +312,9 @@ def safe_extract(zpath, dest):
             target = os.path.realpath(os.path.join(dest, info.filename))
             if not target.startswith(root + os.sep) and target != root:
                 raise SystemExit(f"unsafe path in zip: {info.filename}")
-        z.extractall(dest)
+        for info in z.infolist():
+            if info.filename.lower().endswith(EXTRACT_EXT):
+                z.extract(info, dest)
 
 
 def slug(t):
@@ -249,7 +324,7 @@ def slug(t):
 # ---------------------------------------------------------------- scan
 HEAD = ["Decision", "Photo", "Item ID", "Supplier", "Posted", "Product name", "Category", "Supplier price (cost)",
         "Proposed sell price", "Final sell price", "Sizes", "Suggested", "Already on site", "Site price",
-        "Source group", "Photo files", "Original message", "Applied"]
+        "Source group", "Photo files", "Original message", "Applied", "Site product ID"]
 COL = {h: i + 1 for i, h in enumerate(HEAD)}
 
 
@@ -260,7 +335,7 @@ def write_sheet(path, rows):
         c.font = Font(bold=True, color="FFFFFF"); c.fill = PatternFill("solid", fgColor="4D66B0"); c.alignment = Alignment(wrap_text=True, vertical="center")
     for r in rows:
         ws.append([r["decision"], None, r["id"], r["supplier"], r["posted"], r["name"], r["category"], r["cost"], r["proposed"], r["final"],
-                   r["sizes"], r["suggested"], r["site_name"], r["site_price"], r["group"], ", ".join(r["files"]), r["text"][:400], ""])
+                   r["sizes"], r["suggested"], r["site_name"], r["site_price"], r["group"], ", ".join(r["files"]), r["text"][:400], "", r["site_id"]])
         row = ws.max_row
         ws.row_dimensions[row].height = 70
         try:
@@ -268,25 +343,149 @@ def write_sheet(path, rows):
             ws.add_image(im, f"B{row}")
         except Exception:
             pass
-        if r["suggested"].startswith("SKIP"):
+        if r["suggested"].startswith(("⚠", "↓")):
+            for c in ws[row]: c.fill = PatternFill("solid", fgColor="FFE0B2" if r["suggested"].startswith("⚠") else "E3F2FD")
+        elif r["suggested"].startswith("SKIP"):
             for c in ws[row]: c.fill = PatternFill("solid", fgColor="EEEEEE")
         elif not r["name"] or r["name"].startswith("("):
             ws.cell(row=row, column=COL["Product name"]).fill = PatternFill("solid", fgColor="FFF3CD")
     widths = {"Decision": 14, "Photo": 14, "Item ID": 14, "Supplier": 18, "Posted": 11, "Product name": 44, "Category": 18, "Supplier price (cost)": 12,
-              "Proposed sell price": 12, "Final sell price": 12, "Sizes": 10, "Suggested": 16, "Already on site": 34, "Site price": 10,
-              "Source group": 26, "Photo files": 30, "Original message": 70, "Applied": 12}
+              "Proposed sell price": 12, "Final sell price": 12, "Sizes": 10, "Suggested": 44, "Already on site": 34, "Site price": 10,
+              "Source group": 26, "Photo files": 30, "Original message": 70, "Applied": 12, "Site product ID": 38}
     for h, w in widths.items(): ws.column_dimensions[get_column_letter(COL[h])].width = w
-    dv = DataValidation(type="list", formula1='"ADD,SKIP"', allow_blank=True)
+    dv = DataValidation(type="list", formula1='"ADD,SKIP,UPDATE COST"', allow_blank=True)
     ws.add_data_validation(dv); dv.add(f"A2:A{ws.max_row + 500}")
     cats = DataValidation(type="list", formula1='"' + ",".join(CATEGORIES) + '"', allow_blank=True)
     ws.add_data_validation(cats); cats.add(f"G2:G{ws.max_row + 500}")
     ws.freeze_panes = "D2"
     n = wb.create_sheet("How to review")
     for line in ["1. In column A choose ADD or SKIP for each row (blank rows are ignored). Prices of products already on the site are changed in the admin panel, never from here.",
+                 "   Orange rows (⚠) are products you already sell whose new supplier price leaves you a thin margin or a loss; blue rows (↓) leave room to cut your price.",
+                 "   For those, choose UPDATE COST to record the new supplier price for the admin Inventory & pricing page. Your selling price is NOT changed: do that in admin.",
                  "2. Check the product name and category (yellow = needs a name). Branded shoes: keep the '-style' wording, no brand claims.",
                  "3. 'Final sell price' is what customers pay. It starts as supplier price + margin; change it freely. The supplier price and group are saved for the admin Inventory & pricing page.",
                  "4. Save the file, then tell Claude 'apply the approved catalogue rows'.",
                  f"Margin rule: supplier price +{CFG['markup_percent']}% rounded up to the next KSh {CFG['round_up_to']}; none for your own groups (scripts/intake/config.json)."]:
+        n.append([line])
+    n.column_dimensions["A"].width = 120
+    wb.save(path)
+
+
+def note_stock(stock, product, supplier, ts, sold_out=False, price=None):
+    """Remember the newest date a supplier posted (or marked sold out) a product you sell."""
+    rec = stock["products"].setdefault(product["id"], {"name": product["name"], "supplier": supplier, "last_posted": ""})
+    day = ts.date().isoformat()
+    rec["name"] = product["name"]
+    if sold_out:
+        if day >= rec.get("sold_out", ""): rec["sold_out"] = day
+        return
+    if day >= rec["last_posted"]:
+        rec.update(last_posted=day, supplier=supplier)
+        if price: rec["price"] = price
+    if rec.get("sold_out") and rec["sold_out"] < rec["last_posted"]:
+        rec.pop("sold_out")  # reposted after the sold-out notice: back in stock
+
+
+def track_export_stock(stock, msgs, items, supplier, live):
+    """Updates last-posted / sold-out dates from one export. Returns the cutoff for 'recent' posts."""
+    latest = max((m_["ts"] for m_ in msgs), default=datetime.datetime.now())
+    sup = stock["suppliers"].setdefault(supplier, {})
+    sup["latest_chat"] = max(sup.get("latest_chat", ""), latest.date().isoformat())
+    for m_ in msgs:  # text-only "sold out" notices
+        t = clean_text(m_["body"])
+        if not SOLD_OUT.search(t): continue
+        hit = match_live(clean_name(SOLD_OUT.sub(" ", t)), live)
+        if hit: note_stock(stock, hit, supplier, m_["ts"], sold_out=True)
+    for it in items:
+        if not it["name"]: continue
+        hit = match_live(it["name"], live)
+        if hit: note_stock(stock, hit, supplier, it["ts"], sold_out=bool(SOLD_OUT.search(it["text"] or "")), price=it["price"])
+    return latest - datetime.timedelta(days=NEW_ITEM_DAYS)
+
+
+def cmd_stock(args):
+    """Stock check over every export in the Drive folder, including ones already scanned.
+    Writes no review rows: only intake/stock_seen.json and the stock-check sheet."""
+    root = work_root(args)
+    for d in ("work", "review"): os.makedirs(os.path.join(root, d), exist_ok=True)
+    watch = [cfg_path(p) for p in (args.watch or CFG["watch_dirs"])]
+    zips = sorted({z for d in watch for z in glob.glob(os.path.join(d, "WhatsApp Chat*.zip"))})
+    if not zips: print("No supplier chat exports found."); return
+    live = live_products()
+    spath = os.path.join(root, "stock_seen.json")
+    stock = json.load(open(spath)) if os.path.exists(spath) else {"products": {}, "suppliers": {}}
+    for z in zips:
+        if not fully_local(z):
+            print(f"  skipped {os.path.basename(z)}: still downloading from Google Drive (set it to 'Available offline' and wait)"); continue
+        h = file_sha1(z)
+        group = re.sub(r"\s*\(\d+\)$", "", re.sub(r"^WhatsApp Chat\s*-\s*", "", os.path.basename(z)[:-4])).strip()
+        supplier, kind = canonical_supplier(group)
+        dest = os.path.join(root, "work", f"{slug(supplier)}-{h[:8]}")
+        if not glob.glob(os.path.join(dest, "*.txt")):
+            shutil.rmtree(dest, ignore_errors=True); safe_extract(z, dest)
+        txts = glob.glob(os.path.join(dest, "*.txt"))
+        if not txts: continue
+        msgs = parse_chat(open(txts[0], encoding="utf-8", errors="ignore").read())
+        track_export_stock(stock, msgs, build_items(msgs, dest, supplier), supplier, live)
+        print(f"  {supplier}: newest message {stock['suppliers'][supplier]['latest_chat']}")
+    json.dump(stock, open(spath, "w"), indent=1)
+    flagged = stock_check(stock, live)
+    sold_n = sum(1 for f in flagged if f["status"].startswith("SOLD"))
+    note = f"{len(zips)} export(s): {sold_n} sold out, {len(flagged) - sold_n} not reposted {STOCK_CHECK_DAYS}+ days, {len(stock['products'])} on-site product(s) tracked"
+    if flagged:
+        out = os.path.join(root, "review", f"{datetime.date.today().isoformat()}-stock-check.xlsx")
+        write_stock_sheet(out, flagged); note += f" -> {os.path.basename(out)}"; print("wrote", out)
+    print("stock check:", note)
+    log_run(root, "stock", note)
+
+
+def stock_check(stock, live):
+    """Products still on the site that a supplier marked sold out, or hasn't reposted for a while.
+    Days are counted to that supplier's newest message, so a late export doesn't make everything stale."""
+    on_site = {p["id"]: p for p in live}
+    out = []
+    for pid, rec in stock["products"].items():
+        if pid not in on_site: continue
+        latest = stock["suppliers"].get(rec["supplier"], {}).get("latest_chat") or rec["last_posted"]
+        if rec.get("sold_out"):
+            status = f"SOLD OUT notice on {rec['sold_out']}"
+        elif rec["last_posted"]:
+            age = (datetime.date.fromisoformat(latest) - datetime.date.fromisoformat(rec["last_posted"])).days
+            if age < STOCK_CHECK_DAYS: continue
+            status = f"Not reposted for {age} days"
+        else:
+            continue
+        out.append({"name": on_site[pid]["name"], "supplier": rec["supplier"], "last_posted": rec["last_posted"] or "-",
+                    "status": status, "price": on_site[pid].get("price"), "id": pid})
+    return sorted(out, key=lambda f: (not f["status"].startswith("SOLD"), f["last_posted"]))
+
+
+def stale_exports(stock):
+    today = datetime.date.today()
+    out = []
+    for name, sup in sorted(stock["suppliers"].items()):
+        if not sup.get("latest_chat"): continue
+        age = (today - datetime.date.fromisoformat(sup["latest_chat"])).days
+        if age >= STALE_EXPORT_DAYS: out.append(f"{name} chat is {age} days old, export it again")
+    return out
+
+
+def write_stock_sheet(path, flagged):
+    wb = openpyxl.Workbook(); ws = wb.active; ws.title = "Stock check"
+    head = ["Product (on site)", "Supplier", "Last posted", "Status", "Site price", "Site product ID"]
+    ws.append(head)
+    for c in ws[1]:
+        c.font = Font(bold=True, color="FFFFFF"); c.fill = PatternFill("solid", fgColor="4D66B0")
+    for f in flagged:
+        ws.append([f["name"], f["supplier"], f["last_posted"], f["status"], f["price"], f["id"]])
+        if f["status"].startswith("SOLD"):
+            for c in ws[ws.max_row]: c.fill = PatternFill("solid", fgColor="FFE0B2")
+    for col, w in zip("ABCDEF", (48, 22, 12, 34, 11, 38)): ws.column_dimensions[col].width = w
+    ws.freeze_panes = "A2"
+    n = wb.create_sheet("How to use")
+    for line in [f"Products still on your site that a supplier marked sold out, or hasn't reposted for {STOCK_CHECK_DAYS}+ days.",
+                 "Nothing here is changed automatically. Confirm stock with the supplier, then hide or update the product in admin if needed.",
+                 f"Change the {STOCK_CHECK_DAYS}-day limit with stock_check_days in scripts/intake/config.json."]:
         n.append([line])
     n.column_dimensions["A"].width = 120
     wb.save(path)
@@ -301,12 +500,21 @@ def cmd_scan(args):
     watch = [cfg_path(p) for p in (args.watch or CFG["watch_dirs"])]
     zips = sorted({z for d in watch for z in glob.glob(os.path.join(d, "WhatsApp Chat*.zip"))})
     if not zips:
-        print("No supplier chat exports found in:", *watch, sep="\n  "); return
+        print("No supplier chat exports found in:", *watch, sep="\n  ")
+        log_run(root, "scan", "No chat exports in the Drive folder"); return
     live = live_products()
     print(f"live catalogue: {len(live)} products")
-    new_sheets = 0
+    new_sheets, summary = 0, []
+    cost_flags = collections.Counter()
+    spath = os.path.join(root, "stock_seen.json")
+    stock = json.load(open(spath)) if os.path.exists(spath) else {"products": {}, "suppliers": {}}
+    new_exports = old_total = 0
+    not_ready = []
     for z in zips:
-        h = hashlib.sha1(open(z, "rb").read()).hexdigest()
+        if not fully_local(z):
+            print(f"  skipped {os.path.basename(z)}: still downloading from Google Drive (set it to 'Available offline' and wait)")
+            not_ready.append(os.path.basename(z)); continue
+        h = file_sha1(z)
         if h in manifest["zips"]:
             continue
         group = re.sub(r"\s*\(\d+\)$", "", re.sub(r"^WhatsApp Chat\s*-\s*", "", os.path.basename(z)[:-4])).strip()
@@ -318,9 +526,19 @@ def cmd_scan(args):
             print("  no chat text in", os.path.basename(z)); manifest["zips"][h] = {"zip": os.path.basename(z), "note": "no text"}; continue
         msgs = parse_chat(open(txts[0], encoding="utf-8", errors="ignore").read())
         items = build_items(msgs, dest, supplier)
+        # "Recent" counts back from the newest message in this export, not from today, so a
+        # chat exported late still gets a full window.
+        cutoff = track_export_stock(stock, msgs, items, supplier, live)
+        new_exports += 1
+        old_skipped = 0
         if kind == "unlisted": print(f"  note: '{group}' is not one of your listed suppliers; using the default {CFG['markup_percent']}% margin.")
+        # A whole group can be pinned to one category (config "group_categories": {"match text": "slug"}).
+        group_cat = next((c for m, c in CFG.get("group_categories", {}).items() if m.lower() in group.lower()), None)
         rows, skipped_seen = [], 0
         for n, it in enumerate(items):
+            sold = bool(SOLD_OUT.search(it["text"] or ""))
+            if it["ts"] < cutoff: old_skipped += 1; continue  # older posts: likely gone, not offered
+            if sold: continue  # a sold-out notice is never a product to add
             key = f"{slug(supplier)}|{it['ts'].date()}|{slug(it['name'] or it['photos'][0])}|{it['price']}"
             if key in seen: skipped_seen += 1; continue
             seen.add(key)
@@ -339,10 +557,12 @@ def cmd_scan(args):
             m = match_live(name, live) if it["name"] else None
             cost = it["price"]; prop = sell_price(cost, kind)
             # Prices of products already on the site are never changed from here: admin sets those.
-            if m is not None: suggested = "SKIP (on site)"
+            if m is not None:
+                suggested = cost_check(cost, m.get("price"), kind)
+                if suggested != "SKIP (on site)": cost_flags[suggested[0]] += 1
             else: suggested = "ADD" if cost else "ADD (no price)"
             rows.append({"decision": "", "id": iid, "supplier": supplier, "posted": it["ts"].strftime("%Y-%m-%d"), "name": name,
-                         "category": it["category"], "cost": cost, "proposed": prop, "final": prop, "sizes": it["sizes"], "suggested": suggested, "group": group, "kind": kind,
+                         "category": group_cat or it["category"], "cost": cost, "proposed": prop, "final": prop, "sizes": it["sizes"], "suggested": suggested, "group": group, "kind": kind,
                          "site_name": m["name"] if m else "", "site_price": m["price"] if m else None, "site_id": m["id"] if m else "",
                          "files": files, "text": it["text"], "thumb": thumb})
         stamp = datetime.date.today().isoformat()
@@ -350,13 +570,34 @@ def cmd_scan(args):
             out = os.path.join(root, "review", f"{stamp}-{slug(supplier)}-{h[:6]}.xlsx"); write_sheet(out, rows); new_sheets += 1
             flagged = [r["id"] for r in rows if r["name"].startswith("(")]
             json.dump({"sheet": out, "photo_dir": os.path.join(root, "photos"), "need_names": flagged}, open(out.replace(".xlsx", ".todo.json"), "w"), indent=1)
-            print(f"  {supplier}: {len(msgs)} messages -> {len(rows)} new items ({len(flagged)} photo-only need a name, {skipped_seen} already seen) -> {out}")
+            summary.append(f"{supplier} {len(rows)} new item(s) -> {os.path.basename(out)}")
+            print(f"  {supplier}: {len(msgs)} messages -> {len(rows)} new items ({len(flagged)} photo-only need a name, {skipped_seen} already seen, {old_skipped} older than {NEW_ITEM_DAYS} days ignored) -> {out}")
         else:
-            print(f"  {supplier}: nothing new")
+            print(f"  {supplier}: nothing new ({old_skipped} post(s) older than {NEW_ITEM_DAYS} days ignored)")
+        old_total += old_skipped
         manifest["zips"][h] = {"zip": os.path.basename(z), "supplier": supplier, "processed": stamp}
     manifest["seen"] = sorted(seen)
     json.dump(manifest, open(mpath, "w"), indent=1)
+    json.dump(stock, open(spath, "w"), indent=1)
     print(f"done: {new_sheets} new review sheet(s)")
+    stock_note = ""
+    if new_exports:
+        flagged = stock_check(stock, live)
+        sold_n = sum(1 for f in flagged if f["status"].startswith("SOLD"))
+        stock_note = f", {old_total} older post(s) ignored, stock check: {sold_n} sold out, {len(flagged) - sold_n} not reposted {STOCK_CHECK_DAYS}+ days"
+        if flagged:
+            out = os.path.join(root, "review", f"{datetime.date.today().isoformat()}-stock-check.xlsx")
+            write_stock_sheet(out, flagged)
+            stock_note += f" -> {os.path.basename(out)}"
+            print(f"stock check: {sold_n} sold out, {len(flagged) - sold_n} not reposted for {STOCK_CHECK_DAYS}+ days -> {out}")
+    stale = stale_exports(stock)
+    if stale:
+        print("export reminder:", "; ".join(stale)); stock_note += "; export reminder: " + "; ".join(stale)
+    flags = ""
+    if cost_flags:
+        flags = f", {cost_flags['⚠']} thin-margin/below-cost warning(s), {cost_flags['↓']} room-to-cut"
+        print(f"cost check: {cost_flags['⚠']} product(s) on site now at a thin margin or below cost, {cost_flags['↓']} with room to cut the price")
+    log_run(root, "scan", f"{len(zips)} export(s) checked, {new_sheets} new review sheet(s){flags}{stock_note}" + (": " + "; ".join(summary) if summary else "") + (f" | NOT READY (still downloading from Drive): {', '.join(not_ready)}" if not_ready else ""))
 
 
 def cmd_setnames(args):
@@ -369,6 +610,7 @@ def cmd_setnames(args):
             if names[iid].get("category"): ws.cell(row=row[0].row, column=COL["Category"]).value = names[iid]["category"]
             ws.cell(row=row[0].row, column=COL["Product name"]).fill = PatternFill(fill_type=None); n += 1
     wb.save(args.sheet); print(f"named {n} rows")
+    log_run(os.path.dirname(os.path.dirname(os.path.abspath(args.sheet))), "setnames", f"named {n} photo-only row(s) in {os.path.basename(args.sheet)}")
 
 
 def cmd_contact(args):
@@ -401,6 +643,31 @@ def sourcing_ready(base, H):
 SQL_HINT = "The admin-only table product_sourcing doesn't exist yet. Run docs/sql/product_sourcing.sql in Supabase (SQL Editor) once, then retry."
 
 
+def update_cost_row(row, base, H, dry_run):
+    """Records a supplier's new price as the product's cost in product_sourcing.
+    Never touches the product's selling price. Returns True (done), False (needs attention)."""
+    v = lambda h: row[COL[h] - 1].value if len(row) >= COL[h] else None
+    pid, cost, site = v("Site product ID"), v("Supplier price (cost)"), v("Already on site") or v("Product name")
+    if not pid: print(f"  ! {v('Item ID')}: UPDATE COST needs a product already on the site (sheet made before this feature: re-scan)"); return False
+    if not isinstance(cost, (int, float)) or cost <= 0: print(f"  ! {site}: UPDATE COST needs a supplier price"); return False
+    supplier = canonical_supplier(v("Source group") or "")[0] if v("Source group") else (v("Supplier") or "Unknown")
+    print(f"  {'(dry) ' if dry_run else ''}cost  {site} | supplier cost now KSh {int(cost)} from {supplier} (selling price unchanged)")
+    if dry_run: return True
+    patch = {"supplier_cost": int(cost), "supplier": supplier, "source_ref": f"cost update: {v('Source group')} post of {v('Posted')}"}
+    hp = dict(H, Prefer="return=representation")
+    st, body = http("PATCH", f"{base}/rest/v1/product_sourcing?product_id=eq.{pid}", hp, json.dumps(patch).encode())
+    if st not in (200, 204): print(f"    failed: {st} {body[:120]}"); return False
+    if st == 200 and json.loads(body or b"[]"): return True
+    # No sourcing record yet: create one, listed at today's selling price.
+    st, body = http("GET", f"{base}/rest/v1/products?select=price&id=eq.{pid}", H)
+    rows = json.loads(body) if st == 200 else []
+    if not rows: print(f"    failed: product {pid} not found"); return False
+    rec = dict(patch, product_id=pid, listed_price=rows[0]["price"])
+    st, body = http("POST", f"{base}/rest/v1/product_sourcing", H, json.dumps(rec).encode())
+    if st not in (200, 201): print(f"    failed: {st} {body[:120]}"); return False
+    return True
+
+
 def cmd_apply(args):
     root = work_root(args)
     key = os.environ.get("SUPABASE_SERVICE_KEY")
@@ -409,18 +676,30 @@ def cmd_apply(args):
     env = load_env(); base = env["NEXT_PUBLIC_SUPABASE_URL"]
     H = {"apikey": key or "", "Authorization": f"Bearer {key}", "Content-Type": "application/json"}
     HR = H if key else {"apikey": env["NEXT_PUBLIC_SUPABASE_ANON_KEY"]}
-    sheets = [args.sheet] if args.sheet else sorted(glob.glob(os.path.join(root, "review", "*.xlsx")))
+    sheets = [args.sheet] if args.sheet else sorted(f for f in glob.glob(os.path.join(root, "review", "*.xlsx")) if not os.path.basename(f).startswith("~$"))
     if key and not sourcing_ready(base, H): sys.exit(SQL_HINT)
     st, body = http("GET", f"{base}/rest/v1/products?select=slug", HR)
     taken = {r["slug"] for r in json.loads(body)}
     st, body = http("GET", f"{base}/rest/v1/categories?select=slug", HR)
     cats = {r["slug"] for r in json.loads(body)}
-    added = bad = 0
+    added = bad = costs = 0
     for sp in sheets:
-        wb = openpyxl.load_workbook(sp); ws = wb["Review"]; dirty = False
+        wb = openpyxl.load_workbook(sp)
+        if "Review" not in wb.sheetnames: continue  # e.g. the stock-check sheet
+        ws = wb["Review"]; dirty = False
         for row in ws.iter_rows(min_row=2):
             v = lambda h: row[COL[h] - 1].value
-            if (v("Decision") or "").strip().upper() != "ADD" or v("Applied"): continue
+            decision = (v("Decision") or "").strip().upper()
+            if v("Applied"): continue
+            if decision == "UPDATE COST":
+                r_ = update_cost_row(row, base, H, args.dry_run)
+                if r_ is True:
+                    costs += 1
+                    if not args.dry_run:
+                        ws.cell(row=row[0].row, column=COL["Applied"]).value = "cost " + datetime.date.today().isoformat(); dirty = True
+                elif r_ is False: bad += 1
+                continue
+            if decision != "ADD": continue
             name, cat, price = (v("Product name") or "").strip(), (v("Category") or "").strip(), v("Final sell price")
             if not name or name.startswith("("): print(f"  ! {v('Item ID')}: needs a product name"); bad += 1; continue
             if cat == "sneakers-shoes" and BIG_BRANDS.search(name) and "style" not in name.lower():
@@ -460,7 +739,8 @@ def cmd_apply(args):
             except Exception as e:
                 print("    failed:", e)
         if dirty: wb.save(sp)
-    print(f"{'(dry run) ' if args.dry_run else ''}added {added}, rows needing attention {bad}")
+    print(f"{'(dry run) ' if args.dry_run else ''}added {added}, supplier costs updated {costs}, rows needing attention {bad}")
+    log_run(root, "apply", f"{'(dry run) ' if args.dry_run else ''}added {added} product(s), updated {costs} supplier cost(s), {bad} row(s) need attention, from {len(sheets)} sheet(s)")
     if added and not args.dry_run:
         print("Catalogue changed in the database. It shows on the site after the next rebuild (Publish changes in admin).")
 
@@ -495,9 +775,11 @@ def main():
     n = sub.add_parser("setnames"); n.add_argument("sheet"); n.add_argument("names")
     c = sub.add_parser("contact"); c.add_argument("todo")
     b = sub.add_parser("backfill"); b.add_argument("--own-slugs")
+    k = sub.add_parser("stock"); k.add_argument("--watch", action="append"); k.add_argument("--work")
+    g = sub.add_parser("log"); g.add_argument("--last", type=int, default=15); g.add_argument("--work")
     a = sub.add_parser("apply"); a.add_argument("--sheet"); a.add_argument("--work"); a.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
-    {"scan": cmd_scan, "setnames": cmd_setnames, "contact": cmd_contact, "apply": cmd_apply, "backfill": cmd_backfill}[args.cmd](args)
+    {"scan": cmd_scan, "setnames": cmd_setnames, "contact": cmd_contact, "apply": cmd_apply, "backfill": cmd_backfill, "log": cmd_log, "stock": cmd_stock}[args.cmd](args)
 
 
 if __name__ == "__main__":
