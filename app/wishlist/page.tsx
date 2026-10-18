@@ -6,10 +6,12 @@ import { useCart } from "@/lib/cart-context";
 import { useWishlist } from "@/lib/wishlist";
 import { formatKES } from "@/lib/format";
 import { showToast } from "@/lib/toast";
+import { useSavedPrices } from "@/lib/use-saved-prices";
 
 export default function WishlistPage() {
   const { items, remove } = useWishlist();
   const { addItem } = useCart();
+  const prices = new Map(useSavedPrices().map((s) => [s.item.slug, s]));
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-6">
@@ -32,7 +34,18 @@ export default function WishlistPage() {
               </Link>
               <div className="min-w-0 flex-1">
                 <Link href={`/product/${item.slug}`} className="line-clamp-2 text-sm font-medium hover:text-primary">{item.name}</Link>
-                <p className="text-sm font-bold">{formatKES(item.price)}</p>
+                {(() => {
+                  const sp = prices.get(item.slug);
+                  if (!sp) return <p className="text-sm font-bold">{formatKES(item.price)}</p>;
+                  if (sp.now === null) return <p className="text-xs text-muted">No longer listed</p>;
+                  return (
+                    <>
+                      <p className="text-sm font-bold">{formatKES(sp.now)}</p>
+                      {sp.change > 0 && <p className="text-xs font-semibold text-success">↓ {formatKES(sp.change)} cheaper than when you saved it</p>}
+                      {sp.change < 0 && <p className="text-xs text-muted">Up {formatKES(-sp.change)} since you saved it</p>}
+                    </>
+                  );
+                })()}
               </div>
               <div className="flex shrink-0 flex-col gap-1.5">
                 <Link href={`/product/${item.slug}`} className="tap-target rounded-full bg-primary px-4 py-1.5 text-center text-xs font-semibold text-white hover:bg-primary-dark">View</Link>

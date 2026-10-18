@@ -8,6 +8,7 @@ import { getAllReviews } from "@/lib/reviews";
 import ReviewsCarousel from "@/components/ReviewsCarousel";
 import CartDelivery from "@/components/CartDelivery";
 import CommunityStrip from "@/components/CommunityStrip";
+import RecommendedForYou from "@/components/RecommendedForYou";
 import { MAX_PER_ORDER } from "@/lib/community";
 
 export default function CartPage() {
@@ -104,6 +105,8 @@ export default function CartPage() {
         </Link>
         <p className="mt-2 text-center text-xs text-muted">Up to {MAX_PER_ORDER} of each item per order.</p>
       </div>
+
+      <RecommendedForYou title="You might also need" subtitle="Picked from what you have in your cart and have looked at" />
 
       <CommunityStrip />
 

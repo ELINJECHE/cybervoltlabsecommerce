@@ -9,6 +9,8 @@ import UspStrip from "@/components/UspStrip";
 import PriceChips from "@/components/PriceChips";
 import CommunityStrip from "@/components/CommunityStrip";
 import RecentlyViewed from "@/components/RecentlyViewed";
+import RecommendedForYou from "@/components/RecommendedForYou";
+import SavedDropsStrip from "@/components/SavedDropsStrip";
 import { COLLECTIONS } from "@/lib/collections";
 import TrustSection from "@/components/TrustSection";
 import ReviewsCarousel from "@/components/ReviewsCarousel";
@@ -103,7 +105,11 @@ export default async function HomePage() {
 
       <CategoryRail categories={categories} />
 
+      <SavedDropsStrip />
+
       <RecentlyViewed />
+
+      <RecommendedForYou />
 
       <PriceChips />
 

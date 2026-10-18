@@ -94,7 +94,10 @@ export default function SearchBar({
           autoComplete="off"
           placeholder="Search gloves, helmets, sneakers, duvets..."
           aria-label="Search products"
+          role="combobox"
           aria-expanded={open}
+          aria-autocomplete="list"
+          aria-controls="search-suggestions"
           className="h-11 w-full rounded-full border border-border bg-surface pl-4 pr-10 text-sm outline-none focus:border-primary"
         />
         <svg
@@ -111,7 +114,7 @@ export default function SearchBar({
         </svg>
 
         {open && (
-          <div className="absolute left-0 right-0 top-full z-50 mt-1 max-h-[70vh] overflow-auto rounded-card border border-border bg-surface shadow-lg">
+          <div id="search-suggestions" className="absolute left-0 right-0 top-full z-50 mt-1 max-h-[70vh] overflow-auto rounded-card border border-border bg-surface shadow-lg">
             {!trimmed ? (
               <div className="p-3 text-sm">
                 {recent.length > 0 && (

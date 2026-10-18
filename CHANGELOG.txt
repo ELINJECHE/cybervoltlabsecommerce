@@ -3,6 +3,32 @@ Newest first. "Live" = running on cybervoltlabs.co.ke. "Not deployed" = in the c
 but waiting on a setup step that only the site owner can do.
 
 ==============================================================================
+2026-10-18
+==============================================================================
+Storefront upgrade, phases 1-3  (committed, not yet pushed)
+Phase 1
+- Top bar: live same-day countdown in Nairobi time ("Order in the next 3h 10m for same-day delivery"),
+  switching to the next delivery day after 5pm, on Sundays and on public holidays. Delivery-area picker
+  (remembered; used on product pages, cart and checkout). Link to the free WhatsApp group.
+- Homepage rebuilt as shelves (Motorcycle Gear, Shoes, Appliances lead), trust strip, category bubbles,
+  "Shop by budget" pages (/under/500 ... /under/5000), recently viewed, quick-add "+", toast messages.
+- Product page: real total with delivery to the visitor's area; sticky Add to Cart bar on phones.
+- Checkout: area carried over; MVP code CYBMVP354 takes KSh 100 off delivery. Success page offers the MVP
+  WhatsApp group. Max 5 of any item per order. Phone bottom bar (switch: BOTTOM_NAV_ENABLED).
+Phase 2
+- Search: suggestions with photos, typo and synonym tolerant, recent searches, WhatsApp fallback.
+- Sorting on category and search pages; "Show more" on category pages.
+- Saved-for-later hearts and a Saved page. "Complete your set" on product pages (no invented discounts).
+- "Shop by need" collections (Rider kit, New home starter, Gifts under KSh 3,000, Fitness & outdoors).
+- Products with no price are hidden from the shop until priced (they stay in admin).
+Phase 3
+- "Recommended for you" on the homepage and cart, from what the visitor viewed, saved or added (stored in
+  their browser only).
+- Price-drop notice: if something a visitor saved has got cheaper, a banner on the homepage and a note on the
+  Saved page. "Tell me if the price drops" opens a WhatsApp message to the shop (answered by hand).
+- Where to change things: docs/STOREFRONT_FEATURES.md.
+
+==============================================================================
 2026-10-15
 ==============================================================================
 Inventory added from the WhatsApp broadcast group  (committed, not yet pushed)
