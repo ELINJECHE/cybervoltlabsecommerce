@@ -9,6 +9,7 @@ import {
   type CategoryRow,
 } from "@/lib/admin-products";
 import { markUnpublished } from "@/lib/deploy";
+import { toAdminMessage } from "@/lib/errors";
 
 export default function AdminCategoriesPage() {
   const [categories, setCategories] = useState<CategoryRow[]>([]);
@@ -37,7 +38,7 @@ export default function AdminCategoriesPage() {
       setName("");
       await load();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to create category.");
+      setError(toAdminMessage(err, "CV-ADM-01", "Failed to create category."));
     } finally {
       setSubmitting(false);
     }
@@ -50,7 +51,7 @@ export default function AdminCategoriesPage() {
       markUnpublished();
       await load();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to delete category.");
+      setError(toAdminMessage(err, "CV-ADM-01", "Failed to delete category."));
     }
   }
 

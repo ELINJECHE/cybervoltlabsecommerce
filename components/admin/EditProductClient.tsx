@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import ProductForm from "@/components/admin/ProductForm";
+import { toAdminMessage } from "@/lib/errors";
 import {
   listCategoriesAdmin,
   getProductAdmin,
@@ -22,7 +23,7 @@ export default function EditProductClient({ id }: { id: string }) {
         setCategories(cats);
         setProduct(prod);
       })
-      .catch((err) => setError(err instanceof Error ? err.message : "Failed to load product."))
+      .catch((err) => setError(toAdminMessage(err, "CV-ADM-04", "Failed to load product.")))
       .finally(() => setLoading(false));
   }, [id]);
 

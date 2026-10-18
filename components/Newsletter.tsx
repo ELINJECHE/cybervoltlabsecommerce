@@ -3,13 +3,14 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useAuth } from "@/lib/auth-context";
+import { toAppError, type AppError } from "@/lib/errors";
 
 type Status = "idle" | "already-subscribed" | "subscribed-with-points" | "error";
 
 export default function Newsletter() {
   const { user, claimNewsletterPoints } = useAuth();
   const [status, setStatus] = useState<Status>("idle");
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<AppError | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -19,7 +20,7 @@ export default function Newsletter() {
     const { error, newlyAwarded } = await claimNewsletterPoints();
     setSubmitting(false);
     if (error) {
-      setError(error);
+      setError(toAppError(error, "CV-NET-01"));
       setStatus("error");
       return;
     }
@@ -55,7 +56,7 @@ export default function Newsletter() {
       ) : (
         <form onSubmit={handleSubmit} className="mt-3">
           {status === "error" && error && (
-            <p className="mb-2 text-xs text-deal">{error}</p>
+            <p className="mb-2 text-xs text-deal">{error.message}{error.code ? ` (${error.code})` : ""}</p>
           )}
           <button
             type="submit"

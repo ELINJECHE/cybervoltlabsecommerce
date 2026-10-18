@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/lib/auth-context";
 import { supabaseEnabled } from "@/lib/supabase";
+import ErrorNotice from "@/components/ErrorNotice";
+import { toAppError, type AppError } from "@/lib/errors";
 
 export default function LoginPage() {
   const { signIn } = useAuth();
@@ -13,7 +15,7 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<AppError | null>(null);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -22,7 +24,7 @@ export default function LoginPage() {
     const { error } = await signIn(email, password);
     setSubmitting(false);
     if (error) {
-      setError(error);
+      setError(toAppError(error, "CV-AUTH-04"));
       return;
     }
     router.push("/account");
@@ -72,7 +74,7 @@ export default function LoginPage() {
           />
         </div>
 
-        {error && <p className="rounded-md bg-deal/10 px-3 py-2 text-sm text-deal">{error}</p>}
+        <ErrorNotice error={error} context="logging in" />
 
         <button
           type="submit"

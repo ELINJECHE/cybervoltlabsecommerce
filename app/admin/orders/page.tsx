@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { formatKES } from "@/lib/format";
 import { buildPhoneChatLink, normalizeKenyanPhone } from "@/lib/whatsapp";
+import { toAdminMessage } from "@/lib/errors";
 import {
   ORDERS_SETUP_NEEDED,
   ORDER_STATUSES,
@@ -46,7 +47,7 @@ export default function OrdersPage() {
         setOrders(rows);
         setSuppliers(await loadItemSuppliers(rows.flatMap((o) => o.items.map((i) => i.productId))));
       })
-      .catch((err: Error) => (err.message === ORDERS_SETUP_NEEDED ? setSetupNeeded(true) : setError(err.message)))
+      .catch((err: Error) => (err.message === ORDERS_SETUP_NEEDED ? setSetupNeeded(true) : setError(toAdminMessage(err, "CV-ADM-04"))))
       .finally(() => setLoading(false));
   }, []);
 
@@ -76,7 +77,7 @@ export default function OrdersPage() {
       await updateOrderStatus(order.id, status);
       setOrders((prev) => prev.map((o) => (o.id === order.id ? { ...o, status } : o)));
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Couldn't update the order.");
+      setError(toAdminMessage(err, "CV-ADM-01", "Couldn't update the order."));
     } finally {
       setSaving(null);
     }

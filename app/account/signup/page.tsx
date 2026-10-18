@@ -4,6 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { useAuth } from "@/lib/auth-context";
 import { supabaseEnabled } from "@/lib/supabase";
+import ErrorNotice from "@/components/ErrorNotice";
+import { toAppError, type AppError } from "@/lib/errors";
 
 export default function SignupPage() {
   const { signUp } = useAuth();
@@ -13,7 +15,7 @@ export default function SignupPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<AppError | null>(null);
   const [done, setDone] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
@@ -23,7 +25,7 @@ export default function SignupPage() {
     const { error } = await signUp(email, password, fullName, phone);
     setSubmitting(false);
     if (error) {
-      setError(error);
+      setError(toAppError(error, "CV-AUTH-04"));
       return;
     }
     setDone(true);
@@ -111,7 +113,7 @@ export default function SignupPage() {
           />
         </div>
 
-        {error && <p className="rounded-md bg-deal/10 px-3 py-2 text-sm text-deal">{error}</p>}
+        <ErrorNotice error={error} context="creating an account" />
 
         <button
           type="submit"

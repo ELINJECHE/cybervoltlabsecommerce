@@ -8,6 +8,7 @@ import { generateId, slugify, uploadProductImage } from "@/lib/admin-products";
 import { markUnpublished } from "@/lib/deploy";
 import { getProductSupplier, saveProductSupplier } from "@/lib/admin-sourcing";
 import { buildPhoneChatLink, normalizeKenyanPhone } from "@/lib/whatsapp";
+import { toAdminMessage } from "@/lib/errors";
 
 interface ProductFormProps {
   categories: CategoryRow[];
@@ -61,7 +62,7 @@ export default function ProductForm({ categories, initial, onSubmit, submitLabel
       const url = await uploadProductImage(file, draftId);
       setImages((prev) => [...prev, url]);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Image upload failed.");
+      setError(toAdminMessage(err, "CV-ADM-02", "Image upload failed."));
     } finally {
       setUploading(false);
       e.target.value = "";
@@ -128,7 +129,7 @@ export default function ProductForm({ categories, initial, onSubmit, submitLabel
       }
       router.push("/admin");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong saving this product.");
+      setError(toAdminMessage(err, "CV-ADM-01", "Something went wrong saving this product."));
       setSubmitting(false);
     }
   }

@@ -5,6 +5,15 @@ but waiting on a setup step that only the site owner can do.
 ==============================================================================
 2026-10-18
 ==============================================================================
+Error codes  (committed, not yet pushed)
+- Failures now show a plain sentence plus a reference code (CV-AUTH-01, CV-ORDER-02 ...) and a WhatsApp link that
+  quotes it, instead of raw technical text. Wrong password / unconfirmed email / existing account stay specific.
+  Staff screens show the code plus the real detail. Key to all 15 codes: docs/ERROR_CODES.md (rebuild it with
+  node scripts/gen-error-docs.mjs after editing lib/errors.ts).
+Supabase keys
+- The site now uses the new publishable key; the legacy anon and service keys are disabled. Any build, including
+  Netlify or GitHub, must have the new NEXT_PUBLIC_SUPABASE_ANON_KEY. The build refuses to run on the old key.
+
 Storefront upgrade, phases 1-3  (committed, not yet pushed)
 Phase 1
 - Top bar: live same-day countdown in Nairobi time ("Order in the next 3h 10m for same-day delivery"),

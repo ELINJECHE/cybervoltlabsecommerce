@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { formatKES } from "@/lib/format";
+import { toAdminMessage } from "@/lib/errors";
 import {
   SETUP_NEEDED,
   loadInventoryLines,
@@ -27,7 +28,7 @@ export default function InventoryPage() {
   useEffect(() => {
     loadInventoryLines()
       .then(setLines)
-      .catch((err: Error) => (err.message === SETUP_NEEDED ? setSetupNeeded(true) : setError(err.message)))
+      .catch((err: Error) => (err.message === SETUP_NEEDED ? setSetupNeeded(true) : setError(toAdminMessage(err, "CV-ADM-04"))))
       .finally(() => setLoading(false));
   }, []);
 

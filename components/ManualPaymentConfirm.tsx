@@ -9,6 +9,8 @@ import { MPESA_TILL, TILL_NAME, ORDER_HOLD_TIME } from "@/lib/store-info";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
 import CheckoutSteps from "@/components/CheckoutSteps";
 import CopyButton from "@/components/CopyButton";
+import ErrorNotice from "@/components/ErrorNotice";
+import { toAppError, type AppError } from "@/lib/errors";
 
 interface Props {
   order: OrderPayload;
@@ -26,7 +28,7 @@ export default function ManualPaymentConfirm({ order, reason, onConfirmed }: Pro
   const [paidAmount, setPaidAmount] = useState(String(amountDue));
   const [manual, setManual] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<AppError | null>(null);
 
   const parsed = useMemo(() => parseMpesaMessage(pasted), [pasted]);
   const pasteFailed = pasted.trim().length > 0 && !parsed.code;
@@ -56,9 +58,9 @@ export default function ManualPaymentConfirm({ order, reason, onConfirmed }: Pro
     const amount = Number(paidAmount);
     if (!CODE_PATTERN.test(code) || !(amount > 0) || !paidFromPhone.trim()) {
       setManual(true);
-      setError(
-        "Please paste your M-Pesa message, or enter the confirmation code (the 10 letters and numbers at the start of the SMS)."
-      );
+      setError({
+        message: "Please paste your M-Pesa message, or enter the confirmation code (the 10 letters and numbers at the start of the SMS).",
+      });
       return;
     }
 
@@ -70,10 +72,8 @@ export default function ManualPaymentConfirm({ order, reason, onConfirmed }: Pro
         paidAmount: amount,
       });
       onConfirmed(code);
-    } catch {
-      setError(
-        "We couldn't send your confirmation just now. Please try again, or send your M-Pesa code to us on WhatsApp."
-      );
+    } catch (err) {
+      setError(toAppError(err, "CV-ORDER-03"));
       setSubmitting(false);
     }
   }
@@ -266,7 +266,7 @@ export default function ManualPaymentConfirm({ order, reason, onConfirmed }: Pro
           </div>
         )}
 
-        {error && <p className="mt-3 rounded-md bg-deal/10 px-3 py-2 text-sm text-deal">{error}</p>}
+        <ErrorNotice error={error} context={`paying for order ${order.orderReference}`} className="mt-3" />
 
         <button
           type="submit"

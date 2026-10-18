@@ -23,6 +23,8 @@ import CheckoutSteps from "@/components/CheckoutSteps";
 import { SAME_DAY_HEADLINE } from "@/lib/store-info";
 import { MVP_CODE, MVP_DELIVERY_DISCOUNT } from "@/lib/community";
 import { useDeliveryArea } from "@/lib/use-delivery-area";
+import ErrorNotice from "@/components/ErrorNotice";
+import { ERROR_CODES, toAppError, type AppError } from "@/lib/errors";
 import {
   NAIROBI_ZONES,
   OUTSIDE_NAIROBI_NOTE,
@@ -65,7 +67,7 @@ export default function CheckoutPage() {
   const total = subtotal + (delivery?.fee ?? 0) - mvpDiscount;
   const [notes, setNotes] = useState("");
   const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<AppError | null>(null);
   const [phase, setPhase] = useState<Phase>("form");
   // Snapshot of what was ordered — the cart is cleared once payment is confirmed,
   // but the manual-payment step still needs the details.
@@ -81,11 +83,11 @@ export default function CheckoutPage() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!delivery) {
-      setError("Please choose your delivery area so we can add the delivery fee.");
+      setError({ message: "Please choose your delivery area so we can add the delivery fee." });
       return;
     }
     if (delivery.needsBuilding) {
-      setError("Please type your building or estate so we can confirm the exact delivery fee.");
+      setError({ message: "Please type your building or estate so we can confirm the exact delivery fee." });
       return;
     }
     setSubmitting(true);
@@ -117,11 +119,7 @@ export default function CheckoutPage() {
       // so every order attempt is visible to staff even if M-Pesa fails.
       await submitOrder(payload);
     } catch (err) {
-      setError(
-        err instanceof Error
-          ? err.message
-          : "Something went wrong submitting your order. Please try again or reach us on WhatsApp."
-      );
+      setError(toAppError(err, "CV-ORDER-02"));
       setSubmitting(false);
       return;
     }
@@ -165,7 +163,7 @@ export default function CheckoutPage() {
     } catch (err) {
       console.error("M-Pesa prompt could not be started:", err);
       setManualReason(
-        "We couldn't send the M-Pesa prompt to your phone automatically, but your order is saved. Pay by Till below, then confirm."
+        `${ERROR_CODES["CV-PAY-01"].customer} (Reference CV-PAY-01)`
       );
       setPhase("manual-payment");
     } finally {
@@ -407,9 +405,7 @@ export default function CheckoutPage() {
           />
         </div>
 
-        {error && (
-          <p className="rounded-md bg-deal/10 px-3 py-2 text-sm text-deal">{error}</p>
-        )}
+        <ErrorNotice error={error} context="placing an order" />
 
         <button
           type="submit"

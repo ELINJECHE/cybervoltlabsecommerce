@@ -27,6 +27,7 @@ export default function SearchBar({
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(-1);
   const [index, setIndex] = useState<SearchIndex | null>(null);
+  const [indexFailed, setIndexFailed] = useState(false);
   const [recent, setRecent] = useState<string[]>([]);
   const router = useRouter();
   const boxRef = useRef<HTMLDivElement>(null);
@@ -35,7 +36,11 @@ export default function SearchBar({
   function openPanel() {
     setOpen(true);
     setRecent(getRecentSearches());
-    if (!index) loadSearchIndex().then(setIndex).catch(() => undefined);
+    if (!index) {
+      loadSearchIndex()
+        .then((i) => { setIndex(i); setIndexFailed(false); })
+        .catch((err) => { console.error("[CV-DATA-01]", err); setIndexFailed(true); });
+    }
   }
 
   useEffect(() => {
@@ -137,6 +142,10 @@ export default function SearchBar({
                   ))}
                 </div>
               </div>
+            ) : indexFailed ? (
+              <p className="p-3 text-sm text-muted">
+                Suggestions aren&rsquo;t available right now (Reference CV-DATA-01). Press Search to look through all products.
+              </p>
             ) : !index ? (
               <p className="p-3 text-sm text-muted">Searching…</p>
             ) : (

@@ -4,13 +4,15 @@ import { useState } from "react";
 import Link from "next/link";
 import { useAuth } from "@/lib/auth-context";
 import { supabaseEnabled } from "@/lib/supabase";
+import ErrorNotice from "@/components/ErrorNotice";
+import { toAppError, type AppError } from "@/lib/errors";
 
 export default function ForgotPasswordPage() {
   const { resetPassword } = useAuth();
 
   const [email, setEmail] = useState("");
   const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<AppError | null>(null);
   const [sent, setSent] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
@@ -20,7 +22,7 @@ export default function ForgotPasswordPage() {
     const { error } = await resetPassword(email);
     setSubmitting(false);
     if (error) {
-      setError(error);
+      setError(toAppError(error, "CV-AUTH-03"));
       return;
     }
     setSent(true);
@@ -75,7 +77,7 @@ export default function ForgotPasswordPage() {
           />
         </div>
 
-        {error && <p className="rounded-md bg-deal/10 px-3 py-2 text-sm text-deal">{error}</p>}
+        <ErrorNotice error={error} context="resetting a password" />
 
         <button
           type="submit"

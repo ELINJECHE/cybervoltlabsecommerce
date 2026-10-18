@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@/lib/auth-context";
 import { supabase, supabaseEnabled } from "@/lib/supabase";
+import ErrorNotice from "@/components/ErrorNotice";
+import { toAppError, type AppError } from "@/lib/errors";
 
 export default function ResetPasswordPage() {
   const { updatePassword } = useAuth();
@@ -14,7 +16,7 @@ export default function ResetPasswordPage() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<AppError | null>(null);
   const [done, setDone] = useState(false);
 
   useEffect(() => {
@@ -37,7 +39,7 @@ export default function ResetPasswordPage() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (password !== confirmPassword) {
-      setError("Passwords don't match.");
+      setError({ message: "Passwords don't match." });
       return;
     }
     setSubmitting(true);
@@ -45,7 +47,7 @@ export default function ResetPasswordPage() {
     const { error } = await updatePassword(password);
     setSubmitting(false);
     if (error) {
-      setError(error);
+      setError(toAppError(error, "CV-AUTH-04"));
       return;
     }
     setDone(true);
@@ -119,7 +121,7 @@ export default function ResetPasswordPage() {
           />
         </div>
 
-        {error && <p className="rounded-md bg-deal/10 px-3 py-2 text-sm text-deal">{error}</p>}
+        <ErrorNotice error={error} context="setting a new password" />
 
         <button
           type="submit"

@@ -87,7 +87,7 @@ export default function PublishBar() {
       )}
       {result === "failed" && (
         <p className="mt-3 rounded-md bg-deal/10 px-3 py-2 text-sm text-deal">
-          Couldn&rsquo;t reach the publish service. Your edits are safe — try again, or deploy from
+          CV-ADM-03: couldn&rsquo;t reach the publish service. Your edits are safe — try again, or deploy from
           Netlify → Deploys.
         </p>
       )}

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { listProductsAdmin, deleteProduct, type ProductRow } from "@/lib/admin-products";
 import { markUnpublished } from "@/lib/deploy";
 import { formatKES } from "@/lib/format";
+import { toAdminMessage } from "@/lib/errors";
 
 export default function AdminProductsPage() {
   const [products, setProducts] = useState<ProductRow[]>([]);
@@ -17,7 +18,7 @@ export default function AdminProductsPage() {
     try {
       setProducts(await listProductsAdmin());
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to load products.");
+      setError(toAdminMessage(err, "CV-ADM-04", "Failed to load products."));
     } finally {
       setLoading(false);
     }
@@ -35,7 +36,7 @@ export default function AdminProductsPage() {
       markUnpublished();
       setProducts((prev) => prev.filter((p) => p.id !== id));
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to delete product.");
+      setError(toAdminMessage(err, "CV-ADM-01", "Failed to delete product."));
     } finally {
       setDeletingId(null);
     }
