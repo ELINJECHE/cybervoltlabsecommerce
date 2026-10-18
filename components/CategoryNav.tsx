@@ -7,6 +7,7 @@ import { createPortal } from "react-dom";
 import { usePathname } from "next/navigation";
 import type { Category } from "@/lib/types";
 import { useCart } from "@/lib/cart-context";
+import { useWishlist } from "@/lib/wishlist";
 import { useAuth } from "@/lib/auth-context";
 import SearchBar from "@/components/SearchBar";
 
@@ -15,6 +16,7 @@ export default function CategoryNav({ categories }: { categories: Category[] }) 
   const [expandedSlug, setExpandedSlug] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
   const { itemCount } = useCart();
+  const { items: savedItems } = useWishlist();
   const { user } = useAuth();
   const pathname = usePathname();
 
@@ -111,6 +113,21 @@ export default function CategoryNav({ categories }: { categories: Category[] }) 
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-6 w-6">
             <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
           </svg>
+        </Link>
+
+        <Link
+          href="/wishlist"
+          aria-label={`Saved items, ${savedItems.length}`}
+          className="tap-target relative hidden items-center justify-center rounded-md sm:flex"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-6 w-6">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+          </svg>
+          {savedItems.length > 0 && (
+            <span className="absolute -right-1.5 -top-1.5 flex h-5 min-w-[1.25rem] items-center justify-center rounded-full bg-deal px-1 text-[11px] font-bold text-white">
+              {savedItems.length}
+            </span>
+          )}
         </Link>
 
         <Link

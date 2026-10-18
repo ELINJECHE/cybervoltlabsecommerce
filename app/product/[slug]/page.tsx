@@ -2,6 +2,8 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getAllProducts, getCategoryBySlug, getProductBySlug, getRelatedProducts } from "@/lib/products";
+import CompleteTheSet from "@/components/CompleteTheSet";
+import { completeTheSet, needsChoice } from "@/lib/pairings";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbJsonLd, productJsonLd, productMetadata } from "@/lib/seo";
 import { getAllReviews } from "@/lib/reviews";
@@ -13,6 +15,7 @@ import ProductActions from "@/components/ProductActions";
 import ProductDelivery from "@/components/ProductDelivery";
 import StickyBuyBar from "@/components/StickyBuyBar";
 import TrackView from "@/components/TrackView";
+import WishlistButton from "@/components/WishlistButton";
 import { getProductImage } from "@/lib/images";
 import ProductCard from "@/components/ProductCard";
 import ReviewsCarousel from "@/components/ReviewsCarousel";
@@ -33,6 +36,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
   if (!product) notFound();
 
   const related = await getRelatedProducts(product);
+  const setPicks = completeTheSet(product, await getAllProducts());
   const reviews = getAllReviews();
   const category = await getCategoryBySlug(product.category);
   const categoryName = category?.name ?? product.category.replace(/-/g, " ");
@@ -83,6 +87,12 @@ export default async function ProductPage({ params }: { params: { slug: string }
           <PriceTag price={product.price} discountPrice={product.discountPrice} size="lg" />
 
           <ProductDelivery price={product.discountPrice ?? product.price} />
+          <div>
+            <WishlistButton
+              variant="inline"
+              item={{ slug: product.slug, name: product.name, price: product.discountPrice ?? product.price, image: getProductImage(product.images), id: product.id }}
+            />
+          </div>
 
           {isLowStock && (
             <p className="text-sm font-medium text-deal">Only {product.stock} left in stock — order soon</p>
@@ -118,6 +128,11 @@ export default async function ProductPage({ params }: { params: { slug: string }
           />
         </div>
       </div>
+
+      <CompleteTheSet
+        current={needsChoice(product) ? null : { id: product.id, slug: product.slug, name: product.name, image: getProductImage(product.images), price: product.discountPrice ?? product.price }}
+        picks={setPicks.map((p) => ({ id: p.id, slug: p.slug, name: p.name, image: getProductImage(p.images), price: p.discountPrice ?? p.price }))}
+      />
 
       {related.length > 0 && (
         <section className="mt-12">

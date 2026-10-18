@@ -114,6 +114,10 @@ async function loadProducts(): Promise<Product[]> {
     result = productsData as Product[];
   }
 
+  // A product with no price yet stays out of the shop (it would read "KSh 0"). It still exists in
+  // the admin panel and appears here as soon as it is given a price.
+  result = result.filter((p) => p.price > 0);
+
   if (process.env.NODE_ENV === "production") cachedProducts = result;
   return result;
 }
@@ -140,6 +144,16 @@ async function loadCategories(): Promise<Category[]> {
 
 export async function getAllProducts(): Promise<Product[]> {
   return loadProducts();
+}
+
+// Every product id, including ones still waiting for a price that the shop hides. The admin edit
+// pages are built from this list so an unpriced product can always be opened and priced.
+export async function getAllProductIds(): Promise<string[]> {
+  if (supabaseEnabled) {
+    const { data, error } = await supabase.from("products").select("id");
+    if (!error && data) return (data as { id: string }[]).map((r) => r.id);
+  }
+  return (productsData as Product[]).map((p) => p.id);
 }
 
 export async function getAllCategories(): Promise<Category[]> {

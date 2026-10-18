@@ -5,6 +5,7 @@ import { getProductImage } from "@/lib/images";
 import PriceTag from "@/components/PriceTag";
 import StarRating from "@/components/StarRating";
 import QuickAdd from "@/components/QuickAdd";
+import WishlistButton from "@/components/WishlistButton";
 
 export default function ProductCard({
   product,
@@ -29,6 +30,9 @@ export default function ProductCard({
         price={product.discountPrice ?? product.price}
       />
     )}
+    <WishlistButton
+      item={{ slug: product.slug, name: product.name, price: product.discountPrice ?? product.price, image: getProductImage(product.images), id: product.id }}
+    />
     <Link
       href={`/product/${product.slug}`}
       className="group flex h-full flex-col rounded-card border border-border bg-surface shadow-card transition hover:shadow-md"

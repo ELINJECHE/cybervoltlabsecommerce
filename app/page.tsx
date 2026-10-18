@@ -9,6 +9,7 @@ import UspStrip from "@/components/UspStrip";
 import PriceChips from "@/components/PriceChips";
 import CommunityStrip from "@/components/CommunityStrip";
 import RecentlyViewed from "@/components/RecentlyViewed";
+import { COLLECTIONS } from "@/lib/collections";
 import TrustSection from "@/components/TrustSection";
 import ReviewsCarousel from "@/components/ReviewsCarousel";
 import {
@@ -105,6 +106,21 @@ export default async function HomePage() {
       <RecentlyViewed />
 
       <PriceChips />
+
+      <section className="mx-auto max-w-7xl px-4 pt-4" aria-label="Shop by need">
+        <p className="mb-2 text-sm font-semibold">Shop by need</p>
+        <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+          {COLLECTIONS.map((c) => (
+            <Link key={c.slug} href={`/collections/${c.slug}`} className="flex items-center gap-3 rounded-card border border-border bg-surface p-3 hover:shadow-md">
+              <span className="text-2xl" aria-hidden="true">{c.icon}</span>
+              <span className="leading-tight">
+                <span className="block text-sm font-semibold">{c.title}</span>
+                <span className="hidden text-xs text-muted sm:block">{c.blurb}</span>
+              </span>
+            </Link>
+          ))}
+        </div>
+      </section>
 
       {SHELVES.map((shelf, i) => (
         <div key={shelf.title}>
