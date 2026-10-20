@@ -5,6 +5,11 @@ but waiting on a setup step that only the site owner can do.
 ==============================================================================
 2026-10-18
 ==============================================================================
+Omar Electronics prices
+- The 38 Omar Electronics products (TVs, home theatre systems, speakers, soundbars, microwaves, fridge, cooker,
+  water dispensers, heater) now have prices (KSh 2,600 to 36,800) in the database. They appear on the live site
+  at the next build. No products are left at KSh 0.
+
 Error codes  (committed, not yet pushed)
 - Failures now show a plain sentence plus a reference code (CV-AUTH-01, CV-ORDER-02 ...) and a WhatsApp link that
   quotes it, instead of raw technical text. Wrong password / unconfirmed email / existing account stay specific.
