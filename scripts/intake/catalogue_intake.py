@@ -55,7 +55,7 @@ DESC = {
 BIG_BRANDS = re.compile(r"(?i)\b(nike|adidas|puma|new balance|vans|jordan|timberland|clarks|dr\.? ?martens|lugz|cat|converse|skechers|reebok|under armour|on cloud|air ?max|air ?force)\b")
 GREETING = re.compile(r"(?i)\b(good morning|happy (?:monday|tuesday|wednesday|thursday|friday|saturday|sunday)|blessings?|prayer|amen|father|lord|heavenly|almighty|god|happy new)\b")
 SOLD_OUT = re.compile(r"(?i)\b(sold ?out|out of stock|out-of-stock|no stock|imeisha|zimeisha|stock (?:is )?(?:over|finished)|not available)\b")
-NEW_ITEM_DAYS = CFG.get("new_item_days", 7)        # only posts this recent are offered as new products
+NEW_ITEM_DAYS = int(os.environ.get("INTAKE_NEW_ITEM_DAYS") or CFG.get("new_item_days", 7))        # only posts this recent are offered as new products
 STOCK_CHECK_DAYS = CFG.get("stock_check_days", 21)  # on-site products not reposted this long get a stock warning
 STALE_EXPORT_DAYS = 14                              # warn when a supplier's chat hasn't been exported for this long
 EMO = re.compile(r"[\U00010000-\U0010ffff☀-➿⬀-⯿️‍]")
@@ -201,16 +201,31 @@ def guess_category(text):
     return ""
 
 
+def supplier_skip_senders(supplier):
+    """Senders to ignore in one supplier's chat (config suppliers[].skip_senders): in a one-to-one chat
+    your own messages and screenshots are conversation, not products."""
+    return next((x.get("skip_senders", []) for x in CFG["suppliers"] if x["name"] == supplier), [])
+
+
+def looks_like_product(text):
+    """A caption worth naming a product from: it has a price, or says what the thing is."""
+    return bool(text) and (bool(prices_in(text)) or bool(guess_category(text)))
+
+
 def build_items(msgs, photos_dir, supplier):
     items, last_text = [], None
+    skip = set(CFG["skip_senders"]) | set(supplier_skip_senders(supplier))
     for m in sorted(msgs, key=lambda x: x["ts"]):
-        if m["sender"] in CFG["skip_senders"]: continue
+        if m["sender"] in skip: continue
         photos = [a or b for a, b in ATTACH.findall(m["body"])]
         txt = clean_text(m["body"])
         if "omitted" in txt and not photos:
             continue
         if photos:
             use = txt or (last_text[1] if last_text and (m["ts"] - last_text[0]).total_seconds() <= 600 else "")
+            # Chit-chat ("Hello kaka", "Poa sana") is not a product name. The photo is kept, but unnamed,
+            # so it shows up as "(name from photo)" for you to name or skip.
+            if not looks_like_product(use): use = ""
             files = [p for p in photos if os.path.exists(os.path.join(photos_dir, p)) and p.lower().endswith((".jpg", ".jpeg", ".png", ".webp"))]
             if files:
                 items.append({"ts": m["ts"], "text": use, "own": bool(txt), "photos": files, "sender": m["sender"]})
@@ -269,6 +284,28 @@ def cost_check(cost, site_price, kind):
 def tokens(s):
     stop = {"the", "and", "with", "for", "size", "pcs", "pc", "set", "kg", "black", "white", "new"}
     return {t for t in re.findall(r"[a-z0-9]+", s.lower()) if len(t) > 1 and t not in stop}
+
+
+def stem_tokens(s):
+    """tokens() with plurals folded (protectors = protector) for the duplicate check."""
+    return {t[:-1] if len(t) > 4 and t.endswith("s") and not t.endswith("ss") else t for t in tokens(s)}
+
+
+def same_item(name, price, live):
+    """A product on the shop that is PROBABLY the same thing under different wording: same selling
+    price and at least two shared words ('Camp master folding chair' / 'Heavy-Duty Folding Camping
+    Chair'), or a shared model/quantity number (1553). Category is ignored, because the same item
+    is often filed under two. It is a guess (Air Max 95 and 97 at one price also match), so apply
+    holds such rows for a look instead of skipping them; 'ADD ANYWAY' overrides."""
+    if not isinstance(price, (int, float)): return None
+    a = stem_tokens(name)
+    for p in live:
+        if p.get("price") != int(price): continue
+        b = stem_tokens(p["name"])
+        shared = a & b
+        if not shared or not b: continue
+        if len(shared) >= 2 or any(t.isdigit() and len(t) >= 4 for t in shared): return p
+    return None
 
 
 def match_live(name, live):
@@ -359,7 +396,7 @@ def write_sheet(path, rows):
     ws.add_data_validation(cats); cats.add(f"G2:G{ws.max_row + 500}")
     ws.freeze_panes = "D2"
     n = wb.create_sheet("How to review")
-    for line in ["1. In column A choose ADD or SKIP for each row (blank rows are ignored). Prices of products already on the site are changed in the admin panel, never from here.",
+    for line in ["1. In column A choose ADD or SKIP for each row (blank rows are ignored). A row held as a possible repeat of something already on the site: SKIP it, or choose ADD ANYWAY if it is a different item. Prices of products already on the site are changed in the admin panel, never from here.",
                  "   Orange rows (⚠) are products you already sell whose new supplier price leaves you a thin margin or a loss; blue rows (↓) leave room to cut your price.",
                  "   For those, choose UPDATE COST to record the new supplier price for the admin Inventory & pricing page. Your selling price is NOT changed: do that in admin.",
                  "2. Check the product name and category (yellow = needs a name). Branded shoes: keep the '-style' wording, no brand claims.",
@@ -703,7 +740,7 @@ def cmd_apply(args):
     cats = {r["slug"] for r in json.loads(body)}
     # Names already on the shop, so an ADD row that repeats a live product (or an earlier row in this
     # same run) is skipped instead of creating a second copy.
-    st, body = http("GET", f"{base}/rest/v1/products?select=name,category", HR)
+    st, body = http("GET", f"{base}/rest/v1/products?select=name,category,price", HR)
     live_now = json.loads(body) if st == 200 else []
     added = bad = costs = dups = 0
     for sp in sheets:
@@ -722,7 +759,7 @@ def cmd_apply(args):
                         ws.cell(row=row[0].row, column=COL["Applied"]).value = "cost " + datetime.date.today().isoformat(); dirty = True
                 elif r_ is False: bad += 1
                 continue
-            if decision != "ADD": continue
+            if decision not in ("ADD", "ADD ANYWAY"): continue
             name, cat, price = (v("Product name") or "").strip(), (v("Category") or "").strip(), v("Final sell price")
             name = clean_listing_name(name, v("Supplier price (cost)"))
             if not cat:  # blank category: keyword guess, then the config fallback rules
@@ -738,8 +775,15 @@ def cmd_apply(args):
             if not isinstance(price, (int, float)) or price < CFG["min_sell_price"]: print(f"  ! {name}: needs a final sell price"); bad += 1; continue
             if cat not in cats: print(f"  ! {name}: category '{cat}' doesn't exist yet (create it first)"); bad += 1; continue
             nk = re.sub(r"[^a-z0-9]", "", name.lower())
-            dup = next((p_ for p_ in live_now if re.sub(r"[^a-z0-9]", "", p_["name"].lower()) == nk), None) or match_live(name, live_now)
-            if dup is not None and (dup.get("category") == cat or re.sub(r"[^a-z0-9]", "", dup["name"].lower()) == nk):
+            force = decision == "ADD ANYWAY"   # you looked: add it even if it resembles something on the shop
+            dup = None if force else next((p_ for p_ in live_now if re.sub(r"[^a-z0-9]", "", p_["name"].lower()) == nk), None) or match_live(name, live_now)
+            maybe = same_item(name, price, live_now) if dup is None and decision == "ADD" else None
+            if maybe is not None:
+                print(f"  ? {name}: same price and wording as '{maybe['name']}', held. Set Decision to SKIP if it's a repeat, or ADD ANYWAY if it's a different item"); bad += 1
+                continue
+            if dup is not None and not (dup.get("category") == cat or re.sub(r"[^a-z0-9]", "", dup["name"].lower()) == nk):
+                dup = None
+            if dup is not None:
                 print(f"  = {name}: skipped, already on the shop as '{dup['name']}'"); dups += 1
                 if not args.dry_run:
                     ws.cell(row=row[0].row, column=COL["Decision"]).value = "SKIP (duplicate)"; dirty = True
@@ -755,7 +799,7 @@ def cmd_apply(args):
             sizes = v("Sizes")
             desc = DESC.get(cat, "") + (f" Sizes {sizes}. Please add your size in the Order Notes at checkout." if sizes and cat == "sneakers-shoes" else "")
             print(f"  {'(dry) ' if args.dry_run else ''}add   {name} | {cat} | KSh {int(price)} (cost {cost or 'n/a'} from {supplier}) | {len(files)} photo(s)")
-            live_now.append({"name": name, "category": cat})
+            live_now.append({"name": name, "category": cat, "price": int(price)})
             if args.dry_run: added += 1; continue
             pid = str(uuid.uuid4()); urls = []
             try:

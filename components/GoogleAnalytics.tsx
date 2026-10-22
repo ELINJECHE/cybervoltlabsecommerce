@@ -1,13 +1,13 @@
 import Script from "next/script";
-import { CONSENT_KEY } from "@/lib/consent";
+import { CONSENT_KEY, DEFAULT_CONSENT } from "@/lib/consent";
 
 // Set NEXT_PUBLIC_GA4_ID in .env.local to enable. This is the ONE analytics
 // script the project budget allows — do not also add Meta Pixel alongside it.
 // NEXT_PUBLIC_GA4_ID_2 is an optional second property: the same gtag.js load
 // reports every visit to both, neither overwrites the other.
-// Google Consent Mode v2: everything starts denied; CookieConsent grants
-// analytics_storage only after the visitor accepts (and restores that choice
-// on later visits).
+// Google Consent Mode v2: analytics_storage starts at DEFAULT_CONSENT (lib/consent.ts) unless the
+// visitor already chose. With the default granted, pressing Decline in CookieConsent turns cookies off and
+// the choice is restored on later visits (while denied, gtag.js still sends cookie-less pings). Ad storage and personalisation always stay denied.
 const GA4_IDS = [process.env.NEXT_PUBLIC_GA4_ID, process.env.NEXT_PUBLIC_GA4_ID_2].filter(
   (id): id is string => Boolean(id)
 );
@@ -28,11 +28,12 @@ export default function GoogleAnalytics() {
             ad_storage: 'denied',
             ad_user_data: 'denied',
             ad_personalization: 'denied',
-            analytics_storage: 'denied'
+            analytics_storage: '${DEFAULT_CONSENT}'
           });
           try {
-            if (localStorage.getItem('${CONSENT_KEY}') === 'granted') {
-              gtag('consent', 'update', { analytics_storage: 'granted' });
+            var saved = localStorage.getItem('${CONSENT_KEY}');
+            if (saved === 'granted' || saved === 'denied') {
+              gtag('consent', 'update', { analytics_storage: saved });
             }
           } catch (e) {}
           gtag('js', new Date());

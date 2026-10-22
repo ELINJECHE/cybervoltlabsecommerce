@@ -9,6 +9,7 @@ import {
 } from "react";
 import type { User } from "@supabase/supabase-js";
 import { supabase, supabaseEnabled } from "@/lib/supabase";
+import { LOYALTY_V2, type WelcomeVoucher } from "@/lib/loyalty";
 
 interface AuthContextValue {
   user: User | null;
@@ -16,12 +17,14 @@ interface AuthContextValue {
   isAdmin: boolean;
   pointsBalance: number;
   refreshPoints: () => Promise<void>;
+  /** The customer's one-time welcome voucher (null until loaded, or when rewards are off). */
+  welcomeVoucher: WelcomeVoucher | null;
+  refreshVoucher: () => Promise<void>;
   signUp: (email: string, password: string, fullName: string, phone: string) => Promise<{ error: string | null }>;
   signIn: (email: string, password: string) => Promise<{ error: string | null }>;
   signOut: () => Promise<void>;
   resetPassword: (email: string) => Promise<{ error: string | null }>;
   updatePassword: (newPassword: string) => Promise<{ error: string | null }>;
-  claimNewsletterPoints: () => Promise<{ error: string | null; newlyAwarded: boolean }>;
 }
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
@@ -30,6 +33,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [pointsBalance, setPointsBalance] = useState(0);
+  const [welcomeVoucher, setWelcomeVoucher] = useState<WelcomeVoucher | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
 
   async function refreshAdminStatus() {
@@ -76,8 +80,25 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return () => listener.subscription.unsubscribe();
   }, []);
 
+  // Asking for the voucher creates it the first time and just returns it afterwards.
+  async function refreshVoucher() {
+    if (!LOYALTY_V2 || !supabaseEnabled || !user) {
+      setWelcomeVoucher(null);
+      return;
+    }
+    const { data, error } = await supabase.rpc("ensure_welcome_voucher");
+    if (error) {
+      console.error("[CV-LOY-01] welcome voucher:", error.message);
+      setWelcomeVoucher(null);
+      return;
+    }
+    const row = Array.isArray(data) ? data[0] : data;
+    setWelcomeVoucher(row ? { amount: row.amount, minOrder: row.min_order, used: Boolean(row.used) } : null);
+  }
+
   useEffect(() => {
     refreshPoints();
+    refreshVoucher();
     refreshAdminStatus();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
@@ -117,15 +138,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return { error: error?.message ?? null };
   }
 
-  async function claimNewsletterPoints() {
-    if (!supabaseEnabled) return { error: "Accounts aren't set up yet — check back soon.", newlyAwarded: false };
-    if (!user) return { error: "Log in or create an account first to claim your points.", newlyAwarded: false };
-    const { data, error } = await supabase.rpc("claim_newsletter_points");
-    if (error) return { error: error.message, newlyAwarded: false };
-    await refreshPoints();
-    return { error: null, newlyAwarded: Boolean(data) };
-  }
-
   return (
     <AuthContext.Provider
       value={{
@@ -134,12 +146,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         isAdmin,
         pointsBalance,
         refreshPoints,
+        welcomeVoucher,
+        refreshVoucher,
         signUp,
         signIn,
         signOut,
         resetPassword,
         updatePassword,
-        claimNewsletterPoints,
       }}
     >
       {children}

@@ -3,14 +3,53 @@ Newest first. "Live" = running on cybervoltlabs.co.ke. "Not deployed" = in the c
 but waiting on a setup step that only the site owner can do.
 
 ==============================================================================
+2026-10-22
+==============================================================================
+Catalogue clean-up and 40% pricing  (database, live after this build)
+- 16 duplicate products from the 18 Oct batch removed; 2 out-of-stock helmets, a mislabelled raincoat and a duplicate vest
+  removed; the Hi-Vis Reflective Mesh Vest set to KSh 3,500.
+- New standard margin 40% over supplier cost (was 20%): 362 existing products repriced (undo file in intake/), and new
+  intake uses 40%. Gears Central added as a supplier: 3 new helmets, 2 older helmets repriced to 40% over his cost.
+- Intake now holds likely repeats for review and stops chat lines becoming product names.
+
+Shop events and order source  (pushed 2026-10-22)
+- Google Analytics now receives the standard shop steps: product viewed (view_item), added to cart (add_to_cart), checkout
+  started (begin_checkout) and order placed (purchase, with the order reference, items and delivery fee). Together with the
+  cookies being on by default, Analytics' monetisation reports show the full journey and returning buyers.
+- Every order now notes where the visitor came from ("Source: tiktok/bio", "Source: l.facebook.com", "Source: direct") in
+  its Notes. Tag links like https://cybervoltlabs.co.ke/?utm_source=tiktok&utm_medium=bio to name a source yourself.
+- Privacy page updated to match. Code: lib/analytics.ts, lib/source.ts. Order placement itself was not exercised on
+  localhost (it would write to the real order sheet), so check the first live order's Notes and Analytics' real-time view.
+
+Privacy page  (pushed 2026-10-22)
+- New page /privacy ("Privacy & Cookies"): what is collected, why, who handles it, cookies with a switch-off button, how
+  long it is kept, and the visitor's rights under Kenya's Data Protection Act. Linked from the footer and the cookie
+  notice, and added to the sitemap. It describes what the code does today; update it if tracking changes.
+
+Cookie bar and analytics  (pushed 2026-10-22)
+- Analytics cookies are ON by default so returning visitors and full journeys are recognised; a visitor who presses
+  Decline is not tracked, and that choice is remembered ("Cookie settings" in the footer reopens it). Ad cookies and ad
+  personalisation stay off. This was the owner's decision; it is riskier than opt-in under Kenya's Data Protection Act.
+- The notice is now a small card that doesn't cover the bottom of a phone screen: above the bottom menu, WhatsApp button
+  left free. Wording: "They are on unless you decline."
+- To go back to opt-in, set DEFAULT_CONSENT = "denied" in lib/consent.ts (visits are then counted anonymously).
+
+==============================================================================
 2026-10-18
 ==============================================================================
+Loyalty v2  (pushed 2026-10-22; hidden until switched on)
+- Points are now worth KSh 1 each. Paid orders earn 1% (1.5% from KSh 20,000). Points can be used at checkout (min 100,
+  max 10% of the order or KSh 1,000). The 100 free "newsletter" points are gone, replaced by a one-time KSh 200 welcome
+  voucher on a first order of KSh 4,000+.
+- Enforced in the database (docs/sql/loyalty_v2.sql, tested with 23 checks) and mirrored on screen (lib/loyalty.ts).
+- Off until you run the SQL and set NEXT_PUBLIC_LOYALTY_V2=true. Full guide: docs/LOYALTY.md.
+
 Omar Electronics prices
 - The 38 Omar Electronics products (TVs, home theatre systems, speakers, soundbars, microwaves, fridge, cooker,
   water dispensers, heater) now have prices (KSh 2,600 to 36,800) in the database. They appear on the live site
   at the next build. No products are left at KSh 0.
 
-Error codes  (committed, not yet pushed)
+Error codes  (pushed 2026-10-22)
 - Failures now show a plain sentence plus a reference code (CV-AUTH-01, CV-ORDER-02 ...) and a WhatsApp link that
   quotes it, instead of raw technical text. Wrong password / unconfirmed email / existing account stay specific.
   Staff screens show the code plus the real detail. Key to all 15 codes: docs/ERROR_CODES.md (rebuild it with
@@ -19,7 +58,7 @@ Supabase keys
 - The site now uses the new publishable key; the legacy anon and service keys are disabled. Any build, including
   Netlify or GitHub, must have the new NEXT_PUBLIC_SUPABASE_ANON_KEY. The build refuses to run on the old key.
 
-Storefront upgrade, phases 1-3  (committed, not yet pushed)
+Storefront upgrade, phases 1-3  (pushed 2026-10-22)
 Phase 1
 - Top bar: live same-day countdown in Nairobi time ("Order in the next 3h 10m for same-day delivery"),
   switching to the next delivery day after 5pm, on Sundays and on public holidays. Delivery-area picker

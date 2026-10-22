@@ -1,71 +1,51 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { useAuth } from "@/lib/auth-context";
-import { toAppError, type AppError } from "@/lib/errors";
+import { EXCLUSIVE_GROUP_URL } from "@/lib/community";
+import { LOYALTY_V2, WELCOME_AMOUNT, WELCOME_MIN_ORDER } from "@/lib/loyalty";
+import { formatKES } from "@/lib/format";
 
-type Status = "idle" | "already-subscribed" | "subscribed-with-points" | "error";
-
+// Footer box. With rewards on: the welcome voucher. Otherwise: the free WhatsApp group.
 export default function Newsletter() {
-  const { user, claimNewsletterPoints } = useAuth();
-  const [status, setStatus] = useState<Status>("idle");
-  const [error, setError] = useState<AppError | null>(null);
-  const [submitting, setSubmitting] = useState(false);
+  const { user, welcomeVoucher } = useAuth();
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    if (!user) return; // guests see the login/signup prompt instead of this form
-    setSubmitting(true);
-    const { error, newlyAwarded } = await claimNewsletterPoints();
-    setSubmitting(false);
-    if (error) {
-      setError(toAppError(error, "CV-NET-01"));
-      setStatus("error");
-      return;
-    }
-    setStatus(newlyAwarded ? "subscribed-with-points" : "already-subscribed");
+  if (!LOYALTY_V2) {
+    return (
+      <div>
+        <h3 className="text-sm font-semibold text-white">Get deals first</h3>
+        <p className="mt-1 text-xs text-white/70">New arrivals and offers, straight to your phone.</p>
+        <a
+          href={EXCLUSIVE_GROUP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="tap-target mt-3 flex h-11 w-full items-center justify-center rounded-md bg-accent px-4 text-sm font-semibold text-foreground transition hover:brightness-95"
+        >
+          Join the free WhatsApp group
+        </a>
+      </div>
+    );
   }
 
   return (
     <div>
-      <h3 className="text-sm font-semibold text-white">Get deals in your inbox</h3>
+      <h3 className="text-sm font-semibold text-white">{formatKES(WELCOME_AMOUNT)} off your first order</h3>
       <p className="mt-1 text-xs text-white/70">
-        No spam, just restocks and flash deals — plus 100 points for subscribing.
+        Create an account for a welcome voucher on a first order of {formatKES(WELCOME_MIN_ORDER)} or more, and earn points on every paid order.
       </p>
-
       {!user ? (
-        <p className="mt-3 text-sm text-white/80">
-          <Link href="/account/signup" className="font-medium text-accent hover:underline">
-            Create an account
-          </Link>{" "}
-          (or{" "}
-          <Link href="/account/login" className="font-medium text-accent hover:underline">
-            log in
-          </Link>
-          ) to subscribe and claim your 100 points.
-        </p>
-      ) : status === "subscribed-with-points" ? (
+        <Link
+          href="/account/signup"
+          className="tap-target mt-3 flex h-11 w-full items-center justify-center rounded-md bg-accent px-4 text-sm font-semibold text-foreground transition hover:brightness-95"
+        >
+          Create an account
+        </Link>
+      ) : welcomeVoucher && !welcomeVoucher.used ? (
         <p className="mt-3 text-sm font-medium text-accent">
-          You&rsquo;re subscribed — 100 points added to your account!
-        </p>
-      ) : status === "already-subscribed" ? (
-        <p className="mt-3 text-sm font-medium text-accent">
-          You&rsquo;re already subscribed — that bonus is one-time per account.
+          Your {formatKES(welcomeVoucher.amount)} voucher is ready. Use it at checkout on a first order of {formatKES(welcomeVoucher.minOrder)} or more.
         </p>
       ) : (
-        <form onSubmit={handleSubmit} className="mt-3">
-          {status === "error" && error && (
-            <p className="mb-2 text-xs text-deal">{error.message}{error.code ? ` (${error.code})` : ""}</p>
-          )}
-          <button
-            type="submit"
-            disabled={submitting}
-            className="tap-target h-11 w-full rounded-md bg-accent px-4 text-sm font-semibold text-foreground transition hover:brightness-95 disabled:cursor-not-allowed disabled:opacity-70"
-          >
-            {submitting ? "Subscribing..." : "Subscribe & Claim 100 Points"}
-          </button>
-        </form>
+        <p className="mt-3 text-sm font-medium text-accent">You&rsquo;re all set. Your points show in your account.</p>
       )}
     </div>
   );

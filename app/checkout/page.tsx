@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/lib/cart-context";
@@ -23,6 +23,10 @@ import CheckoutSteps from "@/components/CheckoutSteps";
 import { SAME_DAY_HEADLINE } from "@/lib/store-info";
 import { MVP_CODE, MVP_DELIVERY_DISCOUNT } from "@/lib/community";
 import { useDeliveryArea } from "@/lib/use-delivery-area";
+import { LOYALTY_V2, TIER_THRESHOLD, maxRedeemable, pointsEarned } from "@/lib/loyalty";
+import { supabase } from "@/lib/supabase";
+import { trackShop } from "@/lib/analytics";
+import { readSource } from "@/lib/source";
 import ErrorNotice from "@/components/ErrorNotice";
 import { ERROR_CODES, toAppError, type AppError } from "@/lib/errors";
 import {
@@ -44,9 +48,8 @@ const MPESA_PROMPT_ENABLED = supabaseEnabled && process.env.NEXT_PUBLIC_MPESA_PR
 
 export default function CheckoutPage() {
   const { items, subtotal, clearCart } = useCart();
-  const { user } = useAuth();
+  const { user, pointsBalance, welcomeVoucher, refreshPoints, refreshVoucher } = useAuth();
   const router = useRouter();
-  const estimatedPoints = Math.floor(subtotal / 1000) * 5;
 
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -64,17 +67,37 @@ export default function CheckoutPage() {
   // The MVP code takes KSh 100 off the delivery fee (never below zero; not for courier parcels).
   const mvpApplied = mvpCode.trim().toUpperCase() === MVP_CODE;
   const mvpDiscount = mvpApplied && delivery && !delivery.payOnDelivery ? Math.min(MVP_DELIVERY_DISCOUNT, delivery.fee) : 0;
-  const total = subtotal + (delivery?.fee ?? 0) - mvpDiscount;
+  // Rewards: the welcome voucher (a first order of KSh 4,000+) and points (1 point = KSh 1).
+  const [useVoucher, setUseVoucher] = useState(true);
+  const [usePoints, setUsePoints] = useState(false);
+  const voucherEligible = LOYALTY_V2 && !!user && !!welcomeVoucher && !welcomeVoucher.used && subtotal >= welcomeVoucher.minOrder;
+  const voucherOff = voucherEligible && useVoucher ? welcomeVoucher!.amount : 0;
+  const redeemMax = LOYALTY_V2 && user ? maxRedeemable(subtotal, voucherOff, pointsBalance) : 0;
+  const pointsOff = usePoints ? redeemMax : 0;
+  const estimatedPoints = LOYALTY_V2 ? pointsEarned(subtotal, voucherOff + pointsOff) : 0;
+  const total = subtotal + (delivery?.fee ?? 0) - mvpDiscount - voucherOff - pointsOff;
   const [notes, setNotes] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<AppError | null>(null);
   const [phase, setPhase] = useState<Phase>("form");
+  // Once per visit to this page, as soon as the saved cart has loaded.
+  const startedCheckout = useRef(false);
+  useEffect(() => {
+    if (startedCheckout.current || items.length === 0) return;
+    startedCheckout.current = true;
+    trackShop("begin_checkout", items.map((i) => ({ id: i.productId, name: i.name, price: i.unitPrice, quantity: i.quantity })));
+  }, [items]);
   // Snapshot of what was ordered — the cart is cleared once payment is confirmed,
   // but the manual-payment step still needs the details.
   const [order, setOrder] = useState<OrderPayload | null>(null);
   const [manualReason, setManualReason] = useState<string | null>(null);
 
   function finishCheckout(completed: OrderPayload, mpesaCode?: string) {
+    trackShop(
+      "purchase",
+      completed.items.map((i) => ({ id: i.productId, name: i.name, price: i.unitPrice, quantity: i.quantity })),
+      { transactionId: completed.orderReference, shipping: completed.deliveryFee ?? 0 },
+    );
     saveLastOrder(completed, mpesaCode);
     clearCart();
     router.push("/checkout/success");
@@ -103,7 +126,7 @@ export default function CheckoutPage() {
       notes: tagOrderNotes(
         orderReference,
         "AWAITING PAYMENT",
-        [describeDelivery(delivery), mvpDiscount > 0 ? `MVP code ${MVP_CODE} (-KSh ${mvpDiscount} delivery)` : "", `Total to pay now KSh ${total}`, notes.trim()].filter(Boolean).join(" · ")
+        [describeDelivery(delivery), `Source: ${readSource()}`, mvpDiscount > 0 ? `MVP code ${MVP_CODE} (-KSh ${mvpDiscount} delivery)` : "", voucherOff > 0 ? `Welcome voucher (-KSh ${voucherOff})` : "", pointsOff > 0 ? `Points used (-KSh ${pointsOff})` : "", `Total to pay now KSh ${total}`, notes.trim()].filter(Boolean).join(" · ")
       ),
       items,
       subtotal,
@@ -111,8 +134,35 @@ export default function CheckoutPage() {
       deliveryFee: delivery.fee - mvpDiscount,
       deliveryPayOnArrival: delivery.payOnDelivery,
       total,
+      voucherAmount: voucherOff,
+      pointsRedeemed: pointsOff,
       submittedAt: new Date().toISOString(),
     };
+
+    // Using rewards: ask the database what it will really allow, then book the order with it first,
+    // so a voucher or points are never promised to the customer without being used up.
+    let recorded = false;
+    if (voucherOff > 0 || pointsOff > 0) {
+      const { data, error: quoteError } = await supabase.rpc("loyalty_quote", {
+        p_subtotal: subtotal,
+        p_points: pointsOff,
+        p_use_voucher: voucherOff > 0,
+      });
+      const q = Array.isArray(data) ? data[0] : data;
+      if (quoteError || !q || q.voucher_off !== voucherOff || q.points_off !== pointsOff) {
+        if (quoteError) console.error("[CV-LOY-01] quote:", quoteError.message);
+        setError(toAppError(new Error("rewards changed"), "CV-LOY-01"));
+        await Promise.all([refreshPoints(), refreshVoucher()]);
+        setSubmitting(false);
+        return;
+      }
+      recorded = await recordShopOrder(payload);
+      if (!recorded) {
+        setError(toAppError(new Error("rewards not recorded"), "CV-LOY-01"));
+        setSubmitting(false);
+        return;
+      }
+    }
 
     try {
       // Order-of-record webhook — happens regardless of how payment goes,
@@ -124,7 +174,8 @@ export default function CheckoutPage() {
       return;
     }
 
-    await recordShopOrder(payload);
+    if (!recorded) await recordShopOrder(payload);
+    if (voucherOff > 0 || pointsOff > 0) await Promise.all([refreshPoints(), refreshVoucher()]);
     setOrder(payload);
 
     if (!MPESA_PROMPT_ENABLED) {
@@ -242,6 +293,18 @@ export default function CheckoutPage() {
             <span>−{formatKES(mvpDiscount)}</span>
           </div>
         )}
+        {voucherOff > 0 && (
+          <div className="mt-1 flex justify-between text-sm text-success">
+            <span>Welcome voucher</span>
+            <span>−{formatKES(voucherOff)}</span>
+          </div>
+        )}
+        {pointsOff > 0 && (
+          <div className="mt-1 flex justify-between text-sm text-success">
+            <span>Points used</span>
+            <span>−{formatKES(pointsOff)}</span>
+          </div>
+        )}
         <div className="mt-2 flex justify-between border-t border-border pt-2 text-sm font-bold">
           <span>{delivery ? "Total to pay now" : "Total"}</span>
           <span>{formatKES(total)}</span>
@@ -267,26 +330,45 @@ export default function CheckoutPage() {
         </div>
       )}
 
-      {user ? (
-        estimatedPoints > 0 && (
+      {LOYALTY_V2 && (
+        user ? (
           <div className="mb-6 rounded-card border border-secondary/30 bg-secondary-light p-4 text-sm">
-            <p className="text-secondary">
-              You&rsquo;ll earn <strong>{estimatedPoints} points</strong> on this order once
-              payment is confirmed.
-            </p>
+            {welcomeVoucher && !welcomeVoucher.used && (
+              voucherEligible ? (
+                <label className="mb-2 flex items-start gap-2 text-secondary">
+                  <input type="checkbox" checked={useVoucher} onChange={(e) => setUseVoucher(e.target.checked)} className="mt-0.5 h-4 w-4" />
+                  <span>Use my <strong>{formatKES(welcomeVoucher.amount)}</strong> welcome voucher on this order</span>
+                </label>
+              ) : (
+                <p className="mb-2 text-secondary">
+                  Your {formatKES(welcomeVoucher.amount)} welcome voucher needs items worth {formatKES(welcomeVoucher.minOrder)} or more
+                  (you&rsquo;re {formatKES(welcomeVoucher.minOrder - subtotal)} away).
+                </p>
+              )
+            )}
+            {redeemMax > 0 && (
+              <label className="mb-2 flex items-start gap-2 text-secondary">
+                <input type="checkbox" checked={usePoints} onChange={(e) => setUsePoints(e.target.checked)} className="mt-0.5 h-4 w-4" />
+                <span>Use <strong>{redeemMax} points</strong> (−{formatKES(redeemMax)}). You have {pointsBalance}.</span>
+              </label>
+            )}
+            {estimatedPoints > 0 && (
+              <p className="text-secondary">
+                You&rsquo;ll earn <strong>{estimatedPoints} points</strong> ({formatKES(estimatedPoints)}) once payment is confirmed.
+                {subtotal < TIER_THRESHOLD && TIER_THRESHOLD - subtotal <= 8000 && (
+                  <> Add {formatKES(TIER_THRESHOLD - subtotal)} more to earn 1.5% instead of 1%.</>
+                )}
+              </p>
+            )}
+          </div>
+        ) : (
+          <div className="mb-6 rounded-card border border-border bg-surface p-4 text-sm text-muted">
+            <Link href="/account/signup" className="font-medium text-primary hover:underline">Create an account</Link>{" "}
+            (or{" "}
+            <Link href="/account/login" className="font-medium text-primary hover:underline">log in</Link>) to get a KSh 200 welcome voucher
+            on a first order of KSh 4,000 or more, and to earn points on this order.
           </div>
         )
-      ) : (
-        <div className="mb-6 rounded-card border border-border bg-surface p-4 text-sm text-muted">
-          <Link href="/account/login" className="font-medium text-primary hover:underline">
-            Log in
-          </Link>{" "}
-          or{" "}
-          <Link href="/account/signup" className="font-medium text-primary hover:underline">
-            create an account
-          </Link>{" "}
-          to earn loyalty points on this order.
-        </div>
       )}
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">

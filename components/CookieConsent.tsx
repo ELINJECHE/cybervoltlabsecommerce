@@ -1,6 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
+import { BOTTOM_NAV_ENABLED } from "@/lib/community";
 import { OPEN_CONSENT_EVENT, readConsent, saveConsent, type ConsentChoice } from "@/lib/consent";
 
 const ANALYTICS_ENABLED = Boolean(process.env.NEXT_PUBLIC_GA4_ID);
@@ -28,29 +30,29 @@ export default function CookieConsent() {
     <div
       role="dialog"
       aria-label="Cookie consent"
-      className="fixed inset-x-0 bottom-0 z-[60] border-t border-border bg-surface p-4 shadow-card"
+      className={`fixed left-3 right-[5.5rem] z-[60] rounded-card border border-border bg-surface p-3 shadow-card sm:right-auto sm:max-w-sm lg:bottom-4 lg:left-4 ${
+        BOTTOM_NAV_ENABLED ? "bottom-[4.5rem]" : "bottom-3"
+      }`}
     >
-      <div className="mx-auto flex max-w-7xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-sm text-muted">
-          We use cookies only to measure how the site is used (Google Analytics) so we can improve
-          it. You can change your choice anytime from &ldquo;Cookie settings&rdquo; in the footer.
-        </p>
-        <div className="flex shrink-0 gap-2">
-          <button
-            type="button"
-            onClick={() => choose("denied")}
-            className="tap-target flex-1 rounded-full border border-primary px-5 py-2.5 text-sm font-semibold text-primary hover:bg-primary-light sm:flex-none"
-          >
-            Decline
-          </button>
-          <button
-            type="button"
-            onClick={() => choose("granted")}
-            className="tap-target flex-1 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white hover:bg-primary-dark sm:flex-none"
-          >
-            Accept
-          </button>
-        </div>
+      <p className="text-xs leading-snug text-muted">
+        We use cookies to remember you and see how the site is used (Google Analytics), so we can improve it.
+        They are on unless you decline. <Link href="/privacy" className="underline">Privacy details</Link>.
+      </p>
+      <div className="mt-2 flex gap-2">
+        <button
+          type="button"
+          onClick={() => choose("denied")}
+          className="flex-1 rounded-full border border-primary px-4 py-1.5 text-xs font-semibold text-primary hover:bg-primary-light"
+        >
+          Decline
+        </button>
+        <button
+          type="button"
+          onClick={() => choose("granted")}
+          className="flex-1 rounded-full bg-primary px-4 py-1.5 text-xs font-semibold text-white hover:bg-primary-dark"
+        >
+          OK
+        </button>
       </div>
     </div>
   );

@@ -40,6 +40,10 @@ export const ERROR_CODES = {
     meaning: "The automatic M-Pesa prompt (PayHero) couldn't be started. The order is saved and the customer pays by Till.",
     customer: "We couldn't send the M-Pesa prompt automatically, but your order is saved. Pay by Till below, then confirm.",
   },
+  "CV-LOY-01": {
+    meaning: "Points or the welcome voucher couldn't be applied to an order (database not set up for rewards, or the offer changed).",
+    customer: "We couldn't apply your rewards just now. Untick them to continue, or try again.",
+  },
   "CV-DATA-01": {
     meaning: "The product list or search index couldn't be loaded.",
     customer: "We couldn't load the product list. Please refresh the page.",

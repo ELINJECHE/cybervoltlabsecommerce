@@ -19,6 +19,7 @@ code.
 | `CV-ORDER-02` | The order sheet (Google Apps Script) didn't accept the order: it returned an error or couldn't be reached. | We couldn't send your order just now. Please try again, or place it on WhatsApp. |
 | `CV-ORDER-03` | A customer's M-Pesa payment confirmation couldn't be sent to the order sheet. | We couldn't send your payment confirmation. Please try again, or send your M-Pesa code to us on WhatsApp. |
 | `CV-PAY-01` | The automatic M-Pesa prompt (PayHero) couldn't be started. The order is saved and the customer pays by Till. | We couldn't send the M-Pesa prompt automatically, but your order is saved. Pay by Till below, then confirm. |
+| `CV-LOY-01` | Points or the welcome voucher couldn't be applied to an order (database not set up for rewards, or the offer changed). | We couldn't apply your rewards just now. Untick them to continue, or try again. |
 | `CV-DATA-01` | The product list or search index couldn't be loaded. | We couldn't load the product list. Please refresh the page. |
 | `CV-ADM-01` | Admin: a save or delete was refused (permissions) or failed in the database. | That change couldn't be saved. |
 | `CV-ADM-02` | Admin: a product photo couldn't be uploaded. | The photo couldn't be uploaded. |

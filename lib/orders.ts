@@ -14,6 +14,9 @@ export interface OrderPayload {
   // True when the delivery fee is paid to the courier on arrival (outside Nairobi).
   deliveryPayOnArrival?: boolean;
   total?: number;
+  /** Welcome voucher and points used on this order (the database re-checks both). */
+  voucherAmount?: number;
+  pointsRedeemed?: number;
   submittedAt: string;
   // Extra fields are ignored by the original sheet script (the same facts are
   // also written into Notes), and used by the optional extended script in
@@ -116,8 +119,8 @@ export async function submitOrder(payload: OrderPayload): Promise<void> {
 // Copies every checkout (guest or logged in) into Supabase's shop_orders table for the
 // admin Orders page (docs/sql/shop_orders.sql). Best-effort, like recordAccountOrder:
 // the webhook above stays the order of record, so a failure here never blocks checkout.
-export async function recordShopOrder(payload: OrderPayload): Promise<void> {
-  if (!supabaseEnabled || !payload.orderReference) return;
+export async function recordShopOrder(payload: OrderPayload): Promise<boolean> {
+  if (!supabaseEnabled || !payload.orderReference) return false;
   const { error } = await supabase.from("shop_orders").insert({
     reference: payload.orderReference,
     customer_name: payload.customerName,
@@ -130,8 +133,12 @@ export async function recordShopOrder(payload: OrderPayload): Promise<void> {
     total: payload.total ?? payload.subtotal,
     items: payload.items,
     notes: payload.notes || null,
+    // Only sent when used, so shops that haven't turned rewards on keep working unchanged.
+    ...(payload.voucherAmount ? { voucher_amount: payload.voucherAmount } : {}),
+    ...(payload.pointsRedeemed ? { points_redeemed: payload.pointsRedeemed } : {}),
   });
   if (error) console.error("Failed to save order for the admin Orders page:", error.message);
+  return !error;
 }
 
 export interface PaymentConfirmationDetails {

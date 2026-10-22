@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/lib/auth-context";
 import { supabase, supabaseEnabled } from "@/lib/supabase";
 import { formatKES } from "@/lib/format";
+import { LOYALTY_V2, REDEEM_CAP_MAX, REDEEM_MIN, TIER_THRESHOLD } from "@/lib/loyalty";
 
 interface OrderRow {
   id: string;
@@ -15,12 +16,21 @@ interface OrderRow {
 }
 
 export default function AccountPage() {
-  const { user, loading, isAdmin, pointsBalance, signOut } = useAuth();
+  const { user, loading, isAdmin, pointsBalance, welcomeVoucher, signOut } = useAuth();
   const router = useRouter();
   const [orders, setOrders] = useState<OrderRow[]>([]);
 
   useEffect(() => {
     if (!supabaseEnabled || !user) return;
+    // With rewards on, orders come from the shop's order book (customers can read only their own).
+    if (LOYALTY_V2) {
+      supabase
+        .from("shop_orders")
+        .select("id, status, total, created_at")
+        .order("created_at", { ascending: false })
+        .then(({ data }) => setOrders((data ?? []).map((o) => ({ id: o.id, status: o.status, subtotal: o.total, created_at: o.created_at }))));
+      return;
+    }
     supabase
       .from("orders")
       .select("id, status, subtotal, created_at")
@@ -83,14 +93,33 @@ export default function AccountPage() {
         </div>
       </div>
 
-      <div className="mb-6 rounded-card border border-success/30 bg-success-light p-5">
-        <p className="text-sm font-medium text-muted">Your points balance</p>
-        <p className="mt-1 text-3xl font-bold text-foreground">{pointsBalance.toLocaleString()} pts</p>
-        <p className="mt-1 text-xs text-muted">
-          Worth {formatKES(pointsBalance * 10)} &middot; 5 points per KES 1,000 spent, credited once
-          we confirm payment on an order.
-        </p>
-      </div>
+      {LOYALTY_V2 && (
+        <>
+          {welcomeVoucher && (
+            <div className="mb-4 rounded-card border border-primary/30 bg-primary/5 p-5">
+              <p className="text-sm font-medium text-muted">Welcome voucher</p>
+              {welcomeVoucher.used ? (
+                <p className="mt-1 text-sm">Your voucher has been used. Thanks for your first order!</p>
+              ) : (
+                <>
+                  <p className="mt-1 text-2xl font-bold text-primary">{formatKES(welcomeVoucher.amount)} off</p>
+                  <p className="mt-1 text-xs text-muted">
+                    On your first order with items worth {formatKES(welcomeVoucher.minOrder)} or more. It&rsquo;s applied at checkout.
+                  </p>
+                </>
+              )}
+            </div>
+          )}
+          <div className="mb-6 rounded-card border border-success/30 bg-success-light p-5">
+            <p className="text-sm font-medium text-muted">Your points balance</p>
+            <p className="mt-1 text-3xl font-bold text-foreground">{pointsBalance.toLocaleString()} pts</p>
+            <p className="mt-1 text-xs text-muted">
+              Worth {formatKES(pointsBalance)} &middot; 1 point = KSh 1. Paid orders earn 1% back, or 1.5% from {formatKES(TIER_THRESHOLD)},
+              credited once we confirm payment. Use at least {REDEEM_MIN} points at checkout, up to 10% of an order (max {formatKES(REDEEM_CAP_MAX)}).
+            </p>
+          </div>
+        </>
+      )}
 
       <h2 className="mb-3 text-sm font-bold uppercase tracking-wide text-muted">Order History</h2>
       {orders.length === 0 ? (
@@ -110,14 +139,14 @@ export default function AccountPage() {
               </div>
               <span
                 className={`rounded-full px-2.5 py-1 text-xs font-medium capitalize ${
-                  order.status === "confirmed"
+                  order.status === "confirmed" || order.status === "paid" || order.status === "delivered"
                     ? "bg-success/10 text-success"
                     : order.status === "cancelled"
                       ? "bg-deal/10 text-deal"
                       : "bg-secondary-light text-secondary"
                 }`}
               >
-                {order.status}
+                {order.status.replace(/_/g, " ")}
               </span>
             </li>
           ))}

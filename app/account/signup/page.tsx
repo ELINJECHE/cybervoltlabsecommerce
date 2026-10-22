@@ -6,6 +6,8 @@ import { useAuth } from "@/lib/auth-context";
 import { supabaseEnabled } from "@/lib/supabase";
 import ErrorNotice from "@/components/ErrorNotice";
 import { toAppError, type AppError } from "@/lib/errors";
+import { LOYALTY_V2, WELCOME_AMOUNT, WELCOME_MIN_ORDER } from "@/lib/loyalty";
+import { formatKES } from "@/lib/format";
 
 export default function SignupPage() {
   const { signUp } = useAuth();
@@ -62,8 +64,9 @@ export default function SignupPage() {
     <div className="mx-auto max-w-md px-4 py-10">
       <h1 className="mb-1 text-xl font-bold">Create an account</h1>
       <p className="mb-6 text-sm text-muted">
-        Earn 5 points (worth KES 50) for every KES 1,000 you spend, plus 100 points just for
-        subscribing to our newsletter.
+        {LOYALTY_V2
+          ? `Get ${formatKES(WELCOME_AMOUNT)} off your first order of ${formatKES(WELCOME_MIN_ORDER)} or more, and earn points on every paid order (1 point = KSh 1).`
+          : "Save your details for faster checkout and keep track of your orders."}
       </p>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">

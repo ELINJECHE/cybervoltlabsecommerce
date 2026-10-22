@@ -13,7 +13,7 @@ shop until you approve it.
    a review sheet to `intake/review/<date>-<group>-<id>.xlsx` (pictures included).
    Run it yourself any time with the same command.
 3. **Review** the sheet: column A = `ADD` or `SKIP` (blank = ignored). Check names, categories and
-   the *Final sell price* (supplier price + 20% margin, editable). Products already on the site are
+   the *Final sell price* (supplier price + 40% margin, editable). Products already on the site are
    marked `SKIP (on site)`: **prices of existing products are never changed from here, admin sets them.**
 4. **Tell Claude "apply the approved catalogue rows"**. It runs
    `SUPABASE_SERVICE_KEY=... python3 scripts/intake/catalogue_intake.py apply` (add `--dry-run` to
@@ -53,8 +53,8 @@ catalogue change.
 - Exports are cumulative, so posts already seen are skipped (`intake/processed.json`).
 - Main suppliers: Brown Collection, Jamnet Wholesalers, Phyllis Households, Open Air, Splendid Homes
   (matched from the export's file name). Their posted price is treated as your cost and the listed
-  price is cost +20%, rounded up to the next KSh 10. Groups in `retail_price_sources` (your own
-  broadcast group) get no margin. A group not on the list is flagged and also gets 20%.
+  price is cost +40%, rounded up to the next KSh 10. Groups in `retail_price_sources` (your own
+  broadcast group) get no margin. A group not on the list is flagged and also gets 40%.
   Edit `scripts/intake/config.json`.
 - Every product added records its supplier, supplier cost and listed price in the admin-only table
   `product_sourcing`. **One-time setup:** run `docs/sql/product_sourcing.sql` in Supabase (SQL Editor).

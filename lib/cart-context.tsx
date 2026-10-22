@@ -8,6 +8,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { trackShop } from "@/lib/analytics";
 
 export interface CartItem {
   productId: string;
@@ -56,6 +57,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, [items, hydrated]);
 
   const addItem: CartContextValue["addItem"] = (item, quantity = 1) => {
+    trackShop("add_to_cart", [{ id: item.productId, name: item.name, price: item.unitPrice, quantity }]);
     setItems((prev) => {
       const key = lineKey(item.productId, item.color);
       const existing = prev.find((i) => lineKey(i.productId, i.color) === key);
