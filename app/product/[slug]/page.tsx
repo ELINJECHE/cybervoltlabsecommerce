@@ -17,6 +17,7 @@ import StickyBuyBar from "@/components/StickyBuyBar";
 import TrackView from "@/components/TrackView";
 import WishlistButton from "@/components/WishlistButton";
 import PriceAlert from "@/components/PriceAlert";
+import ShareButton from "@/components/ShareButton";
 import { getProductImage } from "@/lib/images";
 import ProductCard from "@/components/ProductCard";
 import ReviewsCarousel from "@/components/ReviewsCarousel";
@@ -94,6 +95,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
               item={{ slug: product.slug, name: product.name, price: product.discountPrice ?? product.price, image: getProductImage(product.images), id: product.id }}
             />
             <PriceAlert slug={product.slug} name={product.name} price={product.discountPrice ?? product.price} />
+            <ShareButton name={product.name} slug={product.slug} price={product.discountPrice ?? product.price} />
           </div>
 
           {isLowStock && (

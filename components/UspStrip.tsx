@@ -1,6 +1,6 @@
 const ITEMS = [
   { icon: "⚡", title: "Dispatched in 2 hours", text: "Same-day in Nairobi" },
-  { icon: "🚚", title: "Delivery from KSh 100", text: "Countrywide parcels too" },
+  { icon: "🚚", title: "Free delivery over KSh 5,000", text: "In Nairobi. From KSh 100 otherwise" },
   { icon: "📲", title: "Pay with M-Pesa", text: "Secure Till payment" },
   { icon: "↩️", title: "48-hour returns", text: "After delivery" },
 ];

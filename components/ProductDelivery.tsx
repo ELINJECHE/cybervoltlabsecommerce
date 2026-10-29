@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { feeLabel } from "@/lib/delivery";
+import { FREE_DELIVERY_FROM, feeLabel, freeDeliveryApplies } from "@/lib/delivery";
 import { deliveryHeadline, deliveryStatus, type DeliveryStatus } from "@/lib/delivery-clock";
 import { useDeliveryArea } from "@/lib/use-delivery-area";
 import { formatKES } from "@/lib/format";
@@ -18,7 +18,9 @@ export default function ProductDelivery({ price }: { price: number }) {
   const { zone, outside } = useDeliveryArea();
 
   let line: string;
-  if (zone) {
+  if (zone && freeDeliveryApplies(price, { payOnDelivery: false })) {
+    line = `Delivery to ${zone.name}: FREE (orders over ${formatKES(FREE_DELIVERY_FROM)}) · Total ${formatKES(price)}`;
+  } else if (zone) {
     const lo = zone.minFee ?? zone.fee;
     line = lo === zone.fee
       ? `Delivery to ${zone.name}: ${formatKES(zone.fee)} · Total ${formatKES(price + zone.fee)}`
@@ -36,6 +38,7 @@ export default function ProductDelivery({ price }: { price: number }) {
         {status ? deliveryHeadline(status) : "Same-day delivery in Nairobi — dispatched within 2 hours"}
       </p>
       <p className="mt-0.5 text-muted">{line}</p>
+      <p className="mt-0.5 text-xs font-semibold text-primary">Free delivery in Nairobi on orders over {formatKES(FREE_DELIVERY_FROM)}</p>
     </div>
   );
 }

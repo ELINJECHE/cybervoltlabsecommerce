@@ -5,6 +5,43 @@ but waiting on a setup step that only the site owner can do.
 ==============================================================================
 2026-10-22
 ==============================================================================
+Black Friday artwork installed  (not yet pushed)
+- The owner's own AI-generated images replace the placeholders: three hero banners (kick-off, motorcycle gear, home and bedding) and the
+  two promo tiles (Day by Day calendar, WhatsApp drops), all as WebP in public/assets/images/bf/. Phone versions of the heroes are cut from
+  the desktop art (scripts/bf/import_art.py); a stray third-party logo on the hero-3 box was painted out. Phone hero is slightly taller so
+  the text never covers the mascot.
+
+Black Friday hero redone Jumia-style  (not yet pushed)
+- The homepage and /black-friday hero now draws live text over artwork-only images: gold BLACK FRIDAY mark with the date, a big headline, an
+  offer pill, value-prop icon chips (free delivery over KSh 5,000, M-Pesa, 48-hour returns, same-day Nairobi) and a button. The pill says
+  "Up to X% off" using the biggest real discount currently set in the shop, otherwise "Real price cuts". Detailed image prompts (master prompt, scenes,
+  a reusable original mascot "Volt", negative prompt, sizes) are in docs/BLACK_FRIDAY_IMAGE_PROMPTS.md.
+
+Free delivery over KSh 5,000  (not yet pushed)
+- Orders in Nairobi whose items come to KSh 5,000 or more get free delivery (counted before any voucher, points or code). The cart shows
+  a progress bar ("Add KSh X more for FREE delivery"), product pages and the homepage strip say so, checkout shows FREE, and the order
+  Notes carry "FREE delivery (items over KSh 5000)" so riders and staff know. Outside Nairobi nothing changes: the courier's parcel fee is
+  still paid to the courier on arrival. Change the amount in lib/delivery.ts (FREE_DELIVERY_FROM).
+
+Growth tweaks and photo cut-outs  (not yet pushed)
+- Product pages get "Share on WhatsApp" (sends the page link to a friend); the cart gets "Send my cart to WhatsApp" (a ready-made
+  list of the items and total); an empty cart now keeps the visitor browsing (recently viewed + popular picks). Shares are tracked in
+  Analytics as "share".
+- Background cut-outs: scripts/bf/run_cutouts.py cuts every product's main photo out onto a plain light 1000x1000 square (local, Apple
+  Vision, nothing uploaded). exports/cutout_review.xlsx shows before/after with a suggested YES/NO; nothing changes on the site until the
+  YES rows are approved and applied (originals stay as the second photo).
+
+Black Friday theme  (not yet pushed)
+- A dark "Black Friday" look in Cybervolt's colours that starts and ends by itself: a black strip with a live countdown above
+  every page (counts down to 30 Oct, then to 30 Nov), a "BLACK FRIDAY" pill in the header and menu, a Black Friday hero
+  carousel and two promo tiles (day-by-day calendar, free WhatsApp group) on the homepage, a dark "Early Access Deals" shelf,
+  a small dismissible promo card, and a new page /black-friday (countdown, deals grid with category pills, day-by-day
+  calendar, why shop with us, FAQ). After 30 Nov the homepage returns to normal in the visitor's browser, no rebuild needed.
+- Deals are real price cuts only: the shelf and grid show products that have a discount price set in admin, with our normal price
+  crossed out. Until some are set the page says the first drops land on 30 Oct. Nothing is invented.
+- Banners are placeholder SVG art (scripts/bf/make_art.py). Prompts for better ones: docs/BLACK_FRIDAY_IMAGE_PROMPTS.md.
+- Turn the whole theme off with BLACK_FRIDAY_THEME = false in lib/blackfriday.ts; dates and weekly themes are in the same file.
+
 Catalogue clean-up and 40% pricing  (database, live after this build)
 - 16 duplicate products from the 18 Oct batch removed; 2 out-of-stock helmets, a mislabelled raincoat and a duplicate vest
   removed; the Hi-Vis Reflective Mesh Vest set to KSh 3,500.

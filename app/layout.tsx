@@ -5,6 +5,8 @@ import { CartProvider } from "@/lib/cart-context";
 import { AuthProvider } from "@/lib/auth-context";
 import CategoryNav from "@/components/CategoryNav";
 import TrackSource from "@/components/TrackSource";
+import BlackFridayStrip from "@/components/BlackFridayStrip";
+import BlackFridayPromo from "@/components/BlackFridayPromo";
 import DeliveryBanner from "@/components/DeliveryBanner";
 import Footer from "@/components/Footer";
 import WhatsAppFloatButton from "@/components/WhatsAppFloatButton";
@@ -59,12 +61,14 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <AuthProvider>
           <CartProvider>
             <TrackSource />
+            <BlackFridayStrip />
             <DeliveryBanner />
             <CategoryNav categories={categories} />
             <main className={`min-h-screen ${BOTTOM_NAV_ENABLED ? "pb-16 lg:pb-0" : ""}`}>{children}</main>
             <Footer categories={categories} />
             <WhatsAppFloatButton />
             <CookieConsent />
+            <BlackFridayPromo />
             <BottomNav />
             <ToastHost />
           </CartProvider>

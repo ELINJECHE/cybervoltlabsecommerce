@@ -34,6 +34,8 @@ import {
   OUTSIDE_NAIROBI_NOTE,
   OUTSIDE_NAIROBI_SLUG,
   describeDelivery,
+  freeDeliveryApplies,
+  FREE_DELIVERY_FROM,
   feeLabel,
   resolveDelivery,
 } from "@/lib/delivery";
@@ -66,7 +68,9 @@ export default function CheckoutPage() {
   // Goods + delivery fee (the fee is 0 outside Nairobi: that one is paid to the courier).
   // The MVP code takes KSh 100 off the delivery fee (never below zero; not for courier parcels).
   const mvpApplied = mvpCode.trim().toUpperCase() === MVP_CODE;
-  const mvpDiscount = mvpApplied && delivery && !delivery.payOnDelivery ? Math.min(MVP_DELIVERY_DISCOUNT, delivery.fee) : 0;
+  const freeDelivery = freeDeliveryApplies(subtotal, delivery);
+  const deliveryFee = freeDelivery ? 0 : (delivery?.fee ?? 0);
+  const mvpDiscount = mvpApplied && delivery && !delivery.payOnDelivery ? Math.min(MVP_DELIVERY_DISCOUNT, deliveryFee) : 0;
   // Rewards: the welcome voucher (a first order of KSh 4,000+) and points (1 point = KSh 1).
   const [useVoucher, setUseVoucher] = useState(true);
   const [usePoints, setUsePoints] = useState(false);
@@ -75,7 +79,7 @@ export default function CheckoutPage() {
   const redeemMax = LOYALTY_V2 && user ? maxRedeemable(subtotal, voucherOff, pointsBalance) : 0;
   const pointsOff = usePoints ? redeemMax : 0;
   const estimatedPoints = LOYALTY_V2 ? pointsEarned(subtotal, voucherOff + pointsOff) : 0;
-  const total = subtotal + (delivery?.fee ?? 0) - mvpDiscount - voucherOff - pointsOff;
+  const total = subtotal + deliveryFee - mvpDiscount - voucherOff - pointsOff;
   const [notes, setNotes] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<AppError | null>(null);
@@ -126,12 +130,12 @@ export default function CheckoutPage() {
       notes: tagOrderNotes(
         orderReference,
         "AWAITING PAYMENT",
-        [describeDelivery(delivery), `Source: ${readSource()}`, mvpDiscount > 0 ? `MVP code ${MVP_CODE} (-KSh ${mvpDiscount} delivery)` : "", voucherOff > 0 ? `Welcome voucher (-KSh ${voucherOff})` : "", pointsOff > 0 ? `Points used (-KSh ${pointsOff})` : "", `Total to pay now KSh ${total}`, notes.trim()].filter(Boolean).join(" · ")
+        [describeDelivery(delivery), freeDelivery ? `FREE delivery (items over KSh ${FREE_DELIVERY_FROM})` : "", `Source: ${readSource()}`, mvpDiscount > 0 ? `MVP code ${MVP_CODE} (-KSh ${mvpDiscount} delivery)` : "", voucherOff > 0 ? `Welcome voucher (-KSh ${voucherOff})` : "", pointsOff > 0 ? `Points used (-KSh ${pointsOff})` : "", `Total to pay now KSh ${total}`, notes.trim()].filter(Boolean).join(" · ")
       ),
       items,
       subtotal,
       deliveryArea: delivery.building ? `${delivery.name} (${delivery.building})` : delivery.name,
-      deliveryFee: delivery.fee - mvpDiscount,
+      deliveryFee: deliveryFee - mvpDiscount,
       deliveryPayOnArrival: delivery.payOnDelivery,
       total,
       voucherAmount: voucherOff,
@@ -284,7 +288,7 @@ export default function CheckoutPage() {
               ? "Choose your area below"
               : delivery.payOnDelivery
                 ? "Pay courier on arrival"
-                : formatKES(delivery.fee)}
+                : freeDelivery ? "FREE" : formatKES(delivery.fee)}
           </span>
         </div>
         {mvpDiscount > 0 && (
@@ -439,8 +443,9 @@ export default function CheckoutPage() {
               className="h-11 w-full rounded-md border border-border bg-surface px-3 text-sm outline-none focus:border-primary"
             />
             <p className="mt-1 text-xs text-muted">
-              Delivery to {delivery.name} is {delivery.range} depending on the building. You pay the top rate
-              (KSh {delivery.fee}) now, and we confirm the exact fee for your building on WhatsApp.
+              {freeDelivery
+                ? `Delivery to ${delivery.name} is free on orders over ${formatKES(FREE_DELIVERY_FROM)}.`
+                : `Delivery to ${delivery.name} is ${delivery.range} depending on the building. You pay the top rate (KSh ${delivery.fee}) now, and we confirm the exact fee for your building on WhatsApp.`}
             </p>
           </div>
         )}

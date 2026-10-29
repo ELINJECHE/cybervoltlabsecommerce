@@ -10,6 +10,8 @@ import CartDelivery from "@/components/CartDelivery";
 import CommunityStrip from "@/components/CommunityStrip";
 import RecommendedForYou from "@/components/RecommendedForYou";
 import { MAX_PER_ORDER } from "@/lib/community";
+import CartToWhatsApp from "@/components/CartToWhatsApp";
+import RecentlyViewed from "@/components/RecentlyViewed";
 
 export default function CartPage() {
   const { items, updateQuantity, removeItem, subtotal } = useCart();
@@ -28,6 +30,8 @@ export default function CartPage() {
             Continue Shopping
           </Link>
         </div>
+        <RecentlyViewed />
+        <RecommendedForYou title="Popular picks to get you started" subtitle="Based on what shoppers like you look at" />
         <ReviewsCarousel reviews={reviews} />
       </div>
     );
@@ -103,6 +107,7 @@ export default function CartPage() {
         >
           Proceed to Checkout
         </Link>
+        <CartToWhatsApp />
         <p className="mt-2 text-center text-xs text-muted">Up to {MAX_PER_ORDER} of each item per order.</p>
       </div>
 

@@ -105,6 +105,10 @@ export default function CategoryNav({ categories }: { categories: Category[] }) 
           <SearchBar />
         </div>
 
+        <Link href="/black-friday" className="hidden shrink-0 rounded-full bg-[#07070d] px-3 py-1.5 text-xs font-black tracking-wide text-[#ffc83d] hover:bg-black lg:inline-flex">
+          BLACK FRIDAY
+        </Link>
+
         <Link
           href="/account"
           aria-label={user ? "My Account" : "Log in or create an account"}
@@ -247,6 +251,14 @@ export default function CategoryNav({ categories }: { categories: Category[] }) 
                 </svg>
               </button>
             </div>
+            <Link
+              href="/black-friday"
+              onClick={() => setMobileMenuOpen(false)}
+              className="tap-target mb-2 flex items-center justify-between rounded-card bg-[#07070d] px-4 py-3 text-sm font-black text-white"
+            >
+              <span><span className="text-[#ffc83d]">BLACK FRIDAY</span> deals</span>
+              <span aria-hidden="true">→</span>
+            </Link>
             <ul className="flex flex-col">
               {categories.map((category) => {
                 const isExpanded = expandedSlug === category.slug;

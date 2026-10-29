@@ -7,6 +7,11 @@ export function buildWhatsAppLink(message: string): string {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`;
 }
 
+// "Send to a friend / to myself" links: no number, so WhatsApp opens its contact picker.
+export function buildShareLink(message: string): string {
+  return `https://wa.me/?text=${encodeURIComponent(message)}`;
+}
+
 export function buildProductEnquiryLink(productName: string, url?: string): string {
   const message = `Hi Cybervolt Labs, I'd like to order: ${productName}${
     url ? `\n${url}` : ""

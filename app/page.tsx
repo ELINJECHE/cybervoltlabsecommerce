@@ -11,6 +11,11 @@ import CommunityStrip from "@/components/CommunityStrip";
 import RecentlyViewed from "@/components/RecentlyViewed";
 import RecommendedForYou from "@/components/RecommendedForYou";
 import SavedDropsStrip from "@/components/SavedDropsStrip";
+import BlackFridaySwitch from "@/components/BlackFridaySwitch";
+import BlackFridayHero from "@/components/BlackFridayHero";
+import BlackFridayShelf, { maxOff } from "@/components/BlackFridayShelf";
+import BlackFridayTiles from "@/components/BlackFridayTiles";
+import { BLACK_FRIDAY_THEME } from "@/lib/blackfriday";
 import { COLLECTIONS } from "@/lib/collections";
 import TrustSection from "@/components/TrustSection";
 import ReviewsCarousel from "@/components/ReviewsCarousel";
@@ -92,10 +97,21 @@ export default async function HomePage() {
       <JsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
       <h1 className="sr-only">Cybervolt Labs — motorcycle gear, sneakers and home essentials in Kenya</h1>
       <div className="pt-4 sm:pt-6">
-        <HeroCarousel slides={HERO_SLIDES} />
+        {BLACK_FRIDAY_THEME ? (
+          <BlackFridaySwitch bf={<BlackFridayHero maxOff={maxOff(all)} />} normal={<HeroCarousel slides={HERO_SLIDES} />} />
+        ) : (
+          <HeroCarousel slides={HERO_SLIDES} />
+        )}
       </div>
 
       <UspStrip />
+
+      {BLACK_FRIDAY_THEME && (
+        <BlackFridaySwitch
+          bf={<><BlackFridayShelf products={all} /><BlackFridayTiles /></>}
+          normal={null}
+        />
+      )}
 
       <section className="mx-auto max-w-7xl px-4 pt-5">
         <HotSearchChips />

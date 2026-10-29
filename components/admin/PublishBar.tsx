@@ -10,12 +10,25 @@ import {
   type PublishResult,
   type UnpublishedChanges,
 } from "@/lib/deploy";
+import { supabase, supabaseEnabled } from "@/lib/supabase";
 
 export default function PublishBar() {
   const [pending, setPending] = useState<UnpublishedChanges | null>(null);
   const [publishing, setPublishing] = useState(false);
   const [result, setResult] = useState<PublishResult | null>(null);
   const [cooldown, setCooldown] = useState(0);
+  // Edits saved from ANY device after the live site was last built (the local counter below only knows this browser).
+  const [editsSinceBuild, setEditsSinceBuild] = useState(0);
+
+  useEffect(() => {
+    const builtAt = process.env.NEXT_PUBLIC_BUILD_TIME;
+    if (!supabaseEnabled || !builtAt) return;
+    supabase
+      .from("products")
+      .select("id", { count: "exact", head: true })
+      .gt("updated_at", builtAt)
+      .then(({ count }) => setEditsSinceBuild(count ?? 0));
+  }, [result]);
 
   useEffect(() => {
     const refresh = () => {
@@ -44,7 +57,7 @@ export default function PublishBar() {
     setPublishing(false);
   }
 
-  const waiting = pending?.count ?? 0;
+  const waiting = Math.max(pending?.count ?? 0, editsSinceBuild);
   const coolingDown = cooldown > 0;
 
   return (

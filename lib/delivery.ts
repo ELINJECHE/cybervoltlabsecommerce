@@ -80,6 +80,14 @@ export const NAIROBI_ZONES: DeliveryZone[] = [
   zone("Zimmerman", 600),
 ];
 
+// Free delivery inside Nairobi when the items come to this much (before any voucher, points or code).
+// Outside Nairobi the courier's parcel fee is paid to the courier on arrival, so it is not ours to waive.
+export const FREE_DELIVERY_FROM = 5000;
+
+export function freeDeliveryApplies(itemsTotal: number, sel: { payOnDelivery: boolean } | null): boolean {
+  return !!sel && !sel.payOnDelivery && itemsTotal >= FREE_DELIVERY_FROM;
+}
+
 export const OUTSIDE_NAIROBI_SLUG = "outside-nairobi";
 
 // Parcel couriers charge by weight (about KSh 300-1,000) and are paid by the customer when
