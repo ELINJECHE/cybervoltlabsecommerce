@@ -42,6 +42,9 @@ export const metadata: Metadata = {
     description: DEFAULT_DESCRIPTION,
   },
   twitter: { card: "summary_large_image", title: DEFAULT_TITLE, description: DEFAULT_DESCRIPTION },
+  verification: {
+    google: "Ve9PCkzga2FkJ9WrAhPSJPGBN0itgBv_CxtNojUrqZU",
+  },
 };
 
 export const viewport: Viewport = {
