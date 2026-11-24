@@ -7,6 +7,7 @@ import { useAuth } from "@/lib/auth-context";
 import { supabaseEnabled } from "@/lib/supabase";
 import ErrorNotice from "@/components/ErrorNotice";
 import { toAppError, type AppError } from "@/lib/errors";
+import ResendConfirmation from "@/components/ResendConfirmation";
 
 export default function LoginPage() {
   const { signIn } = useAuth();
@@ -16,14 +17,18 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<AppError | null>(null);
+  // The account exists but its email was never confirmed (often a first link that didn't open).
+  const [unconfirmed, setUnconfirmed] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setSubmitting(true);
     setError(null);
+    setUnconfirmed(false);
     const { error } = await signIn(email, password);
     setSubmitting(false);
     if (error) {
+      setUnconfirmed(/email not confirmed/i.test(error));
       setError(toAppError(error, "CV-AUTH-04"));
       return;
     }
@@ -85,10 +90,22 @@ export default function LoginPage() {
         </button>
       </form>
 
+      {unconfirmed && (
+        <div className="mt-4">
+          <ResendConfirmation initialEmail={email} />
+        </div>
+      )}
+
       <p className="mt-4 text-center text-sm text-muted">
         New here?{" "}
         <Link href="/account/signup" className="font-medium text-primary hover:underline">
           Create an account
+        </Link>
+      </p>
+      <p className="mt-2 text-center text-sm text-muted">
+        Signed up but your confirmation link didn&rsquo;t work?{" "}
+        <Link href="/account/confirm" className="font-medium text-primary hover:underline">
+          Get a new link
         </Link>
       </p>
     </div>

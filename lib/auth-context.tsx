@@ -24,10 +24,15 @@ interface AuthContextValue {
   signIn: (email: string, password: string) => Promise<{ error: string | null }>;
   signOut: () => Promise<void>;
   resetPassword: (email: string) => Promise<{ error: string | null }>;
+  resendConfirmation: (email: string) => Promise<{ error: string | null }>;
   updatePassword: (newPassword: string) => Promise<{ error: string | null }>;
 }
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
+
+// Where the "Confirm your email" link lands. It must be listed under Redirect URLs in Supabase
+// (Authentication > URL Configuration), or Supabase falls back to its Site URL.
+const confirmUrl = () => `${window.location.origin}/account/confirm`;
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
@@ -111,7 +116,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       options: {
         data: { full_name: fullName, phone },
         // Without this the link uses Supabase's Site URL setting (which pointed at localhost).
-        emailRedirectTo: `${window.location.origin}/account`,
+        emailRedirectTo: confirmUrl(),
       },
     });
     if (error) return { error: error.message };
@@ -140,6 +145,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return { error: error?.message ?? null };
   }
 
+  // A fresh confirmation link, for anyone whose first one expired or pointed at the wrong address.
+  async function resendConfirmation(email: string) {
+    if (!supabaseEnabled) return { error: "Accounts aren't set up yet — check back soon." };
+    const { error } = await supabase.auth.resend({ type: "signup", email, options: { emailRedirectTo: confirmUrl() } });
+    return { error: error?.message ?? null };
+  }
+
   async function updatePassword(newPassword: string) {
     if (!supabaseEnabled) return { error: "Accounts aren't set up yet — check back soon." };
     const { error } = await supabase.auth.updateUser({ password: newPassword });
@@ -160,6 +172,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         signIn,
         signOut,
         resetPassword,
+        resendConfirmation,
         updatePassword,
       }}
     >
