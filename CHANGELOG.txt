@@ -5,6 +5,16 @@ but waiting on a setup step that only the site owner can do.
 ==============================================================================
 2026-11-24
 ==============================================================================
+Homepage clean-up after an outside review  (not yet pushed)
+- "Flash Deals" strip is hidden unless it has 3+ items (it showed a single card). Homepage shelves go from 8 rows to 6
+  (Appliances + Audio merged; Home, Kitchen & Bedding merged). Nothing removed, only grouped.
+- Footer shows the location (Ongata Rongai), the WhatsApp number and the email; its payment badge now says "Pay on delivery".
+- Trust section: "Mobile-Friendly" replaced with "Track Your Order", and "M-Pesa & Secure Payment" with "Pay on Delivery".
+- Privacy page brought in line with pay-on-delivery: no more "pay by M-Pesa / M-Pesa prompt provider"; names the courier (Parcel Grid).
+- The Toys & Gifts category circle had no image (404); category-toy-shop.png added.
+- Drafted, NOT applied: 33 neutral product names to replace the "... style" names and 7 real descriptions
+  (scripts/bf/apply_names.py, scripts/bf/apply_description_fixes.py; both save a rollback file; they need the Supabase secret key).
+
 Google Customer Reviews opt-in  (pushed 2026-11-24)
 - The order confirmation page now shows Google's review opt-in (Merchant Center ID 5917675868) when the customer gave an email at
   checkout (new optional field) or is logged in, and has not declined cookies. Order ID, email, country KE and an estimated delivery date

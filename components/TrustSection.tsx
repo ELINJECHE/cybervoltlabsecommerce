@@ -1,10 +1,10 @@
 const TRUST_ITEMS = [
   { icon: "🚚", title: "Delivery Anywhere in Kenya", description: "Ksh 999 via Parcel Grid, 1-2 business days. Orders before 2:00 PM are dispatched the same day." },
   { icon: "🏷️", title: "Clear Prices", description: "Every price is shown in Kenya shillings." },
-  { icon: "🔒", title: "M-Pesa & Secure Payment", description: "Pay securely with M-Pesa." },
+  { icon: "🤝", title: "Pay on Delivery", description: "Pay when your order arrives, not before." },
   { icon: "🛡️", title: "Buyer Protection", description: "Returns accepted within 48 hours of delivery." },
   { icon: "💬", title: "WhatsApp Support", description: "Real humans, real answers, same day." },
-  { icon: "📱", title: "Mobile-Friendly", description: "Built to work great on any phone, any network." },
+  { icon: "📍", title: "Track Your Order", description: "Message us your order number on WhatsApp and we'll tell you where it is." },
 ];
 
 export default function TrustSection() {

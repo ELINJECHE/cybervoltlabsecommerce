@@ -68,11 +68,9 @@ const HERO_SLIDES = [
 const SHELVES: { slugs: string[]; title: string; subtitle: string; href: string; tint?: boolean }[] = [
   { slugs: ["motorcycle-gear"], title: "Motorcycle Gear", subtitle: "Helmets, jackets, gloves and more for the road", href: "/category/motorcycle-gear", tint: true },
   { slugs: ["sneakers-shoes"], title: "Sneakers & Shoes", subtitle: "Fresh pairs, restocked often", href: "/category/sneakers-shoes" },
-  { slugs: ["home-appliances"], title: "Home Appliances", subtitle: "Microwaves, cookers, washers and kitchen helpers", href: "/category/home-appliances", tint: true },
-  { slugs: ["audio-speakers"], title: "Audio & Speakers", subtitle: "Home theatre, soundbars and portable speakers", href: "/category/audio-speakers" },
-  { slugs: ["sports-leisure", "furniture"], title: "Fitness, Outdoors & Seating", subtitle: "Dumbbells, camping gear, chairs and more", href: "/category/sports-leisure", tint: true },
-  { slugs: ["interior-design"], title: "Home & Bedding", subtitle: "Duvets, curtains, mats and cosy touches", href: "/category/interior-design" },
-  { slugs: ["kitchen-dining"], title: "Kitchen & Dining", subtitle: "Cookware, flasks, lunch boxes and more", href: "/category/kitchen-dining", tint: true },
+  { slugs: ["home-appliances", "audio-speakers"], title: "Appliances & Audio", subtitle: "Microwaves, cookers, home theatre, soundbars and speakers", href: "/category/home-appliances", tint: true },
+  { slugs: ["sports-leisure", "furniture"], title: "Fitness, Outdoors & Seating", subtitle: "Dumbbells, camping gear, chairs and more", href: "/category/sports-leisure" },
+  { slugs: ["interior-design", "kitchen-dining"], title: "Home, Kitchen & Bedding", subtitle: "Duvets, curtains, cookware, flasks and cosy touches", href: "/category/interior-design", tint: true },
   { slugs: ["toy-shop"], title: "Toys & Gifts", subtitle: "Something for the kids", href: "/category/toy-shop" },
 ];
 

@@ -4,11 +4,13 @@ import CookieSettingsButton from "@/components/CookieSettingsButton";
 import type { Category } from "@/lib/types";
 import { SOCIAL_LINKS } from "@/lib/social";
 import { EXCLUSIVE_GROUP_URL } from "@/lib/community";
+import { buildOrderEnquiryLink, whatsappDisplayNumber } from "@/lib/whatsapp";
 
-const PAYMENT_METHODS = ["M-Pesa"];
+const PAYMENT_METHODS = ["Pay on delivery"];
 
 
 export default function Footer({ categories }: { categories: Category[] }) {
+  const phone = whatsappDisplayNumber();
   return (
     <footer className="bg-[#111827] text-white">
       <div className="mx-auto grid max-w-7xl grid-cols-2 gap-8 px-4 py-10 sm:grid-cols-4">
@@ -58,6 +60,16 @@ export default function Footer({ categories }: { categories: Category[] }) {
         <div className="col-span-2 sm:col-span-1">
           <Newsletter />
         </div>
+      </div>
+
+      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-6 gap-y-1 border-t border-white/10 px-4 py-3 text-xs text-white/70 sm:justify-start">
+        <span>Ongata Rongai, Nairobi, Kenya</span>
+        {phone && (
+          <a href={buildOrderEnquiryLink()} target="_blank" rel="noopener noreferrer" className="hover:text-white">
+            WhatsApp {phone}
+          </a>
+        )}
+        <a href="mailto:hello@cybervoltlabs.co.ke" className="hover:text-white">hello@cybervoltlabs.co.ke</a>
       </div>
 
       <div className="mx-auto flex max-w-7xl flex-col items-center gap-3 border-t border-white/10 px-4 py-4 sm:flex-row sm:justify-between">

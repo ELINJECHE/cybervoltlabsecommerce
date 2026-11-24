@@ -2,6 +2,12 @@
 // "+" or leading zeros, e.g. 2547XXXXXXXX.
 const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "254700000000";
 
+// "+254 712 345 678" for showing on the page; null while the placeholder number is still in use.
+export function whatsappDisplayNumber(): string | null {
+  const m = WHATSAPP_NUMBER.match(/^254([17]\d{2})(\d{3})(\d{3})$/);
+  return m && WHATSAPP_NUMBER !== "254700000000" ? `+254 ${m[1]} ${m[2]} ${m[3]}` : null;
+}
+
 export function buildWhatsAppLink(message: string): string {
   const encoded = encodeURIComponent(message);
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`;

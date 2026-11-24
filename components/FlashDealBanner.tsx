@@ -7,7 +7,8 @@ import CountdownTimer from "@/components/CountdownTimer";
 import StockUrgencyBar from "@/components/StockUrgencyBar";
 
 export default function FlashDealBanner({ deals }: { deals: Product[] }) {
-  if (deals.length === 0) return null;
+  // One or two cards in a full-width strip looks empty; the deals still show on their product pages and shelves.
+  if (deals.length < 3) return null;
 
   const earliestEnd = deals
     .map((d) => d.dealEndsAt)

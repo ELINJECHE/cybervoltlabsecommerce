@@ -35,9 +35,10 @@ export default function PrivacyPage() {
 
       <Section title="What we collect">
         <p>
-          <strong className="text-foreground">When you place an order:</strong> your name, phone number, delivery area and
-          address, the items you ordered, and any notes you add. If you pay by M-Pesa we also see the M-Pesa transaction code
-          and the name or number it was paid from. We never see your M-Pesa PIN.
+          <strong className="text-foreground">When you place an order:</strong> your name, phone number, delivery address,
+          the items you ordered, and any notes you add. You pay on delivery, so we do not collect payment details on this site.
+          If we refund you by M-Pesa we use the phone number you gave us, and we never see your M-Pesa PIN. An email address is
+          optional; if you give one, it is used only for the Google Customer Reviews invitation.
         </p>
         <p>
           <strong className="text-foreground">If you create an account:</strong> your email address and your order history,
@@ -45,7 +46,7 @@ export default function PrivacyPage() {
           is not visible to us.
         </p>
         <p>
-          <strong className="text-foreground">On your device:</strong> the site remembers your cart, saved items, delivery area,
+          <strong className="text-foreground">On your device:</strong> the site remembers your cart, saved items,
           recently viewed products and recent searches in your browser&rsquo;s own storage, so they are there when you come
           back. This stays on your device; we don&rsquo;t receive it.
         </p>
@@ -78,9 +79,9 @@ export default function PrivacyPage() {
       <Section title="Who handles it for us">
         <p>
           We use a small number of services to run the shop: our database and account provider (Supabase), our website host
-          (Netlify), Google (Analytics, the sheet where we keep orders for delivery, and Google Customer Reviews if you give an email address at checkout so we can invite you to review your order), and Safaricom M-Pesa, with a payment
-          provider if you choose the M-Pesa prompt at checkout. They handle your data only to provide their service to us. Some
-          are based outside Kenya, so your data may be processed abroad. We share order details with our delivery riders only
+          (Netlify), Google (Analytics, the sheet where we keep orders for delivery, and Google Customer Reviews if you give an email address at checkout so we can invite you to review your order), Safaricom M-Pesa (for refunds) and our courier,
+          Parcel Grid. They handle your data only to provide their service to us. Some
+          are based outside Kenya, so your data may be processed abroad. We share order details with our courier and its delivery riders only
           as far as needed to deliver to you.
         </p>
       </Section>
