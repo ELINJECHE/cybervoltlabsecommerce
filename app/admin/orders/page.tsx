@@ -191,7 +191,7 @@ export default function OrdersPage() {
                   <div className="sm:text-right">
                     <p>
                       Goods {formatKES(o.subtotal)} · Delivery{" "}
-                      {o.pay_on_delivery ? "paid to courier" : formatKES(o.delivery_fee)}
+                      {formatKES(o.delivery_fee)}{o.pay_on_delivery ? " · pay on delivery" : ""}
                     </p>
                     <p className="text-base font-bold">Total {formatKES(o.total)}</p>
                     {o.mpesa_code && (

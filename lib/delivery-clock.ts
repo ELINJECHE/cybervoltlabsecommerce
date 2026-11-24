@@ -1,8 +1,8 @@
-// "Order in the next 3h 10m for same-day delivery" — and what to say after 5pm, on Sundays
+// "Order in the next 3h 10m for same-day dispatch" — and what to say after 2:00 PM, on Sundays
 // and on public holidays. Everything is worked out in Nairobi time (UTC+3, no daylight saving),
 // never the visitor's device clock.
 
-export const LAST_ORDER_HOUR = 17; // 5pm
+import { DISPATCH_CUTOFF_HOUR } from "@/lib/delivery";
 
 const EAT_OFFSET_MS = 3 * 60 * 60 * 1000;
 const DAY_MS = 24 * 60 * 60 * 1000;
@@ -11,7 +11,7 @@ const DAY_MS = 24 * 60 * 60 * 1000;
 const FIXED_HOLIDAYS = ["01-01", "05-01", "06-01", "10-10", "10-20", "12-12", "12-25", "12-26"];
 
 // Movable holidays the government declares each year (Eid days and any special days): add them
-// here as "YYYY-MM-DD" so the page stops promising same-day delivery on them.
+// here as "YYYY-MM-DD" so the page stops promising same-day dispatch on them.
 export const EXTRA_HOLIDAYS: string[] = [];
 
 // "Nairobi wall clock" as a Date whose UTC fields read as Nairobi time.
@@ -60,10 +60,10 @@ export type DeliveryStatus =
 export function deliveryStatus(now: Date = new Date()): DeliveryStatus {
   const n = nairobi(now);
   const msIntoDay = n.getUTCHours() * 3_600_000 + n.getUTCMinutes() * 60_000 + n.getUTCSeconds() * 1000;
-  const cutoff = LAST_ORDER_HOUR * 3_600_000;
+  const cutoff = DISPATCH_CUTOFF_HOUR * 3_600_000;
   if (isDeliveryDay(n) && msIntoDay < cutoff) return { kind: "same-day", msLeft: cutoff - msIntoDay };
 
-  // Next day we deliver on.
+  // Next day we dispatch on.
   let next = new Date(n.getTime() + DAY_MS);
   for (let i = 0; i < 10 && !isDeliveryDay(next); i++) next = new Date(next.getTime() + DAY_MS);
   const tomorrow = new Date(n.getTime() + DAY_MS);
@@ -79,8 +79,8 @@ export function formatCountdown(ms: number): string {
 
 // One line for the banner and the product page.
 export function deliveryHeadline(s: DeliveryStatus): string {
-  if (s.kind === "same-day") return `Order in the next ${formatCountdown(s.msLeft)} for same-day delivery in Nairobi`;
+  if (s.kind === "same-day") return `Order in the next ${formatCountdown(s.msLeft)} for same-day dispatch`;
   return s.reason === "after-hours"
-    ? `Orders after 5pm are delivered ${s.when} — order now`
-    : `No deliveries on Sundays and public holidays — order now, delivered ${s.when}`;
+    ? `Orders after 2:00 PM go out the next business day (${s.when})`
+    : `We dispatch Monday to Saturday. Order now, dispatched ${s.when}`;
 }

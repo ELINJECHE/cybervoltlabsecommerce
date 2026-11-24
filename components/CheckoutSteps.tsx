@@ -1,4 +1,4 @@
-const STEPS = ["Your details", "Pay with M-Pesa", "Confirm payment"];
+const STEPS = ["Your details", "Order placed", "Pay on delivery"];
 
 // current is 1-based: steps before it show a tick, the current one is highlighted.
 export default function CheckoutSteps({ current }: { current: 1 | 2 | 3 }) {

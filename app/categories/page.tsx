@@ -5,7 +5,7 @@ import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
   title: "All categories",
-  description: "Browse every Cybervolt Labs category: motorcycle gear, shoes, appliances, audio, home and more. Same-day delivery in Nairobi.",
+  description: "Browse every Cybervolt Labs category: motorcycle gear, shoes, appliances, audio, home and more. Delivery anywhere in Kenya, pay on delivery.",
   path: "/categories",
 });
 

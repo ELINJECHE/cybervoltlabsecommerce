@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { formatKES } from "@/lib/format";
 import { readLastOrder, type LastOrderSummary } from "@/lib/orders";
-import { DELIVERY_ESTIMATE } from "@/lib/store-info";
+import { COURIER } from "@/lib/delivery";
 import { EXCLUSIVE_GROUP_URL, MVP_CODE, MVP_DELIVERY_DISCOUNT, MVP_GROUP_URL } from "@/lib/community";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
 
@@ -15,7 +15,7 @@ function buildReceiptLink(order: LastOrderSummary): string {
     "Hi Cybervolt Labs, here is my order receipt.",
     `Order: ${order.reference}`,
     items,
-    `Total: ${formatKES(order.total)}`,
+    `Total to pay on delivery: ${formatKES(order.total)}`,
     order.mpesaCode ? `M-Pesa code: ${order.mpesaCode}` : null,
     `Deliver to: ${order.address}`,
     `Phone: ${order.phone}`,
@@ -41,13 +41,16 @@ export default function LastOrderDetails() {
       <div className="mt-6 rounded-card border border-border bg-surface p-4 text-left text-sm">
         <h2 className="mb-2 font-semibold">What happens next</h2>
         <ol className="list-decimal space-y-1 pl-5 text-muted">
-          <li>We confirm your M-Pesa payment.</li>
           <li>
-            We contact you{order?.phone ? ` on ${order.phone}` : ""} to confirm your delivery details.
+            We contact you{order?.phone ? ` on ${order.phone}` : ""} to confirm your order and delivery details.
           </li>
           <li>
-            Your order is processed and dispatched{order?.address ? ` to ${order.address}` : ""}
-            {DELIVERY_ESTIMATE ? ` — ${DELIVERY_ESTIMATE}` : ""}.
+            Orders placed before 2:00 PM East Africa Time are dispatched the same day via {COURIER}
+            {order?.address ? ` to ${order.address}` : ""}. Orders after 2:00 PM go out the next business day.
+          </li>
+          <li>Delivery takes 1-2 business days (Monday to Saturday).</li>
+          <li>
+            Pay on delivery: you pay{order?.total ? ` ${formatKES(order.total)}` : ""} when you collect or receive your parcel.
           </li>
         </ol>
         <p className="mt-3 text-muted">

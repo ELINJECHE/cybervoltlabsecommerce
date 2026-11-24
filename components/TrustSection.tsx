@@ -1,5 +1,5 @@
 const TRUST_ITEMS = [
-  { icon: "🚚", title: "Same-Day Delivery", description: "Nairobi orders dispatched within 2 hours and delivered the same day. Countrywide in 2-4 days." },
+  { icon: "🚚", title: "Delivery Anywhere in Kenya", description: "Ksh 999 via Parcel Grid, 1-2 business days. Orders before 2:00 PM are dispatched the same day." },
   { icon: "🏷️", title: "Clear Prices", description: "Every price is shown in Kenya shillings." },
   { icon: "🔒", title: "M-Pesa & Secure Payment", description: "Pay securely with M-Pesa." },
   { icon: "🛡️", title: "Buyer Protection", description: "Returns accepted within 48 hours of delivery." },

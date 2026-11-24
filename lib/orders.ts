@@ -7,11 +7,11 @@ export interface OrderPayload {
   deliveryAddress: string;
   notes?: string;
   items: CartItem[];
-  // Goods only. What the customer pays by M-Pesa is `total` (goods + delivery fee).
+  // Goods only. What the customer pays on delivery is `total` (goods + delivery fee).
   subtotal: number;
   deliveryArea?: string;
   deliveryFee?: number;
-  // True when the delivery fee is paid to the courier on arrival (outside Nairobi).
+  // True when the order is paid on delivery (every order since the switch to Parcel Grid).
   deliveryPayOnArrival?: boolean;
   total?: number;
   /** Welcome voucher and points used on this order (the database re-checks both). */

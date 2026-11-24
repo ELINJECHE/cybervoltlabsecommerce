@@ -28,10 +28,10 @@ const art = (name: string) => `/assets/images/bf/${name}.${BF_ART_EXT}`;
 export type BfIcon = "truck" | "mpesa" | "return" | "bolt" | "tag";
 export interface BfChip { icon: BfIcon; label: string }
 const CHIPS: Record<string, BfChip> = {
-  free: { icon: "truck", label: "Free delivery over KSh 5,000" },
-  mpesa: { icon: "mpesa", label: "Pay with M-Pesa" },
+  free: { icon: "truck", label: "Delivery Ksh 999 anywhere in Kenya" },
+  mpesa: { icon: "mpesa", label: "Pay on delivery" },
   returns: { icon: "return", label: "48-hour returns" },
-  sameday: { icon: "bolt", label: "Same-day in Nairobi" },
+  sameday: { icon: "bolt", label: "Same-day dispatch before 2:00 PM" },
   real: { icon: "tag", label: "Real price cuts" },
 };
 

@@ -17,6 +17,7 @@ export default function Footer({ categories }: { categories: Category[] }) {
           <ul className="flex flex-col gap-2 text-sm text-white/70">
             <li><Link href="/about" className="hover:text-white">Our Story</Link></li>
             <li><Link href="/contact" className="hover:text-white">Contact Us</Link></li>
+            <li><Link href="/shipping" className="hover:text-white">Delivery</Link></li>
             <li><Link href="/returns" className="hover:text-white">Return Policy</Link></li>
             <li><Link href="/privacy" className="hover:text-white">Privacy &amp; Cookies</Link></li>
             <li><Link href="/wishlist" className="hover:text-white">Saved items</Link></li>

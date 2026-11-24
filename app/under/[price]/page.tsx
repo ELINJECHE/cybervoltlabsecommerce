@@ -22,7 +22,7 @@ export function generateMetadata({ params }: { params: { price: string } }): Met
   if (!limit) return {};
   return pageMetadata({
     title: `Products under ${formatKES(limit)} in Kenya`,
-    description: `Shop products under ${formatKES(limit)} at Cybervolt Labs. Same-day delivery in Nairobi, pay with M-Pesa.`,
+    description: `Shop products under ${formatKES(limit)} at Cybervolt Labs. Delivery Ksh 999 anywhere in Kenya, pay on delivery.`,
     path: `/under/${limit}`,
   });
 }

@@ -1,9 +1,9 @@
 type UspIcon = "dispatch" | "delivery" | "mpesa" | "returns";
 
 const ITEMS: { icon: UspIcon; title: string; text: string }[] = [
-  { icon: "dispatch", title: "Dispatched in 2 hours", text: "Same-day in Nairobi" },
-  { icon: "delivery", title: "Free delivery over KSh 5,000", text: "In Nairobi. From KSh 100 otherwise" },
-  { icon: "mpesa", title: "Pay with M-Pesa", text: "Secure Till payment" },
+  { icon: "dispatch", title: "Same-day dispatch", text: "Order before 2:00 PM" },
+  { icon: "delivery", title: "Delivery Ksh 999", text: "Anywhere in Kenya, 1-2 days" },
+  { icon: "mpesa", title: "Pay on delivery", text: "Pay when you receive it" },
   { icon: "returns", title: "48-hour returns", text: "After delivery" },
 ];
 

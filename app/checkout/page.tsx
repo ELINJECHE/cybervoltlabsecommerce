@@ -14,39 +14,20 @@ import {
   saveLastOrder,
   type OrderPayload,
 } from "@/lib/orders";
-import { initiatePayHeroPayment, pollPayHeroStatus } from "@/lib/payhero";
-import { supabaseEnabled } from "@/lib/supabase";
 import { getAllReviews } from "@/lib/reviews";
 import ReviewsCarousel from "@/components/ReviewsCarousel";
-import ManualPaymentConfirm from "@/components/ManualPaymentConfirm";
 import CheckoutSteps from "@/components/CheckoutSteps";
-import { SAME_DAY_HEADLINE } from "@/lib/store-info";
 import { MVP_CODE, MVP_DELIVERY_DISCOUNT } from "@/lib/community";
-import { useDeliveryArea } from "@/lib/use-delivery-area";
 import { LOYALTY_V2, TIER_THRESHOLD, maxRedeemable, pointsEarned } from "@/lib/loyalty";
 import { supabase } from "@/lib/supabase";
 import { trackShop } from "@/lib/analytics";
 import { readSource } from "@/lib/source";
 import ErrorNotice from "@/components/ErrorNotice";
-import { ERROR_CODES, toAppError, type AppError } from "@/lib/errors";
-import {
-  NAIROBI_ZONES,
-  OUTSIDE_NAIROBI_NOTE,
-  OUTSIDE_NAIROBI_SLUG,
-  describeDelivery,
-  freeDeliveryApplies,
-  FREE_DELIVERY_FROM,
-  feeLabel,
-  resolveDelivery,
-} from "@/lib/delivery";
+import { toAppError, type AppError } from "@/lib/errors";
+import { COURIER, DELIVERY_FEE, PRODUCT_DELIVERY_LINE, describeDelivery } from "@/lib/delivery";
 
-type Phase = "form" | "waiting-for-approval" | "manual-payment";
-
-// The automatic M-Pesa prompt runs through Supabase Edge Functions that have to
-// be deployed first (docs/PAYHERO_SETUP.md). Until NEXT_PUBLIC_MPESA_PROMPT_ENABLED
-// is set to "true", checkout skips the prompt and goes straight to paying the Till
-// and confirming — no failed request, no misleading "instant payment" promise.
-const MPESA_PROMPT_ENABLED = supabaseEnabled && process.env.NEXT_PUBLIC_MPESA_PROMPT_ENABLED === "true";
+// Every order is paid on delivery: placing it books it with the shop, and the customer pays
+// the total (goods + the flat delivery fee) when they collect or receive the parcel.
 
 export default function CheckoutPage() {
   const { items, subtotal, clearCart } = useCart();
@@ -56,21 +37,11 @@ export default function CheckoutPage() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
-  const [areaSlug, setAreaSlug] = useState("");
-  const [building, setBuilding] = useState("");
-  const { slug: storedArea, setArea: rememberArea } = useDeliveryArea();
-  // Start from the area chosen in the top bar.
-  useEffect(() => {
-    if (storedArea && !areaSlug) setAreaSlug(storedArea);
-  }, [storedArea, areaSlug]);
   const [mvpCode, setMvpCode] = useState("");
-  const delivery = resolveDelivery(areaSlug, building);
-  // Goods + delivery fee (the fee is 0 outside Nairobi: that one is paid to the courier).
-  // The MVP code takes KSh 100 off the delivery fee (never below zero; not for courier parcels).
+  // Goods + the flat delivery fee. The MVP code takes KSh 100 off the delivery fee.
   const mvpApplied = mvpCode.trim().toUpperCase() === MVP_CODE;
-  const freeDelivery = freeDeliveryApplies(subtotal, delivery);
-  const deliveryFee = freeDelivery ? 0 : (delivery?.fee ?? 0);
-  const mvpDiscount = mvpApplied && delivery && !delivery.payOnDelivery ? Math.min(MVP_DELIVERY_DISCOUNT, deliveryFee) : 0;
+  const deliveryFee = DELIVERY_FEE;
+  const mvpDiscount = mvpApplied ? Math.min(MVP_DELIVERY_DISCOUNT, deliveryFee) : 0;
   // Rewards: the welcome voucher (a first order of KSh 4,000+) and points (1 point = KSh 1).
   const [useVoucher, setUseVoucher] = useState(true);
   const [usePoints, setUsePoints] = useState(false);
@@ -83,7 +54,6 @@ export default function CheckoutPage() {
   const [notes, setNotes] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<AppError | null>(null);
-  const [phase, setPhase] = useState<Phase>("form");
   // Once per visit to this page, as soon as the saved cart has loaded.
   const startedCheckout = useRef(false);
   useEffect(() => {
@@ -91,32 +61,19 @@ export default function CheckoutPage() {
     startedCheckout.current = true;
     trackShop("begin_checkout", items.map((i) => ({ id: i.productId, name: i.name, price: i.unitPrice, quantity: i.quantity })));
   }, [items]);
-  // Snapshot of what was ordered — the cart is cleared once payment is confirmed,
-  // but the manual-payment step still needs the details.
-  const [order, setOrder] = useState<OrderPayload | null>(null);
-  const [manualReason, setManualReason] = useState<string | null>(null);
-
-  function finishCheckout(completed: OrderPayload, mpesaCode?: string) {
+  function finishCheckout(completed: OrderPayload) {
     trackShop(
       "purchase",
       completed.items.map((i) => ({ id: i.productId, name: i.name, price: i.unitPrice, quantity: i.quantity })),
       { transactionId: completed.orderReference, shipping: completed.deliveryFee ?? 0 },
     );
-    saveLastOrder(completed, mpesaCode);
+    saveLastOrder(completed);
     clearCart();
     router.push("/checkout/success");
   }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!delivery) {
-      setError({ message: "Please choose your delivery area so we can add the delivery fee." });
-      return;
-    }
-    if (delivery.needsBuilding) {
-      setError({ message: "Please type your building or estate so we can confirm the exact delivery fee." });
-      return;
-    }
     setSubmitting(true);
     setError(null);
 
@@ -126,17 +83,17 @@ export default function CheckoutPage() {
       orderReference,
       customerName: name,
       phone,
-      deliveryAddress: `${delivery.name}${delivery.building ? ` (${delivery.building})` : ""}: ${address}`,
+      deliveryAddress: address,
       notes: tagOrderNotes(
         orderReference,
-        "AWAITING PAYMENT",
-        [describeDelivery(delivery), freeDelivery ? `FREE delivery (items over KSh ${FREE_DELIVERY_FROM})` : "", `Source: ${readSource()}`, mvpDiscount > 0 ? `MVP code ${MVP_CODE} (-KSh ${mvpDiscount} delivery)` : "", voucherOff > 0 ? `Welcome voucher (-KSh ${voucherOff})` : "", pointsOff > 0 ? `Points used (-KSh ${pointsOff})` : "", `Total to pay now KSh ${total}`, notes.trim()].filter(Boolean).join(" · ")
+        "PAY ON DELIVERY",
+        [describeDelivery(deliveryFee - mvpDiscount), `Source: ${readSource()}`, mvpDiscount > 0 ? `MVP code ${MVP_CODE} (-KSh ${mvpDiscount} delivery)` : "", voucherOff > 0 ? `Welcome voucher (-KSh ${voucherOff})` : "", pointsOff > 0 ? `Points used (-KSh ${pointsOff})` : "", `Total to pay on delivery KSh ${total}`, notes.trim()].filter(Boolean).join(" · ")
       ),
       items,
       subtotal,
-      deliveryArea: delivery.building ? `${delivery.name} (${delivery.building})` : delivery.name,
+      deliveryArea: COURIER,
       deliveryFee: deliveryFee - mvpDiscount,
-      deliveryPayOnArrival: delivery.payOnDelivery,
+      deliveryPayOnArrival: true,
       total,
       voucherAmount: voucherOff,
       pointsRedeemed: pointsOff,
@@ -169,8 +126,7 @@ export default function CheckoutPage() {
     }
 
     try {
-      // Order-of-record webhook — happens regardless of how payment goes,
-      // so every order attempt is visible to staff even if M-Pesa fails.
+      // Order-of-record webhook.
       await submitOrder(payload);
     } catch (err) {
       setError(toAppError(err, "CV-ORDER-02"));
@@ -180,60 +136,8 @@ export default function CheckoutPage() {
 
     if (!recorded) await recordShopOrder(payload);
     if (voucherOff > 0 || pointsOff > 0) await Promise.all([refreshPoints(), refreshVoucher()]);
-    setOrder(payload);
-
-    if (!MPESA_PROMPT_ENABLED) {
-      // No M-Pesa prompt available — customer pays the Till and confirms next.
-      setManualReason(null);
-      setPhase("manual-payment");
-      setSubmitting(false);
-      return;
-    }
-
-    try {
-      const reference = await initiatePayHeroPayment({
-        customerName: name,
-        phone,
-        deliveryAddress: `${delivery.name}${delivery.building ? ` (${delivery.building})` : ""}: ${address}`,
-        notes,
-        items,
-        amount: total,
-        customerId: user?.id,
-      });
-
-      setPhase("waiting-for-approval");
-      const status = await pollPayHeroStatus(reference);
-
-      if (status === "success") {
-        finishCheckout(payload);
-        return;
-      }
-
-      setManualReason(
-        status === "failed"
-          ? "The M-Pesa payment wasn't completed. You can pay by Till below and confirm it."
-          : "We didn't hear back from M-Pesa in time. If you approved the prompt, tell us below — otherwise pay by Till and confirm it."
-      );
-      setPhase("manual-payment");
-    } catch (err) {
-      console.error("M-Pesa prompt could not be started:", err);
-      setManualReason(
-        `${ERROR_CODES["CV-PAY-01"].customer} (Reference CV-PAY-01)`
-      );
-      setPhase("manual-payment");
-    } finally {
-      setSubmitting(false);
-    }
-  }
-
-  if (phase === "manual-payment" && order) {
-    return (
-      <ManualPaymentConfirm
-        order={order}
-        reason={manualReason}
-        onConfirmed={(mpesaCode) => finishCheckout(order, mpesaCode)}
-      />
-    );
+    setSubmitting(false);
+    finishCheckout(payload);
   }
 
   if (items.length === 0) {
@@ -245,24 +149,11 @@ export default function CheckoutPage() {
     );
   }
 
-  if (phase === "waiting-for-approval") {
-    return (
-      <div className="mx-auto max-w-md px-4 py-16 text-center">
-        <span className="text-4xl" aria-hidden="true">📲</span>
-        <h1 className="mt-4 text-xl font-bold">Check your phone</h1>
-        <p className="mt-2 text-sm text-muted">
-          We&rsquo;ve sent an M-Pesa payment request to {phone}. Enter your M-Pesa PIN to approve
-          it — this page will update automatically.
-        </p>
-      </div>
-    );
-  }
-
   return (
     <div>
     <div className="mx-auto max-w-2xl px-4 py-6">
       <h1 className="mb-1 text-xl font-bold">Checkout</h1>
-      <p className="mb-4 text-sm font-medium text-primary">🚚 {SAME_DAY_HEADLINE} — order today, get it today</p>
+      <p className="mb-4 text-sm font-medium text-primary">🚚 {PRODUCT_DELIVERY_LINE}</p>
       <CheckoutSteps current={1} />
 
       <div className="mb-6 rounded-card border border-border bg-surface p-4">
@@ -282,14 +173,8 @@ export default function CheckoutPage() {
           <span>{formatKES(subtotal)}</span>
         </div>
         <div className="mt-1 flex justify-between text-sm">
-          <span>Delivery{delivery && !delivery.payOnDelivery ? ` (${delivery.name})` : ""}</span>
-          <span className={delivery ? "" : "text-muted"}>
-            {!delivery
-              ? "Choose your area below"
-              : delivery.payOnDelivery
-                ? "Pay courier on arrival"
-                : freeDelivery ? "FREE" : formatKES(delivery.fee)}
-          </span>
+          <span>Delivery ({COURIER})</span>
+          <span>{formatKES(deliveryFee)}</span>
         </div>
         {mvpDiscount > 0 && (
           <div className="mt-1 flex justify-between text-sm text-success">
@@ -310,29 +195,18 @@ export default function CheckoutPage() {
           </div>
         )}
         <div className="mt-2 flex justify-between border-t border-border pt-2 text-sm font-bold">
-          <span>{delivery ? "Total to pay now" : "Total"}</span>
+          <span>Total to pay on delivery</span>
           <span>{formatKES(total)}</span>
         </div>
       </div>
 
-      {MPESA_PROMPT_ENABLED ? (
-        <div className="mb-6 rounded-card border border-success/30 bg-success/5 p-4 text-sm">
-          <h2 className="mb-1 font-semibold text-success">Pay with M-Pesa</h2>
-          <p className="text-muted">
-            Placing your order sends an M-Pesa prompt straight to your phone — enter your PIN to
-            pay instantly. No manual steps needed.
-          </p>
-        </div>
-      ) : (
-        <div className="mb-6 rounded-card border border-success/30 bg-success/5 p-4 text-sm">
-          <h2 className="mb-1 font-semibold text-success">How paying works</h2>
-          <p className="text-muted">
-            Fill in your details and place your order. Next you&rsquo;ll see our M-Pesa Till number
-            and the exact amount to pay, then you confirm with the code from your M-Pesa SMS.
-            Your order isn&rsquo;t complete until you&rsquo;ve paid and confirmed.
-          </p>
-        </div>
-      )}
+      <div className="mb-6 rounded-card border border-success/30 bg-success/5 p-4 text-sm">
+        <h2 className="mb-1 font-semibold text-success">Pay on delivery</h2>
+        <p className="text-muted">
+          Fill in your details and place your order. Nothing to pay now: you pay when you collect or
+          receive your parcel. Orders placed before 2:00 PM East Africa Time are dispatched the same day.
+        </p>
+      </div>
 
       {LOYALTY_V2 && (
         user ? (
@@ -358,7 +232,7 @@ export default function CheckoutPage() {
             )}
             {estimatedPoints > 0 && (
               <p className="text-secondary">
-                You&rsquo;ll earn <strong>{estimatedPoints} points</strong> ({formatKES(estimatedPoints)}) once payment is confirmed.
+                You&rsquo;ll earn <strong>{estimatedPoints} points</strong> ({formatKES(estimatedPoints)}) once your order is paid.
                 {subtotal < TIER_THRESHOLD && TIER_THRESHOLD - subtotal <= 8000 && (
                   <> Add {formatKES(TIER_THRESHOLD - subtotal)} more to earn 1.5% instead of 1%.</>
                 )}
@@ -389,7 +263,7 @@ export default function CheckoutPage() {
 
         <div>
           <label htmlFor="phone" className="mb-1 block text-sm font-medium">
-            {MPESA_PROMPT_ENABLED ? "M-Pesa Phone Number" : "Phone Number"}
+            Phone Number
           </label>
           <input
             id="phone"
@@ -401,54 +275,6 @@ export default function CheckoutPage() {
             className="h-11 w-full rounded-md border border-border bg-surface px-3 text-sm outline-none focus:border-primary"
           />
         </div>
-
-        <div>
-          <label htmlFor="area" className="mb-1 block text-sm font-medium">Delivery Area</label>
-          <select
-            id="area"
-            required
-            value={areaSlug}
-            onChange={(e) => { setAreaSlug(e.target.value); rememberArea(e.target.value); }}
-            className="h-11 w-full rounded-md border border-border bg-surface px-3 text-sm outline-none focus:border-primary"
-          >
-            <option value="" disabled>Select where we&rsquo;re delivering…</option>
-            <optgroup label="Nairobi — same-day delivery">
-              {NAIROBI_ZONES.map((z) => (
-                <option key={z.slug} value={z.slug}>
-                  {z.name} — {feeLabel(z)}
-                </option>
-              ))}
-            </optgroup>
-            <optgroup label="Rest of Kenya">
-              <option value={OUTSIDE_NAIROBI_SLUG}>Outside Nairobi (countrywide parcel)</option>
-            </optgroup>
-          </select>
-          {delivery?.payOnDelivery && <p className="mt-1 text-xs text-muted">{OUTSIDE_NAIROBI_NOTE}</p>}
-          {!delivery && (
-            <p className="mt-1 text-xs text-muted">
-              Can&rsquo;t find your area? Pick the nearest one and tell us on WhatsApp.
-            </p>
-          )}
-        </div>
-
-        {delivery?.range && (
-          <div>
-            <label htmlFor="building" className="mb-1 block text-sm font-medium">Building / Estate</label>
-            <input
-              id="building"
-              required
-              value={building}
-              onChange={(e) => setBuilding(e.target.value)}
-              placeholder="e.g. name of your estate or apartment block"
-              className="h-11 w-full rounded-md border border-border bg-surface px-3 text-sm outline-none focus:border-primary"
-            />
-            <p className="mt-1 text-xs text-muted">
-              {freeDelivery
-                ? `Delivery to ${delivery.name} is free on orders over ${formatKES(FREE_DELIVERY_FROM)}.`
-                : `Delivery to ${delivery.name} is ${delivery.range} depending on the building. You pay the top rate (KSh ${delivery.fee}) now, and we confirm the exact fee for your building on WhatsApp.`}
-            </p>
-          </div>
-        )}
 
         <div>
           <label htmlFor="mvp" className="mb-1 block text-sm font-medium">MVP code (optional)</label>
@@ -463,7 +289,7 @@ export default function CheckoutPage() {
           />
           {mvpApplied && (
             <p className="mt-1 text-xs text-success">
-              {mvpDiscount > 0 ? `MVP code applied: KSh ${mvpDiscount} off your delivery.` : "MVP code accepted. Pick a Nairobi area to see your delivery discount."}
+              MVP code applied: KSh {mvpDiscount} off your delivery.
             </p>
           )}
         </div>
@@ -474,7 +300,7 @@ export default function CheckoutPage() {
             id="address"
             required
             rows={3}
-            placeholder="Estate / building, street, landmark"
+            placeholder="Town, estate / building, street, landmark"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             className="w-full rounded-md border border-border bg-surface px-3 py-2 text-sm outline-none focus:border-primary"
@@ -499,11 +325,7 @@ export default function CheckoutPage() {
           disabled={submitting}
           className="tap-target rounded-full bg-primary py-3.5 text-sm font-semibold text-white hover:bg-primary-dark disabled:cursor-not-allowed disabled:bg-muted"
         >
-          {submitting
-            ? "Placing Order..."
-            : MPESA_PROMPT_ENABLED
-              ? "Place Order & Pay with M-Pesa"
-              : "Place Order & Continue to Payment"}
+          {submitting ? "Placing Order..." : "Place Order (Pay on Delivery)"}
         </button>
       </form>
     </div>

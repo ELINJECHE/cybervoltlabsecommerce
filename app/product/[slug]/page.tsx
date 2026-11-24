@@ -88,7 +88,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
 
           <PriceTag price={product.price} discountPrice={product.discountPrice} size="lg" />
 
-          <ProductDelivery price={product.discountPrice ?? product.price} />
+          <ProductDelivery />
           <div className="flex flex-wrap items-start gap-2">
             <WishlistButton
               variant="inline"

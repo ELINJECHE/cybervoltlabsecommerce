@@ -1,17 +1,18 @@
 import type { Metadata } from "next";
 import type { Category, Product } from "@/lib/types";
 import { SOCIAL_LINKS } from "@/lib/social";
+import { DELIVERY_FEE, RETURN_DAYS } from "@/lib/delivery";
 
 export const SITE_URL = "https://cybervoltlabs.co.ke";
 export const SITE_NAME = "Cybervolt Labs";
-export const DEFAULT_TITLE = "Cybervolt Labs | Same-Day Delivery in Nairobi, Kenya";
+export const DEFAULT_TITLE = "Cybervolt Labs | Delivery Anywhere in Kenya, Pay on Delivery";
 export const DEFAULT_DESCRIPTION =
-  "Same-day delivery in Nairobi. Shop motorcycle riding gear, sneakers, bedding, home décor and smart gadgets at Cybervolt Labs. Pay with M-Pesa.";
+  "Shop motorcycle riding gear, sneakers, bedding, home décor and smart gadgets at Cybervolt Labs. Delivery Ksh 999 anywhere in Kenya, 1-2 business days. Pay on delivery.";
 
 const TITLE_SUFFIX = ` | ${SITE_NAME}`;
 
 // Used whenever a page has no image of its own (a page-level openGraph replaces the layout's).
-const SHARE_IMAGE_ALT = "Cybervolt Labs — same-day delivery in Nairobi. Motorcycle gear, sneakers and home essentials. Pay with M-Pesa.";
+const SHARE_IMAGE_ALT = "Cybervolt Labs — motorcycle gear, sneakers and home essentials. Delivery anywhere in Kenya, pay on delivery.";
 
 export function absoluteUrl(path: string): string {
   if (/^https?:\/\//.test(path)) return path;
@@ -92,7 +93,7 @@ export function productMetadata(product: Product): Metadata {
   const lead = product.description ? firstSentence(product.description) : "";
   const description = composeDescription(
     lead ? `${product.name}: ${lead} ${kes(price)}.` : `Buy ${product.name} online in Kenya for ${kes(price)}.`,
-    ["Order from Cybervolt Labs: same-day delivery in Nairobi, pay with M-Pesa.", "Same-day Nairobi delivery; pay with M-Pesa.", "Pay with M-Pesa."]
+    ["Delivery Ksh 999 via Parcel Grid, 1-2 days, pay on delivery.", "Delivery Ksh 999, pay on delivery.", "Pay on delivery."]
   );
   return pageMetadata({
     // Long names lose their bracketed qualifier rather than being cut off mid-word.
@@ -115,8 +116,8 @@ export function categoryMetadata(category: Category, products: Product[]): Metad
     count > 0
       ? `Shop ${category.name} in Kenya: ${count} product${count === 1 ? "" : "s"} from ${kes(prices[0])}${
           names.length ? `, including ${names.join(" and ")}` : ""
-        }. Same-day delivery in Nairobi; pay with M-Pesa.`
-      : `Shop ${category.name} in Kenya at Cybervolt Labs. Same-day delivery in Nairobi; pay with M-Pesa.`;
+        }. Delivery Ksh 999 anywhere in Kenya; pay on delivery.`
+      : `Shop ${category.name} in Kenya at Cybervolt Labs. Delivery Ksh 999 anywhere in Kenya; pay on delivery.`;
   return pageMetadata({
     title: fitTitle([`${category.name} in Kenya`, category.name]),
     description: truncate(body, 158),
@@ -209,11 +210,23 @@ export function productJsonLd(product: Product, categoryName?: string) {
       ...(refurbished ? { itemCondition: "https://schema.org/RefurbishedCondition" } : {}),
       ...(dealEnds ? { priceValidUntil: dealEnds } : {}),
       seller: { "@id": ORG_ID },
+      shippingDetails: {
+        "@type": "OfferShippingDetails",
+        shippingRate: { "@type": "MonetaryAmount", value: DELIVERY_FEE, currency: "KES" },
+        shippingDestination: { "@type": "DefinedRegion", addressCountry: "KE" },
+        deliveryTime: {
+          "@type": "ShippingDeliveryTime",
+          handlingTime: { "@type": "QuantitativeValue", minValue: 0, maxValue: 0, unitCode: "DAY" },
+          transitTime: { "@type": "QuantitativeValue", minValue: 1, maxValue: 2, unitCode: "DAY" },
+        },
+      },
       hasMerchantReturnPolicy: {
         "@type": "MerchantReturnPolicy",
         applicableCountry: "KE",
         returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
-        merchantReturnDays: 2,
+        merchantReturnDays: RETURN_DAYS,
+        returnMethod: "https://schema.org/ReturnInStore",
+        returnFees: "https://schema.org/FreeReturn",
       },
     },
     ...(product.reviewCount > 0 && product.rating > 0

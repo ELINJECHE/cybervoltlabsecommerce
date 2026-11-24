@@ -42,7 +42,7 @@ const HERO_SLIDES = [
     image: "/assets/images/hero-1.webp",
     alt: "Cybervolt Labs featured products",
     title: "Order Today. Get It Today.",
-    subtitle: "Same-day delivery in Nairobi on motorcycle gear, sneakers and home essentials. Countrywide in 2–4 days.",
+    subtitle: "Motorcycle gear, sneakers and home essentials. Delivery Ksh 999 anywhere in Kenya, 1-2 business days. Pay on delivery.",
     ctaText: "Shop Motorcycle Gear",
     ctaHref: "/category/motorcycle-gear",
   },
@@ -188,7 +188,7 @@ export default async function HomePage() {
             home décor
           </Link>{" "}
           collections to see what&rsquo;s trending this week. Every order is confirmed over
-          WhatsApp, and you pay by M-Pesa.
+          WhatsApp, and you pay on delivery.
         </p>
         <p>
           Whether you found us through a TikTok video or a WhatsApp forward, welcome — fair

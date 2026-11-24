@@ -29,7 +29,7 @@ export default function ContactPage() {
         <p>Email: hello@cybervoltlabs.co.ke</p>
         <p>Instagram: @cybervolt_labs_ &middot; TikTok: @cybervolt_labs</p>
         <p>Facebook &amp; LinkedIn: Cybervolt Labs Kenya</p>
-        <p>Based in Nairobi, Kenya — same-day delivery in Nairobi, countrywide in 2-4 days.</p>
+        <p>Shop: Brisma Tower, Ground Floor, Ongata Rongai. Delivery Ksh 999 anywhere in Kenya via Parcel Grid, 1-2 business days.</p>
       </div>
     </div>
   );

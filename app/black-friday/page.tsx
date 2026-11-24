@@ -12,14 +12,14 @@ import { discounted, maxOff } from "@/components/BlackFridayShelf";
 export const metadata: Metadata = pageMetadata({
   title: "Black Friday Deals",
   description:
-    "Black Friday at Cybervolt Labs, 30 Oct to 30 Nov: real price cuts on motorcycle gear, appliances, bedding, audio and more, with same-day delivery in Nairobi and M-Pesa payment.",
+    "Black Friday at Cybervolt Labs, 30 Oct to 30 Nov: real price cuts on motorcycle gear, appliances, bedding, audio and more, with delivery anywhere in Kenya and pay on delivery.",
   path: "/black-friday",
 });
 
 const PROMISES = [
   { icon: "🏷️", title: "Real price cuts", text: "The old price you see is our normal price, not an invented one." },
-  { icon: "🚚", title: "Free delivery over KSh 5,000", text: "In Nairobi, same-day if you order before 5pm. Countrywide in 2-4 days." },
-  { icon: "📲", title: "Pay with M-Pesa", text: "Pay to our Till; we confirm your order on WhatsApp." },
+  { icon: "🚚", title: "Delivery Ksh 999", text: "Anywhere in Kenya via Parcel Grid, 1-2 business days. Order before 2:00 PM for same-day dispatch." },
+  { icon: "📲", title: "Pay on delivery", text: "Pay when you collect or receive your parcel." },
   { icon: "↩️", title: "48-hour returns", text: "Unused items in original packaging, within 48 hours of delivery." },
 ];
 
@@ -41,7 +41,7 @@ export default async function BlackFridayPage() {
         <div className="mx-auto mt-5 flex max-w-7xl flex-col gap-4 px-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <h1 className="text-2xl font-black text-white sm:text-3xl">Black Friday at Cybervolt Labs</h1>
-            <p className="mt-1 text-sm text-white/75">30 Oct - 30 Nov · Real price cuts · Same-day delivery in Nairobi</p>
+            <p className="mt-1 text-sm text-white/75">30 Oct - 30 Nov · Real price cuts · Delivery anywhere in Kenya</p>
           </div>
           <BlackFridayCountdown />
         </div>

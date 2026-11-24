@@ -25,7 +25,7 @@ export default function BlackFridayPromo() {
         className="absolute right-2 top-2 flex h-6 w-6 items-center justify-center rounded-full bg-white/20 text-sm hover:bg-white/40">×</button>
       <p className="text-xs font-black tracking-widest text-[#ffc83d]">BLACK FRIDAY</p>
       <p className="mt-1 text-lg font-black leading-tight">Biggest offers ready to drop</p>
-      <p className="mt-1 text-xs text-white/75">Real price cuts, same-day delivery in Nairobi.</p>
+      <p className="mt-1 text-xs text-white/75">Real price cuts, delivery anywhere in Kenya.</p>
       <Link href="/black-friday" className="mt-3 inline-block rounded-full bg-[#5de7a4] px-4 py-1.5 text-sm font-black text-[#07070d] hover:opacity-90">See the deals →</Link>
     </div>
   );

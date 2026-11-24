@@ -15,7 +15,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   if (!c) return {};
   return pageMetadata({
     title: `${c.title} in Kenya`,
-    description: `${c.description} Same-day delivery in Nairobi, pay with M-Pesa.`.slice(0, 158),
+    description: `${c.description} Delivery Ksh 999 anywhere in Kenya, pay on delivery.`.slice(0, 158),
     path: `/collections/${c.slug}`,
   });
 }

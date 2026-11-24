@@ -3,6 +3,22 @@ Newest first. "Live" = running on cybervoltlabs.co.ke. "Not deployed" = in the c
 but waiting on a setup step that only the site owner can do.
 
 ==============================================================================
+2026-11-24
+==============================================================================
+Delivery and returns match Google Merchant Center  (pushed 2026-11-24)
+- Delivery is now one flat Ksh 999 per order anywhere in Kenya via Parcel Grid, 1-2 business days (Monday to Saturday),
+  paid on delivery. Orders before 2:00 PM East Africa Time are dispatched the same day; after 2:00 PM, the next business day.
+- Checkout: no area picker, no free-delivery-over-KSh-5,000, no M-Pesa step. Placing the order books it ("PAY ON DELIVERY"
+  in the sheet Notes) and the customer pays goods + Ksh 999 on delivery. The MVP code still takes KSh 100 off delivery.
+- New page /shipping ("Delivery"), linked in the footer next to Return Policy and in the sitemap. /returns rewritten:
+  48 hours (2 days), exchanges, free replacement of defective items, in-store or Parcel Grid drop-off returns,
+  no restocking fee, Ksh 999 fee non-refundable unless damaged/incorrect, M-Pesa refunds within 5 business days.
+- Product pages show "Delivery Ksh 999 via Parcel Grid, 1-2 days, pay on delivery." and their product data now carries
+  shippingDetails (999 KES, KE, handling 0 days, transit 1-2 days) and the return policy (2 days, in store, free return).
+- "Same-day delivery in Nairobi" / "countrywide in 2-4 days" / "free delivery over KSh 5,000" removed site-wide.
+- All terms live in lib/delivery.ts. Change them there AND in Merchant Center together.
+
+==============================================================================
 2026-10-22
 ==============================================================================
 Black Friday artwork installed  (not yet pushed)
