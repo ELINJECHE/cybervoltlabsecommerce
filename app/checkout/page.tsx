@@ -23,6 +23,7 @@ import { supabase } from "@/lib/supabase";
 import { trackShop } from "@/lib/analytics";
 import { readSource } from "@/lib/source";
 import ErrorNotice from "@/components/ErrorNotice";
+import { estimatedDeliveryDate } from "@/lib/delivery-clock";
 import { toAppError, type AppError } from "@/lib/errors";
 import { COURIER, DELIVERY_FEE, PRODUCT_DELIVERY_LINE, describeDelivery } from "@/lib/delivery";
 
@@ -36,6 +37,7 @@ export default function CheckoutPage() {
 
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
   const [mvpCode, setMvpCode] = useState("");
   // Goods + the flat delivery fee. The MVP code takes KSh 100 off the delivery fee.
@@ -67,7 +69,10 @@ export default function CheckoutPage() {
       completed.items.map((i) => ({ id: i.productId, name: i.name, price: i.unitPrice, quantity: i.quantity })),
       { transactionId: completed.orderReference, shipping: completed.deliveryFee ?? 0 },
     );
-    saveLastOrder(completed);
+    saveLastOrder(completed, undefined, {
+      email: email.trim() || user?.email || undefined,
+      estimatedDelivery: estimatedDeliveryDate(),
+    });
     clearCart();
     router.push("/checkout/success");
   }
@@ -274,6 +279,22 @@ export default function CheckoutPage() {
             onChange={(e) => setPhone(e.target.value)}
             className="h-11 w-full rounded-md border border-border bg-surface px-3 text-sm outline-none focus:border-primary"
           />
+        </div>
+
+        <div>
+          <label htmlFor="email" className="mb-1 block text-sm font-medium">Email (optional)</label>
+          <input
+            id="email"
+            type="email"
+            autoComplete="email"
+            placeholder={user?.email ?? "you@example.com"}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="h-11 w-full rounded-md border border-border bg-surface px-3 text-sm outline-none focus:border-primary"
+          />
+          <p className="mt-1 text-xs text-muted">
+            Only used to invite you to review your order through Google Customer Reviews. You can say no when asked.
+          </p>
         </div>
 
         <div>

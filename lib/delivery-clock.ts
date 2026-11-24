@@ -84,3 +84,19 @@ export function deliveryHeadline(s: DeliveryStatus): string {
     ? `Orders after 2:00 PM go out the next business day (${s.when})`
     : `We dispatch Monday to Saturday. Order now, dispatched ${s.when}`;
 }
+
+// "YYYY-MM-DD" by which an order placed now should have arrived: dispatched today if it is a business day before the
+// 2:00 PM cutoff (otherwise the next one), plus up to 2 business days with the courier (Parcel Grid's "1-2 days").
+// Used for the Google Customer Reviews opt-in, which asks for the latest expected date.
+export function estimatedDeliveryDate(now: Date = new Date()): string {
+  let d = nairobi(now);
+  const msIntoDay = d.getUTCHours() * 3_600_000 + d.getUTCMinutes() * 60_000 + d.getUTCSeconds() * 1000;
+  if (!isDeliveryDay(d) || msIntoDay >= DISPATCH_CUTOFF_HOUR * 3_600_000) {
+    do d = new Date(d.getTime() + DAY_MS); while (!isDeliveryDay(d));
+  }
+  for (let left = 2; left > 0; ) {
+    d = new Date(d.getTime() + DAY_MS);
+    if (isDeliveryDay(d)) left--;
+  }
+  return ymd(d);
+}

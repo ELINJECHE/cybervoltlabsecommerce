@@ -37,11 +37,18 @@ export interface LastOrderSummary {
   address: string;
   items: { name: string; quantity: number; color?: string }[];
   mpesaCode?: string;
+  // Only for the Google Customer Reviews opt-in on the success page; kept in this tab's sessionStorage, never sent to our database.
+  email?: string;
+  estimatedDelivery?: string;
 }
 
 const LAST_ORDER_KEY = "cv_last_order";
 
-export function saveLastOrder(order: OrderPayload, mpesaCode?: string): void {
+export function saveLastOrder(
+  order: OrderPayload,
+  mpesaCode?: string,
+  extra: { email?: string; estimatedDelivery?: string } = {},
+): void {
   const summary: LastOrderSummary = {
     reference: order.orderReference ?? "",
     total: order.total ?? order.subtotal,
@@ -49,6 +56,8 @@ export function saveLastOrder(order: OrderPayload, mpesaCode?: string): void {
     address: order.deliveryAddress,
     items: order.items.map((i) => ({ name: i.name, quantity: i.quantity, color: i.color })),
     mpesaCode,
+    email: extra.email,
+    estimatedDelivery: extra.estimatedDelivery,
   };
   try {
     sessionStorage.setItem(LAST_ORDER_KEY, JSON.stringify(summary));

@@ -5,6 +5,12 @@ but waiting on a setup step that only the site owner can do.
 ==============================================================================
 2026-11-24
 ==============================================================================
+Google Customer Reviews opt-in  (pushed 2026-11-24)
+- The order confirmation page now shows Google's review opt-in (Merchant Center ID 5917675868) when the customer gave an email at
+  checkout (new optional field) or is logged in, and has not declined cookies. Order ID, email, country KE and an estimated delivery date
+  (dispatch day + 2 business days, Nairobi time) go to Google; the email stays in the tab's sessionStorage and is not saved to our database.
+  Privacy page updated. Guests who leave the email blank see nothing.
+
 Delivery and returns match Google Merchant Center  (pushed 2026-11-24)
 - Delivery is now one flat Ksh 999 per order anywhere in Kenya via Parcel Grid, 1-2 business days (Monday to Saturday),
   paid on delivery. Orders before 2:00 PM East Africa Time are dispatched the same day; after 2:00 PM, the next business day.

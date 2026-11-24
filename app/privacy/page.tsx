@@ -78,7 +78,7 @@ export default function PrivacyPage() {
       <Section title="Who handles it for us">
         <p>
           We use a small number of services to run the shop: our database and account provider (Supabase), our website host
-          (Netlify), Google (Analytics, and the sheet where we keep orders for delivery), and Safaricom M-Pesa, with a payment
+          (Netlify), Google (Analytics, the sheet where we keep orders for delivery, and Google Customer Reviews if you give an email address at checkout so we can invite you to review your order), and Safaricom M-Pesa, with a payment
           provider if you choose the M-Pesa prompt at checkout. They handle your data only to provide their service to us. Some
           are based outside Kenya, so your data may be processed abroad. We share order details with our delivery riders only
           as far as needed to deliver to you.

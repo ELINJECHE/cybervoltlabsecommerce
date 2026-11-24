@@ -2,6 +2,7 @@ import Link from "next/link";
 import { buildOrderEnquiryLink } from "@/lib/whatsapp";
 import LastOrderDetails from "@/components/LastOrderDetails";
 import WhatsAppChatLink from "@/components/WhatsAppChatLink";
+import GoogleCustomerReviewsOptIn from "@/components/GoogleCustomerReviewsOptIn";
 
 export default function CheckoutSuccessPage() {
   return (
@@ -10,6 +11,7 @@ export default function CheckoutSuccessPage() {
       <h1 className="mt-4 text-xl font-bold">Order Received!</h1>
       <p className="mt-2 text-sm text-muted">Thank you — we&rsquo;ve received your order.</p>
       <LastOrderDetails />
+      <GoogleCustomerReviewsOptIn />
 
       <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
         <Link
