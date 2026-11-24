@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import type { Product } from "@/lib/types";
 import { getProductImage } from "@/lib/images";
@@ -105,14 +106,15 @@ export default function ProductActions({ product }: { product: Product }) {
         </button>
       </div>
 
-      {/* The "face" behind Chat Nami: swap the initials for a real photo once chosen. */}
+      {/* The "face" behind Chat Nami: Nami, our illustrated brand ambassador. */}
       <div className="flex items-end gap-2">
-        <span
-          aria-hidden="true"
-          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-whatsapp text-xs font-bold text-white"
-        >
-          CV
-        </span>
+        <Image
+          src="/assets/images/nami.webp"
+          alt="Nami, the illustrated Cybervolt Labs brand ambassador"
+          width={640}
+          height={700}
+          className="h-auto w-32 shrink-0 rounded-2xl border border-border bg-white sm:w-44"
+        />
         <p className="rounded-2xl rounded-bl-sm border border-border bg-surface px-3 py-2 text-sm">
           Hey, niko hapa! Would you like my assistance with anything kuhusu{" "}
           <span className="font-semibold">{product.name}</span>?

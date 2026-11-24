@@ -5,6 +5,11 @@ but waiting on a setup step that only the site owner can do.
 ==============================================================================
 2026-11-24
 ==============================================================================
+Nami, our brand ambassador  (not yet pushed)
+- The "Chat Nami" box on product pages now shows Nami's full portrait (uncropped, so the embroidered Cybervolt Labs logo on her shirt
+  shows) instead of the "CV" initials: 128 px wide on phones, 176 px on larger screens. File: public/assets/images/nami.webp.
+  Nami is an illustrated character, and the picture's alt text says so.
+
 Homepage clean-up after an outside review  (not yet pushed)
 - "Flash Deals" strip is hidden unless it has 3+ items (it showed a single card). Homepage shelves go from 8 rows to 6
   (Appliances + Audio merged; Home, Kitchen & Bedding merged). Nothing removed, only grouped.
