@@ -82,7 +82,7 @@ export interface AppError {
 const USER_FIXABLE: [RegExp, string][] = [
   [/invalid login credentials|invalid credentials|wrong password/i, "That email or password isn't right. Check them and try again."],
   [/email not confirmed/i, "Please confirm your email first. Check your inbox for the link we sent."],
-  [/already (?:been )?registered|already exists/i, "That email already has an account. Try logging in instead."],
+  [/already (?:been )?registered|already exists/i, "An account with this email already exists. Log in instead, or use Forgot password."],
   [/unable to validate email|invalid email|email address .* invalid/i, "That email address doesn't look right."],
   [/expired|invalid.*(?:token|otp|link)|(?:token|otp|link).*invalid/i, "This link has expired. Please request a new one."],
 ];

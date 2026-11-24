@@ -105,12 +105,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   async function signUp(email: string, password: string, fullName: string, phone: string) {
     if (!supabaseEnabled) return { error: "Accounts aren't set up yet — check back soon." };
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
-      options: { data: { full_name: fullName, phone } },
+      options: {
+        data: { full_name: fullName, phone },
+        // Without this the link uses Supabase's Site URL setting (which pointed at localhost).
+        emailRedirectTo: `${window.location.origin}/account`,
+      },
     });
-    return { error: error?.message ?? null };
+    if (error) return { error: error.message };
+    // With email confirmation on, Supabase doesn't report an existing email as an error (so the
+    // address can't be probed); it returns a user with no identities instead.
+    if (data.user && data.user.identities?.length === 0) return { error: "User already registered" };
+    return { error: null };
   }
 
   async function signIn(email: string, password: string) {

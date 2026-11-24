@@ -7,17 +7,18 @@ import { trackEvent } from "@/lib/analytics";
 
 const link = (label: string) => SOCIAL_LINKS.find((s) => s.label === label)?.href;
 
-// Docked on the left edge, around the middle of the screen: WhatsApp (with its enquiry/track menu)
-// plus Instagram and Facebook. Smaller on phones so it stays out of the way of content.
+// Docked on the right edge, low down where the thumb reaches: WhatsApp (with its enquiry/track menu)
+// plus Instagram and Facebook. On phones it sits above the bottom menu and the sticky buy bar, and
+// it is smaller so it stays out of the way of content.
 export default function WhatsAppFloatButton() {
   const [open, setOpen] = useState(false);
   const instagram = link("Instagram");
   const facebook = link("Facebook");
 
-  const round = "tap-target flex items-center justify-center rounded-full text-white shadow-lg transition hover:brightness-95 h-11 w-11 sm:h-12 sm:w-12";
+  const round = "tap-target flex items-center justify-center rounded-full text-white shadow-lg transition hover:brightness-95 h-10 w-10 sm:h-12 sm:w-12";
 
   return (
-    <div className="fixed left-2 top-1/2 z-50 flex -translate-y-1/2 flex-col items-start gap-2 sm:left-3">
+    <div className="fixed bottom-36 right-2 z-50 flex flex-col items-end gap-2 sm:right-3 lg:bottom-6">
       <div className="relative">
         <button
           type="button"
@@ -31,7 +32,7 @@ export default function WhatsAppFloatButton() {
           </svg>
         </button>
         {open && (
-          <div className="absolute left-full top-0 ml-2 flex animate-slide-up flex-col gap-1 rounded-card border border-border bg-surface p-2 shadow-card">
+          <div className="absolute right-full top-0 mr-2 flex animate-slide-up flex-col gap-1 rounded-card border border-border bg-surface p-2 shadow-card">
             <a
               href={buildOrderEnquiryLink()}
               target="_blank"

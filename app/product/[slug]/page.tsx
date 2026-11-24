@@ -88,6 +88,9 @@ export default async function ProductPage({ params }: { params: { slug: string }
 
           <PriceTag price={product.price} discountPrice={product.discountPrice} size="lg" />
 
+          <div id="buy-actions">
+            <ProductActions product={product} />
+          </div>
           <ProductDelivery />
           <div className="flex flex-wrap items-start gap-2">
             <WishlistButton
@@ -118,9 +121,6 @@ export default async function ProductPage({ params }: { params: { slug: string }
             </ul>
           )}
 
-          <div id="buy-actions">
-            <ProductActions product={product} />
-          </div>
           <TrackView item={{ slug: product.slug, name: product.name, price: product.discountPrice ?? product.price, image: getProductImage(product.images) }} />
           <StickyBuyBar
             productId={product.id}
