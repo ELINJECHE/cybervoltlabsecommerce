@@ -165,9 +165,9 @@ export default function CheckoutPage() {
         <h2 className="mb-2 text-sm font-semibold">Order Summary</h2>
         <ul className="flex flex-col gap-1 text-sm text-muted">
           {items.map((item) => (
-            <li key={`${item.productId}-${item.color ?? ""}`} className="flex justify-between">
+            <li key={`${item.productId}-${item.color ?? ""}-${item.size ?? ""}`} className="flex justify-between">
               <span className="line-clamp-1">
-                {item.name} × {item.quantity}
+                {item.name}{item.size ? ` (size ${item.size})` : ""} × {item.quantity}
               </span>
               <span>{formatKES(item.unitPrice * item.quantity)}</span>
             </li>

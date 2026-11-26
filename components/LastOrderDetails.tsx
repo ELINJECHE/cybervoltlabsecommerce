@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { formatKES } from "@/lib/format";
+import { formatKES, variantLabel } from "@/lib/format";
 import { readLastOrder, type LastOrderSummary } from "@/lib/orders";
 import { COURIER } from "@/lib/delivery";
 import { EXCLUSIVE_GROUP_URL, MVP_CODE, MVP_DELIVERY_DISCOUNT, MVP_GROUP_URL } from "@/lib/community";
@@ -9,7 +9,7 @@ import { buildWhatsAppLink } from "@/lib/whatsapp";
 
 function buildReceiptLink(order: LastOrderSummary): string {
   const items = order.items
-    .map((i) => `• ${i.name}${i.color ? ` (${i.color})` : ""} × ${i.quantity}`)
+    .map((i) => `• ${i.name}${variantLabel(i) ? ` (${variantLabel(i)})` : ""} × ${i.quantity}`)
     .join("\n");
   const lines = [
     "Hi Cybervolt Labs, here is my order receipt.",

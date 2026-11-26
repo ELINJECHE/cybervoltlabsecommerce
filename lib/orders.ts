@@ -35,7 +35,7 @@ export interface LastOrderSummary {
   total: number;
   phone: string;
   address: string;
-  items: { name: string; quantity: number; color?: string }[];
+  items: { name: string; quantity: number; color?: string; size?: string }[];
   mpesaCode?: string;
   // Only for the Google Customer Reviews opt-in on the success page; kept in this tab's sessionStorage, never sent to our database.
   email?: string;
@@ -54,7 +54,7 @@ export function saveLastOrder(
     total: order.total ?? order.subtotal,
     phone: order.phone,
     address: order.deliveryAddress,
-    items: order.items.map((i) => ({ name: i.name, quantity: i.quantity, color: i.color })),
+    items: order.items.map((i) => ({ name: i.name, quantity: i.quantity, color: i.color, size: i.size })),
     mpesaCode,
     email: extra.email,
     estimatedDelivery: extra.estimatedDelivery,

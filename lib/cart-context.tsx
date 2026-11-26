@@ -17,14 +17,15 @@ export interface CartItem {
   image: string;
   unitPrice: number;
   color?: string;
+  size?: string;
   quantity: number;
 }
 
 interface CartContextValue {
   items: CartItem[];
   addItem: (item: Omit<CartItem, "quantity">, quantity?: number) => void;
-  updateQuantity: (productId: string, color: string | undefined, quantity: number) => void;
-  removeItem: (productId: string, color?: string) => void;
+  updateQuantity: (productId: string, color: string | undefined, quantity: number, size?: string) => void;
+  removeItem: (productId: string, color?: string, size?: string) => void;
   clearCart: () => void;
   itemCount: number;
   subtotal: number;
@@ -33,8 +34,8 @@ interface CartContextValue {
 const CartContext = createContext<CartContextValue | undefined>(undefined);
 const STORAGE_KEY = "cybervolt-cart";
 
-function lineKey(productId: string, color?: string) {
-  return `${productId}::${color ?? ""}`;
+function lineKey(productId: string, color?: string, size?: string) {
+  return `${productId}::${color ?? ""}::${size ?? ""}`;
 }
 
 export function CartProvider({ children }: { children: ReactNode }) {
@@ -59,11 +60,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const addItem: CartContextValue["addItem"] = (item, quantity = 1) => {
     trackShop("add_to_cart", [{ id: item.productId, name: item.name, price: item.unitPrice, quantity }]);
     setItems((prev) => {
-      const key = lineKey(item.productId, item.color);
-      const existing = prev.find((i) => lineKey(i.productId, i.color) === key);
+      const key = lineKey(item.productId, item.color, item.size);
+      const existing = prev.find((i) => lineKey(i.productId, i.color, i.size) === key);
       if (existing) {
         return prev.map((i) =>
-          lineKey(i.productId, i.color) === key
+          lineKey(i.productId, i.color, i.size) === key
             ? { ...i, quantity: i.quantity + quantity }
             : i
         );
@@ -72,11 +73,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
     });
   };
 
-  const updateQuantity: CartContextValue["updateQuantity"] = (productId, color, quantity) => {
+  const updateQuantity: CartContextValue["updateQuantity"] = (productId, color, quantity, size) => {
     setItems((prev) =>
       prev
         .map((i) =>
-          lineKey(i.productId, i.color) === lineKey(productId, color)
+          lineKey(i.productId, i.color, i.size) === lineKey(productId, color, size)
             ? { ...i, quantity }
             : i
         )
@@ -84,8 +85,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
     );
   };
 
-  const removeItem: CartContextValue["removeItem"] = (productId, color) => {
-    setItems((prev) => prev.filter((i) => lineKey(i.productId, i.color) !== lineKey(productId, color)));
+  const removeItem: CartContextValue["removeItem"] = (productId, color, size) => {
+    setItems((prev) => prev.filter((i) => lineKey(i.productId, i.color, i.size) !== lineKey(productId, color, size)));
   };
 
   const clearCart = () => setItems([]);

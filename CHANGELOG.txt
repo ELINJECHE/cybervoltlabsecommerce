@@ -5,6 +5,20 @@ but waiting on a setup step that only the site owner can do.
 ==============================================================================
 2026-11-24
 ==============================================================================
+Google Merchant Center fixes  (not yet pushed)
+- Product data now carries brand and manufacturer part number where the title names them (data/merchant-attributes.json): Globalstar GS-801,
+  Star-X 24LN22ST2, Ailipu KL-63xx, Ramtons RM25x, Vitron models, Dessini, Powermax. Unbranded items (tent, shoes) are sent without any.
+- Sale prices are sent properly: the crossed-out price as a strikethrough price plus an end date (the deal's end, or 30 Nov while Black
+  Friday runs). Condition is stated explicitly (New unless set otherwise).
+- Sold out is now a real state: tick "Sold out" in the admin product form (stored as stock = -1). The page says so, Add to Cart is off,
+  the category card shows a chip and Google is told "out of stock". Nothing was marked sold out.
+- Size picker for products listed with sizes (Air Max for now): the size goes into the cart, order and receipt instead of the order notes,
+  and Google gets one variant per size (own SKU) inside a product group.
+- Admin refuses product photos under 500x500 px (Google's minimum, enforced from 31 Jan 2027) and limits titles to 150 and descriptions to
+  5,000 characters.
+- scripts/gmc/build_feed.py builds a Merchant Center feed from the database using the same IDs as the page (the full product ID), with a notes
+  file listing what still needs fixing. Product IDs on the page stay the full database ID.
+
 Nami, our brand ambassador  (not yet pushed)
 - The "Chat Nami" box on product pages now shows Nami's full portrait (uncropped, so the embroidered Cybervolt Labs logo on her shirt
   shows) instead of the "CV" initials: 128 px wide on phones, 176 px on larger screens. File: public/assets/images/nami.webp.

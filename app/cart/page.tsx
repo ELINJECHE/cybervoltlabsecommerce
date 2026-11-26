@@ -45,7 +45,7 @@ export default function CartPage() {
         <div className="flex flex-col gap-3">
           {items.map((item) => (
             <div
-              key={`${item.productId}-${item.color ?? ""}`}
+              key={`${item.productId}-${item.color ?? ""}-${item.size ?? ""}`}
               className="flex gap-3 rounded-card border border-border bg-surface p-3"
             >
               <Link href={`/product/${item.slug}`} className="relative h-20 w-20 shrink-0 overflow-hidden rounded-md bg-primary-light">
@@ -57,12 +57,13 @@ export default function CartPage() {
                     {item.name}
                   </Link>
                   {item.color && <p className="text-xs text-muted">Color: {item.color}</p>}
+                  {item.size && <p className="text-xs text-muted">Size: {item.size}</p>}
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center rounded-full border border-border">
                     <button
                       type="button"
-                      onClick={() => updateQuantity(item.productId, item.color, item.quantity - 1)}
+                      onClick={() => updateQuantity(item.productId, item.color, item.quantity - 1, item.size)}
                       aria-label="Decrease quantity"
                       className="tap-target flex items-center justify-center px-2.5 text-base"
                     >
@@ -71,7 +72,7 @@ export default function CartPage() {
                     <span className="w-6 text-center text-sm font-medium">{item.quantity}</span>
                     <button
                       type="button"
-                      onClick={() => updateQuantity(item.productId, item.color, Math.min(MAX_PER_ORDER, item.quantity + 1))}
+                      onClick={() => updateQuantity(item.productId, item.color, Math.min(MAX_PER_ORDER, item.quantity + 1), item.size)}
                       aria-label="Increase quantity"
                       className="tap-target flex items-center justify-center px-2.5 text-base"
                     >
@@ -83,7 +84,7 @@ export default function CartPage() {
               </div>
               <button
                 type="button"
-                onClick={() => removeItem(item.productId, item.color)}
+                onClick={() => removeItem(item.productId, item.color, item.size)}
                 aria-label={`Remove ${item.name}`}
                 className="tap-target self-start text-muted hover:text-deal"
               >

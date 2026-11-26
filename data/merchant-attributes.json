@@ -1,0 +1,90 @@
+{
+ "_readme": "Merchant Center / structured-data facts per product slug. brand + mpn are only set where the product title itself names them. gmc=true marks the products currently listed in Google Merchant Center (used by scripts/gmc/build_feed.py). sizes enables the size picker. condition defaults to new. Anything not listed here is sent without a brand or product ID (identifier_exists = no in the feed).",
+ "ailipu-kl-6301-3-1-multimedia-speaker-system": {
+  "brand": "Ailipu",
+  "mpn": "KL-6301"
+ },
+ "ailipu-kl-6304-3-1-multimedia-speaker-system": {
+  "brand": "Ailipu",
+  "mpn": "KL-6304",
+  "gmc": true
+ },
+ "ailipu-kl-6310-3-1-multimedia-speaker-system": {
+  "brand": "Ailipu",
+  "mpn": "KL-6310"
+ },
+ "globalstar-gs-801-3-1-home-theatre-system": {
+  "brand": "Globalstar",
+  "mpn": "GS-801",
+  "gmc": true
+ },
+ "ramtons-rm250-single-hot-plate": {
+  "brand": "Ramtons",
+  "mpn": "RM250"
+ },
+ "ramtons-rm253-double-hot-plate": {
+  "brand": "Ramtons",
+  "mpn": "RM253",
+  "gmc": true
+ },
+ "star-x-24-led-tv-24ln22st2": {
+  "brand": "Star-X",
+  "mpn": "24LN22ST2",
+  "gmc": true
+ },
+ "vitron-32-htc3288qs-qled-android-smart-tv": {
+  "brand": "Vitron",
+  "mpn": "HTC3288QS"
+ },
+ "vitron-43-htc43qw-qled-smart-tv": {
+  "brand": "Vitron",
+  "mpn": "HTC43QW"
+ },
+ "vitron-50-htc50qw-smart-tv": {
+  "brand": "Vitron",
+  "mpn": "HTC50QW",
+  "gmc": true
+ },
+ "vitron-55-htc55qw-4k-qled-smart-tv": {
+  "brand": "Vitron",
+  "mpn": "HTC55QW"
+ },
+ "vitron-v42sb-soundbar": {
+  "brand": "Vitron",
+  "mpn": "V42SB"
+ },
+ "vitron-v510-2-1-home-theatre-system": {
+  "brand": "Vitron",
+  "mpn": "V510"
+ },
+ "vitron-v520-2-1-home-theatre-system": {
+  "brand": "Vitron",
+  "mpn": "V520"
+ },
+ "vitron-v5201-2-1-home-theatre-system": {
+  "brand": "Vitron",
+  "mpn": "V5201"
+ },
+ "6ltrs-dessini-electric-pressure-cooker-cracked-handle": {
+  "brand": "Dessini",
+  "gmc": true
+ },
+ "powermax-extension-lead-with-usb-type-c-4-way-3-way": {
+  "brand": "Powermax",
+  "gmc": true
+ },
+ "automatic-camping-tent-3-5-or-6-person": {
+  "gmc": true
+ },
+ "air-max-95-style-cushion-sneakers-black-green": {
+  "sizes": [
+   "40",
+   "41",
+   "42",
+   "43",
+   "44",
+   "45"
+  ],
+  "gmc": true
+ }
+}

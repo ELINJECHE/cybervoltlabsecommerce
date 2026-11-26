@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { Category, Product } from "@/lib/types";
 import { SOCIAL_LINKS } from "@/lib/social";
 import { DELIVERY_FEE, RETURN_DAYS } from "@/lib/delivery";
+import { BF_END, bfPhase } from "@/lib/blackfriday";
 
 export const SITE_URL = "https://cybervoltlabs.co.ke";
 export const SITE_NAME = "Cybervolt Labs";
@@ -186,52 +187,101 @@ export function breadcrumbJsonLd(items: { name: string; path: string }[]) {
 export function productJsonLd(product: Product, categoryName?: string) {
   const url = absoluteUrl(`/product/${product.slug}`);
   const price = effectivePrice(product);
-  const refurbished = /refurb/i.test(product.name);
+  const onSale = product.discountPrice !== undefined && product.discountPrice < product.price;
   const dealEnds =
     product.isDeal && product.dealEndsAt && new Date(product.dealEndsAt).getTime() > Date.now()
       ? product.dealEndsAt.slice(0, 10)
       : undefined;
-  return {
+  // A sale needs an end date for Google: the deal's own end, or the Black Friday end while it is running.
+  const saleEnds = dealEnds ?? (onSale && bfPhase() === "live" ? BF_END.slice(0, 10) : undefined);
+  const condition = product.condition ?? (/refurb/i.test(product.name) ? "refurbished" : "new");
+  const itemCondition = {
+    new: "https://schema.org/NewCondition",
+    used: "https://schema.org/UsedCondition",
+    refurbished: "https://schema.org/RefurbishedCondition",
+  }[condition];
+
+  const offer = (offerUrl: string) => ({
+    "@type": "Offer",
+    url: offerUrl,
+    priceCurrency: "KES",
+    price, // what the customer pays today
+    // The crossed-out price on the page, so Google sees both ("sale_price" in a feed).
+    ...(onSale
+      ? {
+          priceSpecification: {
+            "@type": "UnitPriceSpecification",
+            priceType: "https://schema.org/StrikethroughPrice",
+            price: product.price,
+            priceCurrency: "KES",
+          },
+        }
+      : {}),
+    // -1 in the admin's Stock field = sold out.
+    availability: product.stock < 0 ? "https://schema.org/OutOfStock" : "https://schema.org/InStock",
+    itemCondition,
+    ...(saleEnds ? { priceValidUntil: saleEnds } : {}),
+    seller: { "@id": ORG_ID },
+    shippingDetails: {
+      "@type": "OfferShippingDetails",
+      shippingRate: { "@type": "MonetaryAmount", value: DELIVERY_FEE, currency: "KES" },
+      shippingDestination: { "@type": "DefinedRegion", addressCountry: "KE" },
+      deliveryTime: {
+        "@type": "ShippingDeliveryTime",
+        handlingTime: { "@type": "QuantitativeValue", minValue: 0, maxValue: 0, unitCode: "DAY" },
+        transitTime: { "@type": "QuantitativeValue", minValue: 1, maxValue: 2, unitCode: "DAY" },
+      },
+    },
+    hasMerchantReturnPolicy: {
+      "@type": "MerchantReturnPolicy",
+      applicableCountry: "KE",
+      returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
+      merchantReturnDays: RETURN_DAYS,
+      returnMethod: "https://schema.org/ReturnInStore",
+      returnFees: "https://schema.org/FreeReturn",
+    },
+  });
+
+  const common = {
     "@context": "https://schema.org",
-    "@type": "Product",
     "@id": `${url}#product`,
     name: product.name,
     description: product.description ?? `${product.name} from ${SITE_NAME}.`,
-    sku: product.id,
+    ...(product.brand ? { brand: { "@type": "Brand", name: product.brand } } : {}),
     ...(categoryName ? { category: categoryName } : {}),
     image: product.images.map(absoluteUrl),
     url,
-    offers: {
-      "@type": "Offer",
-      url,
-      priceCurrency: "KES",
-      price,
-      availability: "https://schema.org/InStock",
-      ...(refurbished ? { itemCondition: "https://schema.org/RefurbishedCondition" } : {}),
-      ...(dealEnds ? { priceValidUntil: dealEnds } : {}),
-      seller: { "@id": ORG_ID },
-      shippingDetails: {
-        "@type": "OfferShippingDetails",
-        shippingRate: { "@type": "MonetaryAmount", value: DELIVERY_FEE, currency: "KES" },
-        shippingDestination: { "@type": "DefinedRegion", addressCountry: "KE" },
-        deliveryTime: {
-          "@type": "ShippingDeliveryTime",
-          handlingTime: { "@type": "QuantitativeValue", minValue: 0, maxValue: 0, unitCode: "DAY" },
-          transitTime: { "@type": "QuantitativeValue", minValue: 1, maxValue: 2, unitCode: "DAY" },
-        },
-      },
-      hasMerchantReturnPolicy: {
-        "@type": "MerchantReturnPolicy",
-        applicableCountry: "KE",
-        returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
-        merchantReturnDays: RETURN_DAYS,
-        returnMethod: "https://schema.org/ReturnInStore",
-        returnFees: "https://schema.org/FreeReturn",
-      },
-    },
     ...(product.reviewCount > 0 && product.rating > 0
       ? { aggregateRating: { "@type": "AggregateRating", ratingValue: product.rating, reviewCount: product.reviewCount } }
       : {}),
+  };
+
+  // Sizes: one product group, one variant per size (own SKU and offer), as Google expects for shoes.
+  if (product.sizes && product.sizes.length > 0) {
+    return {
+      ...common,
+      "@type": "ProductGroup",
+      productGroupID: product.id,
+      variesBy: "https://schema.org/size",
+      hasVariant: product.sizes.map((size) => ({
+        "@type": "Product",
+        "@id": `${url}?size=${encodeURIComponent(size)}#product`,
+        sku: `${product.id}-${size}`,
+        name: `${product.name} - Size ${size}`,
+        size,
+        ...(product.mpn ? { mpn: product.mpn } : {}),
+        image: product.images.map(absoluteUrl),
+        offers: offer(`${url}?size=${encodeURIComponent(size)}`),
+      })),
+    };
+  }
+
+  return {
+    ...common,
+    "@type": "Product",
+    sku: product.id,
+    ...(product.mpn ? { mpn: product.mpn } : {}),
+    offers: offer(url),
   };
 }
 

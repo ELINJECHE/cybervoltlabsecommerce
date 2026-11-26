@@ -7,8 +7,9 @@ import { showToast } from "@/lib/toast";
 import { BOTTOM_NAV_ENABLED } from "@/lib/community";
 
 // Phones only: once the main Add to Cart button scrolls out of view, a slim bar keeps it in reach.
-export default function StickyBuyBar({ productId, slug, name, image, price, needsChoice }: {
+export default function StickyBuyBar({ productId, slug, name, image, price, needsChoice, soldOut = false }: {
   productId: string; slug: string; name: string; image: string; price: number;
+  soldOut?: boolean;
   /** Colours to pick, or a size to note: send the visitor back up to the options instead. */
   needsChoice: boolean;
 }) {
@@ -29,7 +30,7 @@ export default function StickyBuyBar({ productId, slug, name, image, price, need
     };
   }, []);
 
-  if (!visible) return null;
+  if (!visible || soldOut) return null;
   return (
     <div className={`fixed inset-x-0 z-30 border-t border-border bg-surface px-4 py-2 shadow-lg lg:hidden ${BOTTOM_NAV_ENABLED ? "bottom-14" : "bottom-0"}`}>
       <div className="mx-auto flex max-w-md items-center gap-3">

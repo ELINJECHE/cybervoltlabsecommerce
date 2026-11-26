@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import type { CategoryRow, ProductInput, ProductRow } from "@/lib/admin-products";
-import { generateId, slugify, uploadProductImage } from "@/lib/admin-products";
+import { GOOD_IMAGE_PX, MAX_DESCRIPTION_CHARS, MAX_TITLE_CHARS, MIN_IMAGE_PX, generateId, slugify, uploadProductImage } from "@/lib/admin-products";
 import { markUnpublished } from "@/lib/deploy";
 import { getProductSupplier, saveProductSupplier } from "@/lib/admin-sourcing";
 import { buildPhoneChatLink, normalizeKenyanPhone } from "@/lib/whatsapp";
@@ -26,7 +26,8 @@ export default function ProductForm({ categories, initial, onSubmit, submitLabel
   const [subcategory, setSubcategory] = useState(initial?.subcategory ?? "");
   const [price, setPrice] = useState(initial?.price?.toString() ?? "");
   const [discountPrice, setDiscountPrice] = useState(initial?.discount_price?.toString() ?? "");
-  const [stock, setStock] = useState(initial?.stock?.toString() ?? "0");
+  const [stock, setStock] = useState(initial && initial.stock > 0 ? initial.stock.toString() : "0");
+  const [soldOut, setSoldOut] = useState((initial?.stock ?? 0) < 0);
   const [description, setDescription] = useState(initial?.description ?? "");
   const [featuresText, setFeaturesText] = useState((initial?.features ?? []).join("\n"));
   const [isNewArrival, setIsNewArrival] = useState(initial?.is_new_arrival ?? false);
@@ -104,7 +105,7 @@ export default function ProductForm({ categories, initial, onSubmit, submitLabel
         discount_price: discountPrice ? Number(discountPrice) : null,
         images,
         features: featuresText.split("\n").map((f) => f.trim()).filter(Boolean),
-        stock: Number(stock),
+        stock: soldOut ? -1 : Math.max(0, Number(stock) || 0),
         is_deal: isDeal,
         deal_ends_at: isDeal && dealEndsAt ? new Date(dealEndsAt).toISOString() : null,
         deal_claimed_percent: isDeal && dealClaimedPercent ? Number(dealClaimedPercent) : null,
@@ -144,10 +145,14 @@ export default function ProductForm({ categories, initial, onSubmit, submitLabel
           <input
             id="name"
             required
+            maxLength={MAX_TITLE_CHARS}
             value={name}
             onChange={(e) => setName(e.target.value)}
             className="h-11 w-full rounded-md border border-border bg-surface px-3 text-sm outline-none focus:border-primary"
           />
+          <p className="mt-1 text-xs text-muted">
+            Brand + product + key details (size, model, material). Google shows about the first 70 characters; the limit is {MAX_TITLE_CHARS}. {name.length}/{MAX_TITLE_CHARS}
+          </p>
         </div>
         <div>
           <label htmlFor="category" className="mb-1 block text-sm font-medium">Category</label>
@@ -235,9 +240,15 @@ export default function ProductForm({ categories, initial, onSubmit, submitLabel
             type="number"
             min={0}
             value={stock}
+            disabled={soldOut}
             onChange={(e) => setStock(e.target.value)}
-            className="h-11 w-full rounded-md border border-border bg-surface px-3 text-sm outline-none focus:border-primary"
+            className="h-11 w-full rounded-md border border-border bg-surface px-3 text-sm outline-none focus:border-primary disabled:opacity-50"
           />
+
+          <label className="mt-2 flex items-center gap-2 text-sm">
+            <input type="checkbox" checked={soldOut} onChange={(e) => setSoldOut(e.target.checked)} className="h-4 w-4 accent-primary" />
+            Sold out (shows &ldquo;Sold out&rdquo;, turns off Add to Cart, tells Google it is out of stock)
+          </label>
         </div>
       </div>
 
@@ -246,6 +257,7 @@ export default function ProductForm({ categories, initial, onSubmit, submitLabel
         <textarea
           id="description"
           rows={3}
+          maxLength={MAX_DESCRIPTION_CHARS}
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           className="w-full rounded-md border border-border bg-surface px-3 py-2 text-sm outline-none focus:border-primary"
@@ -281,6 +293,9 @@ export default function ProductForm({ categories, initial, onSubmit, submitLabel
           ))}
         </div>
         <input type="file" accept="image/*" onChange={handleImageUpload} disabled={uploading} className="text-sm" />
+        <p className="mt-1 text-xs text-muted">
+          Photos must be at least {MIN_IMAGE_PX}×{MIN_IMAGE_PX} px ({GOOD_IMAGE_PX}×{GOOD_IMAGE_PX} or larger is best), on a plain background with no text or watermarks, or Google Shopping rejects them. Smaller photos are not uploaded.
+        </p>
         {uploading && <p className="mt-1 text-xs text-muted">Uploading...</p>}
       </div>
 

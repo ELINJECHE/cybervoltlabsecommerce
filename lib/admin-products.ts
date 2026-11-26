@@ -84,7 +84,38 @@ export async function deleteProduct(id: string): Promise<void> {
   if (error) throw new Error(error.message);
 }
 
+// Google Merchant Center: every product photo must be at least 500 x 500 px (enforced from 31 Jan 2027); 800 x 800 or
+// more is best. Smaller photos are refused here, so a listing can't be rejected for them later.
+export const MIN_IMAGE_PX = 500;
+export const GOOD_IMAGE_PX = 800;
+// Google's limits for a product title and description.
+export const MAX_TITLE_CHARS = 150;
+export const MAX_DESCRIPTION_CHARS = 5000;
+
+function imageSize(file: File): Promise<{ width: number; height: number }> {
+  return new Promise((resolve, reject) => {
+    const url = URL.createObjectURL(file);
+    const img = new window.Image();
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+      resolve({ width: img.naturalWidth, height: img.naturalHeight });
+    };
+    img.onerror = () => {
+      URL.revokeObjectURL(url);
+      reject(new Error("That file could not be read as an image."));
+    };
+    img.src = url;
+  });
+}
+
 export async function uploadProductImage(file: File, productId: string): Promise<string> {
+  const { width, height } = await imageSize(file);
+  if (width < MIN_IMAGE_PX || height < MIN_IMAGE_PX) {
+    throw new Error(
+      `This image is ${width}×${height} px. Google Shopping needs at least ${MIN_IMAGE_PX}×${MIN_IMAGE_PX} px ` +
+        `(${GOOD_IMAGE_PX}×${GOOD_IMAGE_PX} or larger is best), so it was not uploaded. Please use a bigger photo.`
+    );
+  }
   const ext = file.name.split(".").pop();
   const path = `${productId}/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
   const { error } = await supabase.storage.from("product-images").upload(path, file);

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { formatKES } from "@/lib/format";
+import { formatKES, variantLabel } from "@/lib/format";
 import { buildPhoneChatLink, normalizeKenyanPhone } from "@/lib/whatsapp";
 import { toAdminMessage } from "@/lib/errors";
 import {
@@ -211,7 +211,7 @@ export default function OrdersPage() {
                       ? chatLink(
                           s.phone,
                           `Hi ${s.supplier}, this is Cybervolt Labs. I'd like to order ${item.quantity} x ${item.name}` +
-                            `${item.color ? ` (${item.color})` : ""}. Is it available?`
+                            `${variantLabel(item) ? ` (${variantLabel(item)})` : ""}. Is it available?`
                         )
                       : null;
                     return (
@@ -219,7 +219,7 @@ export default function OrdersPage() {
                         <div>
                           <p>
                             {item.quantity} × {item.name}
-                            {item.color ? <span className="text-muted"> ({item.color})</span> : null}
+                            {variantLabel(item) ? <span className="text-muted"> ({variantLabel(item)})</span> : null}
                           </p>
                           <p className="text-xs text-muted">
                             {formatKES(item.unitPrice)} each ·{" "}

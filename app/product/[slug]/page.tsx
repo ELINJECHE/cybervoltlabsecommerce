@@ -128,7 +128,8 @@ export default async function ProductPage({ params }: { params: { slug: string }
             name={product.name}
             image={getProductImage(product.images)}
             price={product.discountPrice ?? product.price}
-            needsChoice={(product.colors?.length ?? 0) > 0 || product.category === "sneakers-shoes"}
+            needsChoice={(product.colors?.length ?? 0) > 0 || (product.sizes?.length ?? 0) > 0 || product.category === "sneakers-shoes"}
+            soldOut={product.stock < 0}
           />
         </div>
       </div>
