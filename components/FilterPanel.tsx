@@ -1,64 +1,49 @@
 "use client";
 
 import { useState } from "react";
-import type { Subcategory } from "@/lib/types";
-
-export interface SelectedFilters {
-  subcategories: string[];
-  colors: string[];
-  priceMax: number;
-}
+import type { FacetGroup, FilterAvailability, SelectedFilters } from "@/lib/facets";
 
 interface FilterPanelProps {
-  subcategories: Subcategory[];
-  colors: string[];
-  maxPrice: number;
+  groups: FacetGroup[];
+  avail: FilterAvailability;
+  bands: { label: string; min: number; max: number }[];
   selected: SelectedFilters;
   onChange: (next: SelectedFilters) => void;
   onClear: () => void;
   resultCount: number;
 }
 
-export default function FilterPanel({
-  subcategories,
-  colors,
-  maxPrice,
-  selected,
-  onChange,
-  onClear,
-  resultCount,
-}: FilterPanelProps) {
+const SHOWN_AT_FIRST = 6;
+
+export default function FilterPanel({ groups, avail, bands, selected, onChange, onClear, resultCount }: FilterPanelProps) {
   const [sheetOpen, setSheetOpen] = useState(false);
+  const [expanded, setExpanded] = useState<Record<string, boolean>>({});
 
-  function toggleSubcategory(slug: string) {
-    const next = selected.subcategories.includes(slug)
-      ? selected.subcategories.filter((s) => s !== slug)
-      : [...selected.subcategories, slug];
-    onChange({ ...selected, subcategories: next });
+  function toggleValue(label: string, value: string) {
+    const current = selected.facets[label] ?? [];
+    const next = current.includes(value) ? current.filter((v) => v !== value) : [...current, value];
+    onChange({ ...selected, facets: { ...selected.facets, [label]: next } });
   }
 
-  function toggleColor(name: string) {
-    const next = selected.colors.includes(name)
-      ? selected.colors.filter((c) => c !== name)
-      : [...selected.colors, name];
-    onChange({ ...selected, colors: next });
-  }
+  const priceMaxShown = selected.priceMax >= avail.maxPrice ? "" : String(selected.priceMax);
+  const priceMinShown = selected.priceMin <= 0 ? "" : String(selected.priceMin);
+  const toggles: { key: "inStock" | "onSale" | "newOnly" | "dealsOnly"; label: string; show: boolean }[] = [
+    { key: "inStock", label: "In stock only", show: avail.anySoldOut },
+    { key: "onSale", label: "On sale", show: avail.anyOnSale },
+    { key: "newOnly", label: "New arrivals", show: avail.anyNew },
+    { key: "dealsOnly", label: "Deals", show: avail.anyDeal },
+  ];
 
   const fields = (
-    <div className="flex flex-col gap-6">
-      {subcategories.length > 0 && (
+    <div className="flex flex-col gap-5">
+      {toggles.some((t) => t.show) && (
         <fieldset>
-          <legend className="mb-2 text-sm font-semibold">Subcategory</legend>
-          <div className="flex flex-col gap-2">
-            {subcategories.map((sub) => (
-              <label key={sub.slug} className="tap-target flex items-center gap-2 text-sm">
-                <input
-                  type="checkbox"
-                  checked={selected.subcategories.includes(sub.slug)}
-                  onChange={() => toggleSubcategory(sub.slug)}
-                  className="h-4 w-4 accent-primary"
-                />
-                {sub.name}
+          <legend className="mb-2 text-sm font-semibold">Show only</legend>
+          <div className="flex flex-col gap-1">
+            {toggles.filter((t) => t.show).map((t) => (
+              <label key={t.key} className="tap-target flex items-center gap-2 text-sm">
+                <input type="checkbox" checked={selected[t.key]} onChange={() => onChange({ ...selected, [t.key]: !selected[t.key] })} className="h-4 w-4 accent-primary" />
+                {t.label}
               </label>
             ))}
           </div>
@@ -66,43 +51,85 @@ export default function FilterPanel({
       )}
 
       <fieldset>
-        <legend className="mb-2 text-sm font-semibold">Max Price</legend>
-        <input
-          type="range"
-          min={0}
-          max={maxPrice}
-          step={500}
-          value={selected.priceMax}
-          onChange={(e) => onChange({ ...selected, priceMax: Number(e.target.value) })}
-          className="w-full accent-primary"
-        />
-        <p className="text-xs text-muted">Up to KES {selected.priceMax.toLocaleString()}</p>
+        <legend className="mb-2 text-sm font-semibold">Price (KES)</legend>
+        <div className="flex items-center gap-2">
+          <input
+            type="number" inputMode="numeric" min={0} placeholder="Min" aria-label="Minimum price" value={priceMinShown}
+            onChange={(e) => onChange({ ...selected, priceMin: Math.max(0, Number(e.target.value) || 0) })}
+            className="w-full min-w-0 rounded-md border border-border px-2 py-1.5 text-sm"
+          />
+          <span className="text-muted">–</span>
+          <input
+            type="number" inputMode="numeric" min={0} placeholder="Max" aria-label="Maximum price" value={priceMaxShown}
+            onChange={(e) => onChange({ ...selected, priceMax: e.target.value === "" ? avail.maxPrice : Math.max(0, Number(e.target.value) || 0) })}
+            className="w-full min-w-0 rounded-md border border-border px-2 py-1.5 text-sm"
+          />
+        </div>
+        {bands.length > 0 && (
+          <div className="mt-2 flex flex-wrap gap-1.5">
+            {bands.map((b) => {
+              const active = selected.priceMin === b.min && (selected.priceMax === b.max || (b.max > avail.maxPrice && selected.priceMax >= avail.maxPrice));
+              return (
+                <button
+                  key={b.label} type="button" aria-pressed={active}
+                  onClick={() => onChange({ ...selected, priceMin: active ? 0 : b.min, priceMax: active ? avail.maxPrice : Math.min(b.max, avail.maxPrice) })}
+                  className={`rounded-full border px-2.5 py-1 text-xs ${active ? "border-primary bg-primary-light font-semibold text-primary" : "border-border"}`}
+                >
+                  {b.label}
+                </button>
+              );
+            })}
+          </div>
+        )}
       </fieldset>
 
-      {colors.length > 0 && (
+      {avail.anyRated && (
         <fieldset>
-          <legend className="mb-2 text-sm font-semibold">Color</legend>
-          <div className="flex flex-col gap-2">
-            {colors.map((color) => (
-              <label key={color} className="tap-target flex items-center gap-2 text-sm">
-                <input
-                  type="checkbox"
-                  checked={selected.colors.includes(color)}
-                  onChange={() => toggleColor(color)}
-                  className="h-4 w-4 accent-primary"
-                />
-                {color}
+          <legend className="mb-2 text-sm font-semibold">Customer rating</legend>
+          <div className="flex flex-col gap-1">
+            {[4, 3].map((r) => (
+              <label key={r} className="tap-target flex items-center gap-2 text-sm">
+                <input type="radio" name="min-rating" checked={selected.minRating === r} onChange={() => onChange({ ...selected, minRating: r })} className="h-4 w-4 accent-primary" />
+                {r}★ &amp; up
               </label>
             ))}
+            {selected.minRating > 0 && (
+              <button type="button" onClick={() => onChange({ ...selected, minRating: 0 })} className="self-start text-xs text-primary hover:underline">Any rating</button>
+            )}
           </div>
         </fieldset>
       )}
 
-      <button
-        type="button"
-        onClick={onClear}
-        className="tap-target self-start text-sm font-medium text-primary hover:underline"
-      >
+      {groups.map((group, i) => {
+        const chosen = selected.facets[group.label] ?? [];
+        const open = expanded[group.label];
+        // Options the shopper ticked always stay visible, even when the list is collapsed.
+        const visible = open ? group.options : group.options.filter((o, idx) => idx < SHOWN_AT_FIRST || chosen.includes(o.value));
+        return (
+          <details key={group.label} open={i < 3 || chosen.length > 0} className="group">
+            <summary className="tap-target flex cursor-pointer list-none items-center justify-between text-sm font-semibold">
+              <span>{group.label}{chosen.length > 0 && <span className="ml-1 text-xs font-normal text-primary">({chosen.length})</span>}</span>
+              <span aria-hidden className="text-muted transition group-open:rotate-180">⌄</span>
+            </summary>
+            <div className="mt-1 flex flex-col gap-1">
+              {visible.map((o) => (
+                <label key={o.value} className="tap-target flex items-center gap-2 text-sm">
+                  <input type="checkbox" checked={chosen.includes(o.value)} onChange={() => toggleValue(group.label, o.value)} className="h-4 w-4 accent-primary" />
+                  <span className="flex-1">{o.value}</span>
+                  <span className="text-xs text-muted">{o.count}</span>
+                </label>
+              ))}
+              {group.options.length > visible.length || (open && group.options.length > SHOWN_AT_FIRST) ? (
+                <button type="button" onClick={() => setExpanded({ ...expanded, [group.label]: !open })} className="self-start py-1 text-xs font-medium text-primary hover:underline">
+                  {open ? "Show fewer" : `Show all ${group.options.length}`}
+                </button>
+              ) : null}
+            </div>
+          </details>
+        );
+      })}
+
+      <button type="button" onClick={onClear} className="tap-target self-start text-sm font-medium text-primary hover:underline">
         Clear all filters
       </button>
     </div>
@@ -111,7 +138,7 @@ export default function FilterPanel({
   return (
     <>
       {/* Desktop sidebar */}
-      <aside className="hidden w-56 shrink-0 lg:block">
+      <aside className="hidden w-60 shrink-0 lg:block">
         <h2 className="mb-4 text-sm font-bold uppercase tracking-wide text-muted">Filters</h2>
         {fields}
       </aside>
@@ -132,7 +159,7 @@ export default function FilterPanel({
       </div>
 
       {sheetOpen && (
-        <div className="fixed inset-0 z-50 lg:hidden">
+        <div className="fixed inset-0 z-[55] lg:hidden">
           <button aria-label="Close filters" className="absolute inset-0 bg-black/40" onClick={() => setSheetOpen(false)} />
           <div className="absolute inset-x-0 bottom-0 max-h-[80vh] animate-slide-up overflow-y-auto rounded-t-2xl bg-surface p-4">
             <div className="mb-4 flex items-center justify-between">

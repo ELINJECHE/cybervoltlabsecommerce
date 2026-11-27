@@ -13,7 +13,7 @@ export default function ShareButton({ name, slug, price }: { name: string; slug:
       target="_blank"
       rel="noopener noreferrer"
       onClick={() => trackEvent("share", { method: "whatsapp", content_type: "product", item_id: slug })}
-      className="tap-target inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-sm font-medium text-muted hover:border-whatsapp hover:text-whatsapp"
+      className="inline-flex min-h-11 items-center gap-1 px-1 text-xs font-medium text-muted underline underline-offset-2 hover:text-whatsapp"
     >
       <span aria-hidden="true">↗</span> Share on WhatsApp
     </a>

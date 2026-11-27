@@ -6,7 +6,7 @@ import CompleteTheSet from "@/components/CompleteTheSet";
 import { completeTheSet, needsChoice } from "@/lib/pairings";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbJsonLd, productJsonLd, productMetadata } from "@/lib/seo";
-import { getAllReviews } from "@/lib/reviews";
+import { getProductReviews, getStoreReviews } from "@/lib/reviews";
 import ImageGallery from "@/components/ImageGallery";
 import PriceTag from "@/components/PriceTag";
 import StarRating from "@/components/StarRating";
@@ -39,7 +39,8 @@ export default async function ProductPage({ params }: { params: { slug: string }
 
   const related = await getRelatedProducts(product);
   const setPicks = completeTheSet(product, await getAllProducts());
-  const reviews = getAllReviews();
+  const ownReviews = getProductReviews(product.slug);
+  const storeReviews = getStoreReviews();
   const category = await getCategoryBySlug(product.category);
   const categoryName = category?.name ?? product.category.replace(/-/g, " ");
   const isLowStock = product.stock > 0 && product.stock <= 10;
@@ -121,6 +122,26 @@ export default async function ProductPage({ params }: { params: { slug: string }
             </ul>
           )}
 
+          {(product.specs?.length || product.brand || product.mpn || product.gtin) && (
+            <section aria-labelledby="specs-heading">
+              <h2 id="specs-heading" className="mb-2 text-sm font-semibold">Specifications</h2>
+              <dl className="divide-y divide-border rounded-card border border-border text-sm">
+                {[
+                  ...(product.brand ? [{ label: "Brand", value: product.brand }] : []),
+                  ...(product.mpn ? [{ label: "Model", value: product.mpn }] : []),
+                  ...(product.specs ?? []),
+                  ...(product.condition && product.condition !== "new" ? [{ label: "Condition", value: product.condition.charAt(0).toUpperCase() + product.condition.slice(1) }] : []),
+                  ...(product.gtin ? [{ label: "Barcode (GTIN)", value: product.gtin }] : []),
+                ].map((row) => (
+                  <div key={row.label} className="grid grid-cols-[9rem_1fr] gap-3 px-3 py-2">
+                    <dt className="text-muted">{row.label}</dt>
+                    <dd className="font-medium">{row.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </section>
+          )}
+
           <TrackView item={{ slug: product.slug, name: product.name, price: product.discountPrice ?? product.price, image: getProductImage(product.images) }} />
           <StickyBuyBar
             productId={product.id}
@@ -151,7 +172,8 @@ export default async function ProductPage({ params }: { params: { slug: string }
       )}
     </div>
 
-    <ReviewsCarousel reviews={reviews} />
+    {ownReviews.length > 0 && <ReviewsCarousel reviews={ownReviews} heading={`Reviews for ${product.name}`} />}
+    <ReviewsCarousel reviews={storeReviews} />
     </div>
   );
 }

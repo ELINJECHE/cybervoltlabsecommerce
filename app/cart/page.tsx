@@ -4,18 +4,22 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/lib/cart-context";
 import { formatKES } from "@/lib/format";
-import { getAllReviews } from "@/lib/reviews";
+import { getStoreReviews } from "@/lib/reviews";
 import ReviewsCarousel from "@/components/ReviewsCarousel";
 import CartDelivery from "@/components/CartDelivery";
 import CommunityStrip from "@/components/CommunityStrip";
 import RecommendedForYou from "@/components/RecommendedForYou";
 import { MAX_PER_ORDER } from "@/lib/community";
+import CartSkeleton from "@/components/CartSkeleton";
 import CartToWhatsApp from "@/components/CartToWhatsApp";
 import RecentlyViewed from "@/components/RecentlyViewed";
 
 export default function CartPage() {
-  const { items, updateQuantity, removeItem, subtotal } = useCart();
-  const reviews = getAllReviews();
+  const { items, updateQuantity, removeItem, subtotal, ready } = useCart();
+  const reviews = getStoreReviews();
+
+  // Wait for the saved cart before deciding it is empty.
+  if (!ready) return <CartSkeleton />;
 
   if (items.length === 0) {
     return (

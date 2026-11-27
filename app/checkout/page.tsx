@@ -14,8 +14,9 @@ import {
   saveLastOrder,
   type OrderPayload,
 } from "@/lib/orders";
-import { getAllReviews } from "@/lib/reviews";
+import { getStoreReviews } from "@/lib/reviews";
 import ReviewsCarousel from "@/components/ReviewsCarousel";
+import CartSkeleton from "@/components/CartSkeleton";
 import CheckoutSteps from "@/components/CheckoutSteps";
 import { MVP_CODE, MVP_DELIVERY_DISCOUNT } from "@/lib/community";
 import { LOYALTY_V2, TIER_THRESHOLD, maxRedeemable, pointsEarned } from "@/lib/loyalty";
@@ -25,13 +26,14 @@ import { readSource } from "@/lib/source";
 import ErrorNotice from "@/components/ErrorNotice";
 import { estimatedDeliveryDate } from "@/lib/delivery-clock";
 import { toAppError, type AppError } from "@/lib/errors";
-import { COURIER, DELIVERY_FEE, PRODUCT_DELIVERY_LINE, describeDelivery } from "@/lib/delivery";
+import { COURIER, DELIVERY_FEE, PICKUP_AREA, PRODUCT_DELIVERY_LINE, SHOP_ADDRESS, describeDelivery, describePickup } from "@/lib/delivery";
+import { PHONE_ERROR, normalizeKenyanMobile } from "@/lib/phone";
 
 // Every order is paid on delivery: placing it books it with the shop, and the customer pays
 // the total (goods + the flat delivery fee) when they collect or receive the parcel.
 
 export default function CheckoutPage() {
-  const { items, subtotal, clearCart } = useCart();
+  const { items, subtotal, clearCart, ready } = useCart();
   const { user, pointsBalance, welcomeVoucher, refreshPoints, refreshVoucher } = useAuth();
   const router = useRouter();
 
@@ -39,10 +41,15 @@ export default function CheckoutPage() {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
+  const [phoneError, setPhoneError] = useState(false);
   const [mvpCode, setMvpCode] = useState("");
-  // Goods + the flat delivery fee. The MVP code takes KSh 100 off the delivery fee.
+  const [promoOpen, setPromoOpen] = useState(false);
+  // Delivered by the courier (flat fee) or collected free at the shop.
+  const [method, setMethod] = useState<"delivery" | "pickup">("delivery");
+  const pickup = method === "pickup";
+  // Goods + the delivery fee (nothing for pickup). The promo code takes KSh 100 off the delivery fee.
   const mvpApplied = mvpCode.trim().toUpperCase() === MVP_CODE;
-  const deliveryFee = DELIVERY_FEE;
+  const deliveryFee = pickup ? 0 : DELIVERY_FEE;
   const mvpDiscount = mvpApplied ? Math.min(MVP_DELIVERY_DISCOUNT, deliveryFee) : 0;
   // Rewards: the welcome voucher (a first order of KSh 4,000+) and points (1 point = KSh 1).
   const [useVoucher, setUseVoucher] = useState(true);
@@ -71,7 +78,7 @@ export default function CheckoutPage() {
     );
     saveLastOrder(completed, undefined, {
       email: email.trim() || user?.email || undefined,
-      estimatedDelivery: estimatedDeliveryDate(),
+      estimatedDelivery: pickup ? undefined : estimatedDeliveryDate(),
     });
     clearCart();
     router.push("/checkout/success");
@@ -79,6 +86,12 @@ export default function CheckoutPage() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    const normalizedPhone = normalizeKenyanMobile(phone);
+    if (!normalizedPhone) {
+      setPhoneError(true);
+      document.getElementById("phone")?.focus();
+      return;
+    }
     setSubmitting(true);
     setError(null);
 
@@ -87,16 +100,17 @@ export default function CheckoutPage() {
       type: "order",
       orderReference,
       customerName: name,
-      phone,
-      deliveryAddress: address,
+      phone: normalizedPhone,
+      deliveryAddress: pickup ? `Collect at our shop: ${SHOP_ADDRESS}` : address,
       notes: tagOrderNotes(
         orderReference,
-        "PAY ON DELIVERY",
-        [describeDelivery(deliveryFee - mvpDiscount), `Source: ${readSource()}`, mvpDiscount > 0 ? `MVP code ${MVP_CODE} (-KSh ${mvpDiscount} delivery)` : "", voucherOff > 0 ? `Welcome voucher (-KSh ${voucherOff})` : "", pointsOff > 0 ? `Points used (-KSh ${pointsOff})` : "", `Total to pay on delivery KSh ${total}`, notes.trim()].filter(Boolean).join(" · ")
+        pickup ? "PICKUP · PAY ON COLLECTION" : "PAY ON DELIVERY",
+        [pickup ? describePickup() : describeDelivery(deliveryFee - mvpDiscount), `Source: ${readSource()}`, mvpDiscount > 0 ? `MVP code ${MVP_CODE} (-KSh ${mvpDiscount} delivery)` : "", voucherOff > 0 ? `Welcome voucher (-KSh ${voucherOff})` : "", pointsOff > 0 ? `Points used (-KSh ${pointsOff})` : "", `Total to pay on ${pickup ? "collection" : "delivery"} KSh ${total}`, notes.trim()].filter(Boolean).join(" · ")
       ),
       items,
       subtotal,
-      deliveryArea: COURIER,
+      deliveryArea: pickup ? PICKUP_AREA : COURIER,
+      deliveryMethod: method,
       deliveryFee: deliveryFee - mvpDiscount,
       deliveryPayOnArrival: true,
       total,
@@ -145,6 +159,8 @@ export default function CheckoutPage() {
     finishCheckout(payload);
   }
 
+  if (!ready) return <CartSkeleton title="Checkout" />;
+
   if (items.length === 0) {
     return (
       <div className="mx-auto max-w-2xl px-4 py-16 text-center">
@@ -178,12 +194,12 @@ export default function CheckoutPage() {
           <span>{formatKES(subtotal)}</span>
         </div>
         <div className="mt-1 flex justify-between text-sm">
-          <span>Delivery ({COURIER})</span>
-          <span>{formatKES(deliveryFee)}</span>
+          <span>{pickup ? "Collect at our shop" : `Delivery (${COURIER})`}</span>
+          <span>{pickup ? "Free" : formatKES(deliveryFee)}</span>
         </div>
         {mvpDiscount > 0 && (
           <div className="mt-1 flex justify-between text-sm text-success">
-            <span>MVP code</span>
+            <span>Promo code</span>
             <span>−{formatKES(mvpDiscount)}</span>
           </div>
         )}
@@ -200,16 +216,17 @@ export default function CheckoutPage() {
           </div>
         )}
         <div className="mt-2 flex justify-between border-t border-border pt-2 text-sm font-bold">
-          <span>Total to pay on delivery</span>
+          <span>{pickup ? "Total to pay on collection" : "Total to pay on delivery"}</span>
           <span>{formatKES(total)}</span>
         </div>
       </div>
 
       <div className="mb-6 rounded-card border border-success/30 bg-success/5 p-4 text-sm">
-        <h2 className="mb-1 font-semibold text-success">Pay on delivery</h2>
+        <h2 className="mb-1 font-semibold text-success">{pickup ? "Pay when you collect" : "Pay on delivery"}</h2>
         <p className="text-muted">
-          Fill in your details and place your order. Nothing to pay now: you pay when you collect or
-          receive your parcel. Orders placed before 2:00 PM East Africa Time are dispatched the same day.
+          {pickup
+            ? "Fill in your details and place your order. Nothing to pay now: you pay at our shop when you collect it. We will contact you when it is ready."
+            : "Fill in your details and place your order. Nothing to pay now: you pay when you collect or receive your parcel. Orders placed before 2:00 PM East Africa Time are dispatched the same day."}
         </p>
       </div>
 
@@ -255,10 +272,37 @@ export default function CheckoutPage() {
       )}
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <fieldset>
+          <legend className="mb-2 text-sm font-medium">How would you like to get your order?</legend>
+          <div className="flex flex-col gap-2">
+            {([
+              { id: "delivery", title: `Delivery via ${COURIER}, Ksh ${DELIVERY_FEE.toLocaleString("en-KE")} (1-2 days)` },
+              { id: "pickup", title: `Collect at our shop, Free (${SHOP_ADDRESS.replace(", Ground Floor", "")})` },
+            ] as const).map((opt) => (
+              <label
+                key={opt.id}
+                className={`flex cursor-pointer items-start gap-3 rounded-card border p-3 text-sm ${method === opt.id ? "border-primary bg-primary/5" : "border-border bg-surface"}`}
+              >
+                <input
+                  type="radio"
+                  name="delivery-method"
+                  value={opt.id}
+                  checked={method === opt.id}
+                  onChange={() => setMethod(opt.id)}
+                  className="mt-0.5 h-4 w-4 accent-[var(--color-primary)]"
+                />
+                <span className="font-medium">{opt.title}</span>
+              </label>
+            ))}
+          </div>
+        </fieldset>
+
         <div>
           <label htmlFor="name" className="mb-1 block text-sm font-medium">Full Name</label>
           <input
             id="name"
+            name="name"
+            autoComplete="name"
             required
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -272,19 +316,34 @@ export default function CheckoutPage() {
           </label>
           <input
             id="phone"
+            name="phone"
             type="tel"
+            inputMode="tel"
+            autoComplete="tel"
             required
             placeholder="07XX XXX XXX"
             value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            className="h-11 w-full rounded-md border border-border bg-surface px-3 text-sm outline-none focus:border-primary"
+            aria-invalid={phoneError}
+            aria-describedby={phoneError ? "phone-error" : undefined}
+            onChange={(e) => {
+              setPhone(e.target.value);
+              if (phoneError && normalizeKenyanMobile(e.target.value)) setPhoneError(false);
+            }}
+            onBlur={() => setPhoneError(phone.trim() !== "" && !normalizeKenyanMobile(phone))}
+            className={`h-11 w-full rounded-md border bg-surface px-3 text-sm outline-none focus:border-primary ${phoneError ? "border-deal" : "border-border"}`}
           />
+          {phoneError && (
+            <p id="phone-error" role="alert" className="mt-1 text-xs text-deal">
+              {PHONE_ERROR}
+            </p>
+          )}
         </div>
 
         <div>
           <label htmlFor="email" className="mb-1 block text-sm font-medium">Email (optional)</label>
           <input
             id="email"
+            name="email"
             type="email"
             autoComplete="email"
             placeholder={user?.email ?? "you@example.com"}
@@ -298,35 +357,55 @@ export default function CheckoutPage() {
         </div>
 
         <div>
-          <label htmlFor="mvp" className="mb-1 block text-sm font-medium">MVP code (optional)</label>
-          <input
-            id="mvp"
-            value={mvpCode}
-            onChange={(e) => setMvpCode(e.target.value)}
-            autoCapitalize="characters"
-            autoComplete="off"
-            placeholder="Have an MVP code?"
-            className="h-11 w-full rounded-md border border-border bg-surface px-3 text-sm uppercase outline-none focus:border-primary"
-          />
-          {mvpApplied && (
-            <p className="mt-1 text-xs text-success">
-              MVP code applied: KSh {mvpDiscount} off your delivery.
-            </p>
+          {promoOpen ? (
+            <>
+              <label htmlFor="promo" className="mb-1 block text-sm font-medium">Promo code (optional)</label>
+              <input
+                id="promo"
+                value={mvpCode}
+                onChange={(e) => setMvpCode(e.target.value)}
+                autoCapitalize="characters"
+                autoComplete="off"
+                placeholder="Enter your promo code"
+                className="h-11 w-full rounded-md border border-border bg-surface px-3 text-sm uppercase outline-none focus:border-primary"
+              />
+              {mvpApplied && mvpDiscount > 0 && (
+                <p className="mt-1 text-xs text-success">
+                  Promo code applied: KSh {mvpDiscount} off your delivery.
+                </p>
+              )}
+              {mvpApplied && mvpDiscount === 0 && pickup && (
+                <p className="mt-1 text-xs text-muted">This code takes money off delivery, and collecting at our shop has no delivery fee.</p>
+              )}
+            </>
+          ) : (
+            <button
+              type="button"
+              onClick={() => setPromoOpen(true)}
+              aria-expanded={false}
+              className="min-h-11 text-sm font-medium text-primary underline underline-offset-2"
+            >
+              Have a promo code?
+            </button>
           )}
         </div>
 
-        <div>
-          <label htmlFor="address" className="mb-1 block text-sm font-medium">Delivery Address</label>
-          <textarea
-            id="address"
-            required
-            rows={3}
-            placeholder="Town, estate / building, street, landmark"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-            className="w-full rounded-md border border-border bg-surface px-3 py-2 text-sm outline-none focus:border-primary"
-          />
-        </div>
+        {!pickup && (
+          <div>
+            <label htmlFor="address" className="mb-1 block text-sm font-medium">Delivery Address</label>
+            <textarea
+              id="address"
+              name="address"
+              autoComplete="street-address"
+              required
+              rows={3}
+              placeholder="Town, estate / building, street, landmark"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              className="w-full rounded-md border border-border bg-surface px-3 py-2 text-sm outline-none focus:border-primary"
+            />
+          </div>
+        )}
 
         <div>
           <label htmlFor="notes" className="mb-1 block text-sm font-medium">Order Notes (optional)</label>
@@ -346,12 +425,12 @@ export default function CheckoutPage() {
           disabled={submitting}
           className="tap-target rounded-full bg-primary py-3.5 text-sm font-semibold text-white hover:bg-primary-dark disabled:cursor-not-allowed disabled:bg-muted"
         >
-          {submitting ? "Placing Order..." : "Place Order (Pay on Delivery)"}
+          {submitting ? "Placing Order..." : pickup ? "Place Order (Pay on Collection)" : "Place Order (Pay on Delivery)"}
         </button>
       </form>
     </div>
 
-    <ReviewsCarousel reviews={getAllReviews()} />
+    <ReviewsCarousel reviews={getStoreReviews()} />
     </div>
   );
 }

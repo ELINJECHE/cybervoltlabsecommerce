@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { searchDocs, normalize } from "@/lib/search";
+import { logZeroResultSearch } from "@/lib/search-log";
 import {
   clearRecentSearches,
   getRecentSearches,
@@ -70,6 +71,7 @@ export default function SearchBar({
 
   function go(href: string) {
     if (trimmed) rememberSearch(trimmed);
+    if (trimmed && index && products.length === 0 && categories.length === 0) logZeroResultSearch(trimmed);
     setOpen(false);
     router.push(href);
   }

@@ -112,11 +112,15 @@ export function productMetadata(product: Product): Metadata {
 export function categoryMetadata(category: Category, products: Product[]): Metadata {
   const count = products.length;
   const prices = products.map(effectivePrice).sort((a, b) => a - b);
-  const names = products.slice(0, 2).map((p) => p.name);
+  // What the category holds: its most common types if the products have them, otherwise a couple of names.
+  const typeCounts = new Map<string, number>();
+  for (const p of products) if (p.type) typeCounts.set(p.type, (typeCounts.get(p.type) ?? 0) + 1);
+  const types = Array.from(typeCounts.entries()).sort((a, b) => b[1] - a[1]).slice(0, 3).map(([t]) => t.toLowerCase());
+  const names = types.length >= 2 ? types : products.slice(0, 2).map((p) => p.name);
   const body =
     count > 0
       ? `Shop ${category.name} in Kenya: ${count} product${count === 1 ? "" : "s"} from ${kes(prices[0])}${
-          names.length ? `, including ${names.join(" and ")}` : ""
+          names.length ? `, including ${names.length > 2 ? names.slice(0, -1).join(", ") + " and " + names[names.length - 1] : names.join(" and ")}` : ""
         }. Delivery Ksh 999 anywhere in Kenya; pay on delivery.`
       : `Shop ${category.name} in Kenya at Cybervolt Labs. Delivery Ksh 999 anywhere in Kenya; pay on delivery.`;
   return pageMetadata({
@@ -184,6 +188,14 @@ export function breadcrumbJsonLd(items: { name: string; path: string }[]) {
   };
 }
 
+function specValue(product: Product, label: string): string | undefined {
+  return product.specs?.find((s) => s.label.toLowerCase() === label.toLowerCase())?.value;
+}
+
+function colourOf(product: Product): string | undefined {
+  return specValue(product, "Colour") ?? (product.colors && product.colors.length > 0 ? product.colors.map((c) => c.name).join(", ") : undefined);
+}
+
 export function productJsonLd(product: Product, categoryName?: string) {
   const url = absoluteUrl(`/product/${product.slug}`);
   const price = effectivePrice(product);
@@ -248,6 +260,14 @@ export function productJsonLd(product: Product, categoryName?: string) {
     name: product.name,
     description: product.description ?? `${product.name} from ${SITE_NAME}.`,
     ...(product.brand ? { brand: { "@type": "Brand", name: product.brand } } : {}),
+    ...(product.gtin ? { gtin: product.gtin } : {}),
+    // Colour and material as Google's own fields; every other spec as a named property.
+    ...(colourOf(product) ? { color: colourOf(product) } : {}),
+    ...(specValue(product, "Material") ? { material: specValue(product, "Material") } : {}),
+    ...(product.sizes && product.sizes.length > 0 ? { size: product.sizes.join(", ") } : {}),
+    ...(product.specs && product.specs.length > 0
+      ? { additionalProperty: product.specs.map((s) => ({ "@type": "PropertyValue", name: s.label, value: s.value })) }
+      : {}),
     ...(categoryName ? { category: categoryName } : {}),
     image: product.images.map(absoluteUrl),
     url,

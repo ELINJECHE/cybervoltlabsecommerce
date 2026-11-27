@@ -1,10 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useCart } from "@/lib/cart-context";
 import { formatKES } from "@/lib/format";
-import { showToast } from "@/lib/toast";
-import { BOTTOM_NAV_ENABLED } from "@/lib/community";
+import { showAddedToCart } from "@/lib/toast";
 
 // Phones only: once the main Add to Cart button scrolls out of view, a slim bar keeps it in reach.
 export default function StickyBuyBar({ productId, slug, name, image, price, needsChoice, soldOut = false }: {
@@ -15,6 +14,7 @@ export default function StickyBuyBar({ productId, slug, name, image, price, need
 }) {
   const [visible, setVisible] = useState(false);
   const { addItem } = useCart();
+  const barRef = useRef<HTMLDivElement>(null);
 
   // Show the bar once the main buttons have scrolled up out of sight.
   useEffect(() => {
@@ -30,9 +30,26 @@ export default function StickyBuyBar({ productId, slug, name, image, price, need
     };
   }, []);
 
-  if (!visible || soldOut) return null;
+  // Publish the bar's height so the floating Nami button and the cookie notice sit above it (see globals.css).
+  const showing = visible && !soldOut;
+  useEffect(() => {
+    const root = document.documentElement;
+    const el = barRef.current;
+    if (!showing || !el) { root.style.setProperty("--cv-sticky-h", "0px"); return; }
+    const publish = () => root.style.setProperty("--cv-sticky-h", `${el.offsetHeight}px`);
+    publish();
+    const ro = new ResizeObserver(publish);
+    ro.observe(el);
+    return () => { ro.disconnect(); root.style.setProperty("--cv-sticky-h", "0px"); };
+  }, [showing]);
+
+  if (!showing) return null;
   return (
-    <div className={`fixed inset-x-0 z-30 border-t border-border bg-surface px-4 py-2 shadow-lg lg:hidden ${BOTTOM_NAV_ENABLED ? "bottom-14" : "bottom-0"}`}>
+    <div
+      ref={barRef}
+      style={{ bottom: "calc(var(--cv-nav-h) + env(safe-area-inset-bottom, 0px))" }}
+      className="fixed inset-x-0 z-30 border-t border-border bg-surface px-4 py-2 shadow-lg lg:hidden"
+    >
       <div className="mx-auto flex max-w-md items-center gap-3">
         <div className="min-w-0 flex-1">
           <p className="truncate text-xs text-muted">{name}</p>
@@ -49,7 +66,7 @@ export default function StickyBuyBar({ productId, slug, name, image, price, need
         ) : (
           <button
             type="button"
-            onClick={() => { addItem({ productId, slug, name, image, unitPrice: price }); showToast("Added to cart ✓", "/cart", "View cart"); }}
+            onClick={() => { addItem({ productId, slug, name, image, unitPrice: price }); showAddedToCart({ name, image }); }}
             className="tap-target rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-white"
           >
             Add to Cart

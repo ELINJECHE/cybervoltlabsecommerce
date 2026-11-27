@@ -3,6 +3,12 @@ export interface ProductColor {
   hex: string;
 }
 
+// One line of the specification table, e.g. { label: "Material", value: "Genuine leather" }.
+export interface ProductSpec {
+  label: string;
+  value: string;
+}
+
 export interface Product {
   id: string;
   slug: string;
@@ -32,6 +38,12 @@ export interface Product {
   mpn?: string; // manufacturer part number
   condition?: "new" | "used" | "refurbished"; // omitted = new
   sizes?: string[]; // when set, the visitor picks one (shoes)
+  gtin?: string; // barcode (EAN/UPC), checked before it is accepted
+  // Everything below is worked out in lib/attributes.ts from the "Label: value" lines in `features` (what the admin
+  // form writes), so no database change is needed. `features` itself keeps only the plain bullet points.
+  specs?: ProductSpec[]; // the specification table
+  type?: string; // what kind of product it is within its category (Helmets, Gloves, Microwaves ...)
+  facets?: Record<string, string[]>; // every filterable fact: Type, Brand, Colour, Capacity and each spec
 }
 
 export interface Subcategory {
@@ -54,4 +66,6 @@ export interface Review {
   date: string; // ISO date, when the review was actually left
   text: string;
   source: "google" | "whatsapp" | "instagram" | "facebook" | "direct";
+  /** Slug of the product this review is about. Leave out for a review of the shop as a whole. */
+  productSlug?: string;
 }

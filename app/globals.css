@@ -68,3 +68,13 @@ body {
     min-width: 44px;
   }
 }
+
+/* Bottom-of-screen stack on phones: bottom menu, then the sticky buy bar, then the floating Nami button.
+   --cv-sticky-h is set by StickyBuyBar while it is showing. */
+:root {
+  --cv-nav-h: 57px; /* 3.5rem menu + 1px border */
+  --cv-sticky-h: 0px;
+}
+@media (min-width: 1024px) {
+  :root { --cv-nav-h: 0px; }
+}

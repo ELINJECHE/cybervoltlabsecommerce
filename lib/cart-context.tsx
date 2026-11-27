@@ -29,6 +29,8 @@ interface CartContextValue {
   clearCart: () => void;
   itemCount: number;
   subtotal: number;
+  /** False until the saved cart has been read from this browser; the cart is not "empty" before then. */
+  ready: boolean;
 }
 
 const CartContext = createContext<CartContextValue | undefined>(undefined);
@@ -99,7 +101,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   return (
     <CartContext.Provider
-      value={{ items, addItem, updateQuantity, removeItem, clearCart, itemCount, subtotal }}
+      value={{ items, addItem, updateQuantity, removeItem, clearCart, itemCount, subtotal, ready: hydrated }}
     >
       {children}
     </CartContext.Provider>

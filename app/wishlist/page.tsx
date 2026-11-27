@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useCart } from "@/lib/cart-context";
 import { useWishlist } from "@/lib/wishlist";
 import { formatKES } from "@/lib/format";
-import { showToast } from "@/lib/toast";
+import { showAddedToCart } from "@/lib/toast";
 import { useSavedPrices } from "@/lib/use-saved-prices";
 
 export default function WishlistPage() {
@@ -52,7 +52,7 @@ export default function WishlistPage() {
                 {item.id && (
                   <button
                     type="button"
-                    onClick={() => { addItem({ productId: item.id!, slug: item.slug, name: item.name, image: item.image, unitPrice: item.price }); showToast("Added to cart ✓", "/cart", "View cart"); }}
+                    onClick={() => { addItem({ productId: item.id!, slug: item.slug, name: item.name, image: item.image, unitPrice: item.price }); showAddedToCart({ name: item.name, image: item.image }); }}
                     className="tap-target rounded-full border border-primary px-4 py-1.5 text-xs font-semibold text-primary hover:bg-primary hover:text-white"
                   >
                     Add to cart

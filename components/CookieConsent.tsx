@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { BOTTOM_NAV_ENABLED } from "@/lib/community";
 import { OPEN_CONSENT_EVENT, readConsent, saveConsent, type ConsentChoice } from "@/lib/consent";
 
 const ANALYTICS_ENABLED = Boolean(process.env.NEXT_PUBLIC_GA4_ID);
@@ -30,9 +29,8 @@ export default function CookieConsent() {
     <div
       role="dialog"
       aria-label="Cookie consent"
-      className={`fixed left-3 right-[5.5rem] z-[60] rounded-card border border-border bg-surface p-3 shadow-card sm:right-auto sm:max-w-sm lg:bottom-4 lg:left-4 ${
-        BOTTOM_NAV_ENABLED ? "bottom-[4.5rem]" : "bottom-3"
-      }`}
+      style={{ bottom: "calc(var(--cv-nav-h) + env(safe-area-inset-bottom, 0px) + var(--cv-sticky-h) + 12px)" }}
+      className="fixed left-3 right-[5.5rem] z-[60] rounded-card border border-border bg-surface p-3 shadow-card sm:right-auto sm:max-w-sm lg:!bottom-4 lg:left-4"
     >
       <p className="text-xs leading-snug text-muted">
         We use cookies to remember you and see how the site is used (Google Analytics), so we can improve it.

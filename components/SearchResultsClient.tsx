@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import type { Product } from "@/lib/types";
 import ProductCard from "@/components/ProductCard";
@@ -8,6 +8,7 @@ import ShowMoreGrid from "@/components/ShowMoreGrid";
 import SortSelect, { sortProducts, type SortKey } from "@/components/SortSelect";
 import { searchDocs } from "@/lib/search";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
+import { logZeroResultSearch } from "@/lib/search-log";
 
 export default function SearchResultsClient({ products }: { products: Product[] }) {
   const searchParams = useSearchParams();
@@ -19,6 +20,12 @@ export default function SearchResultsClient({ products }: { products: Product[] 
     const found = searchDocs(products, query);
     return sort === "relevance" ? found : sortProducts(found, sort);
   }, [products, query, sort]);
+
+  // Only after synonyms and typo matching have both come up empty.
+  const noResults = query !== "" && results.length === 0;
+  useEffect(() => {
+    if (noResults) logZeroResultSearch(query);
+  }, [noResults, query]);
 
   if (!query) {
     return (

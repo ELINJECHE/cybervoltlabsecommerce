@@ -26,7 +26,7 @@ import {
   getRecommendedProducts,
 } from "@/lib/products";
 import type { Product } from "@/lib/types";
-import { getAllReviews } from "@/lib/reviews";
+import { getStoreReviews } from "@/lib/reviews";
 import JsonLd from "@/components/JsonLd";
 import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, organizationJsonLd, pageMetadata, websiteJsonLd } from "@/lib/seo";
 
@@ -88,7 +88,7 @@ export default async function HomePage() {
   const all = await getAllProducts();
   // Only a starter set goes to the "more to explore" grid; the rest is a click away.
   const recommended = (await getRecommendedProducts()).slice(0, 40);
-  const reviews = getAllReviews();
+  const reviews = getStoreReviews();
 
   return (
     <div>

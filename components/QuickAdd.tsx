@@ -1,7 +1,7 @@
 "use client";
 
 import { useCart } from "@/lib/cart-context";
-import { showToast } from "@/lib/toast";
+import { showAddedToCart } from "@/lib/toast";
 
 // The "+" on a product card: adds one to the cart without leaving the page.
 export default function QuickAdd({ productId, slug, name, image, price }: {
@@ -14,7 +14,7 @@ export default function QuickAdd({ productId, slug, name, image, price }: {
       aria-label={`Add ${name} to cart`}
       onClick={() => {
         addItem({ productId, slug, name, image, unitPrice: price });
-        showToast("Added to cart ✓", "/cart", "View cart");
+        showAddedToCart({ name, image });
       }}
       className="absolute right-2 top-2 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-foreground/80 text-xl leading-none text-white shadow transition hover:bg-foreground"
     >

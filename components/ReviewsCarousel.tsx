@@ -13,7 +13,14 @@ const SOURCE_LABEL: Record<Review["source"], string> = {
   direct: "Verified Customer",
 };
 
-export default function ReviewsCarousel({ reviews }: { reviews: Review[] }) {
+export default function ReviewsCarousel({
+  reviews,
+  heading = "What customers say about Cybervolt Labs",
+}: {
+  reviews: Review[];
+  /** Store-wide reviews say so; a product's own reviews use "Reviews for <product>". */
+  heading?: string;
+}) {
   const railRef = useRef<HTMLDivElement>(null);
 
   // No fabricated placeholder reviews — the section simply doesn't render
@@ -28,7 +35,7 @@ export default function ReviewsCarousel({ reviews }: { reviews: Review[] }) {
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-8">
-      <h2 className="mb-4 text-lg font-bold">What Our Customers Are Saying</h2>
+      <h2 className="mb-4 text-lg font-bold">{heading}</h2>
 
       <div className="relative">
         <div
