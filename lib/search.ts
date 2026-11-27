@@ -3,7 +3,7 @@
 // everyday synonyms ("trainers" finds sneakers, "kneepads" finds knee guards). The synonym list
 // lives in lib/search-synonyms.ts.
 
-import { PHRASES, WORDS } from "@/lib/search-synonyms";
+import { PHRASES, PREFER, WORDS } from "@/lib/search-synonyms";
 
 export interface SearchDoc {
   name: string;
@@ -32,6 +32,7 @@ function tokens(s: string): string[] {
 const PHRASE_BY_COMPACT = new Map<string, string[][]>(
   Object.entries(PHRASES).map(([k, v]) => [tokens(k).join(""), v.map(tokens)] as const),
 );
+const PREFER_COMPACT = new Set(PREFER.map((k) => tokens(k).join("")));
 const WORD_ALTS = new Map<string, string[][]>(
   Object.entries(WORDS).map(([k, v]) => [stem(k), v.map((a) => tokens(a))] as const),
 );
@@ -70,7 +71,7 @@ function wordScore(q: string, words: string[]): number {
   return best;
 }
 
-interface Unit { orig: string[]; alts: string[][]; always?: boolean }
+interface Unit { orig: string[]; alts: string[][]; always?: boolean; prefer?: boolean }
 
 // Looks a span up in the phrase list, forgiving a one-letter typo ("kneepds", "knee padz").
 function findPhrase(compact: string): string[][] | undefined {
@@ -89,7 +90,7 @@ function toUnits(qt: string[]): Unit[] {
     let len = Math.min(3, qt.length - i);
     for (; len >= 1; len--) {
       const alts = findPhrase(qt.slice(i, i + len).join(""));
-      if (alts) { hit = { orig: qt.slice(i, i + len), alts, always: true }; break; }
+      if (alts) { hit = { orig: qt.slice(i, i + len), alts, always: true, prefer: PREFER_COMPACT.has(qt.slice(i, i + len).join("")) }; break; }
     }
     if (hit) { units.push(hit); i += len; }
     else { units.push({ orig: [qt[i]], alts: WORD_ALTS.get(qt[i]) ?? [] }); i += 1; }
@@ -113,7 +114,7 @@ function scoreTokens(qt: string[], words: string[], catWords: string[]): number 
   for (const unit of toUnits(qt)) {
     let s = phraseScore(unit.orig, words);
     // A phrase from the synonym list always counts its alternatives; a lone word only falls back to them.
-    if (s === 0 || unit.always) for (const alt of unit.alts) s = Math.max(s, phraseScore(alt, words) * 0.8);
+    if (s === 0 || unit.always) for (const alt of unit.alts) s = Math.max(s, phraseScore(alt, words) * (unit.prefer ? 1.5 : 0.8));
     if (s === 0 && unit.orig.length === 1) s = wordScore(unit.orig[0], catWords) * 0.7;
     if (s === 0) return 0; // every word has to match something
     total += s;

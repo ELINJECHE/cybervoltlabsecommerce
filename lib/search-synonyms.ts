@@ -25,6 +25,12 @@ export const PHRASES: Record<string, string[]> = {
   armor: ["jacket", "armour"],
 };
 
+// PREFER: phrases whose alternatives should rank ABOVE products that contain the typed word itself.
+// Use it when the typed word is slang for one of our products but also appears in unrelated names
+// ("lid" = helmet, yet "jar lid" and "bathroom set lids" contain the word). Search "jar lid" still
+// finds jar lids, because the extra word has to match too.
+export const PREFER: string[] = ["lid"];
+
 // WORDS: single everyday words that mean something else on our shelves. (Plurals are handled
 // automatically, so there is no need to list both "glove" and "gloves".)
 export const WORDS: Record<string, string[]> = {
