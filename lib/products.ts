@@ -1,5 +1,7 @@
 import productsData from "@/data/products.json";
 import { withMerchantAttrs } from "@/lib/merchant";
+import { enrichProduct } from "@/lib/attributes";
+import { inferFromName } from "@/lib/product-types";
 import categoriesData from "@/data/categories.json";
 import type { Category, Product } from "@/lib/types";
 import { supabase, supabaseEnabled } from "@/lib/supabase";
@@ -117,7 +119,10 @@ async function loadProducts(): Promise<Product[]> {
 
   // A product with no price yet stays out of the shop (it would read "KSh 0"). It still exists in
   // the admin panel and appears here as soon as it is given a price.
-  result = result.filter((p) => p.price > 0).map(withMerchantAttrs);
+  result = result
+    .filter((p) => p.price > 0)
+    .map(withMerchantAttrs)
+    .map((p) => enrichProduct(p, inferFromName(p.category, p.name)));
 
   if (process.env.NODE_ENV === "production") cachedProducts = result;
   return result;

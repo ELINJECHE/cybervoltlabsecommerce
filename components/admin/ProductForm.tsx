@@ -9,6 +9,7 @@ import { markUnpublished } from "@/lib/deploy";
 import { getProductSupplier, saveProductSupplier } from "@/lib/admin-sourcing";
 import { buildPhoneChatLink, normalizeKenyanPhone } from "@/lib/whatsapp";
 import { toAdminMessage } from "@/lib/errors";
+import { joinFeatureLines, splitFeatureLines, validGtin } from "@/lib/attributes";
 
 interface ProductFormProps {
   categories: CategoryRow[];
@@ -29,7 +30,15 @@ export default function ProductForm({ categories, initial, onSubmit, submitLabel
   const [stock, setStock] = useState(initial && initial.stock > 0 ? initial.stock.toString() : "0");
   const [soldOut, setSoldOut] = useState((initial?.stock ?? 0) < 0);
   const [description, setDescription] = useState(initial?.description ?? "");
-  const [featuresText, setFeaturesText] = useState((initial?.features ?? []).join("\n"));
+  // `features` holds both bullet points and "Label: value" facts (see lib/attributes.ts); the form edits them separately.
+  const parsed = splitFeatureLines(initial?.features ?? []);
+  const [featuresText, setFeaturesText] = useState(parsed.bullets.join("\n"));
+  const [specsText, setSpecsText] = useState(parsed.specs.map((sp) => `${sp.label}: ${sp.value}`).join("\n"));
+  const [brand, setBrand] = useState(parsed.reserved.brand ?? "");
+  const [mpn, setMpn] = useState(parsed.reserved.mpn ?? "");
+  const [gtin, setGtin] = useState(parsed.reserved.gtin ?? "");
+  const [condition, setCondition] = useState(parsed.reserved.condition?.toLowerCase() ?? "new");
+  const [sizes, setSizes] = useState(parsed.reserved.sizes ?? "");
   const [isNewArrival, setIsNewArrival] = useState(initial?.is_new_arrival ?? false);
   const [isDeal, setIsDeal] = useState(initial?.is_deal ?? false);
   const [dealEndsAt, setDealEndsAt] = useState(initial?.deal_ends_at?.slice(0, 16) ?? "");
@@ -82,6 +91,16 @@ export default function ProductForm({ categories, initial, onSubmit, submitLabel
       return;
     }
 
+    if (gtin.trim() && !validGtin(gtin)) {
+      setError("That barcode (GTIN) isn't valid — it should be 8, 12, 13 or 14 digits with a correct check digit. Check it against the packaging, or leave it blank.");
+      return;
+    }
+    const badSpec = specsText.split("\n").map((l) => l.trim()).find((l) => l && !/^[A-Za-z][^:]{0,27}:\s*\S/.test(l));
+    if (badSpec) {
+      setError(`Specifications need a label and a value, like "Material: Leather". Fix this line: "${badSpec}"`);
+      return;
+    }
+
     if (supplierPhone.trim() && !normalizedPhone) {
       setError("Supplier phone doesn't look like a Kenyan mobile number (e.g. 0712 345 678).");
       return;
@@ -104,7 +123,7 @@ export default function ProductForm({ categories, initial, onSubmit, submitLabel
         price: Number(price),
         discount_price: discountPrice ? Number(discountPrice) : null,
         images,
-        features: featuresText.split("\n").map((f) => f.trim()).filter(Boolean),
+        features: joinFeatureLines({ brand, mpn, gtin: validGtin(gtin) ?? "", condition, sizes, specsText, bulletsText: featuresText }),
         stock: soldOut ? -1 : Math.max(0, Number(stock) || 0),
         is_deal: isDeal,
         deal_ends_at: isDeal && dealEndsAt ? new Date(dealEndsAt).toISOString() : null,
@@ -263,6 +282,59 @@ export default function ProductForm({ categories, initial, onSubmit, submitLabel
           className="w-full rounded-md border border-border bg-surface px-3 py-2 text-sm outline-none focus:border-primary"
         />
       </div>
+
+      <fieldset className="rounded-md border border-border p-3">
+        <legend className="px-1 text-sm font-medium">Product details (shown on the page, sent to Google, used by the filters)</legend>
+        <div className="grid gap-3 sm:grid-cols-2">
+          <div>
+            <label htmlFor="brand" className="mb-1 block text-sm font-medium">Brand</label>
+            <input id="brand" value={brand} onChange={(e) => setBrand(e.target.value)} placeholder="e.g. Hisense" className="w-full rounded-md border border-border bg-surface px-3 py-2 text-sm outline-none focus:border-primary" />
+          </div>
+          <div>
+            <label htmlFor="mpn" className="mb-1 block text-sm font-medium">Model / part number</label>
+            <input id="mpn" value={mpn} onChange={(e) => setMpn(e.target.value)} placeholder="e.g. H20MOWS11" className="w-full rounded-md border border-border bg-surface px-3 py-2 text-sm outline-none focus:border-primary" />
+          </div>
+          <div>
+            <label htmlFor="gtin" className="mb-1 block text-sm font-medium">Barcode (GTIN / EAN)</label>
+            <input id="gtin" inputMode="numeric" value={gtin} onChange={(e) => setGtin(e.target.value)} placeholder="8, 12, 13 or 14 digits" className="w-full rounded-md border border-border bg-surface px-3 py-2 text-sm outline-none focus:border-primary" />
+          </div>
+          <div>
+            <label htmlFor="condition" className="mb-1 block text-sm font-medium">Condition</label>
+            <select id="condition" value={condition} onChange={(e) => setCondition(e.target.value)} className="w-full rounded-md border border-border bg-surface px-3 py-2 text-sm outline-none focus:border-primary">
+              <option value="new">New</option>
+              <option value="refurbished">Refurbished</option>
+              <option value="used">Used</option>
+            </select>
+          </div>
+          <div className="sm:col-span-2">
+            <label htmlFor="sizes" className="mb-1 block text-sm font-medium">Sizes to choose from (comma separated, optional)</label>
+            <input id="sizes" value={sizes} onChange={(e) => setSizes(e.target.value)} placeholder="e.g. 40, 41, 42, 43" className="w-full rounded-md border border-border bg-surface px-3 py-2 text-sm outline-none focus:border-primary" />
+          </div>
+        </div>
+        <div className="mt-3">
+          <label htmlFor="specs" className="mb-1 block text-sm font-medium">Specifications (one per line, as Label: value)</label>
+          <textarea
+            id="specs"
+            rows={4}
+            value={specsText}
+            onChange={(e) => setSpecsText(e.target.value)}
+            placeholder={"Material: Genuine leather\nCapacity: 20 L\nColours: black, white\nPower: 700 W"}
+            className="w-full rounded-md border border-border bg-surface px-3 py-2 font-mono text-sm outline-none focus:border-primary"
+          />
+          <p className="mt-1 text-xs text-muted">Each line becomes a row in the product&apos;s specification table and a filter on the category page (Colours, Capacity, Material, Size and so on).</p>
+        </div>
+        {(() => {
+          const todo = [
+            !brand.trim() && "brand",
+            !gtin.trim() && "barcode",
+            !specsText.trim() && "at least one specification",
+            description.trim().length < 150 && "a description of 150+ characters",
+          ].filter(Boolean);
+          return todo.length > 0 ? (
+            <p className="mt-2 text-xs text-muted">Google Shopping and the filters work best with: {todo.join(", ")}.</p>
+          ) : null;
+        })()}
+      </fieldset>
 
       <div>
         <label htmlFor="features" className="mb-1 block text-sm font-medium">Features (one per line)</label>

@@ -73,3 +73,23 @@ catalogue change.
 ## Files
 `scripts/intake/catalogue_intake.py` (commands: `scan`, `contact`, `setnames`, `apply`, `log`),
 `scripts/intake/config.json`.
+
+## Product details for filters, the spec table and Google (no database change needed)
+Any line in a product's **features** list written as `Label: value` is treated as a fact, not a bullet
+point. The admin form has fields for the common ones; uploads can simply include the lines.
+
+| Line | What it feeds |
+|---|---|
+| `Brand: Hisense` | Brand filter, Google `brand`, spec table |
+| `Model: H20MOWS11` | Google `mpn`, spec table |
+| `GTIN: 4006381333931` | Google `gtin`. Only accepted if the check digit is right |
+| `Condition: refurbished` | Google `itemCondition`, Condition filter (default is new) |
+| `Sizes: 40, 41, 42` | The size picker on the product page |
+| `Colours: black, grey` | Colour filter, Google `color` |
+| `Material: Stainless steel`, `Capacity: 20 L`, `Power: 700 W`, anything else | A row in the spec table, a Google `additionalProperty`, and a category filter once at least 3 products share that label |
+
+Lines without a colon stay ordinary bullet points. Category filters (Type, Brand, Channels, Capacity,
+Screen size, Bed size, Connectivity ...) are built automatically from these facts; for products that do
+not have them yet, Type and a few facts are worked out from the product name
+(`lib/product-types.ts`, editable). Inferred values only drive the filters and search, never Google.
+Setting a **subcategory** in the admin overrides the inferred Type.

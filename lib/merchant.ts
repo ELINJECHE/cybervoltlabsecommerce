@@ -6,6 +6,7 @@ import type { Product } from "@/lib/types";
 export interface MerchantAttrs {
   brand?: string;
   mpn?: string;
+  gtin?: string;
   condition?: "new" | "used" | "refurbished";
   sizes?: string[];
   gmc?: boolean; // listed in Google Merchant Center
@@ -24,6 +25,7 @@ export function withMerchantAttrs(product: Product): Product {
     ...product,
     ...(a.brand ? { brand: a.brand } : {}),
     ...(a.mpn ? { mpn: a.mpn } : {}),
+    ...(a.gtin ? { gtin: a.gtin } : {}),
     ...(a.condition ? { condition: a.condition } : {}),
     ...(a.sizes && a.sizes.length > 0 ? { sizes: a.sizes } : {}),
   };
