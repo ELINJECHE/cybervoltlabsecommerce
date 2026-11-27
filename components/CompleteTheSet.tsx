@@ -5,14 +5,15 @@ import Link from "next/link";
 import { useState } from "react";
 import { useCart } from "@/lib/cart-context";
 import { formatKES } from "@/lib/format";
-import { showToast } from "@/lib/toast";
+import { showAddedToCart } from "@/lib/toast";
 
 export interface SetItem { id: string; slug: string; name: string; image: string; price: number }
 
-// "Complete your set": tick what you want and add it all in one tap.
+// "Pairs well with this": only the item being viewed starts ticked; the shopper ticks any extras,
+// the total and the button follow live, and one tap adds the ticked items.
 export default function CompleteTheSet({ current, picks }: { current: SetItem | null; picks: SetItem[] }) {
   const items = [...(current ? [current] : []), ...picks];
-  const [chosen, setChosen] = useState<Set<string>>(new Set(items.map((i) => i.id)));
+  const [chosen, setChosen] = useState<Set<string>>(new Set(current ? [current.id] : []));
   const { addItem } = useCart();
   if (picks.length === 0) return null;
 
@@ -27,7 +28,7 @@ export default function CompleteTheSet({ current, picks }: { current: SetItem | 
 
   return (
     <section className="mx-auto max-w-7xl px-4 pt-8">
-      <h2 className="mb-3 text-lg font-bold">Complete your set</h2>
+      <h2 className="mb-3 text-lg font-bold">Pairs well with this</h2>
       <div className="rounded-card border border-border bg-surface p-3 sm:p-4">
         <ul className="flex flex-col gap-2">
           {items.map((item) => (
@@ -50,11 +51,11 @@ export default function CompleteTheSet({ current, picks }: { current: SetItem | 
             disabled={selected.length === 0}
             onClick={() => {
               selected.forEach((i) => addItem({ productId: i.id, slug: i.slug, name: i.name, image: i.image, unitPrice: i.price }));
-              showToast(`${selected.length} item${selected.length === 1 ? "" : "s"} added ✓`, "/cart", "View cart");
+              showAddedToCart({ name: selected[0].name, image: selected[0].image, count: selected.length });
             }}
             className="tap-target rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white hover:bg-primary-dark disabled:cursor-not-allowed disabled:bg-muted"
           >
-            Add selected to cart
+            {selected.length > 0 ? `Add selected to cart (${selected.length})` : "Add selected to cart"}
           </button>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import { getAllProducts } from "@/lib/products";
-import { getAllReviews } from "@/lib/reviews";
+import { getStoreReviews } from "@/lib/reviews";
 import SearchResultsClient from "@/components/SearchResultsClient";
 import ReviewsCarousel from "@/components/ReviewsCarousel";
 
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default async function SearchPage() {
   const products = await getAllProducts();
-  const reviews = getAllReviews();
+  const reviews = getStoreReviews();
 
   return (
     <div>

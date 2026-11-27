@@ -9,6 +9,8 @@ import { useCart } from "@/lib/cart-context";
 import { MAX_PER_ORDER } from "@/lib/community";
 import { buildProductEnquiryLink } from "@/lib/whatsapp";
 import WhatsAppChatLink from "@/components/WhatsAppChatLink";
+import { setChatProduct } from "@/lib/chat-context";
+import { showAddedToCart } from "@/lib/toast";
 
 export default function ProductActions({ product }: { product: Product }) {
   const [selectedColor, setSelectedColor] = useState(product.colors?.[0]?.name);
@@ -25,6 +27,12 @@ export default function ProductActions({ product }: { product: Product }) {
   const [pageUrl, setPageUrl] = useState<string | undefined>(undefined);
   useEffect(() => setPageUrl(window.location.href), []);
 
+  // Tell the floating Nami button which product this is, so it opens the same chat.
+  useEffect(() => {
+    setChatProduct({ name: product.name, slug: product.slug });
+    return () => setChatProduct(null);
+  }, [product.name, product.slug]);
+
   // Links from Google can name a size (?size=42): start with it chosen.
   useEffect(() => {
     const wanted = new URLSearchParams(window.location.search).get("size");
@@ -36,11 +44,12 @@ export default function ProductActions({ product }: { product: Product }) {
 
   const unitPrice = product.discountPrice ?? product.price;
 
-  function handleAddToCart() {
+  // Returns false (and points at the size picker) when a size is still needed.
+  function addCurrentToCart(): boolean {
     if (hasSizes && !selectedSize) {
       setSizeError(true);
       document.getElementById("size-picker")?.scrollIntoView({ behavior: "smooth", block: "center" });
-      return;
+      return false;
     }
     addItem(
       {
@@ -54,6 +63,12 @@ export default function ProductActions({ product }: { product: Product }) {
       },
       quantity
     );
+    return true;
+  }
+
+  function handleAddToCart() {
+    if (!addCurrentToCart()) return;
+    showAddedToCart({ name: product.name, image: getProductImage(product.images) });
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);
   }
@@ -151,14 +166,7 @@ export default function ProductActions({ product }: { product: Product }) {
           </button>
           <button
             type="button"
-            onClick={() => {
-              if (hasSizes && !selectedSize) {
-                setSizeError(true);
-                document.getElementById("size-picker")?.scrollIntoView({ behavior: "smooth", block: "center" });
-                return;
-              }
-              router.push("/cart");
-            }}
+            onClick={() => { if (addCurrentToCart()) router.push("/cart"); }}
             className="tap-target flex-1 rounded-full border border-primary px-6 py-3 text-sm font-semibold text-primary transition hover:bg-primary-light"
           >
             Buy Now
@@ -166,8 +174,14 @@ export default function ProductActions({ product }: { product: Product }) {
         </div>
       )}
 
-      {/* The "face" behind Chat Nami: Nami, our illustrated brand ambassador. */}
-      <div className="flex items-end gap-2">
+      {/* Nami, our illustrated brand ambassador. Tapping her greeting opens the same WhatsApp chat as the floating button. */}
+      <WhatsAppChatLink
+        href={buildProductEnquiryLink(product.name, pageUrl)}
+        button="chat_nami"
+        placement="product_page"
+        product={product.slug}
+        className="flex items-end gap-2 rounded-2xl transition hover:brightness-95"
+      >
         <Image
           src="/assets/images/nami.webp"
           alt="Nami, the illustrated Cybervolt Labs brand ambassador"
@@ -175,20 +189,10 @@ export default function ProductActions({ product }: { product: Product }) {
           height={700}
           className="h-auto w-32 shrink-0 rounded-2xl border border-border bg-white sm:w-44"
         />
-        <p className="rounded-2xl rounded-bl-sm border border-border bg-surface px-3 py-2 text-sm">
+        <span className="rounded-2xl rounded-bl-sm border border-border bg-surface px-3 py-2 text-sm">
           Hey, niko hapa! Would you like my assistance with anything kuhusu{" "}
           <span className="font-semibold">{product.name}</span>?
-        </p>
-      </div>
-
-      <WhatsAppChatLink
-        href={buildProductEnquiryLink(product.name, pageUrl)}
-        button="chat_nami"
-        placement="product_page"
-        product={product.slug}
-        className="tap-target flex items-center justify-center gap-2 rounded-full bg-whatsapp px-6 py-3 text-sm font-semibold text-white transition hover:brightness-95"
-      >
-        💬 Chat Nami
+        </span>
       </WhatsAppChatLink>
     </div>
   );

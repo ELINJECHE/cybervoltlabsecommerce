@@ -6,7 +6,7 @@ import CompleteTheSet from "@/components/CompleteTheSet";
 import { completeTheSet, needsChoice } from "@/lib/pairings";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbJsonLd, productJsonLd, productMetadata } from "@/lib/seo";
-import { getAllReviews } from "@/lib/reviews";
+import { getProductReviews, getStoreReviews } from "@/lib/reviews";
 import ImageGallery from "@/components/ImageGallery";
 import PriceTag from "@/components/PriceTag";
 import StarRating from "@/components/StarRating";
@@ -39,7 +39,8 @@ export default async function ProductPage({ params }: { params: { slug: string }
 
   const related = await getRelatedProducts(product);
   const setPicks = completeTheSet(product, await getAllProducts());
-  const reviews = getAllReviews();
+  const ownReviews = getProductReviews(product.slug);
+  const storeReviews = getStoreReviews();
   const category = await getCategoryBySlug(product.category);
   const categoryName = category?.name ?? product.category.replace(/-/g, " ");
   const isLowStock = product.stock > 0 && product.stock <= 10;
@@ -151,7 +152,8 @@ export default async function ProductPage({ params }: { params: { slug: string }
       )}
     </div>
 
-    <ReviewsCarousel reviews={reviews} />
+    {ownReviews.length > 0 && <ReviewsCarousel reviews={ownReviews} heading={`Reviews for ${product.name}`} />}
+    <ReviewsCarousel reviews={storeReviews} />
     </div>
   );
 }

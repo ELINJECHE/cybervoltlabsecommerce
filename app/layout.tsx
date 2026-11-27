@@ -50,6 +50,8 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
+  // Lets the bottom menu and buttons clear the iPhone home bar (env(safe-area-inset-bottom)).
+  viewportFit: "cover",
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {

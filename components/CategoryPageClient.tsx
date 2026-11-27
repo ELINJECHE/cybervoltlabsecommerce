@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import type { Category, Product } from "@/lib/types";
 import { filterProducts, getAllColors } from "@/lib/products";
-import { getAllReviews } from "@/lib/reviews";
+import { getStoreReviews } from "@/lib/reviews";
 import FilterPanel, { type SelectedFilters } from "@/components/FilterPanel";
 import ProductCard from "@/components/ProductCard";
 import SortSelect, { sortProducts, type SortKey } from "@/components/SortSelect";
@@ -87,7 +87,7 @@ export default function CategoryPageClient({
         </div>
       </div>
 
-      <ReviewsCarousel reviews={getAllReviews()} />
+      <ReviewsCarousel reviews={getStoreReviews()} />
     </div>
   );
 }

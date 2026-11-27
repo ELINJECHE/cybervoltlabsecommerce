@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { formatKES, variantLabel } from "@/lib/format";
 import { readLastOrder, type LastOrderSummary } from "@/lib/orders";
-import { COURIER } from "@/lib/delivery";
+import { COURIER, SHOP_ADDRESS } from "@/lib/delivery";
 import { EXCLUSIVE_GROUP_URL, MVP_CODE, MVP_DELIVERY_DISCOUNT, MVP_GROUP_URL } from "@/lib/community";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
 
@@ -15,9 +15,9 @@ function buildReceiptLink(order: LastOrderSummary): string {
     "Hi Cybervolt Labs, here is my order receipt.",
     `Order: ${order.reference}`,
     items,
-    `Total to pay on delivery: ${formatKES(order.total)}`,
+    `${order.method === "pickup" ? "Total to pay on collection" : "Total to pay on delivery"}: ${formatKES(order.total)}`,
     order.mpesaCode ? `M-Pesa code: ${order.mpesaCode}` : null,
-    `Deliver to: ${order.address}`,
+    order.method === "pickup" ? `Collect at: ${SHOP_ADDRESS}` : `Deliver to: ${order.address}`,
     `Phone: ${order.phone}`,
   ].filter(Boolean);
   return buildWhatsAppLink(lines.join("\n"));
@@ -40,19 +40,31 @@ export default function LastOrderDetails() {
 
       <div className="mt-6 rounded-card border border-border bg-surface p-4 text-left text-sm">
         <h2 className="mb-2 font-semibold">What happens next</h2>
-        <ol className="list-decimal space-y-1 pl-5 text-muted">
-          <li>
-            We contact you{order?.phone ? ` on ${order.phone}` : ""} to confirm your order and delivery details.
-          </li>
-          <li>
-            Orders placed before 2:00 PM East Africa Time are dispatched the same day via {COURIER}
-            {order?.address ? ` to ${order.address}` : ""}. Orders after 2:00 PM go out the next business day.
-          </li>
-          <li>Delivery takes 1-2 business days (Monday to Saturday).</li>
-          <li>
-            Pay on delivery: you pay{order?.total ? ` ${formatKES(order.total)}` : ""} when you collect or receive your parcel.
-          </li>
-        </ol>
+        {order?.method === "pickup" ? (
+          <ol className="list-decimal space-y-1 pl-5 text-muted">
+            <li>
+              We contact you{order?.phone ? ` on ${order.phone}` : ""} to confirm your order and tell you when it is ready.
+            </li>
+            <li>Collect it, free of charge, at our shop: {SHOP_ADDRESS}.</li>
+            <li>
+              Pay when you collect:{order?.total ? ` ${formatKES(order.total)}` : " the total on your order"}. Bring your order reference.
+            </li>
+          </ol>
+        ) : (
+          <ol className="list-decimal space-y-1 pl-5 text-muted">
+            <li>
+              We contact you{order?.phone ? ` on ${order.phone}` : ""} to confirm your order and delivery details.
+            </li>
+            <li>
+              Orders placed before 2:00 PM East Africa Time are dispatched the same day via {COURIER}
+              {order?.address ? ` to ${order.address}` : ""}. Orders after 2:00 PM go out the next business day.
+            </li>
+            <li>Delivery takes 1-2 business days (Monday to Saturday).</li>
+            <li>
+              Pay on delivery: you pay{order?.total ? ` ${formatKES(order.total)}` : ""} when you collect or receive your parcel.
+            </li>
+          </ol>
+        )}
         <p className="mt-3 text-muted">
           Questions? Message us on WhatsApp and quote your order reference.
         </p>

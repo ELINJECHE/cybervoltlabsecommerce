@@ -1,5 +1,6 @@
 "use client";
 
+import { PICKUP_AREA } from "@/lib/delivery";
 import { useEffect, useMemo, useState } from "react";
 import { formatKES, variantLabel } from "@/lib/format";
 import { buildPhoneChatLink, normalizeKenyanPhone } from "@/lib/whatsapp";
@@ -176,6 +177,9 @@ export default function OrdersPage() {
                   <div>
                     <p className="font-semibold">{o.customer_name}</p>
                     <p className="text-muted">{o.phone}</p>
+                    {o.delivery_area === PICKUP_AREA && (
+                      <p className="mt-0.5 inline-block rounded bg-primary/10 px-2 py-0.5 text-xs font-semibold text-primary">🏬 Shop pickup (no delivery)</p>
+                    )}
                     <p className="text-muted">{o.delivery_address}</p>
                     {customerChat && (
                       <a
@@ -191,7 +195,7 @@ export default function OrdersPage() {
                   <div className="sm:text-right">
                     <p>
                       Goods {formatKES(o.subtotal)} · Delivery{" "}
-                      {formatKES(o.delivery_fee)}{o.pay_on_delivery ? " · pay on delivery" : ""}
+                      {formatKES(o.delivery_fee)}{o.pay_on_delivery ? (o.delivery_area === PICKUP_AREA ? " · pay on collection" : " · pay on delivery") : ""}
                     </p>
                     <p className="text-base font-bold">Total {formatKES(o.total)}</p>
                     {o.mpesa_code && (

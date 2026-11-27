@@ -10,6 +10,8 @@ export interface OrderPayload {
   // Goods only. What the customer pays on delivery is `total` (goods + delivery fee).
   subtotal: number;
   deliveryArea?: string;
+  /** "pickup" = the customer collects at our shop (no delivery fee); otherwise delivered by the courier. */
+  deliveryMethod?: "delivery" | "pickup";
   deliveryFee?: number;
   // True when the order is paid on delivery (every order since the switch to Parcel Grid).
   deliveryPayOnArrival?: boolean;
@@ -37,6 +39,7 @@ export interface LastOrderSummary {
   address: string;
   items: { name: string; quantity: number; color?: string; size?: string }[];
   mpesaCode?: string;
+  method?: "delivery" | "pickup";
   // Only for the Google Customer Reviews opt-in on the success page; kept in this tab's sessionStorage, never sent to our database.
   email?: string;
   estimatedDelivery?: string;
@@ -54,6 +57,7 @@ export function saveLastOrder(
     total: order.total ?? order.subtotal,
     phone: order.phone,
     address: order.deliveryAddress,
+    method: order.deliveryMethod ?? "delivery",
     items: order.items.map((i) => ({ name: i.name, quantity: i.quantity, color: i.color, size: i.size })),
     mpesaCode,
     email: extra.email,

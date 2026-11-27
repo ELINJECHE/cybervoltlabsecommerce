@@ -22,7 +22,7 @@ export default function BottomNav() {
   if (pathname.startsWith("/checkout") || pathname.startsWith("/admin")) return null;
 
   return (
-    <nav aria-label="Main" className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-surface/95 backdrop-blur lg:hidden">
+    <nav aria-label="Main" className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-surface/95 pb-[env(safe-area-inset-bottom)] backdrop-blur lg:hidden">
       <ul className="mx-auto grid max-w-md grid-cols-5">
         {ITEMS.map((item) => {
           const active = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);

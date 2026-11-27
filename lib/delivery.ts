@@ -12,6 +12,10 @@ export const SHOP_ADDRESS = "Brisma Tower, Ground Floor, Ongata Rongai";
 // Orders placed before this hour (East Africa Time) are dispatched the same day.
 export const DISPATCH_CUTOFF_HOUR = 14;
 
+// Free collection at the shop (chosen at checkout; saved on the order as the method "pickup").
+export const PICKUP_AREA = "Shop pickup";
+export const PICKUP_LINE = `Or collect free at our shop: ${SHOP_ADDRESS}.`;
+
 // Shown on every product page next to the price.
 export const PRODUCT_DELIVERY_LINE = "Delivery Ksh 999 via Parcel Grid, 1-2 days, pay on delivery.";
 
@@ -43,4 +47,8 @@ export const RETURN_TERMS = [
 // One line for the order sheet's Notes column.
 export function describeDelivery(fee: number): string {
   return `Delivery: ${COURIER}, KSh ${fee}, pay on delivery`;
+}
+
+export function describePickup(): string {
+  return `PICKUP: customer collects at our shop (${SHOP_ADDRESS}), no delivery fee, pay on collection`;
 }

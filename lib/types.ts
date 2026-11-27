@@ -54,4 +54,6 @@ export interface Review {
   date: string; // ISO date, when the review was actually left
   text: string;
   source: "google" | "whatsapp" | "instagram" | "facebook" | "direct";
+  /** Slug of the product this review is about. Leave out for a review of the shop as a whole. */
+  productSlug?: string;
 }
